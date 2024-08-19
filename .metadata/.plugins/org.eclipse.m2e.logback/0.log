@@ -1,0 +1,11 @@
+2024-08-19 21:24:22,890 [Worker-5: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-08-19 21:26:14,820 [Worker-0: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.javaOrder:javaOrder:0.0.1-SNAPSHOT @ C:\javaorder\javaOrderProject\javaOrder\javaOrder\pom.xml.
+2024-08-19 21:26:17,869 [Worker-0: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /javaOrder/src/main/java
+2024-08-19 21:26:17,871 [Worker-0: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /javaOrder/src/main/resources
+2024-08-19 21:26:17,879 [Worker-0: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /javaOrder/src/main/resources
+2024-08-19 21:26:17,884 [Worker-0: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /javaOrder/src/test/java
+2024-08-19 21:26:17,885 [Worker-0: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /javaOrder/src/test/resources
+2024-08-19 21:26:19,994 [Worker-0: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 8 sec
+2024-08-19 21:26:21,996 [Worker-0: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-19 21:26:22,044 [Worker-0: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-19 21:26:22,053 [Worker-0: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\javaorder\javaOrderProject\javaOrder\javaOrder\src\test\resources
