@@ -1,6 +1,29 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-	<th:block th:fragment="itemList">
+<th:block th:fragment="itemList">
 	
-	</th:block>
+	<div>
+	
+	
+	
+		<!-- 왼쪽(배너 + 상품리스트) -->
+		<!-- 프로모션 배너 -->
+		<div class="w-75 p-3 float-start h-100" style="background-color: red;">
+			<div>
+				배너이미지
+			</div>
+			<div>
+				상품리스트
+			</div>
+		</div>
+		
+		
+		<!-- 오른쪽(장바구니) -->
+		<div class="w-25 p-3 float-start h-100" style="background-color: yellow;">
+			카트
+		</div>
+		
+	</div>
+	
+</th:block>
 </html>
