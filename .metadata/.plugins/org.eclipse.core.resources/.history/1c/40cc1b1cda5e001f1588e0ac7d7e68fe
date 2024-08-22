@@ -1,0 +1,5 @@
+package com.javaOrder.test.order.service;
+
+public class KakaoPayServiceImpl implements KakaoPayService {
+
+}

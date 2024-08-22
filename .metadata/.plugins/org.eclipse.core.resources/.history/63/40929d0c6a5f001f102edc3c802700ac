@@ -1,0 +1,63 @@
+package com.javaOrder.kakaotest.service;
+
+import java.net.URLEncoder;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.codec.Encoder;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+
+import com.javaOrder.kakaotest.vo.KakaoPayReadyVO;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@Slf4j
+public class PayServiceImpl implements PayService{
+	
+	@Value("${kakao-admin-key}")
+    private String kakaoAdminKey;
+	
+	@Override
+	public KakaoPayReadyVO kakaoPay(Map<String, Object> params) {
+		log.info(kakaoAdminKey);
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Authorization", kakaoAdminKey);
+		
+		// Server Request Body : 서버 요청 본문
+        MultiValueMap<String, Object> payParams = new LinkedMultiValueMap<String, Object>();
+
+        /* cid
+         * 카카오페이 가맹점 코드 / 프로젝트용 테스트 코드 */
+        payParams.add("cid", "TC0ONETIME"); // 가맹점 코드 - 테스트용
+        payParams.add("partner_order_id", "1001"); // 주문 번호
+        payParams.add("partner_user_id", "goguma"); // 회원 아이디
+        payParams.add("item_name",  (String) params.get("item_name")); // 상품 명
+        payParams.add("quantity",  (String) params.get("quantity")); // 상품 수량
+        payParams.add("total_amount",  (String) params.get("total_amount")); // 상품 가격
+        payParams.add("tax_free_amount",  (String) params.get("tax_free_amount")); // 상품 비과세 금액
+        payParams.add("approval_url", "http://localhost:8080/pay/success"); // 성공시 url
+	    payParams.add("cancel_url", "http://localhost:8080/pay/cancel"); // 실패시 url
+	    payParams.add("fail_url", "http://localhost:8080/pay/fail");
+		
+	    // 카카오 페이 결제준비 api 요청
+	    HttpEntity<Map> request = new HttpEntity<Map>(payParams, headers);
+	    
+	    RestTemplate template = new RestTemplate();
+	    String url = "https://kapi.kakao.com/v1/payment/ready";
+	    
+	    // 요청 결과
+	    KakaoPayReadyVO res = template.postForObject(url, request, KakaoPayReadyVO.class);
+	    
+	    /*요청결과에서 응답받은 tid 값을 DB에 저장하는 로직 추가
+	     * 주문번호-tid 연결해 결제이력 테이블로 관리?
+	     * */
+	    
+		return res;
+	}
+}

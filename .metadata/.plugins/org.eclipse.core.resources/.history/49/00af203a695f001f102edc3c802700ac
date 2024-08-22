@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kakao Pay</title>
+</head>
+<body>
+<h1>카카오 페이 테스트</h1>
+<!-- <form method="post" th:action="@{/kakaoPay}">
+    <button type="submit">결제하기</button>
+</form> -->
+<button id="kaobtn">카카오페이</button>
+<script src="jquery-3.7.1.min.js"></script>
+<script>
+	$("#kaobtn").click(function(){
+		$.ajax({
+			type:'get',
+			url:'/pay/ready',
+			data:{
+				item_name:"아이폰 14 pro",
+				quantity:"1",
+				total_amount:"1400000",
+				tax_free_amount:"0"
+			},
+			success:function(res){
+				location.href=res.next_redirect_mobile_url;
+			}
+		})
+	});
+</script>
+</body>
+</html>

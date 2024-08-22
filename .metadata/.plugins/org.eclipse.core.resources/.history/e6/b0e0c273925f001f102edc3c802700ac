@@ -1,0 +1,79 @@
+package com.javaOrder.kakaotest.service;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.javaOrder.kakaotest.vo.KakaoPayReadyResponseVO;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@Slf4j
+public class PayServiceImpl implements PayService{
+	
+	@Value("${kakao-admin-key}")
+    private String kakaoAdminKey;
+	
+	@Override
+	public KakaoPayReadyResponseVO kakaoPay(Map<String, String> params) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Host", "open-api.kakaopay.com");
+		headers.set("Authorization", "SECRET_KEY "+kakaoAdminKey);
+		headers.set("Content-Type", "application/json");
+		// Server Request Body : 서버 요청 본문
+		// 아니..이거쓰면 카카오에서 원하는 형식이 아니라 안나온데..
+        // MultiValueMap<String, String> payParams = new LinkedMultiValueMap<String, String>();
+		Map<String, String> payParams = new HashMap<>();
+        /* cid
+         * 카카오페이 가맹점 코드 / 프로젝트용 테스트 코드 */
+        payParams.put("cid", "TC0ONETIME"); // 가맹점 코드 - 테스트용
+        payParams.put("partner_order_id", "1001"); // 주문 번호
+        payParams.put("partner_user_id", "goguma"); // 회원 아이디
+        payParams.put("item_name", params.get("item_name")); // 상품 명
+        payParams.put("quantity", params.get("quantity")); // 상품 수량
+        payParams.put("total_amount", params.get("total_amount")); // 상품 가격
+        payParams.put("tax_free_amount", params.get("tax_free_amount")); // 상품 비과세 금액
+        payParams.put("approval_url", "http://localhost:8080/pay/success"); // 성공시 url
+	    payParams.put("cancel_url", "http://localhost:8080/pay/cancel"); // 실패시 url
+	    payParams.put("fail_url", "http://localhost:8080/pay/fail");
+	    
+	    
+	    //log.info("payParams: "+payParams.toString());
+	    
+	    // ObjectMapper를 사용해 payParams를 JSON String으로 변환
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    String jsonBody = "";
+	    try {
+	    	jsonBody = objectMapper.writeValueAsString(payParams); // Map->JSON 변환
+	    } catch(JsonProcessingException e) {
+	    	log.error("JSON 변환 중 오류 발생", e);
+	    }
+	    
+	    
+	    // 카카오 페이 결제준비 api 요청
+	    HttpEntity<String> request = new HttpEntity<>(jsonBody, headers);
+	    log.info(request.toString());
+	    
+	    RestTemplate template = new RestTemplate();
+	    template.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
+	    //String url = "https://kapi.kakao.com/v1/payment/ready";
+	    String url = "https://open-api.kakaopay.com/v1/payment/ready";
+	    // 요청 결과 
+	    KakaoPayReadyResponseVO res = template.postForObject(url, request, KakaoPayReadyResponseVO.class);
+	    log.info(res.toString());
+	    /*요청결과에서 응답받은 tid 값을 DB에 저장하는 로직 추가
+	     * 주문번호-tid 연결해 결제이력 테이블로 관리?
+	     * */
+	    
+		return res;
+	}
+}

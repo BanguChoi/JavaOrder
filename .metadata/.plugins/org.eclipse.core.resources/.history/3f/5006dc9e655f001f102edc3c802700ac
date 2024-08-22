@@ -1,0 +1,91 @@
+package com.javaOrder.test.order.service;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
+
+import com.javaOrder.test.order.dto.KakaoPayDTO;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
+
+@Service
+@RequiredArgsConstructor
+@Transactional
+@Log
+public class KakaoPay2Service {
+
+	private static final String Host = "https://kapi.kakao.com";
+
+	/* Authorization
+	 * 공개되면 안되는 키라 properties에 저장해두고 불러오는 식으로 코드 작성
+	*/
+//    @Value("#{sellentProperty['kakao.admin']}")
+	@Value("${kakao-admin-key}")
+    private String kakaoAdminKey;
+
+    private KakaoPayDTO kakaoPayDTO;
+
+    public String kakaoPayReady() {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory()); // 정확한 에러 파악을 위해 생성
+
+        // Server Request Header : 서버 요청 헤더
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "KakaoAK " + kakaoAdminKey); // 어드민 키
+        headers.add("Accept", "application/json");
+      //headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+        headers.add("Content-type", "application/json");
+        
+        // Server Request Body : 서버 요청 본문
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+
+        /* cid
+         * 카카오페이 가맹점 코드 / 프로젝트용 테스트 코드 */
+        params.add("cid", "TC0ONETIME"); // 가맹점 코드 - 테스트용
+        params.add("partner_order_id", "1001"); // 주문 번호
+        params.add("partner_user_id", "goguma"); // 회원 아이디
+        params.add("item_name", "비둘기"); // 상품 명
+        params.add("quantity", "1"); // 상품 수량
+        params.add("total_amount", "20000"); // 상품 가격
+        params.add("tax_free_amount", "0"); // 상품 비과세 금액
+        params.add("approval_url", "https://developers.kakao.com/success"); // 성공시 url
+	    params.add("cancel_url", "https://developers.kakao.com/cancel"); // 실패시 url
+	    params.add("fail_url", "https://developers.kakao.com/fail");
+//        params.add("approval_url", "http://localhost:8080/"); // 성공시 url
+//        params.add("cancel_url", "http://localhost:8080/kakaoPayCancle"); // 실패시 url
+//        params.add("fail_url", "http://localhost:8080/kakaoPayFail");
+
+        // 헤더와 바디 붙이기 (header + body)
+        HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
+
+        try {
+        	/* RestTemplate
+        	 * RestTemplate을 이용해 카카오페이 서버에 데이터를 보내는 방법.
+        	 * post방식으로 Host+"/v1/payment/ready"에 Boardy(Header+Body)를 보냄
+        	 * 정보를 보내고 요청이 성공적으로 이뤄지면 카카오페이에서 응답정보를 보내주는데
+        	 * kakaoPayDTO.class는 응답을 받을 객체로 설정한 것
+        	 * */
+            kakaoPayDTO = restTemplate.postForObject(new URI(Host + "/online/v1/payment/ready"), body, KakaoPayDTO.class);
+
+            log.info(""+ kakaoPayDTO);
+            return kakaoPayDTO.getNext_redirect_pc_url();
+
+        } catch (RestClientException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return "/kakaoPaySuccess";
+    }
+}

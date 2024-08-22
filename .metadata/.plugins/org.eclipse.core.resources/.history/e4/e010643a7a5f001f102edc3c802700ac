@@ -1,0 +1,35 @@
+spring.application.name=javaOrder
+
+# 서버 설정
+server.servlet.encoding.force=true
+
+# datasource (oracle)
+spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
+spring.datasource.url=jdbc:oracle:thin:@localhost:1521/xepdb1
+spring.datasource.username=javaOrder
+spring.datasource.password=1234
+
+# jpa setting
+# DB의 구조를 생성하는 DDL을 처리하는 옵션
+spring.jpa.hibernate.ddl-auto=update
+
+# DDL을 생성할 때 JPA가 DB를 초기화해야 하는지 여부 설정
+spring.jpa.generate-ddl=true
+
+# 실행되는 SQL문을 보여줄 것인가의 여부를 지정
+spring.jpa.show-sql=true
+# 질의문이 한 줄로 보여진다
+# logging.level.org.hibernate=info
+
+# 스프링 부트가 실행되면서 사용하는 SQL들의 포맷팅을 의미하는데 true인 경우 줄바꿈 처리
+spring.jpa.properties.hibernate.format_sql=true
+
+# 사용하는 DB 지정
+spring.jpa.database=oracle
+
+# true일 경우 트랜잭션이 완수되어도 영속성 컨텍스트는 살아있다.
+spring.jpa.open-in-view=true
+
+# secretKey
+#kakao-admin-key=DEV72140AA845DB49076BC816EF5B3E89407FF6A
+kakao-admin-key=5tgijeLfXgX3nE3IvkboX5SoWzYOLPWJJ99e4mCGNSxvic7nAkJTnqQHIuGDgCY6dA5BEQp5i1EyV3jF

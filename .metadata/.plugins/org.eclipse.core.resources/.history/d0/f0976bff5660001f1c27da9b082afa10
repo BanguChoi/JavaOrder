@@ -1,0 +1,13 @@
+package com.javaOrder.cart.repository;
+
+import com.javaOrder.cart.domain.Cart;
+
+public class CustomCartRepositoryImpl implements CustomCartRepository {
+
+	@Override
+	public Cart saveWithFeneratedId(Cart cart) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

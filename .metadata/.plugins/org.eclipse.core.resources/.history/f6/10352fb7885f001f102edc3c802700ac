@@ -1,0 +1,11 @@
+package com.javaOrder.kakaotest.service;
+
+import java.util.Map;
+
+import com.javaOrder.kakaotest.vo.KakaoPayReadyVO;
+
+public interface PayService {
+
+	KakaoPayReadyVO kakaoPay(Map<String, String> params);
+
+}

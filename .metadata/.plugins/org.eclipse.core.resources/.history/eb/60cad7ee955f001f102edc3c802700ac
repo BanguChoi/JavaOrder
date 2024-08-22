@@ -1,0 +1,21 @@
+package com.javaOrder.kakaopay.service;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+@Service
+public interface KakaoPayServiceImpl extends KakaoPayService {
+	@Value("${kakaopayJavaOrder.kakaopay-secret-key}")
+	private String kakaoSecretKey;
+	
+	@Value("${kakaopayJavaOrder.cid}")
+	private String cid;
+	
+	@Value("${kakaopayJavaOrder.host}")
+	private String hostURL;
+	
+	private String tid;
+	
+	
+	
+}

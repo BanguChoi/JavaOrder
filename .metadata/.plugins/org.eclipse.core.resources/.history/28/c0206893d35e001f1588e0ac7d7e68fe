@@ -1,0 +1,28 @@
+package com.javaOrder.kakaoPayTest.controller;
+
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.javaOrder.kakaoPayTest.service.KakaoPayService;
+import com.javaOrder.kakaoPayTest.vo.KakaoPayReadyVO;
+
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+
+@Controller
+@Slf4j
+public class KakaoPayReadyController {
+	
+	@Setter(onMethod_=@Autowired)
+	private KakaoPayService kakaoPayService;
+	
+	public @ResponseBody KakaoPayReadyVO kakaoPay(@RequestParam Map<String,Object> params) {
+		KakaoPayReadyVO res = kakaoPayService.kakaoPay(params);
+		log.info(res.toString());
+		return res;
+	}
+}

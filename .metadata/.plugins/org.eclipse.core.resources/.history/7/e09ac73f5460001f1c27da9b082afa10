@@ -1,0 +1,5 @@
+package com.javaOrder.cart.vo;
+
+public class ItemVO {
+
+}

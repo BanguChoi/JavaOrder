@@ -1,0 +1,5 @@
+package com.javaOrder.kakaoPayTest.vo;
+
+public class KakaoPayReadyVO {
+
+}

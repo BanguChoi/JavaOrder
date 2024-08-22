@@ -1,0 +1,29 @@
+package com.javaOrder.kakaotest.controller;
+
+import java.util.Map;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.javaOrder.kakaotest.service.PayService;
+import com.javaOrder.kakaotest.vo.KakaoPayReadyVO;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Controller
+@RequiredArgsConstructor
+@Slf4j
+public class KakaoPayController {
+
+	private final PayService payService;
+	
+	@GetMapping("/pay/ready")
+	public @ResponseBody KakaoPayReadyVO kakaoPay(@RequestParam Map<String, String> params) {
+		KakaoPayReadyVO res = payService.kakaoPay(params);
+		log.info(res.toString());
+		return res;
+	}
+}

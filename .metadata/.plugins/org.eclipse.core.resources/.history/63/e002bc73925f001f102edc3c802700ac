@@ -1,0 +1,12 @@
+package com.javaOrder.test.order.service;
+
+import com.javaOrder.test.order.dto.ApproveResponse;
+import com.javaOrder.test.order.dto.ReadyResponse;
+
+public interface KakaoPayService {
+
+	ReadyResponse payReady(String name, int totalPrice);
+
+	ApproveResponse payApprove(String tid, String pgToken);
+
+}

@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "kakaopayJavaOrder.cid",
+  "type": "java.lang.String",
+  "description": "A description for 'kakaopayJavaOrder.cid'"
+}]}

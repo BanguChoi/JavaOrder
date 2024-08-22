@@ -1,0 +1,16 @@
+package com.javaOrder.common.util.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.javaOrder.cart.domain.CartItemVO;
+
+public interface ItemRepository extends JpaRepository<CartItemVO, String> {
+	// 네이티브 쿼리 예제
+	@Query(value="SELECT item_id_seq.NEXTVAL FROM DUAL", nativeQuery=true)
+	Long getNextSequenceValue();
+	
+	// 매개변수가 있는 네이티브 쿼리 예제
+	@Query(value="SELECT item_id_seq.NEXTVAL FROM DUAL", nativeQuery=true)
+	CartItemVO findByName(@Param("itemName") String itemName);
+}

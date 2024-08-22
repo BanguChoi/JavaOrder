@@ -1,0 +1,18 @@
+package com.javaOrder.kakaotest.vo;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Setter
+@Getter
+@ToString
+public class KakaoPayReadyResponseVO {
+	private String tid;						// 결제고유번호
+	private String next_redirect_app_url;
+	private String next_redirect_mobile_url;// 요청한 클라이언트가 모바일 웹
+	private String next_redirect_pc_url;	// 요청한 클라이언트가 pc웹
+	private String android_app_scheme;
+	private String ios_app_scheme;
+	private String created_at;		// 가맹점 주문번호
+}

@@ -1,0 +1,5 @@
+package com.javaOrder.kakaopay.service;
+
+public interface KakaoPayService {
+
+}

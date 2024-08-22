@@ -1,0 +1,28 @@
+package com.javaOrder.kakaoPayTest.service;
+
+import java.util.Map;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+
+import com.javaOrder.kakaoPayTest.vo.KakaoPayReadyVO;
+
+@Service
+public class KakaoPayServiceImpl implements KakaoPayService {
+	@Override
+	public KakaoPayReadyVO kakaoPay(Map<String, Object> params) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Authorization", "KakaoAk {key}");
+		
+		MultiValueMap<String, Object> payParams = new LinkedMultiValueMap<String, Object>();
+		
+		payParams.add("cid", "TC0ONETIME");
+		payParams.add("partner_order_id", "KA020230318001");
+		payParams.add("partner_order_id", "KA020230318001");
+		
+		
+		return null;
+	}
+}

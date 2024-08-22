@@ -1,0 +1,5 @@
+package com.javaOrder.test.order.dto;
+
+public class KakaoPayDTO {
+
+}
