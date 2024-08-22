@@ -1,0 +1,8 @@
+package com.javaOrder.kakaopay.service;
+
+import com.javaOrder.kakaopay.model.KakaoPayReadyResponseVO;
+
+public interface KakaoPayService {
+	public KakaoPayReadyResponseVO ready(String agent, String openType);
+	public String approve(String pgToken);
+}

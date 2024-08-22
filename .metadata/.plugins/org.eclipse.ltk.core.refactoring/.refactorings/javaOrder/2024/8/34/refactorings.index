@@ -24,3 +24,10 @@
 1724310715091	Delete element
 1724311296507	Delete element
 1724312622977	Rename package 'com.javaOrder.client.orders.vo'
+1724314995507	Rename package 'com.javaOrder.client.orders.domain'
+1724315008459	Rename package 'com.javaOrder.client.orders.service'
+1724315014915	Rename package 'com.javaOrder.client.orders.repository'
+1724315022770	Rename package 'com.javaOrder.client.orders.controller'
+1724315036729	Rename package 'com.javaOrder.kakaopay.controller'
+1724315043366	Rename package 'com.javaOrder.kakaopay.model'
+1724315048268	Rename package 'com.javaOrder.kakaopay.service'
