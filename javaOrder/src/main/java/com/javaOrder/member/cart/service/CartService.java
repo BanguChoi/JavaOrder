@@ -9,6 +9,6 @@ public interface CartService {
 	// void insertCart(Cart cart);
 	void updateCart(Cart cart);
 	void deleteCart(Cart cart);
-	
+
 
 }

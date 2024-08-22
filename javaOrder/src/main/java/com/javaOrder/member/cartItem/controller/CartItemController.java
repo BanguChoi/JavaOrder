@@ -1,9 +1,9 @@
-package com.javaOrder.member.cart.controller;
+package com.javaOrder.member.cartItem.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.javaOrder.member.cart.service.CartItemService;
+import com.javaOrder.member.cartItem.service.CartItemService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -11,10 +11,10 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/javaOrder/*")
 @RequiredArgsConstructor
 public class CartItemController {
-	
+
 	private final CartItemService cartItemService;
-	
-	
-	
-	
+
+
+
+
 }

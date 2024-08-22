@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
-	
+
 	private final CartRepository cartRepository;
 
 	@Override
@@ -21,7 +21,7 @@ public class CartServiceImpl implements CartService {
 		List<Cart> cartList = cartRepository.findAll();
 		return cartList;
 	}
-	
+
 	/*
 	@Override
 	public void insertCart(Cart cart) {
@@ -33,7 +33,7 @@ public class CartServiceImpl implements CartService {
 	public void updateCart(Cart cart) {
 		Optional<Cart> cartOptional = cartRepository.findById(cart.getCartId());
 		Cart updateCart = cartOptional.get();
-		
+
 		updateCart.setCartPrice(cart.getCartPrice());
 		cartRepository.save(updateCart);
 	}

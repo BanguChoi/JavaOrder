@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" class="h-100" data-bs-theme="auto" >
+<head>
+	<th:block th:insert="~{template/client/fragments/block :: config}"></th:block>
+	<meta name="theme-color" content="#712cf9"/>
+</head>
+
+<body class="d-flex h-100 text-center">
+	<!-- 헤더 -->
+	<header class="mb-auto">
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+		    <th:block th:insert="~{template/client/fragments/block :: header}"></th:block>
+		</nav>
+	</header>
+	
+	<!-- 사이드바 -->
+	<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary">
+	    <th:block th:insert="~{template/client/fragments/block :: sidebar}"></th:block>
+	</div>
+	
+	
+	<!-- 메인 콘텐츠 영역 -->
+    <div class="d-flex flex-column w-100 mt-5">
+		<div class="container ">
+			<th:block layout:fragment="content">              
+			<th:block th:insert="~{javaOrder/item/itemList :: itemList}"></th:block>
+            </th:block>
+        </div>
+	</div>
+	    
+	    
+	    <!-- 푸터 -->
+	<footer class="footer mt-auto pt-2 bg-body-tertiary fixed-bottom">
+		<th:block th:insert="~{template/client/fragments/block :: footer}"></th:block>
+	</footer>   
+
+	<th:block layout:fragment="script"></th:block>
+  	<script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/js/jquery-3.7.1.min.js"></script>
+	<script src="/js/common.js"></script>
+</body>
+		
+</html>
