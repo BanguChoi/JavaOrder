@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" class="h-100" data-bs-theme="auto" >
+	<head>
+		<th:block th:insert="~{template/client/fragments/block :: config}"></th:block>
+		<meta name="theme-color" content="#712cf9"/>
+	</head>
+	<body class="d-flex h-100 text-center text-bg-dark">
+		
+		<div class="d-flex w-100 h-100 p-3 mx-auto flex-column">
+	  	 	<header class="mb-auto">
+		  		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		  			<th:block th:insert="~{template/client/fragments/block :: header}"></th:block>
+		  		</nav>	
+			</header>
+			
+	
+		</div>
+		
+		
+	</body>
+</html>
