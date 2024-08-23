@@ -2,8 +2,44 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{template/client/layout/layout}" >
 	
-	<th:block layout:fragment="content"></th:block>
+<th:block th:fragment="cartItemList">
+
+	<th:block th:if="${not #strings.isEmpty(cartItemList)}">
+		<div th:eaxh="cartItem : ${cartItemList}" th:object="${cartItem}" th:data-no="*{itemId}" class="d-flex justify-content-center">
+			<div>
+				<img class="card-img-top">
+				<h5 class="card-title" th:text="*{product.productName}"></h5>
+				<p class="card-text" th:text="*{itemPrice}"></p>
+			</div>
+			<div>
+				<div>
+					<div>옵션</div>
+					<span th:text="*{optionShot}"></span>
+					<span th:text="*{optionSize}"></span>
+					<span th:text="*{optionTemperature}"></span>
+					<span th:text="*{optionSyrup}"></span>
+				</div>
+				<div class="d-flex justify-content-center">
+					<button type="button" class="btn btn-primary plusItemBtn">+</button>
+					<p class="card-text" th:text="*{itemNum}"></p>
+					<button type="button" class="btn btn-primary minusItemBtn">-</button>
+					<div>
+						<button type="button"  class="btn btn-primary deleteItemBtn">삭제</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		
+		<div>
+			<span>총 금액</span>
+			<span th:text="*{itemPrice}"></span>
+		</div>
+		
+	</th:block>
 	
+	<div class="float-left"> 
+		<button type="button" class="btn btn-primary orderBtn">결제하기</button>
+	</div>
 	
+</th:block>	
 </html>

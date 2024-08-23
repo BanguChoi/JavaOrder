@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" class="h-100" data-bs-theme="auto" >
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/client/layout/layout}" >
+
 	<head>
 		<th:block th:insert="~{template/client/fragments/block :: config}"></th:block>
 		<meta name="theme-color" content="#712cf9"/>
@@ -20,10 +22,16 @@
 		
 		
 		<!-- 메인 콘텐츠 영역 -->
-	    <div class="d-flex flex-column w-100 mt-5 pt-2">
+	    <div class="d-flex flex-grow-1 mt-5 pt-2">
 			<th:block layout:fragment="content">   
-			<!-- 상품 리스트 + 장바구니 -->           
-			<th:block th:insert="~{javaOrder/item/itemList :: itemList}"></th:block>
+				<!-- 상품 리스트 -->           
+				<div class="flex-grow-1" style="width: 75%; height: 100%;">
+					<th:block th:insert="~{javaOrder/product/productList :: productList}"></th:block>
+				</div>
+				<!-- 장바구니 -->
+				<div class="" style="width: 25%; height: 100%; background-color: yellow;">
+					<th:block th:insert="~{javaOrder/cart/cartItemList :: cartItemList}"></th:block>
+				</div>
             </th:block>
 		</div>
 

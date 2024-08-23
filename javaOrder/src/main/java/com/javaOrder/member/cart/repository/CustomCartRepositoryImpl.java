@@ -1,6 +1,6 @@
 package com.javaOrder.member.cart.repository;
 
-import com.javaOrder.member.cart.vo.Cart;
+import com.javaOrder.member.cart.domain.Cart;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

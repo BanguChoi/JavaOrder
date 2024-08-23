@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/client/layout/layout}" >
+	<th:block th:fragment="productList">
+
+	<div>
+		배너
+	</div>
+	
+		
+	<div th:if="${productList == null or #lists.size(productList) == 0}">
+	    <div class="text-center">등록된 제품이 없습니다.</div>
+	</div>
+	
+	<th:block th:if="${productList != null and not #lists.isEmpty(productList.dtoList)}" class="container">
+	    <div th:each="product : ${productList}" th:object="${product}" th:data-no="*{productId}">
+	        <div class="card" style="width: 18rem;">
+	            <img class="card-img-top">
+	            <div class="card-body">
+	                <h5 class="card-title" th:text="*{productName}"></h5>
+	                <p class="card-text" th:text="*{productExplain}"></p>
+	                <p class="card-text" th:text="*{productPrice}"></p>
+	                <a th:href="@{/product/} + *{productId}" class="btn btn-primary">제품담기</a>
+	            </div>
+	        </div>
+	    </div>
+	</th:block>
+	
+	
+	<!-- 
+	<div>
+		<div class="card" style="width: 18rem;">
+			<img class="card-img-top">
+			<div class="card-body">
+				<h5 class="card-title">아메리카노</h5>
+				<p class="card-text">간단한 설명</p>
+				<p class="card-text">2000</p>
+				<a class="btn btn-primary">제품담기</a>
+			</div>
+		</div>
+	</div>
+	 -->
+	
+	<!-- 
+	<nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+
+			<li class="page-item" th:if="$productList.prev}">
+				<a th:data-number="${productList.prevPage}" class="page-link">Previous</a>
+			</li>
+			
+			<li th:each="number : ${productList.pageNumList}"
+				th:classappend="'page-item ' + ${(productList.current == number) ? 'active' : ''}">
+				<a class="page-link" th:text="${number}" th:data-number="${number}"></a>
+			</li>
+			
+			<li class="page-item" th:if="${productList.next}">
+				<a th:data-number="${productList.nextPage}" class="page-link">Next</a>
+			</li>
+		</ul>
+	</nav>
+	-->
+	 
+</th:block>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-package com.javaOrder.member.cart.vo;
+package com.javaOrder.member.cart.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

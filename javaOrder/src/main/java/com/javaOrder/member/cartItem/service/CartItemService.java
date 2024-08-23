@@ -2,7 +2,7 @@ package com.javaOrder.member.cartItem.service;
 
 import java.util.List;
 
-import com.javaOrder.member.cartItem.vo.CartItem;
+import com.javaOrder.member.cartItem.domain.CartItem;
 
 public interface CartItemService {
 	List<CartItem> cartItemList(CartItem cartItem);

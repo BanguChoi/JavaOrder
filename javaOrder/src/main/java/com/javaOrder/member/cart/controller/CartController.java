@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.javaOrder.member.cart.domain.Cart;
 import com.javaOrder.member.cart.service.CartService;
-import com.javaOrder.member.cart.vo.Cart;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

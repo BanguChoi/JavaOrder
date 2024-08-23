@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.javaOrder.member.cart.domain.Cart;
 import com.javaOrder.member.cart.repository.CartRepository;
-import com.javaOrder.member.cart.vo.Cart;
 
 import lombok.RequiredArgsConstructor;
 
