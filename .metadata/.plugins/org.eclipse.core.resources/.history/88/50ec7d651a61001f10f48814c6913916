@@ -1,0 +1,5 @@
+package com.javaOrder.member.cartItem.repository;
+
+public interface CartItemRepository {
+
+}

@@ -1,0 +1,41 @@
+package com.javaOrder.common.product.domain;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.annotation.CreatedDate;
+
+import com.javaOrder.common.category.domain.Category;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+
+@Entity
+public class Product {
+	@Id
+	private String p_id;		// 상품 코드
+	
+	@Column(nullable=false)
+	@JoinColumn(name="cate_code")
+	private Category cate_code;	// 카테고리코드
+	
+	@Column(length=50, nullable=false)
+	private String p_name;		// 상품명
+	
+	@Column(nullable=false)
+	@ColumnDefault(value="0")
+	private int p_order;		// 주문횟수
+	
+	@Lob
+	@Column(nullable=false)
+	private String p_ex;		// 상품설명
+	
+	@CreatedDate
+	@Column(nullable=false, updatable=false)
+	private String p_date;		// 상품등록일
+	
+	private String p_sell;		// 상품 개시여부
+	
+	private String p_price;		// 상품가격
+}

@@ -1,0 +1,5 @@
+package com.javaOrder.common.product.domain;
+
+public class Product {
+
+}

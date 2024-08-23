@@ -1,0 +1,5 @@
+package com.javaOrder.member.domain;
+
+public class Member {
+
+}

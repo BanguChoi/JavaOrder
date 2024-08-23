@@ -1,0 +1,19 @@
+package com.javaOrder.common.orders.orderitem.domain;
+
+import com.javaOrder.common.orders.domain.Orders;
+import com.javaOrder.common.product.domain.Product;
+
+public class OrderItem {
+	private String oiId;	// 주문항목ID
+	private Orders ordNum;	// 주문번호
+	private Product pId;	// 상품번호
+	private int oiNum;		// 수량
+	private int oiPrice;	// 항목 단가
+	private int oiShot;		// 샷여부
+	private int oiSize;		// 사이즈
+	private int oiTemp;		// 냉온여부
+	private int oiSyrup;	// 시럽
+	private int oiTakeout;	// 수령방식
+	private int oiExfee;	// 추가비용
+	
+}

@@ -1,0 +1,5 @@
+package com.javaOrder.common.category.domain;
+
+public class Category {
+
+}
