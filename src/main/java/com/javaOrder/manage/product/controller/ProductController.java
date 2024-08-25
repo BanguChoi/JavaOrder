@@ -1,4 +1,4 @@
-package com.javaOrder.product.controller;
+package com.javaOrder.manage.product.controller;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.javaOrder.product.DTO.ProductDTO;
-import com.javaOrder.product.service.ProductService;
+import com.javaOrder.manage.product.DTO.ProductDTO;
+import com.javaOrder.manage.product.service.ProductService;
 
 @Controller
 @RequestMapping("/products")
@@ -43,7 +43,7 @@ public class ProductController {
 
     @PostMapping("/{id}/update")
     public String updateProduct(@PathVariable("id") String id, @ModelAttribute ProductDTO productDTO) {
-        productDTO.setP_id(id);
+        productDTO.setProductId(id);
         productService.updateProduct(productDTO);
         return "redirect:/products";
     }

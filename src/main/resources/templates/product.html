@@ -17,13 +17,14 @@
 	        </thead>
 	        <tbody>
 	            <tr th:each="product : ${products}">
-	                <td th:text="${product.p_id}"></td>
-	                <td th:text="${product.cate_code}"></td>
-	                <td th:text="${product.p_name}"></td>
+	                <!-- 올바른 필드명으로 수정 -->
+	                <td th:text="${product.productId}"></td>
+	                <td th:text="${product.categoryCode}"></td>
+	                <td th:text="${product.productName}"></td>
 	                <td>
-	                    <a th:href="@{'/products/' + ${product.p_id}}">View</a>
-	                    <a th:href="@{'/products/' + ${product.p_id} + '/update'}">Update</a>
-	                    <a th:href="@{'/products/' + ${product.p_id} + '/delete'}">Delete</a>
+	                    <a th:href="@{'/products/' + ${product.productId}}">View</a>
+	                    <a th:href="@{'/products/' + ${product.productId} + '/update'}">Update</a>
+	                    <a th:href="@{'/products/' + ${product.productId} + '/delete'}">Delete</a>
 	                </td>
 	            </tr>
 	        </tbody>
