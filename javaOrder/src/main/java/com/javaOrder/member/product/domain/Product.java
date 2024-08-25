@@ -5,6 +5,8 @@ import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -16,13 +18,14 @@ import lombok.Setter;
 @Entity
 @Table(name = "Product")
 public class Product {
-	
+
     @Id
     @Column(name = "p_id", length = 20)
     private String productId;
 
-    @Column(name = "cate_code", length = 50, nullable = false)
-    private String categoryCode;
+    @ManyToOne
+    @JoinColumn(name = "cate_code")
+    private Category category;
 
     @Column(name = "p_order", nullable = false)
     private int productOrder;

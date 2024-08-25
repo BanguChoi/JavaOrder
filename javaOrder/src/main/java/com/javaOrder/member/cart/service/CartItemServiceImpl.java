@@ -1,12 +1,12 @@
-package com.javaOrder.member.cartItem.service;
+package com.javaOrder.member.cart.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.javaOrder.member.cartItem.domain.CartItem;
-import com.javaOrder.member.cartItem.repository.CartItemRepository;
+import com.javaOrder.member.cart.domain.CartItem;
+import com.javaOrder.member.cart.repository.CartItemRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,8 +15,8 @@ import lombok.RequiredArgsConstructor;
 public class CartItemServiceImpl implements CartItemService {
 
 	private final CartItemRepository cartItemRepository;
-	
-	
+
+
 	@Override
 	public List<CartItem> cartItemList(CartItem cartItem) {
 		List<CartItem> cartItemList = cartItemRepository.findAll();

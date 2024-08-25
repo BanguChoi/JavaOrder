@@ -14,10 +14,10 @@ import lombok.extern.slf4j.Slf4j;
 @SpringBootTest
 @Slf4j
 public class ProductTests {
-	
+
 	@Setter(onMethod_ = @Autowired)
 	private ProductRepository productRepository;
-	
+
 	/* 제품 갯수 출력 */
 	@Test
 	public void productListTest() {
@@ -26,5 +26,5 @@ public class ProductTests {
 			log.info(product.toString());
 		}
 	}
-	
+
 }

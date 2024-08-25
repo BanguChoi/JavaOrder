@@ -1,8 +1,6 @@
-package com.javaOrder.member.cartItem.domain;
+package com.javaOrder.member.cart.domain;
 
 import org.hibernate.annotations.ColumnDefault;
-
-import com.javaOrder.member.cart.domain.Cart;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,7 +26,8 @@ public class CartItem {
 
 	@Id
 	@GeneratedValue(
-			strategy = GenerationType.SEQUENCE, generator = "cartItem_generator")
+			strategy = GenerationType.SEQUENCE, 
+			generator = "cartItem_generator")
 	private String itemIdSeq;
 
 	@Column(name = "item_id", nullable = false)
@@ -63,15 +62,15 @@ public class CartItem {
 	@Column(name = "opt_syrup")
 	private int optionSyrup;
 
-	
-	
-	
+
+
+
 	@PrePersist
 	public void preItemId() {
 		this.itemId = cart.getCartId() + this.itemIdSeq;
 	}
-	
-	
+
+
 	/* 총 합을 구하는 로직
 	@PrePersist
     @PreUpdate
@@ -81,15 +80,15 @@ public class CartItem {
 		if(this.optionShot > 0) {
 			addPrice += optionShot * 500;
 		}
-		
+
 		if(this.optionSize > 1) {
 			addPrice += optionSize * 700;
 		}
-		
+
 		if(this.optionSyrup > 0) {
 			addPrice += optionSyrup * 500;
 		}
-		
+
 		this.itemPrice = (this.product.getProductPrice() + addPrice) * this.itemNum ;
 	}
 	 */
