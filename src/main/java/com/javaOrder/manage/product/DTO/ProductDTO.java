@@ -14,4 +14,7 @@ public class ProductDTO {
     private String productSell;  // 필드명 수정
     private Integer productPrice;  // 타입 및 필드명 수정
     private String productName;
+
+    // 이미지 경로를 저장할 필드 추가
+    private String image;
 }

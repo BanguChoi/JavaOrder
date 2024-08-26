@@ -22,9 +22,7 @@
 	                <td th:text="${product.categoryCode}"></td>
 	                <td th:text="${product.productName}"></td>
 	                <td>
-	                    <a th:href="@{'/products/' + ${product.productId}}">View</a>
-	                    <a th:href="@{'/products/' + ${product.productId} + '/update'}">Update</a>
-	                    <a th:href="@{'/products/' + ${product.productId} + '/delete'}">Delete</a>
+	                    <a th:href="@{'/products/' + ${product.productId}}">상세보기</a>
 	                </td>
 	            </tr>
 	        </tbody>

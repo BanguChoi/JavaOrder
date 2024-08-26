@@ -1,18 +1,87 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="UTF-8">
-		<title>Page Title</title>
-	</head>
-	<body>
-		<h1>Product Detail</h1>
-	    <p><strong>Product ID:</strong> <span th:text="${product.p_id}"></span></p>
-	    <p><strong>Category Code:</strong> <span th:text="${product.cate_code}"></span></p>
-	    <p><strong>Product Name:</strong> <span th:text="${product.p_name}"></span></p>
-	    <p><strong>Description:</strong> <span th:text="${product.p_ex}"></span></p>
-	    <p><strong>Date:</strong> <span th:text="${product.p_date}"></span></p>
-	    <p><strong>Sell:</strong> <span th:text="${product.p_sell}"></span></p>
-	    <p><strong>Price:</strong> <span th:text="${product.p_price}"></span></p>
-	    <a th:href="@{'/products'}">Back to list</a>
-	</body>
+<head>
+    <meta charset="UTF-8">
+    <title>Page Title</title>
+    <style>
+        .product-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .product-image {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+        }
+        .product-info {
+            margin-top: 20px;
+        }
+        .product-info div {
+            margin-bottom: 10px;
+        }
+        .actions {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="product-container">
+        <h1>상품 상세 정보</h1>
+        
+        <!-- 기본 이미지 사용 -->
+        <img th:if="${product.image != null}" th:src="@{${product.image}}" alt="Product Image" class="product-image">
+        <img th:if="${product.image == null}" th:src="@{/images/noimg.png}" alt="Product Image" class="product-image">
+
+        <form th:object="${product}" th:action="@{'/products/' + ${product.productId} + '/update'}" method="post">
+            <input type="hidden" th:field="*{productId}" />
+            <div class="product-info">
+                <div>
+                    <strong>상품명:</strong> 
+                    <input type="text" th:field="*{productName}" />
+                </div>
+                <div>
+                    <strong>카테고리 코드:</strong> 
+                    <span th:text="${product.categoryCode}"></span>
+                </div>
+                <div>
+                    <strong>상품 코드:</strong> 
+                    <span th:text="${product.productId}"></span>
+                </div>
+                <div>
+                    <strong>상품 등록 일자:</strong> 
+                    <span th:text="${product.productDate}"></span>
+                </div>
+                <div>
+                    <strong>가격:</strong>
+                    <input type="number" th:field="*{productPrice}" />
+                </div>
+                <div>
+                    <strong>주문 횟수:</strong> 
+                    <span th:text="${product.productOrder}"></span>
+                </div>
+                <div>
+                    <strong>상품 상세 설명:</strong>
+                    <textarea th:field="*{productExplain}"></textarea>
+                </div>
+                <div>
+                    <strong>상품 게시 여부:</strong>
+                    <select th:field="*{productSell}">
+                        <option th:value="Y" th:text="'게시'"></option>
+                        <option th:value="N" th:text="'미게시'"></option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="actions">
+                <!-- 수정 버튼 -->
+                <button type="submit">수정</button>
+                <!-- 목록으로 돌아가기 버튼 -->
+                <a th:href="@{/products}">목록으로</a>
+            </div>
+        </form>
+    </div>
+</body>
 </html>

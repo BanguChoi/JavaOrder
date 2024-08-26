@@ -36,7 +36,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void updateProduct(ProductDTO productDTO) {
-        Product product = convertDtoToEntity(productDTO);
+        if (productDTO.getProductId() == null) {
+            throw new IllegalArgumentException("Product ID must not be null");
+        }
+
+        Product product = productRepository.findById(productDTO.getProductId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid product ID"));
+
+        // 업데이트 로직
+        product.setProductName(productDTO.getProductName());
+        product.setProductPrice(productDTO.getProductPrice());
+        product.setProductExplain(productDTO.getProductExplain());
+        product.setProductSell(productDTO.getProductSell());
+
         productRepository.save(product);
     }
 
@@ -45,7 +57,6 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteById(productId);
     }
 
-    // Null 체크를 포함한 convertEntityToDto 메서드
     private ProductDTO convertEntityToDto(Product product) {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setProductId(product.getProductId());
@@ -54,7 +65,7 @@ public class ProductServiceImpl implements ProductService {
         productDTO.setProductExplain(product.getProductExplain());
         productDTO.setProductDate(product.getProductDate());
         productDTO.setProductSell(product.getProductSell());
-        productDTO.setProductPrice(product.getProductPrice());  // Null 체크 포함
+        productDTO.setProductPrice(product.getProductPrice());
         productDTO.setProductName(product.getProductName());
         return productDTO;
     }

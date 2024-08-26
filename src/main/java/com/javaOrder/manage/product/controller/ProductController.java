@@ -31,27 +31,17 @@ public class ProductController {
     @GetMapping("/{id}")
     public String getProduct(@PathVariable("id") String id, Model model) {
         ProductDTO product = productService.getProductById(id);
+        if (product == null) {
+            return "error/404"; // 제품이 없는 경우 404 페이지로 리다이렉트
+        }
         model.addAttribute("product", product);
-        return "productDetail";
-    }
-
-    @PostMapping
-    public String addProduct(@ModelAttribute ProductDTO productDTO) {
-        productService.addProduct(productDTO);
-        return "redirect:/products";
+        return "productDetail"; // 템플릿 파일 이름
     }
 
     @PostMapping("/{id}/update")
-    public String updateProduct(@PathVariable("id") String id, @ModelAttribute ProductDTO productDTO) {
-        productDTO.setProductId(id);
+    public String updateProduct(@PathVariable("id") String id, @ModelAttribute("product") ProductDTO productDTO) {
+        productDTO.setProductId(id);  // productId를 DTO에 설정
         productService.updateProduct(productDTO);
-        return "redirect:/products";
-    }
-
-    @GetMapping("/{id}/delete")
-    public String deleteProduct(@PathVariable("id") String id) {
-        productService.deleteProduct(id);
-        return "redirect:/products";
+        return "redirect:/products/" + id;
     }
 }
-
