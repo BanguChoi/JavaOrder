@@ -1,31 +1,74 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="UTF-8">
-		<title>Page Title</title>
-	</head>
-	<body>
-		<h1>Product List</h1>
-	    <table>
-	        <thead>
-	            <tr>
-	                <th>Product ID</th>
-	                <th>Category Code</th>
-	                <th>Product Name</th>
-	                <th>Actions</th>
-	            </tr>
-	        </thead>
-	        <tbody>
-	            <tr th:each="product : ${products}">
-	                <!-- 올바른 필드명으로 수정 -->
-	                <td th:text="${product.productId}"></td>
-	                <td th:text="${product.categoryCode}"></td>
-	                <td th:text="${product.productName}"></td>
-	                <td>
-	                    <a th:href="@{'/products/' + ${product.productId}}">상세보기</a>
-	                </td>
-	            </tr>
-	        </tbody>
-	    </table>
-	</body>
+<head>
+    <meta charset="UTF-8">
+    <title>상품 목록</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .actions a {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>상품 목록</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>이미지</th>
+                <th>상품명</th>
+                <th>카테고리 코드</th>
+                <th>상품 코드</th>
+                <th>상품 등록 일자</th>
+                <th>가격</th>
+                <th>간략한 상품 설명</th>
+                <th>상품 게시 여부</th>
+                <th>주문 횟수</th>
+                <th>상세보기</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product : ${productsPage.content}">
+                <td>
+                    <img th:if="${product.image != null}" th:src="@{${product.image}}" alt="상품 이미지" style="width:100px;"/>
+                    <img th:unless="${product.image != null}" th:src="@{/images/noimg.png}" alt="기본 이미지" style="width:100px;"/>
+                </td>
+                <td th:text="${product.productName}"></td>
+                <td th:text="${product.categoryCode}"></td>
+                <td th:text="${product.productId}"></td>
+                <td th:text="${product.productDate}"></td>
+                <td th:text="${#numbers.formatCurrency(product.productPrice)}"></td>
+                <td th:text="${product.productExplain}"></td>
+                <td th:text="${product.productSell}"></td>
+                <td th:text="${product.productOrder}"></td>
+                <td><a th:href="@{'/products/' + ${product.productId}}">상세보기</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <span th:text="'Page: ' + ${productsPage.number + 1} + ' / ' + ${productsPage.totalPages}"></span>
+        <div>
+            <a th:href="@{/products(page=${productsPage.number - 1})}" th:if="${productsPage.hasPrevious()}">Previous</a>
+            <span th:each="i : ${#numbers.sequence(1, productsPage.totalPages)}">
+                <a th:href="@{/products(page=${i - 1})}" th:text="${i}" th:classappend="${i == productsPage.number + 1} ? 'current' : ''"></a>
+            </span>
+            <a th:href="@{/products(page=${productsPage.number + 1})}" th:if="${productsPage.hasNext()}">Next</a>
+        </div>
+    </div>
+    <div class="actions">
+        <a th:href="@{/products/new}">상품 등록</a>
+    </div>
+</body>
 </html>

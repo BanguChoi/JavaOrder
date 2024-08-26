@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>상품 등록</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="/js/productForm.js"></script>
+    <style>
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .form-container div {
+            margin-bottom: 10px;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-container input, .form-container select, .form-container textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-container .actions {
+            margin-top: 20px;
+            text-align: right;
+        }
+        .form-container .actions button, .form-container .actions a {
+            padding: 10px 15px;
+            margin-left: 10px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>상품 등록</h1>
+        <form id="productForm">
+            <div>
+                <label for="productName">상품명</label>
+                <input type="text" id="productName" name="productName" required>
+            </div>
+            <div>
+                <label for="categoryCode">카테고리 코드</label>
+                <input type="text" id="categoryCode" name="categoryCode" required>
+            </div>
+            <div>
+                <label for="productPrice">가격</label>
+                <input type="number" id="productPrice" name="productPrice" required>
+            </div>
+            <div>
+                <label for="productSell">상품 게시 여부</label>
+                <select id="productSell" name="productSell">
+                    <option value="Y">게시</option>
+                    <option value="N">미게시</option>
+                </select>
+            </div>
+            <div>
+                <label for="productExplain">상품 상세 설명</label>
+                <textarea id="productExplain" name="productExplain" required></textarea>
+            </div>
+            <div class="actions">
+                <button type="button" id="submitBtn">등록</button>
+                <a href="/products" class="button">목록</a>
+                <a href="/categories/new" class="button">카테고리 추가</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

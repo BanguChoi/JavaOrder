@@ -1,4 +1,4 @@
-package com.javaOrder.manage.product;
+package com.javaOrder.admin.product;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

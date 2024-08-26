@@ -1,4 +1,4 @@
-package com.javaOrder.manage.product.entity;
+package com.javaOrder.admin.product.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

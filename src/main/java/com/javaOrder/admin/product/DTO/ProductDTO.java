@@ -1,4 +1,4 @@
-package com.javaOrder.manage.product.DTO;
+package com.javaOrder.admin.product.DTO;
 
 import java.util.Date;
 

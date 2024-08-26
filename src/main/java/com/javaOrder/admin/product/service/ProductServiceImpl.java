@@ -1,12 +1,15 @@
-package com.javaOrder.manage.product.service;
+package com.javaOrder.admin.product.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.stream.Collectors;
-import com.javaOrder.manage.product.DTO.ProductDTO;
-import com.javaOrder.manage.product.entity.Product;
-import com.javaOrder.manage.product.repository.ProductRepository;
+
+import com.javaOrder.admin.product.DTO.ProductDTO;
+import com.javaOrder.admin.product.entity.Product;
+import com.javaOrder.admin.product.repository.ProductRepository;
+
+import java.util.Date;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -15,10 +18,9 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public List<ProductDTO> getAllProducts() {
-        return productRepository.findAll().stream()
-                .map(this::convertEntityToDto)
-                .collect(Collectors.toList());
+    public Page<ProductDTO> getAllProducts(Pageable pageable) {
+        return productRepository.findAll(pageable)
+                .map(this::convertEntityToDto);
     }
 
     @Override
@@ -30,6 +32,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void addProduct(ProductDTO productDTO) {
+        // 상품 등록 일자 설정
+        productDTO.setProductDate(new Date());
+
+        // 카테고리 코드 + 시퀀스 번호로 상품 코드 생성
+        String newProductId = generateProductId(productDTO.getCategoryCode());
+        productDTO.setProductId(newProductId);
+
         Product product = convertDtoToEntity(productDTO);
         productRepository.save(product);
     }
@@ -82,4 +91,28 @@ public class ProductServiceImpl implements ProductService {
         product.setProductName(productDTO.getProductName());
         return product;
     }
+
+    private String generateProductId(String categoryCode) {
+        // 해당 카테고리 코드로 시작하는 기존의 최대 상품 코드를 찾음
+        String maxProductId = productRepository.findMaxProductIdByCategoryCode(categoryCode);
+        
+        int newSequence = 1;
+        if (maxProductId != null && maxProductId.length() > categoryCode.length()) {
+            // 카테고리 코드 길이 이후의 시퀀스 부분을 추출
+            String sequenceStr = maxProductId.substring(categoryCode.length());
+            try {
+                newSequence = Integer.parseInt(sequenceStr) + 1;
+            } catch (NumberFormatException e) {
+                // 시퀀스 번호를 숫자로 변환하지 못하는 경우, 기본값으로 1을 사용
+                newSequence = 1;
+            }
+        }
+
+        // 시퀀스를 2자리로 맞추기 위해 형식을 지정합니다.
+        String formattedSequence = String.format("%02d", newSequence);
+        
+        return categoryCode + formattedSequence; // 상품 ID 형식: 카테고리 코드 + 시퀀스 번호
+    }
+
+
 }
