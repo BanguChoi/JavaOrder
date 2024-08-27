@@ -1,0 +1,21 @@
+package com.javaOrder.common.orders.orderitem.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.javaOrder.common.orders.orderitem.domain.OrderItem;
+import com.javaOrder.common.orders.orderitem.repository.OrderItemRepository;
+
+@Service
+public class OrderItemServiceImpl implements OrderItemService {
+
+	
+	private final OrderItemRepository orderItemRepository;
+	
+	@Override
+	public List<OrderItem> orderItemList(OrderItem orderItem) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

@@ -1,0 +1,19 @@
+package com.javaOrder.common.orders.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.javaOrder.common.orders.service.OrdersService;
+
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequestMapping("/orders/*")
+@RequiredArgsConstructor
+public class OrdersController {
+
+	private final OrdersService orderService;
+	
+	
+	
+}

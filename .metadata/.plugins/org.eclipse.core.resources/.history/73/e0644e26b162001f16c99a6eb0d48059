@@ -1,0 +1,5 @@
+package com.javaOrder.member.service;
+
+public interface MemberService {
+
+}

@@ -1,0 +1,8 @@
+package com.javaOrder.common.kakaopay.service;
+
+import com.javaOrder.common.kakaopay.domain.KakaoPayReadyResponse;
+
+public interface KakaoPayService {
+	public KakaoPayReadyResponse ready(String agent, String openType);
+	public String approve(String pgToken);
+}

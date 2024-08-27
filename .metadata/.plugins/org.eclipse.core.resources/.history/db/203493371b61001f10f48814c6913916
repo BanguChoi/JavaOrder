@@ -1,0 +1,5 @@
+package com.javaOrder.common.orders.orderitem.repository;
+
+public interface OrderItemRepository {
+
+}

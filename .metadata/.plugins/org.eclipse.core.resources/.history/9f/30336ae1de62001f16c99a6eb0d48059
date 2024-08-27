@@ -1,0 +1,28 @@
+package com.javaOrder.common.orders.controller;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.javaOrder.common.orders.domain.Orders;
+import com.javaOrder.common.orders.service.OrdersService;
+
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequestMapping("/javaOrder/*")
+@RequiredArgsConstructor
+public class OrdersController {
+
+	private final OrdersService orderService;
+	
+	@GetMapping("/ordersList")
+	public String orderList(Orders orders, Model model) {
+		List<Orders> orderList = orderService.orderList(orders);
+		model.addAttribute("orderList", orderList);
+		return "order/orderList";
+	}
+}

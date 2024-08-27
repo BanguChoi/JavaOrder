@@ -1,0 +1,5 @@
+package com.javaOrder.common.orders.orderItem.domain;
+
+public class OrderItemTests {
+
+}

@@ -1,0 +1,18 @@
+package com.javaOrder.common.orders.orderItem.domain;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.javaOrder.common.orders.orderitem.repository.OrderItemRepository;
+
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+
+@SpringBootTest
+@Slf4j
+public class OrderItemTests {
+	@Setter(onMethod_=@Autowired)
+	private OrderItemRepository orderItemRepository;
+	
+	
+}

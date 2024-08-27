@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <title>결제 승인 결과 (result of approval)</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
+</head>
+<body>
+<h1>승인 결과</h1>
+	<!-- <p th:text="${response}"></p> -->
+
+	<a href="javascript:closePopup();" target="_parent">close</a><br />
+	<script th:inline="script">
+		var response = /*[[${response}]]*/'';
+		var responseObject = JSON.parse(response);
+		
+		console.log(response);
+		document.write("Partner Order ID: " + responseObject.partner_order_id + "<br>");
+		document.write("Partner User ID: " + responseObject.partner_user_id + "<br>");
+		document.write("Item Name: " + responseObject.item_name + "<br>");
+		document.write("Item Code: " + responseObject.item_code + "<br>");
+		document.write("Quantity: " + responseObject.quantity + "<br>");
+		document.write("Total Amount: " + responseObject.amount.total + "<br>");
+		document.write("VAT Amount: " + responseObject.amount.vat + "<br>");
+		document.write("Created At: " + responseObject.created_at + "<br>");
+		document.write("Approved At: " + responseObject.approved_at + "<br>");
+		/*]]>*/
+	
+	    function closePopup() {
+	        window.opener.location.href = "/";
+	        self.close();
+	    }
+	</script>
+	<button type="button" id="orderBtn" class="btn btn-primary btn-sm">주문확인</button>
+</body>
+</html>

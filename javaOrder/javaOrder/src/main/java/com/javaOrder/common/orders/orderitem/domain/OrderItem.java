@@ -12,53 +12,68 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+//@SequenceGenerator(
+//name="orderItem_generator",
+//sequenceName="order_item_seq",
+//initialValue = 1,
+//allocationSize = 1)
+
 @Getter
 @Setter
+@Builder
 @ToString
 @Entity
-@Table(name="orderitem")
+@Table(name="order_item")
 public class OrderItem {
 	@Id
 	@Column(name="oi_id")
-	private String oiId;	// 주문항목ID
+	private String orderitemId;	// 주문항목ID
 	
 	@ManyToOne
 	@JoinColumn(name="ord_num")
-	private Orders ordNum;	// 주문번호
+	private Orders orderNumber;	// 주문번호
 	
 	@OneToOne
 	@JoinColumn(name="p_id")
-	private Product pId;	// 상품번호
+	private Product productId;	// 상품번호
 	
 	@Column(name="oi_num", nullable=false)
 	@ColumnDefault("0")
-	private int oiNum;		// 수량
+	private Integer orderitemNumber;		// 수량
 	
 	@Column(name="oi_price", nullable=false)
-	private int oiPrice;	// 항목 단가
+	private Integer orderitemPrice;	// 항목 단가
 	
 	@Column(name="oi_shot", nullable=false)
-	private int oiShot;		// 샷여부
+	private Integer orderitemShot;		// 샷여부
 	
 	@Column(name="oi_size", nullable=false)
-	private int oiSize;		// 사이즈
+	private Integer orderitemSize;		// 사이즈
 	
 	@Column(name="oi_temp", nullable=false)
-	private int oiTemp;		// 냉온여부
+	private Integer orderitemTemp;		// 냉온여부
 	
 	@Column(name="oi_syrup", nullable=true)
-	private int oiSyrup;	// 시럽
+	private Integer orderitemSyrup;	// 시럽
 	
 	@Column(name="oi_takeout", nullable=false)
-	private int oiTakeout;	// 수령방식
+	@ColumnDefault("0")
+	private Integer orderitemTakeout;	// 수령방식
 	
 	@Column(name="oi_exfee", nullable=false)
 	@ColumnDefault("0")
-	private int oiExfee;	// 추가비용
+	private Integer orderitemExfee;	// 추가비용
+	
+	
+//	public void preOrderId() {
+//		this.orderitemId = orderNumber.getOrderNumber() + this.orderItemSeq
+//	}
 }
 
 

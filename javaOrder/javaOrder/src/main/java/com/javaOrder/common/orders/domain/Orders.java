@@ -16,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,6 +24,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
+@Builder
 @ToString
 @Entity
 @Table(name="orders")
@@ -31,22 +33,26 @@ public class Orders {
 	@Id
 	@Column(name="ord_num")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "orders_generator")
-	private Long ordNum;
+	private Long orderNumber;
 	
 	@ManyToOne
 	@JoinColumn(name="m_code")
-	private Member mCode;
+	private Member memberCode;
 	
 	@CreationTimestamp
 	@Column(name="ord_date", nullable=false)
-	private LocalDateTime ordDate;
+	private LocalDateTime orderDate;
 	
 	@Column(name="ord_price", nullable=false)
-	private int ordPrice;
+	private Integer orderPrice;
 	
 	@Column(name="ord_status", columnDefinition = "CHAR(1) DEFAULT 'W'", nullable=false)
 	@ColumnDefault(value="W")
-	private String ordStatus;
+	private String orderStatus;
+	
+	// 상품명 필요
+	@Column(length=100, name="ord_name", nullable=false)
+	private String orderName;
 }
 
 /**********************************************************************************

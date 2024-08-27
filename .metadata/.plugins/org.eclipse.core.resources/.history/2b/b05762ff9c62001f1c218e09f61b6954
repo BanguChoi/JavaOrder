@@ -1,0 +1,5 @@
+package com.javaOrder.common.product.repository;
+
+public interface ProductRepository {
+
+}

@@ -1,0 +1,5 @@
+package com.javaOrder.common.product.service;
+
+public interface ProductService {
+
+}

@@ -1,0 +1,5 @@
+package com.javaOrder.common.orders.orderitem.service;
+
+public class OrderItemServiceImpl implements OrderItemService {
+
+}

@@ -2,6 +2,7 @@ package com.javaOrder.member.cartItem.domain;
 
 import org.hibernate.annotations.ColumnDefault;
 
+import com.javaOrder.common.product.domain.Product;
 import com.javaOrder.member.cart.domain.Cart;
 
 import jakarta.persistence.Column;
@@ -13,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,10 +29,6 @@ import lombok.Setter;
 public class CartItem {
 
 	@Id
-	@GeneratedValue(
-			strategy = GenerationType.SEQUENCE, generator = "cartItem_generator")
-	private String itemIdSeq;
-
 	@Column(name = "item_id", nullable = false)
 	private String itemId;
 
@@ -38,52 +36,65 @@ public class CartItem {
 	@JoinColumn(name = "cart_id")
 	private Cart cart;
 
-	/*
-	@OneToOne
+	
+	@ManyToOne
 	@JoinColumn(name = "p_id")
 	private Product product;
-	*/
+	
 
 	@Column(name = "item_num", nullable = false)
-	private int itemNum;
+	private Integer itemNum;
 
 	@Column(name = "item_price", nullable = false)
-	private int itemPrice;
+	private Integer itemPrice;
 
 	@Column(name = "opt_shot", nullable = false)
 	@ColumnDefault(value = "0")
-	private int optionShot;
+	private Integer optionShot;
 
 	@Column(name = "opt_size", nullable = false)
-	private int optionSize;
+	private Integer optionSize;
 
 	@Column(name = "opt_temp", nullable = false)
-	private int optionTemperature;
+	private Integer optionTemperature;
 
 	@Column(name = "opt_syrup")
-	private int optionSyrup;
+	private Integer optionSyrup;
 
+	
+	//@Id
+	@Transient
+	@GeneratedValue(
+			strategy = GenerationType.SEQUENCE, generator = "cartItem_generator")
+	private Long itemIdSeq;	
+	
 	@PrePersist
 	public void preItemId() {
 		this.itemId = cart.getCartId() + this.itemIdSeq;
 	}
+	
+	
+	/* 총 합을 구하는 로직
+	@PrePersist
+    @PreUpdate
+	public void calculateItemPrice() {
+		int addPrice = 0;
+
+		if(this.optionShot > 0) {
+			addPrice += optionShot * 500;
+		}
+		
+		if(this.optionSize > 1) {
+			addPrice += optionSize * 700;
+		}
+		
+		if(this.optionSyrup > 0) {
+			addPrice += optionSyrup * 500;
+		}
+		
+		this.itemPrice = (this.product.getProductPrice() + addPrice) * this.itemNum ;
+	}
+	 */
 
 }
 
-
-/*
-CREATE TABLE Cart_Item (
-    item_id VARCHAR2(20) NOT NULL,
-    cart_id VARCHAR2(20) NOT NULL,
-    p_id VARCHAR2(20) NOT NULL,
-    item_num NUMBER NOT NULL,
-    item_price NUMBER NOT NULL,
-    opt_shot NUMBER DEFAULT 0 NOT NULL,
-    opt_size NUMBER NOT NULL,
-    opt_temp NUMBER NOT NULL,
-    opt_syrup NUMBER,
-    CONSTRAINT pk_cart_item PRIMARY KEY (item_id),
-    CONSTRAINT fk_cart_item_cart FOREIGN KEY (cart_id) REFERENCES Cart(cart_id),
-    CONSTRAINT fk_cart_item_product FOREIGN KEY (p_id) REFERENCES Product(p_id)
-);
-*/

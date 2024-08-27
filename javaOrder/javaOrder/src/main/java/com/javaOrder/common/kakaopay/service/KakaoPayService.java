@@ -1,8 +1,12 @@
 package com.javaOrder.common.kakaopay.service;
 
-import com.javaOrder.common.kakaopay.model.KakaoPayReadyResponseVO;
+import com.javaOrder.common.kakaopay.domain.KakaoPayReadyResponse;
+import com.javaOrder.common.kakaopay.domain.PayApproveRequest;
+import com.javaOrder.common.kakaopay.domain.PayReadyRequestVO;
+import com.javaOrder.common.orders.domain.Orders;
 
 public interface KakaoPayService {
-	public KakaoPayReadyResponseVO ready(String agent, String openType);
-	public String approve(String pgToken);
+	public KakaoPayReadyResponse ready(PayReadyRequestVO readyRequest);
+	public String approve(String pgToken, PayApproveRequest payApproveRequest);
+	public Orders copyCartToOrder(String mCode);
 }

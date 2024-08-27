@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
     <typeInfo handle="=javaOrder/C:\/Users\/garden\/.m2\/repository\/org\/springframework\/data\/spring-data-jpa\/3.3.2\/spring-data-jpa-3.3.2.jar=/maven.pomderived=/true=/=/maven.groupId=/org.springframework.data=/=/maven.artifactId=/spring-data-jpa=/=/maven.version=/3.3.2=/=/maven.scope=/compile=/=/maven.pomderived=/true=/&lt;org.springframework.data.jpa.repository(JpaRepository.class[JpaRepository" modifiers="1537" timestamp="1723174952601"/>
-    <typeInfo handle="=javaOrder/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.javaOrder.cart.repository{CustomCartRepository.java[CustomCartRepository" modifiers="513" timestamp="1724311274813"/>
-    <typeInfo handle="=javaOrder/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.javaOrder.common.orders.service{OrdersService.java[OrdersService" modifiers="513" timestamp="1724315340623"/>
+    <typeInfo handle="=javaOrder/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.javaOrder.common.orders.service{OrdersService.java[OrdersService" modifiers="513" timestamp="1724597602669"/>
+    <typeInfo handle="=javaOrder/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.javaOrder.member.cartItem.service{CartItemService.java[CartItemService" modifiers="513" timestamp="1724569009233"/>
+    <typeInfo handle="=javaOrder/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.javaOrder.common.orders.orderitem.service{OrderItemService.java[OrderItemService" modifiers="513" timestamp="1724629920256"/>
 </typeInfoHistroy>

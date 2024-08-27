@@ -1,9 +1,0 @@
-package com.javaOrder.kakaopay.service;
-
-import org.springframework.stereotype.Service;
-
-@Service
-public interface KakaoPayServiceImpl extends KakaoPayService {
-	@Value("${kakaopay-secret-key}")
-	private String kakaoSecretKey;
-}

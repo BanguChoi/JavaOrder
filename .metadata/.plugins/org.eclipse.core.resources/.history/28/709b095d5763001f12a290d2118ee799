@@ -1,0 +1,5 @@
+package com.javaOrder.common.kakaopay.domain;
+
+public class PayReadyRequestVO {
+
+}

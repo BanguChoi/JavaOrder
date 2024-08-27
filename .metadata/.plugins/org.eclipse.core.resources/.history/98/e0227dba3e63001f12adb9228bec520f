@@ -1,0 +1,27 @@
+package com.javaOrder.common.orders.orderitem.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.javaOrder.common.orders.orderitem.domain.OrderItem;
+import com.javaOrder.common.orders.orderitem.repository.OrderItemRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class OrderItemServiceImpl implements OrderItemService {
+
+	
+	private final OrderItemRepository orderItemRepository;
+	
+	@Override
+	public List<OrderItem> orderItemList(OrderItem orderItem) {
+		List<OrderItem> orderItemList = orderItemRepository.findByorderNumber(orderItem.getOrderNumber().getOrderNumber());
+		
+		
+		return orderItemList;
+	}
+}

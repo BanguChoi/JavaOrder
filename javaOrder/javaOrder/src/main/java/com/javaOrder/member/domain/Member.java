@@ -1,56 +1,60 @@
 package com.javaOrder.member.domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@EnableJpaAuditing	// @LastModifiedDate, @CreatedDate 에 필요
-@Table(name="member")
+@Table(name = "Member")
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+//@Data
 public class Member {
+	
 	@Id
-	@Column(length = 10)
-	private String mCode;
+	@Column(name = "m_code")
+	private String membercode;
 	
-	@Column(columnDefinition="NVARCHAR2(5)", nullable=false)
-	private String mName;
+	@Column(name = "m_name")
+	private String membername;
 	
-	@Column(length = 20, nullable=false)
-	private String mId;
+	@Column(name = "m_id")
+	private String memberid;
 	
-	@Column(length = 20, nullable=false)
-	private String mPw;
+	@Column(name = "m_pw")
+	private String memberpasswd;
 	
-	@Column(length = 50, nullable=false)
-	private String mEmail;
+	@Column(name = "m_email")
+	private String memberemail;
 	
-	@Column(length = 20, nullable=false)
-	private String mPhone;
+	@Column(name = "m_phone")
+	private String memberphone;
 	
-//	@Lob
-	@Column(nullable=false)
-	private String mAddr;
+	//@Lob
+	@Column(name = "m_addr")
+	private String memberaddress;
 	
-	@Column(nullable=false)
-	private LocalDateTime mBirth;
+	@Column(name = "m_birth")
+	private LocalDate memberbirth;
 	
-	@LastModifiedDate
-	@Column(nullable=false)
-	private LocalDateTime mLast;
+	@Column(name = "m_last")
+	private LocalDateTime memberlast;
 	
-	@CreatedDate
-	@Column(nullable=false, updatable=false)
-	private LocalDateTime mDate;
+	@Column(name = "m_date")
+	private LocalDate memberdate;
 	
-	@Column(columnDefinition = "CHAR(1) DEFAULT 'M'", nullable=false)
-	@ColumnDefault("M")
-	private String mStatus;
+	@Column(name = "m_status")
+	private String memberstatus;
 }

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="PayTests" project="javaOrder" tests="1" started="1" failures="0" errors="1" ignored="0">
+  <testsuite name="com.javaOrder.common.kakaopay.domain.PayTests" time="0.719" displayname="PayTests" uniqueid="[engine:junit-jupiter]/[class:com.javaOrder.common.kakaopay.domain.PayTests]">
+    <testcase name="copyCartToOrderTest" classname="com.javaOrder.common.kakaopay.domain.PayTests" time="0.719" displayname="copyCartToOrderTest()" uniqueid="[engine:junit-jupiter]/[class:com.javaOrder.common.kakaopay.domain.PayTests]/[method:copyCartToOrderTest()]">
+      <error>org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [select ci1_0.item_id_seq,ci1_0.cart_id,ci1_0.item_id,ci1_0.item_num,ci1_0.item_price,ci1_0.opt_shot,ci1_0.opt_size,ci1_0.opt_syrup,ci1_0.opt_temp,ci1_0.p_id from cart_item ci1_0 where ci1_0.cart_id=?] [ORA-00904: "CI1_0"."ITEM_ID_SEQ": 부적합한 식별자
+] [n/a]; SQL [n/a]&#13;
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:277)&#13;
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)&#13;
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:550)&#13;
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)&#13;
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:335)&#13;
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:136)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)&#13;
+	at jdk.proxy2/jdk.proxy2.$Proxy140.findByCart(Unknown Source)&#13;
+	at com.javaOrder.common.kakaopay.domain.PayTests.copyCartToOrderTest(PayTests.java:51)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+Caused by: org.hibernate.exception.SQLGrammarException: JDBC exception executing SQL [select ci1_0.item_id_seq,ci1_0.cart_id,ci1_0.item_id,ci1_0.item_num,ci1_0.item_price,ci1_0.opt_shot,ci1_0.opt_size,ci1_0.opt_syrup,ci1_0.opt_temp,ci1_0.p_id from cart_item ci1_0 where ci1_0.cart_id=?] [ORA-00904: "CI1_0"."ITEM_ID_SEQ": 부적합한 식별자
+] [n/a]&#13;
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:66)&#13;
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)&#13;
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)&#13;
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:94)&#13;
+	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.executeQuery(DeferredResultSetAccess.java:264)&#13;
+	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.getResultSet(DeferredResultSetAccess.java:167)&#13;
+	at org.hibernate.sql.results.jdbc.internal.JdbcValuesResultSetImpl.advanceNext(JdbcValuesResultSetImpl.java:265)&#13;
+	at org.hibernate.sql.results.jdbc.internal.JdbcValuesResultSetImpl.processNext(JdbcValuesResultSetImpl.java:145)&#13;
+	at org.hibernate.sql.results.jdbc.internal.AbstractJdbcValues.next(AbstractJdbcValues.java:19)&#13;
+	at org.hibernate.sql.results.internal.RowProcessingStateStandardImpl.next(RowProcessingStateStandardImpl.java:67)&#13;
+	at org.hibernate.sql.results.spi.ListResultsConsumer.consume(ListResultsConsumer.java:204)&#13;
+	at org.hibernate.sql.results.spi.ListResultsConsumer.consume(ListResultsConsumer.java:33)&#13;
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.doExecuteQuery(JdbcSelectExecutorStandardImpl.java:211)&#13;
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.executeQuery(JdbcSelectExecutorStandardImpl.java:83)&#13;
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:76)&#13;
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:65)&#13;
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.lambda$new$2(ConcreteSqmSelectQueryPlan.java:139)&#13;
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:382)&#13;
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:302)&#13;
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doList(QuerySqmImpl.java:526)&#13;
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:423)&#13;
+	at org.hibernate.query.Query.getResultList(Query.java:120)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)&#13;
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$DeferredQueryInvocationHandler.invoke(SharedEntityManagerCreator.java:418)&#13;
+	at jdk.proxy2/jdk.proxy2.$Proxy181.getResultList(Unknown Source)&#13;
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$CollectionExecution.doExecute(JpaQueryExecution.java:129)&#13;
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:92)&#13;
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:152)&#13;
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:140)&#13;
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)&#13;
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)&#13;
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:164)&#13;
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:143)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:70)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379)&#13;
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)&#13;
+	... 11 more&#13;
+Caused by: java.sql.SQLSyntaxErrorException: ORA-00904: "CI1_0"."ITEM_ID_SEQ": 부적합한 식별자
+&#13;
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:629)&#13;
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:563)&#13;
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1230)&#13;
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:771)&#13;
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:298)&#13;
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:511)&#13;
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:162)&#13;
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:1009)&#13;
+	at oracle.jdbc.driver.OracleStatement.prepareDefineBufferAndExecute(OracleStatement.java:1270)&#13;
+	at oracle.jdbc.driver.OracleStatement.executeMaybeDescribe(OracleStatement.java:1148)&#13;
+	at oracle.jdbc.driver.OracleStatement.executeSQLSelect(OracleStatement.java:1660)&#13;
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1469)&#13;
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3760)&#13;
+	at oracle.jdbc.driver.OraclePreparedStatement.executeQuery(OraclePreparedStatement.java:3935)&#13;
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.executeQuery(OraclePreparedStatementWrapper.java:1101)&#13;
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeQuery(ProxyPreparedStatement.java:52)&#13;
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeQuery(HikariProxyPreparedStatement.java)&#13;
+	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.executeQuery(DeferredResultSetAccess.java:246)&#13;
+	... 49 more&#13;
+Caused by: Error : 904, Position : 7, Sql = select ci1_0.item_id_seq,ci1_0.cart_id,ci1_0.item_id,ci1_0.item_num,ci1_0.item_price,ci1_0.opt_shot,ci1_0.opt_size,ci1_0.opt_syrup,ci1_0.opt_temp,ci1_0.p_id from cart_item ci1_0 where ci1_0.cart_id=:1 , OriginalSql = select ci1_0.item_id_seq,ci1_0.cart_id,ci1_0.item_id,ci1_0.item_num,ci1_0.item_price,ci1_0.opt_shot,ci1_0.opt_size,ci1_0.opt_syrup,ci1_0.opt_temp,ci1_0.p_id from cart_item ci1_0 where ci1_0.cart_id=?, Error Msg = ORA-00904: "CI1_0"."ITEM_ID_SEQ": 부적합한 식별자
+&#13;
+	at oracle.jdbc.driver.T4CTTIoer11.processError(T4CTTIoer11.java:636)&#13;
+	... 66 more&#13;
+&#13;
+</error>
+    </testcase>
+  </testsuite>
+</testrun>

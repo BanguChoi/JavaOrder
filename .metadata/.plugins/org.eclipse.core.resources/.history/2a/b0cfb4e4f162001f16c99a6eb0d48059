@@ -1,0 +1,47 @@
+package com.javaOrder.common.orders.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.javaOrder.common.orders.domain.Orders;
+import com.javaOrder.common.orders.repository.OrdersRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class OrdersServiceImpl implements OrdersService {
+
+	private final OrdersRepository orderRepository;
+	
+	// 모든 회원의 주문내역 리스트 (admin)
+	@Override
+	public List<Orders> orderList(Orders orders) {
+		List<Orders> orderList = orderRepository.findAll();
+		return orderList;
+	}
+	
+	// 해당 회원의 주문내역 리스트 (member)
+	@Override
+	public List<Orders> orderClientList(String mCode) {
+		List<Orders> orderList = orderRepository.findByMcode(mCode);
+		return orderList;
+	}
+	
+	// 결제 승인 시 주문데이터 삽입
+	/*
+	public void insertOrder(Orders orders) {
+		orderRepository.save(orders);
+	}*/
+	
+	// 주문 데이터 주문 상태 수정
+	@Override
+	public void updateOrder(Long ord_num) {
+		Optional<Orders> orderOptional = orderRepository.findById(ord_num);
+		
+	}
+	
+	// 주문 데이터 삭제 - 통계에 사용되므로 삭제 불필요
+}

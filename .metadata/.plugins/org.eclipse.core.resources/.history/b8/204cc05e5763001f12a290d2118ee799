@@ -1,0 +1,19 @@
+package com.javaOrder.common.kakaopay.domain;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+public class PayReadyRequestVO {
+
+	private String partnerOrderId;	// 주문번호
+	private String partnerUserId;		// 회원번호
+	private String itemName;		// 상품명
+	private int quantity;			// 수량
+	private int totalAmount;		// 총금액
+	private int taxFreeAmount = 0;
+	private int vatAmount=0;
+}
