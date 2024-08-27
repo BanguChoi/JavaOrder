@@ -5,7 +5,7 @@
 	<th:block th:fragment="cartItemList">
 
 	<th:block th:if="${not #strings.isEmpty(cartItemList)}">
-		<div th:eaxh="cartItem : ${cartItemList}" th:object="${cartItem}" th:data-no="*{itemId}" class="d-flex justify-content-center">
+		<div th:each="cartItem : ${cartItemList}" th:object="${cartItem}" th:data-no="*{itemId}" class="d-flex justify-content-center">
 			<div>
 				<img class="card-img-top">
 				<h5 class="card-title" th:text="*{product.productName}"></h5>
@@ -14,10 +14,32 @@
 			<div>
 				<div>
 					<div>옵션</div>
-					<span th:text="*{optionShot}"></span>
-					<span th:text="*{optionSize}"></span>
-					<span th:text="*{optionTemperature}"></span>
-					<span th:text="*{optionSyrup}"></span>
+					<div th:switch="*{optionSize}">
+						<a th:case="0">S</a>
+						<a th:case="1">M</a>
+						<a th:case="2">L</a>
+					</div>
+					<div th:switch="*{optionTemperature}">
+						<a th:case="0">ICE</a>
+						<a th:case="1">HOT</a>
+					</div>
+					<div th:switch="*{optionShot}">
+						<a th:case="0"></a>
+						<a th:case="1">샷추가 +1</a>
+						<a th:case="2">샷추가 +2</a>
+						<a th:case="3">샷추가 +3</a>
+						<a th:case="4">샷추가 +4</a>
+						<a th:case="5">샷추가 +5</a>
+						<a th:case="6">샷추가 +6</a>
+						<a th:case="7">샷추가 +7</a>
+						<a th:case="8">샷추가 +8</a>
+						<a th:case="9">샷추가 +9</a>
+					</div>
+					<div th:switch="*{optionSyrup}">
+						<a th:case="0"></a>
+						<a th:case="1">카라멜시럽</a>
+						<a th:case="2">바닐라시럽</a>
+					</div>
 				</div>
 				<div class="d-flex justify-content-center">
 					<button type="button" class="btn btn-primary plusItemBtn">+</button>

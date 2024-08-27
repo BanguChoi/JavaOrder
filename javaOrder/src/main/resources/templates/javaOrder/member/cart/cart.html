@@ -6,9 +6,9 @@
 		<th:block th:insert="~{javaOrder/member/cart/cartItemList :: cartItemList}"></th:block>
 		
 		<div>
-			<div>
+			<div th:each="cart : ${cartList}" th:object="${cart}" th:data-no="*{cartId}">
 				<span>총 금액</span>
-				<span th:text="*{itemPrice}"></span>
+				<span th:text="*{cartPrice}"></span>
 			</div>
 		
 			<div class="cartBtn"> 

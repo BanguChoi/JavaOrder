@@ -9,4 +9,5 @@ public interface CartItemService {
 	void insertCartItem(CartItem cartItem);
 	void updateCartItem(CartItem cartItem);
 	void deleteCartItem(CartItem cartItem);
+	void insertCartItem(String cartId, CartItem cartItem);
 }

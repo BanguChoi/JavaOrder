@@ -7,6 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.javaOrder.member.cart.domain.Cart;
+import com.javaOrder.member.cart.domain.CartItem;
+import com.javaOrder.member.cart.service.CartItemService;
+import com.javaOrder.member.cart.service.CartService;
 import com.javaOrder.member.product.domain.Product;
 import com.javaOrder.member.product.service.ProductService;
 
@@ -20,15 +24,15 @@ public class MainController {
 	@Setter(onMethod_ = @Autowired)
 	private ProductService productService;
 	
-	/*
+	
 	@Setter(onMethod_ = @Autowired)
 	private CartService cartService;
-	*/
 	
-	/*
+	
+	
 	@Setter(onMethod_ = @Autowired)
 	private CartItemService cartItemService;
-	*/
+	
 	
 	@GetMapping("/member/main")
 	public String main(Model model) {
@@ -36,15 +40,15 @@ public class MainController {
 		List<Product> productList = productService.productList(new Product());
 		model.addAttribute("productList", productList);
 		
-		/*
+		
 		List<Cart> cartList = cartService.cartList(new Cart());
 		model.addAttribute("cartList", cartList);
-		*/
 		
-		/*
+		
+		
 		List<CartItem> cartItemList = cartItemService.cartItemList(new CartItem());
 		model.addAttribute("cartItemList", cartItemList);
-		*/
+		
 		
 		return "javaOrder/member/main";
 	}

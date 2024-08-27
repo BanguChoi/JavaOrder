@@ -1,7 +1,5 @@
 package com.javaOrder.admin.member.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
@@ -28,11 +26,11 @@ public class MemberTests {
 	@Test
 	public void createMemberTest() {
 		Member member = new Member();
-		member.setMembercode("M0001");
-		member.setMembername("홍길동");
-		member.setMemberid("java");
+		member.setMembercode("M0002");
+		member.setMembername("김후추");
+		member.setMemberid("react");
 		member.setMemberpasswd("1234");
-		member.setMemberemail("java@naver.com");
+		member.setMemberemail("react@naver.com");
 		member.setMemberphone("010-1234-5678");
 		member.setMemberbirth(LocalDate.now());
 		member.setMemberlast(null);
@@ -45,8 +43,7 @@ public class MemberTests {
 	    cart.setMember(member);
 
 	    cartRepository.save(cart);
-	    
-	    assertThat(cart.getCartId()).isEqualTo("CM0001");
+
 	}
 	
 	

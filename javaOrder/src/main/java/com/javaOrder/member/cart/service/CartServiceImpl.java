@@ -33,8 +33,9 @@ public class CartServiceImpl implements CartService {
 	public void updateCart(Cart cart) {
 		Optional<Cart> cartOptional = cartRepository.findById(cart.getCartId());
 		Cart updateCart = cartOptional.get();
-
-		updateCart.setCartPrice(cart.getCartPrice());
+		
+		updateCart.calcCartPrice();
+		// updateCart.setCartPrice(cart.getCartPrice());
 		cartRepository.save(updateCart);
 	}
 

@@ -3,15 +3,15 @@ package com.javaOrder.member.cart.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.javaOrder.common.service.IdGenerationService;
+import com.javaOrder.member.cart.domain.Cart;
 import com.javaOrder.member.cart.domain.CartItem;
 import com.javaOrder.member.cart.repository.CartItemRepository;
+import com.javaOrder.member.cart.repository.CartRepository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -20,8 +20,11 @@ public class CartItemServiceImpl implements CartItemService {
 
 	private final CartItemRepository cartItemRepository;
 	
-	@PersistenceContext
-	private EntityManager entityManager;
+	@Autowired
+	private IdGenerationService idGenerationService;
+	
+	@Autowired
+	private CartRepository cartRepository;
 	
 	
 	@Override
@@ -30,17 +33,19 @@ public class CartItemServiceImpl implements CartItemService {
 		return cartItemList;
 	}
 	
-	@Transactional
+	
 	@Override
-	public void insertCartItem(CartItem cartItem) {
-		long itemIdSeqence = getItemIdSeqenceValue();
-		cartItem.setItemIdSeq(itemIdSeqence);
-		cartItemRepository.save(cartItem);
-	}
-	/* 카트 아이템 시퀀스를 위한 쿼리문 */
-	public Long getItemIdSeqenceValue() {
-		Query query = entityManager.createNativeQuery("SELECT item_id_seq.NEXTVAL FROM dual");
-		return ((Number) query.getSingleResult()).longValue();
+	public void insertCartItem(String cartId, CartItem cartItem) {
+		Optional<Cart> cartOptional = cartRepository.findById(cartId);
+		
+		if(cartOptional.isPresent()) {
+			Cart cart = cartOptional.get();
+			
+			String cartItemId = idGenerationService.generateId(cart.getCartId(), "item_id_seq");
+			cartItem.setItemId(cartItemId);
+			
+			cartItemRepository.save(cartItem);
+		}
 	}
 
 
@@ -56,6 +61,13 @@ public class CartItemServiceImpl implements CartItemService {
 	@Override
 	public void deleteCartItem(CartItem cartItem) {
 		cartItemRepository.deleteById(cartItem.getItemId());
+	}
+
+
+	@Override
+	public void insertCartItem(CartItem cartItem) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

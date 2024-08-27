@@ -11,21 +11,24 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
-import jakarta.persistence.Transient;
+import jakarta.persistence.PreUpdate;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class CartItem {
 		
 	@Id
-	@Column(name = "item_id", nullable = false)
+	@Column(name = "item_id",  nullable = false)
 	private String itemId;
-	
-	@Transient
-	private Long itemIdSeq;
 
 	@ManyToOne
 	@JoinColumn(name = "cart_id")
@@ -54,16 +57,26 @@ public class CartItem {
 	@Column(name = "opt_syrup")
 	private int optionSyrup;
 	
-
-
-    @PrePersist
-    public void generateItemId() {
-        if (this.cart != null && this.cart.getCartId() != null) {
-            this.itemId = this.cart.getCartId() + String.format("%04d", this.itemIdSeq);
-        }
-    }
-
-	 
+	
+	/* 옵션값이 더해진 최종 가격 구하는 로직 */
+	@PrePersist
+    @PreUpdate
+	public void calculateItemPrice() {
+		int addPrice = 0;
+		if(this.optionShot > 0) {
+			addPrice += optionShot * 500;
+		}
+		
+		if(this.optionSize > 0) {
+			addPrice += optionSize * 700;
+		}
+		
+		if(this.optionSyrup > 0) {
+			addPrice += optionSyrup * 500;
+		}
+		
+		this.itemPrice = (this.product.getProductPrice() + addPrice) * this.itemNum ;
+	} 
 
 }
 
