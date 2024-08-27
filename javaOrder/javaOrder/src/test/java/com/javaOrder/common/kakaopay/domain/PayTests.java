@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.javaOrder.common.orders.domain.OrderItem;
 import com.javaOrder.common.orders.domain.Orders;
-import com.javaOrder.common.orders.orderitem.domain.OrderItem;
-import com.javaOrder.common.orders.orderitem.repository.OrderItemRepository;
+import com.javaOrder.common.orders.repository.OrderItemRepository;
 import com.javaOrder.common.orders.repository.OrdersRepository;
 import com.javaOrder.common.util.service.IdGenerationService;
 import com.javaOrder.member.cart.domain.Cart;
@@ -74,7 +74,7 @@ public class PayTests {
 		log.info(newOrder.toString());
 		orderRepository.save(newOrder);
 		
-		String orderItemId = idGenerationService.generateId(String.valueOf(newOrder.getOrderNumber()), "order_item_seq");
+		String orderItemId = idGenerationService.generateId(String.valueOf(newOrder.getOrderNumber()), "order_item_seq", 3);
 		log.info("주문항목 ID: "+orderItemId);
 		
 		// 장바구니 항목을 주문 항목으로 변환

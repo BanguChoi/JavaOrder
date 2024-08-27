@@ -10,9 +10,11 @@ public class IdGenerationService {
 	@PersistenceContext
     private EntityManager entityManager;
 
-    public String generateId(String prefix, String sequenceName) {
+    public String generateId(String prefix, String sequenceName, int digit) {
         String sql = "SELECT " + sequenceName + ".NEXTVAL FROM DUAL";
         Number sequenceValue = (Number) entityManager.createNativeQuery(sql).getSingleResult();
-        return prefix + String.format("%04d", sequenceValue.longValue());
+        
+        String format = "%0" + digit + "d";
+        return prefix + String.format(format, sequenceValue.longValue());
     }
 }

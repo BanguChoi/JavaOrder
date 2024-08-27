@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.javaOrder.common.orders.domain.OrderItem;
 import com.javaOrder.common.orders.domain.Orders;
-import com.javaOrder.common.orders.orderitem.domain.OrderItem;
-import com.javaOrder.common.orders.orderitem.repository.OrderItemRepository;
+import com.javaOrder.common.orders.repository.OrderItemRepository;
 import com.javaOrder.common.orders.repository.OrdersRepository;
 
 import lombok.Setter;

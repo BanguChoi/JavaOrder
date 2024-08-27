@@ -21,7 +21,7 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	@Override
 	public void createMember(Member member) {
-		String memberCode = idGenerationService.generateId("M", "member_seq");
+		String memberCode = idGenerationService.generateId("M", "member_seq",4);
 		member.setMembercode(memberCode);
 		memberRepository.save(member);
 	}

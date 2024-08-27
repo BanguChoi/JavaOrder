@@ -18,10 +18,11 @@ import com.javaOrder.common.kakaopay.domain.KakaoPayReadyRequest;
 import com.javaOrder.common.kakaopay.domain.KakaoPayReadyResponse;
 import com.javaOrder.common.kakaopay.domain.PayApproveRequest;
 import com.javaOrder.common.kakaopay.domain.PayReadyRequestVO;
+import com.javaOrder.common.orders.domain.OrderItem;
 import com.javaOrder.common.orders.domain.Orders;
-import com.javaOrder.common.orders.orderitem.domain.OrderItem;
-import com.javaOrder.common.orders.orderitem.repository.OrderItemRepository;
+import com.javaOrder.common.orders.repository.OrderItemRepository;
 import com.javaOrder.common.orders.repository.OrdersRepository;
+import com.javaOrder.common.util.service.IdGenerationService;
 import com.javaOrder.member.cart.domain.Cart;
 import com.javaOrder.member.cart.repository.CartRepository;
 import com.javaOrder.member.cartItem.domain.CartItem;
@@ -136,10 +137,10 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 	private final OrdersRepository orderRepository;
 	private final CartItemRepository cartItemRepository;
 	private final OrderItemRepository orderItemRepository;
-	//private final IdGenerationService idGenerationService;
+	private final IdGenerationService idGenerationService;
+	
 	@Override
-	//@Transactional
-	public Orders copyCartToOrder(String mCode) {
+	public void copyCartToOrder(String mCode) {
 		// 주문한 회원의 장바구니 조회
 		Optional<Member> memberOptional = memberRepository.findById(mCode);
 		Cart cart = cartRepository.findBymemberCode(memberOptional.get());
@@ -164,36 +165,50 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		
 		orderRepository.save(newOrder);
 		
+		// 주문항목 ID 생성
+		String orderItemId = idGenerationService.generateId(String.valueOf(newOrder.getOrderNumber()), "order_item_seq", 3);
+		
 		// 장바구니 항목을 주문 항목으로 변환
 		for (CartItem cartItem : cartItems) {
 			OrderItem newOrderItem = OrderItem.builder()
+					.orderitemId(orderItemId)
 					.orderNumber(newOrder)
 					.productId(cartItem.getProduct())
 					.orderitemNumber(cartItem.getItemNum())
 					.orderitemPrice(cartItem.getItemPrice())
+					.orderitemShot(cartItem.getOptionShot())
+					.orderitemSize(cartItem.getOptionSize())
+					.orderitemTemp(cartItem.getOptionTemperature())
+					.orderitemSyrup(cartItem.getOptionSyrup())
+					.orderitemTakeout(0)
+					.orderitemExfee(0)
 					.build();
+			
 			orderItemRepository.save(newOrderItem);
 		}
 		
+		// 해당 장바구니 내용 삭제
 		cartItemRepository.deleteAll(cartItems);
 		
-		return newOrder;
+//		return newOrder;
 	}
 	
-	// 장바구니 총 계산
 	
-    // 장바구니 항목들의 이름을 기반으로 주문명 생성 (예: "상품명 외 n건")
+	// 장바구니 총 계산
+	// ?
+	
+	// 장바구니 항목들의 이름을 기반으로 주문명 생성 (예: "상품명 외 n건")
 	private String generateOrderName(List<CartItem> cartItems) {
-        if (cartItems.isEmpty()) {
-            return "주문 상품 없음";
-        }
-        String firstItemName = cartItems.get(0).getProduct().getProductName();  // 첫 번째 상품명
-        int remainingItems = cartItems.size() - 1;  // 나머지 상품 개수
-        if (remainingItems > 0) {
-            return firstItemName + " 외 " + remainingItems + "건";
-        } else {
-            return firstItemName;  // 상품이 1개인 경우
-        }
-    }
+	    if (cartItems.isEmpty()) {
+	        return "주문 상품 없음";
+	    }
+	    String firstItemName = cartItems.get(0).getProduct().getProductName();  // 첫 번째 상품명
+	    int remainingItems = cartItems.size() - 1;  // 나머지 상품 개수
+	    if (remainingItems > 0) {
+	        return firstItemName + " 외 " + remainingItems + "건";
+	    } else {
+	        return firstItemName;  // 상품이 1개인 경우
+	    }
+	}
 	
 }
