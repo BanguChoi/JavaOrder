@@ -2,46 +2,38 @@ package com.javaOrder.member.cart.domain;
 
 import org.hibernate.annotations.ColumnDefault;
 
+import com.javaOrder.member.product.domain.Product;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@SequenceGenerator(
-		name = "cartItem_generator",
-		sequenceName = "item_id_seq",
-		initialValue = 1000,
-		allocationSize = 1)
 public class CartItem {
-
+		
 	@Id
-	@GeneratedValue(
-			strategy = GenerationType.SEQUENCE, 
-			generator = "cartItem_generator")
-	private String itemIdSeq;
-
 	@Column(name = "item_id", nullable = false)
 	private String itemId;
+	
+	@Transient
+	private Long itemIdSeq;
 
 	@ManyToOne
 	@JoinColumn(name = "cart_id")
 	private Cart cart;
-
-	/*
+	
 	@OneToOne
 	@JoinColumn(name = "p_id")
 	private Product product;
-	*/
 
 	@Column(name = "item_num", nullable = false)
 	private int itemNum;
@@ -61,37 +53,17 @@ public class CartItem {
 
 	@Column(name = "opt_syrup")
 	private int optionSyrup;
+	
 
 
+    @PrePersist
+    public void generateItemId() {
+        if (this.cart != null && this.cart.getCartId() != null) {
+            this.itemId = this.cart.getCartId() + String.format("%04d", this.itemIdSeq);
+        }
+    }
 
-
-	@PrePersist
-	public void preItemId() {
-		this.itemId = cart.getCartId() + this.itemIdSeq;
-	}
-
-
-	/* 총 합을 구하는 로직
-	@PrePersist
-    @PreUpdate
-	public void calculateItemPrice() {
-		int addPrice = 0;
-
-		if(this.optionShot > 0) {
-			addPrice += optionShot * 500;
-		}
-
-		if(this.optionSize > 1) {
-			addPrice += optionSize * 700;
-		}
-
-		if(this.optionSyrup > 0) {
-			addPrice += optionSyrup * 500;
-		}
-
-		this.itemPrice = (this.product.getProductPrice() + addPrice) * this.itemNum ;
-	}
-	 */
+	 
 
 }
 

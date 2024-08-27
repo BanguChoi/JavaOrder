@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{template/client/layout/layout}" >
 	
-<th:block th:fragment="cartItemList">
+	<th:block th:fragment="cartItemList">
 
 	<th:block th:if="${not #strings.isEmpty(cartItemList)}">
 		<div th:eaxh="cartItem : ${cartItemList}" th:object="${cartItem}" th:data-no="*{itemId}" class="d-flex justify-content-center">
@@ -29,17 +29,9 @@
 				</div>
 			</div>
 		</div>
-		
-		<div>
-			<span>총 금액</span>
-			<span th:text="*{itemPrice}"></span>
-		</div>
-		
 	</th:block>
 	
-	<div class="float-left"> 
-		<button type="button" class="btn btn-primary orderBtn">결제하기</button>
-	</div>
+
 	
 </th:block>	
 </html>

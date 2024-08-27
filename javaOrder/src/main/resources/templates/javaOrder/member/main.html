@@ -26,11 +26,11 @@
 			<th:block layout:fragment="content">   
 				<!-- 상품 리스트 -->           
 				<div class="flex-grow-1" style="width: 75%; height: 100%;">
-					<th:block th:insert="~{javaOrder/product/productList :: productList}"></th:block>
+					<th:block th:insert="~{javaOrder/member/product/productList :: productList}"></th:block>
 				</div>
 				<!-- 장바구니 -->
-				<div class="" style="width: 25%; height: 100%; background-color: yellow;">
-					<th:block th:insert="~{javaOrder/cart/cartItemList :: cartItemList}"></th:block>
+				<div class="" style="width: 25%; height: 100%;">
+					<th:block th:insert="~{javaOrder/member/cart/cart :: cart}"></th:block>
 				</div>
             </th:block>
 		</div>

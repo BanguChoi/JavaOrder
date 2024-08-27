@@ -30,7 +30,7 @@ public class MainController {
 	private CartItemService cartItemService;
 	*/
 	
-	@GetMapping("/")
+	@GetMapping("/member/main")
 	public String main(Model model) {
 		
 		List<Product> productList = productService.productList(new Product());
@@ -46,7 +46,7 @@ public class MainController {
 		model.addAttribute("cartItemList", cartItemList);
 		*/
 		
-		return "javaOrder/main";
+		return "javaOrder/member/main";
 	}
 
 }

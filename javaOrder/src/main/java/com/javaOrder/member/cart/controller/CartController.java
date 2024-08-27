@@ -28,19 +28,19 @@ public class CartController {
 	public String cartList(Cart cart, Model model) {
 		List<Cart> cartList = cartService.cartList(cart);
 		model.addAttribute("cartList", cartList);
-		return "javaOrder/cartList";
+		return "member/cart/cartList";
 	}
 
 	@GetMapping("/updateCart")
 	public String updateCart(Cart cart) {
 		cartService.updateCart(cart);
-		return "redirect:/javaOrder/cartList";
+		return "redirect:/member/cart/cartList";
 	}
 
 	@DeleteMapping("/{cartId}")
 	public String deleteCart(Cart cart) {
 		cartService.deleteCart(cart);
-		return "redirect:/javaOrder/cartList";
+		return "redirect:/member/cart/cartList";
 	}
 
 }
