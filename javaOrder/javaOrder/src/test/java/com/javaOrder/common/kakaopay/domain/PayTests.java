@@ -75,7 +75,7 @@ public class PayTests {
 		orderRepository.save(newOrder);
 		
 		String orderItemId = idGenerationService.generateId(String.valueOf(newOrder.getOrderNumber()), "order_item_seq");
-		
+		log.info("주문항목 ID: "+orderItemId);
 		
 		// 장바구니 항목을 주문 항목으로 변환
 		for (CartItem cartItem : cartItems) {
