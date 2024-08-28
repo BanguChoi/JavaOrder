@@ -1,5 +1,0 @@
-package com.javaOrder.cart.repository;
-
-public interface CustomCartRepository {
-
-}

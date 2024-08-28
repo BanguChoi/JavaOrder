@@ -1,7 +1,0 @@
-package com.javaOrder.kakaoPayTest.service;
-
-
-
-public interface KakaoPayService {
-	
-}

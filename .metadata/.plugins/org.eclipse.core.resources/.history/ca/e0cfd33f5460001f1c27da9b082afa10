@@ -1,7 +1,0 @@
-package com.javaOrder.cart.vo;
-
-
-@Entity
-public class ItemVO {
-	private 
-}

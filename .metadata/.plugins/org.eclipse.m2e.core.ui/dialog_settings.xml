@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\javaorder\javaOrderProject\JavaOrder"/>
 			<item value="C:\javaorder\javaOrderProject"/>
 		</list>
 		<list key="projectNameTemplate">

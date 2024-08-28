@@ -1,5 +1,0 @@
-package com.javaOrder.member.repository;
-
-public interface MemberRepository {
-
-}

@@ -1,8 +1,0 @@
-package com.javaOrder.common.orders.orderItem.domain;
-
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-public class OrderItemTests {
-
-}

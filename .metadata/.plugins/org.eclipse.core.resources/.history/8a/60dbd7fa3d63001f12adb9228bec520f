@@ -1,9 +1,0 @@
-package com.javaOrder.common.orders.orderitem.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.javaOrder.common.orders.orderitem.domain.OrderItem;
-
-public interface OrderItemRepository extends JpaRepository<OrderItem, String>{
-
-}

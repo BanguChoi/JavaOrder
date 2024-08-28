@@ -1,5 +1,0 @@
-package com.javaOrder.common.util.service;
-
-public class IdGenerationService {
-
-}

@@ -1,5 +1,0 @@
-package com.javaOrder.kakaopay.model;
-
-public class KakaoPayReadyRequest {
-
-}

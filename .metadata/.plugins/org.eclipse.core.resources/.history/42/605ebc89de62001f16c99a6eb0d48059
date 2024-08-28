@@ -1,8 +1,0 @@
-package com.javaOrder.common.orders.service;
-
-import org.springframework.stereotype.Service;
-
-@Service
-public class OrdersServiceImpl implements OrdersService {
-
-}

@@ -1,7 +1,0 @@
-package com.javaOrder.common.util.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface ItemRepository extends JpaRepository<T, ID> {
-
-}

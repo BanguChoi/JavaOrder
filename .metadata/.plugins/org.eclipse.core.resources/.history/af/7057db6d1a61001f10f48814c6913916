@@ -1,5 +1,0 @@
-package com.javaOrder.member.cartItem.service;
-
-public interface CartItemService {
-
-}

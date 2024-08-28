@@ -1,5 +1,0 @@
-package com.javaOrder.common.orders.orderitem.domain;
-
-public class OrderItem {
-
-}
