@@ -41,8 +41,10 @@
         <tbody>
             <tr th:each="product : ${productsPage.content}">
                 <td>
-                    <img th:if="${product.image != null}" th:src="@{${product.image}}" alt="상품 이미지" style="width:100px;"/>
-                    <img th:unless="${product.image != null}" th:src="@{/images/noimg.png}" alt="기본 이미지" style="width:100px;"/>
+                    <!-- 상품 코드에 맞는 이미지 로드, 없을 경우 noimg.png -->
+                    <img th:src="@{/images/{productCode}.jpg(productCode=${product.productId})}" 
+                         onerror="this.src='/images/noimg.png'" 
+                         alt="상품 이미지" style="width:100px;"/>
                 </td>
                 <td th:text="${product.productName}"></td>
                 <td th:text="${product.categoryCode}"></td>

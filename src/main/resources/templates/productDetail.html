@@ -15,8 +15,15 @@
             width: 100%;
             max-width: 300px;
             height: auto;
+            float: left; /* 이미지와 버튼을 나란히 배치 */
+            margin-right: 20px; /* 이미지와 버튼 사이 여백 */
+        }
+        .image-actions {
+            display: flex;
+            align-items: center;
         }
         .product-info {
+            clear: both; /* 이미지와 버튼 아래에 정보가 위치하도록 설정 */
             margin-top: 20px;
         }
         .product-info div {
@@ -25,13 +32,32 @@
         .actions {
             margin-top: 20px;
         }
+        .btn {
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
     <div class="product-container">
         <h1>상품 상세 정보</h1>
         
-        <img id="productImage" th:src="@{${product.image} != null ? product.image : '/images/noimg.png'}" alt="Product Image" class="product-image">
+        <!-- 이미지 및 이미지 관리 버튼 -->
+        <div class="image-actions">
+            <img th:src="@{/images/{productCode}.jpg(productCode=${product.productId})}" 
+                 onerror="this.src='/images/noimg.png'" 
+                 alt="상품 이미지" class="product-image">
+
+            <button type="button" class="btn" id="manageImageButton" onclick="manageImage()">이미지 관리</button>
+        </div>
 
         <form id="productForm">
             <input type="hidden" id="productId" th:value="${product.productId}" />
@@ -81,5 +107,12 @@
     </div>
     <script src="/js/jquery-3.7.1.min.js"></script>
     <script src="/js/productDetail.js"></script>
+
+    <!-- 이미지 관리 버튼 클릭 시 실행할 스크립트 -->
+    <script>
+        function manageImage() {
+            alert("구현 대기중...");
+        }
+    </script>
 </body>
 </html>
