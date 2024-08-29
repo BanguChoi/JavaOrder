@@ -1,31 +1,4 @@
 $(document).ready(function() {
-<<<<<<< Updated upstream
-    $("#updateButton").click(function() {
-        // 폼 데이터 가져오기
-        var productData = {
-            productId: $("#productId").val(),
-            productName: $("#productName").val(),
-            categoryCode: $("#categoryCode").text(),
-            productPrice: parseFloat($("#productPrice").val()), // 가격을 float로 변환
-            productExplain: $("#productExplain").val(),
-            productSell: $("#productSell").val()
-        };
-
-        // AJAX 요청으로 데이터 전송
-        $.ajax({
-            type: "POST",
-            url: "/products/" + productData.productId + "/update",
-            contentType: "application/json",
-            data: JSON.stringify(productData),
-            success: function(response) {
-                // 성공 시 목록 페이지로 리다이렉션
-                alert("상품이 성공적으로 수정되었습니다.");
-                window.location.href = "/products"; // 목록 페이지로 이동
-            },
-            error: function(xhr, status, error) {
-                // 오류 처리
-                alert("상품 수정에 실패하였습니다. 다시 시도해주세요.");
-=======
     // 이미지 관리 버튼 클릭 시 파일 선택창 열기
     $('#manageImageButton').click(function() {
         $('#imageUpload').click();  // 파일 선택 창 열기
@@ -80,10 +53,11 @@ $(document).ready(function() {
     $('#updateButton').click(function() {
         var productId = $('#productId').val();
         var productName = $('#productName').val();
-        var productPrice = $('#productPrice').val();
+        var productPrice = parseFloat($('#productPrice').val()); // 가격을 float로 변환
         var productExplain = $('#productExplain').val();
         var productSell = $('#productSell').val();
 
+        // AJAX 요청으로 데이터 전송
         $.ajax({
             url: '/products/' + productId,
             type: 'PUT',
@@ -98,9 +72,8 @@ $(document).ready(function() {
                 alert('상품 정보가 수정되었습니다.');
                 window.location.href = '/products'; // 수정 후 목록 페이지로 이동
             },
-            error: function(error) {
-                alert('수정 중 오류가 발생했습니다.');
->>>>>>> Stashed changes
+            error: function(xhr, status, error) {
+                alert('상품 수정에 실패하였습니다. 다시 시도해주세요.');
             }
         });
     });
