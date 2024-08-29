@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>상품 등록</title>
+<<<<<<< Updated upstream
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <script src="/js/jquery-3.7.1.min.js"></script>
     <script src="/js/productForm.js"></script>
+=======
+>>>>>>> Stashed changes
     <style>
         .form-container {
             max-width: 500px;
@@ -35,6 +38,15 @@
             margin-left: 10px;
             text-decoration: none;
         }
+<<<<<<< Updated upstream
+=======
+
+        /* 추가된 카테고리 입력 폼 숨기기 */
+        .new-category-form {
+            margin-top: 10px;
+            display: none;
+        }
+>>>>>>> Stashed changes
     </style>
 </head>
 <body>
@@ -47,7 +59,24 @@
             </div>
             <div>
                 <label for="categoryCode">카테고리 코드</label>
+<<<<<<< Updated upstream
                 <input type="text" id="categoryCode" name="categoryCode" required>
+=======
+                <div style="display: flex; align-items: center;">
+                    <select id="categoryCode" name="categoryCode" required>
+                        <option value="" disabled selected>카테고리 선택</option>
+                        <option th:each="category : ${categories}" th:value="${category.code}" th:text="${category.name}"></option>
+                    </select>
+                    <button type="button" id="showAddCategoryForm" style="margin-left: 10px;">카테고리 추가</button>
+                </div>
+            </div>
+            <div class="new-category-form" id="newCategoryForm">
+                <label for="newCategoryPrefix">새 카테고리 코드</label>
+                <input type="text" id="newCategoryPrefix" name="newCategoryPrefix" placeholder="Prefix (예: A01)">
+                <label for="newCategoryName">새 카테고리 이름</label>
+                <input type="text" id="newCategoryName" name="newCategoryName" placeholder="카테고리 이름">
+                <button type="button" id="addNewCategoryBtn">추가</button>
+>>>>>>> Stashed changes
             </div>
             <div>
                 <label for="productPrice">가격</label>
@@ -67,9 +96,18 @@
             <div class="actions">
                 <button type="button" id="submitBtn">등록</button>
                 <a href="/products" class="button">목록</a>
+<<<<<<< Updated upstream
                 <a href="/categories/new" class="button">카테고리 추가</a>
             </div>
         </form>
     </div>
+=======
+            </div>
+        </form>
+    </div>
+
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="/js/productForm.js"></script>
+>>>>>>> Stashed changes
 </body>
 </html>

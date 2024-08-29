@@ -5,6 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
+<<<<<<< Updated upstream
 		<version>3.3.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
@@ -13,6 +14,16 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>product</name>
 	<description>Demo project for Spring Boot</description>
+=======
+		<version>3.3.3</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.javaOrder.new</groupId>
+	<artifactId>productver2</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>productver2</name>
+	<description>productver project for Spring Boot</description>
+>>>>>>> Stashed changes
 	<url/>
 	<licenses>
 		<license/>
@@ -64,8 +75,32 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+<<<<<<< Updated upstream
 	</dependencies>
 
+=======
+		<!-- JUnit 5 -->
+	    <dependency>
+	        <groupId>org.junit.jupiter</groupId>
+	        <artifactId>junit-jupiter-api</artifactId>
+	        <scope>test</scope>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.junit.jupiter</groupId>
+	        <artifactId>junit-jupiter-engine</artifactId>
+	        <scope>test</scope>
+	    </dependency>
+	
+	    <!-- Mockito -->
+	    <dependency>
+	        <groupId>org.mockito</groupId>
+	        <artifactId>mockito-core</artifactId>
+	        <scope>test</scope>
+	    </dependency>
+	</dependencies>
+
+
+>>>>>>> Stashed changes
 	<build>
 		<plugins>
 			<plugin>

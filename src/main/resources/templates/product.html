@@ -47,12 +47,27 @@
                          alt="상품 이미지" style="width:100px;"/>
                 </td>
                 <td th:text="${product.productName}"></td>
+<<<<<<< Updated upstream
                 <td th:text="${product.categoryCode}"></td>
                 <td th:text="${product.productId}"></td>
                 <td th:text="${product.productDate}"></td>
                 <td th:text="${#numbers.formatCurrency(product.productPrice)}"></td>
                 <td th:text="${product.productExplain}"></td>
                 <td th:text="${product.productSell}"></td>
+=======
+                <td th:text="${product.category.code}"></td>
+                <td th:text="${product.productId}"></td>
+                <td th:text="${#dates.format(product.productDate, 'yyyy-MM-dd')}"></td>
+                <td th:text="${#numbers.formatCurrency(product.productPrice)}"></td>
+                <td th:text="${product.productExplain}"></td>
+
+                <!-- 상품 게시 여부 처리 -->
+                <td>
+			    <span th:text="${product.productSell == 'Y' ? '게시 중' : '미게시'}"></span>
+			</td>
+
+
+>>>>>>> Stashed changes
                 <td th:text="${product.productOrder}"></td>
                 <td><a th:href="@{'/products/' + ${product.productId}}">상세보기</a></td>
             </tr>

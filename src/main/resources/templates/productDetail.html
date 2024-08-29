@@ -15,15 +15,24 @@
             width: 100%;
             max-width: 300px;
             height: auto;
+<<<<<<< Updated upstream
             float: left; /* 이미지와 버튼을 나란히 배치 */
             margin-right: 20px; /* 이미지와 버튼 사이 여백 */
+=======
+            float: left;
+            margin-right: 20px;
+>>>>>>> Stashed changes
         }
         .image-actions {
             display: flex;
             align-items: center;
         }
         .product-info {
+<<<<<<< Updated upstream
             clear: both; /* 이미지와 버튼 아래에 정보가 위치하도록 설정 */
+=======
+            clear: both;
+>>>>>>> Stashed changes
             margin-top: 20px;
         }
         .product-info div {
@@ -52,12 +61,23 @@
         
         <!-- 이미지 및 이미지 관리 버튼 -->
         <div class="image-actions">
+<<<<<<< Updated upstream
             <img th:src="@{/images/{productCode}.jpg(productCode=${product.productId})}" 
                  onerror="this.src='/images/noimg.png'" 
                  alt="상품 이미지" class="product-image">
 
             <button type="button" class="btn" id="manageImageButton" onclick="manageImage()">이미지 관리</button>
         </div>
+=======
+		    <img id="productImage" th:src="@{/images/{productCode}.jpg(productCode=${product.productId})}" 
+		         onerror="this.src='/images/noimg.png'" 
+		         alt="상품 이미지" class="product-image">
+		    <input type="file" id="imageUpload" style="display: none;" />
+		    <button type="button" class="btn" id="manageImageButton">이미지 관리</button>
+		    <button type="button" class="btn btn-danger" id="deleteImageButton">이미지 삭제</button> <!-- 삭제 버튼 추가 -->
+		</div>
+
+>>>>>>> Stashed changes
 
         <form id="productForm">
             <input type="hidden" id="productId" th:value="${product.productId}" />
@@ -68,7 +88,11 @@
                 </div>
                 <div>
                     <strong>카테고리 코드:</strong> 
+<<<<<<< Updated upstream
                     <span id="categoryCode" th:text="${product.categoryCode}"></span>
+=======
+                    <span id="categoryCode" th:text="${product.category.code}"></span>
+>>>>>>> Stashed changes
                 </div>
                 <div>
                     <strong>상품 코드:</strong> 
@@ -76,7 +100,11 @@
                 </div>
                 <div>
                     <strong>상품 등록 일자:</strong> 
+<<<<<<< Updated upstream
                     <span id="productDate" th:text="${product.productDate}"></span>
+=======
+                    <span id="productDate" th:text="${#dates.format(product.productDate, 'yyyy-MM-dd')}"></span>
+>>>>>>> Stashed changes
                 </div>
                 <div>
                     <strong>가격:</strong>
@@ -100,6 +128,7 @@
             </div>
             
             <div class="actions">
+<<<<<<< Updated upstream
                 <button type="button" id="updateButton">수정</button>
                 <a href="/products">목록으로</a>
             </div>
@@ -114,5 +143,16 @@
             alert("구현 대기중...");
         }
     </script>
+=======
+                <button type="button" id="updateButton" class="btn">수정</button>
+                <a href="/products" class="btn">목록으로</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- jQuery 라이브러리 및 외부 JavaScript 파일 로드 -->
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="/js/productDetail.js"></script>
+>>>>>>> Stashed changes
 </body>
 </html>
