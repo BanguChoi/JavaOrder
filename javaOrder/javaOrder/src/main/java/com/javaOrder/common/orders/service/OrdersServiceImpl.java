@@ -3,6 +3,7 @@ package com.javaOrder.common.orders.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.javaOrder.common.orders.domain.Orders;
@@ -22,7 +23,7 @@ public class OrdersServiceImpl implements OrdersService {
 	// 모든 회원의 주문내역 리스트 (Admin)
 	@Override
 	public List<Orders> orderList(Orders orders) {
-		List<Orders> orderList = orderRepository.findAll();
+		List<Orders> orderList = orderRepository.findAll(Sort.by(Sort.Direction.DESC, "orderNumber"));
 		return orderList;
 	}
 	
@@ -32,6 +33,12 @@ public class OrdersServiceImpl implements OrdersService {
 		Optional<Member> memberOptional = memberRepository.findById(mCode);
 		List<Orders> orderList = orderRepository.findBymemberCode(memberOptional.get());
 		return orderList;
+	}
+	@Override
+	public Orders getOrder(Long ord_num) {
+		Optional<Orders> orderOptional = orderRepository.findById(ord_num);
+		Orders order = orderOptional.get();
+		return order;
 	}
 	
 	// 결제 승인 시 주문데이터 삽입 - 결제 쪽에서 추가하는걸로..?

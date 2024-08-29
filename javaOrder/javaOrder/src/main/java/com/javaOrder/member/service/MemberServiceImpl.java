@@ -20,16 +20,26 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Transactional
 	@Override
-	public void createMember(Member member) {
-		String memberCode = idGenerationService.generateId("M", "member_seq",4);
-		member.setMembercode(memberCode);
+	public void insertMemberCode(Member member) {
+		String memberCode = idGenerationService.generateId("M", "member_seq", 4);
+		member.setMemberCode(memberCode);
 		memberRepository.save(member);
 	}
 
 	@Override
-	public List<Member> memberList(Member member) {
+	public List<Member> memberList() {
 		List<Member> memberList = memberRepository.findAll();
 		return memberList;
 	}
 
+	@Override
+	public Member Login(String memberId, String memberPassword) {
+		Member member = memberRepository.findByMemberId(memberId);
+		if(member != null && member.getMemberPasswd().equals(memberPassword)) {
+			return member;
+		}
+		return null;
+	}
+
+	
 }

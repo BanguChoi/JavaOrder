@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/client/layout/layout}" >
 
-</body>
+<th:block layout:fragment="content">
+	<h3>회원 주문내역 조회</h3>
+	
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr>
+				<th>주문번호</th>
+				<th>상품명</th>
+				<th>총금액</th>
+				<th>주문일자</th>
+				<th>주문상태</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${#lists.size(orderList) == 0}">
+				<td colspan="5">주문 내역이 없습니다.</td>
+			</tr>
+			
+			<th:block th:if="${not #strings.isEmpty(orderList)}">
+				<tr class="text-center" th:each="order:${orderList}" th:object="${order}" th:data-no="*{orderNumber}">
+					<td th:text="*{orderNumber}"></td>
+					<td>
+						<a th:href="@{/javaOrder/client/orderItemList/} + *{orderNumber}" th:text="*{orderName}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a>
+					</td>
+					<td th:text="*{orderPrice}"></td>
+					<td th:text="*{orderDate}"></td>
+					<td th:text="*{orderStatus}"></td>
+				</tr>
+			</th:block>
+		</tbody>
+	</table>
+</th:block>
+		
+<th:block layout:fragment="script">
+	
+</th:block>
 </html>

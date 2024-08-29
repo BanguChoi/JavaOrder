@@ -19,7 +19,7 @@ public class OrderItemServiceImpl implements OrderItemService {
 	@Override
 	public List<OrderItem> orderItemList(OrderItem orderItem) {
 		List<OrderItem> orderItemList = orderItemRepository.findByorderNumber(orderItem.getOrderNumber());
-		
+
 		return orderItemList;
 	}
 }

@@ -25,13 +25,14 @@ public class OrderItemTests {
 	
 	@Test
 	public void orderItemListTest() {
-		Optional<Orders> orderOptional = orderRepository.findById(10002L);
+		Optional<Orders> orderOptional = orderRepository.findById(10001L);
 		List<OrderItem> orderItemList = orderItemRepository.findByorderNumber(orderOptional.get());
 		
 		log.info("============주문 상세 내역 리스트===========");
-		
+		log.info(orderItemList.toString());
 		for(OrderItem orderItem : orderItemList) {
 			log.info(orderItem.toString());
+			log.info(orderItem.getProductId().toString());
 		}
 		
 		log.info("============주문 상세 내역 리스트===========");

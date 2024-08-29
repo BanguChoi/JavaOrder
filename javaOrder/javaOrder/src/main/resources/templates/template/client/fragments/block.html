@@ -24,14 +24,14 @@
 	<!-- header -->
 	<th:block th:fragment="header">
 		<div class="container">		
-			<!-- <form class="d-flex mx-auto" role="search">
+			<form class="d-flex mx-auto" role="search">
 			     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 			     <button class="btn btn-primary" type="submit">Search</button>
-			</form> -->
+			</form>
 			
-		    <div class="col-md-3 text-end">
-		      <button type="button" class="btn btn-outline-primary me-2">Login</button>
-		      <button type="button" class="btn btn-primary">Sign-up</button>
+		    <div class="col-md-5 text-end">
+		      <button type="button" id="loginBtn" class="btn btn-outline-primary me-2">Login</button>
+		      <button type="button" id="signUpBtn" class="btn btn-primary">Sign-up</button>
 		    </div>
 		</div>
 	</th:block>
@@ -46,47 +46,31 @@
 	  <ul class="nav nav-pills flex-column mb-auto">
 	    <li>
 	      <a href="#" class="nav-link link-body-emphasis">
-			<!-- <svg class="bi pe-none" width="16" height="16"><use xlink:href="#speedometer2"></use></svg> -->	        
-			Dashboard
-	      </a>
-	    </li>
-	    <li>
-	      <a href="#" class="nav-link link-body-emphasis">
-	        <!-- <svg class="bi pe-none" width="16" height="16"><use xlink:href="#table"></use></svg> -->
 	        Orders
 	      </a>
 	    </li>
 	    <li>
 	      <a href="#" class="nav-link link-body-emphasis">
-	       <!--  <svg class="bi pe-none" width="16" height="16"><use xlink:href="#grid"></use></svg> -->
 	        Products
 	      </a>
 	    </li>
 	    <li>
 	      <a href="#" class="nav-link link-body-emphasis">
-	        <!-- <svg class="bi pe-none" width="16" height="16"><use xlink:href="#people-circle"></use></svg> -->
 	        Customers
 	      </a>
 	    </li>
+	    <li class="nav-item dropend">
+            <a class="nav-link dropdown-toggle link-body-emphasis" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              마이페이지
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+            	<li><a class="dropdown-item" href="#">회원 정보</a></li>
+             	<li><a class="dropdown-item" href="/javaOrder/member/orderList/">주문 내역</a></li>
+              	<li><a class="dropdown-item" href="#">문의 내역</a></li>
+            </ul>
+          </li>
 	  </ul>
 	  <hr>
-	  <!--  
-	  <div class="dropdown">
-	    <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-	      <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-	      <strong>mdo</strong>
-	    </a>
-	    
-	    <ul class="dropdown-menu text-small shadow">
-	      <li><a class="dropdown-item" href="#">New project...</a></li>
-	      <li><a class="dropdown-item" href="#">Settings</a></li>
-	      <li><a class="dropdown-item" href="#">Profile</a></li>
-	      <li><hr class="dropdown-divider"></li>
-	      <li><a class="dropdown-item" href="#">Sign out</a></li>
-	    </ul>
-	    
-	  </div>
-	  -->
 	</th:block>
 
 	

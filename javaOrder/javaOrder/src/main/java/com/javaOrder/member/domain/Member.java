@@ -25,36 +25,36 @@ public class Member {
 	
 	@Id
 	@Column(name = "m_code")
-	private String membercode;
+	private String memberCode;
 	
 	@Column(name = "m_name")
-	private String membername;
+	private String memberName;
 	
 	@Column(name = "m_id")
-	private String memberid;
+	private String memberId;
 	
 	@Column(name = "m_pw")
-	private String memberpasswd;
+	private String memberPasswd;
 	
 	@Column(name = "m_email")
-	private String memberemail;
+	private String memberEmail;
 	
 	@Column(name = "m_phone")
-	private String memberphone;
+	private String memberPhone;
 	
 	//@Lob
 	@Column(name = "m_addr")
-	private String memberaddress;
+	private String memberAddress;
 	
 	@Column(name = "m_birth")
-	private LocalDate memberbirth;
+	private LocalDate memberBirth;
 	
 	@Column(name = "m_last")
-	private LocalDateTime memberlast;
+	private LocalDateTime memberLast;
 	
 	@Column(name = "m_date")
-	private LocalDate memberdate;
+	private LocalDate memberDate;
 	
 	@Column(name = "m_status")
-	private String memberstatus;
+	private String memberStatus;
 }

@@ -6,23 +6,23 @@
 		<link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
 		<link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sticky-footer-navbar/">
 	</head>
-	<body class="d-flex flex-column h-100">
+	<body class="d-flex h-100 text-center">
 		<!-- header -->
-		<header>
-	  		<nav class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+		<header class="mb-auto">
+	  		<nav class="navbar navbar-expand-md navbar-dark fixed-top">
 	  			<th:block th:insert="~{template/client/fragments/block :: header}"></th:block>
 	  		</nav>	
 		</header>
 		
 		
 		<!-- sidebar -->
-		<div>
+		<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary">
   			<th:block th:insert="~{template/client/fragments/block :: sidebar}"></th:block>
 		</div>
 		
 		
 		<!-- main -->
-		<main class="flex-shrink-0">
+		<main class="d-flex flex-column w-100 mt-5 pt-2">
 		  <div class="container">
 		   	<th:block layout:fragment="content"></th:block>
 		  </div>

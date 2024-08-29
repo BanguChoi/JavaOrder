@@ -9,6 +9,9 @@ public interface OrdersService {
 	public List<Orders> orderList(Orders orders);
 	// 주문내역 조회 (회원)
 	public List<Orders> orderClientList(String mCode);
+	// 주문내역 조회 (단일)
+	public Orders getOrder(Long ord_num);
+	
 	// 주문상태 수정 (관리자)
 	public void updateOrder(Orders orders);
 
