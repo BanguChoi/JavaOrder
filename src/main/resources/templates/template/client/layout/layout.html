@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" class="h-100" data-bs-theme="auto" >
+	<head>
+		<th:block th:insert="~{template/client/fragments/block :: config}"></th:block>
+		<link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
+		<link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
+		<link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sticky-footer-navbar/">
+	</head>
+	
+	<body class="d-flex flex-column h-100">
+		<!-- header -->
+		<header>
+	  		<nav class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+	  			<th:block th:insert="~{template/client/fragments/block :: header}"></th:block>
+	  		</nav>	
+		</header>
+		
+		
+		<!-- sidebar -->
+		<div>
+  			<th:block th:insert="~{template/client/fragments/block :: sidebar}"></th:block>
+		</div>
+		
+		
+		<!-- main -->
+		<main class="flex-shrink-0">
+		  <div class="container">
+		   	<th:block layout:fragment="content"></th:block>
+		  </div>
+		</main>
+		
+		
+		<!-- footer -->
+		<footer class="footer mt-auto pt-2 bg-body-tertiary fixed-bottom">
+			<th:block th:insert="~{template/client/fragments/block :: footer}"></th:block>
+		</footer>
+		
+			<script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+			<script src="/js/jquery-3.7.1.min.js"></script>
+			<script src="/js/common.js"></script>
+			<th:block layout:fragment="script"></th:block>
+		
+	</body>
+</html>

@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.javaOrder.member.service.MemberService;
 import com.javaOrder.member.vo.Member;
@@ -42,6 +43,7 @@ public class MemberControll {
 		}
 	}
 	
+	// 로그아웃
 	@GetMapping("/signout")
 	public String signout(HttpSession session) {
 	    session.invalidate(); // 세션 무효화
@@ -54,8 +56,17 @@ public class MemberControll {
 		return "/javaOrder/member/signup";
 	}
 	
-	// 회원가입 -> 로그인페이지
-	
+	// 회원가입 처리
+	@PostMapping("/signup")
+	public RedirectView signup(Member member, Model model) {
+		try {
+			memberService.insertMemberCode(member);
+			return new RedirectView("/javaOrder/member/signin");
+		}catch (Exception e) {
+			model.addAttribute("error", "회원가입에 실패했습니다. 다시 시도해 주세요.");
+			return new RedirectView("/javaOrder/member/signup");
+		}
+	}
 	
 	// 회원 mypage
 	@GetMapping("/mypage")

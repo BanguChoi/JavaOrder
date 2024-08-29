@@ -25,13 +25,15 @@ public class MemberServiceImpl implements MemberService {
 		member.setMemberCode(memberCode);
 		memberRepository.save(member);
 	}
-
+	
+	// 회원 목록
 	@Override
 	public List<Member> memberList() {
 		List<Member> memberList = memberRepository.findAll();
 		return memberList;
 	}
-
+	
+	// 회원 로그인
 	@Override
 	public Member Login(String memberId, String memberPassword) {
 		Member member = memberRepository.findByMemberId(memberId);

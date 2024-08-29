@@ -10,58 +10,51 @@
 <body class="text-center">
     <main class="form-signin">
         <h1 class="h3 mb-3 fw-normal">회원가입</h1>
-        <form>
+        <form id="signupForm">
             <div class="form-floating">
-                <input type="text" class="form-control" id="name" placeholder="이름">
+                <input type="text" class="form-control" id="name" placeholder="이름" maxlength="20">
+                <div class="text-danger error-message" id="nameError"></div>
                 <label for="name">이름</label>
             </div>
-            
             <div class="form-floating">
-                <input type="text" class="form-control" id="id" placeholder="아이디">
+                <input type="text" class="form-control" id="id" placeholder="아이디" maxlength="12">
+                <div class="text-danger error-message" id="idError"></div>
                 <label for="id">아이디</label>
             </div>
-            
             <div class="form-floating">
-                <input type="password" class="form-control" id="password" placeholder="비밀번호">
+                <input type="password" class="form-control" id="password" placeholder="비밀번호" maxlength="20">
+                <div class="text-danger error-message" id="passwordError"></div>
                 <label for="password">비밀번호</label>
             </div>
-            
             <div class="form-floating">
-                <input type="password" class="form-control" id="confirmPassword" placeholder="비밀번호 확인">
+                <input type="password" class="form-control" id="confirmPassword" placeholder="비밀번호 확인" maxlength="20">
+                <div class="text-danger error-message" id="confirmPasswordError"></div>
                 <label for="confirmPassword">비밀번호 확인</label>
             </div>
-
             <div class="form-floating mb-3 position-relative">
-                <input type="email" class="form-control" id="email" placeholder="이메일">
+                <input type="email" class="form-control" id="email" placeholder="이메일" maxlength="50">
+                <div class="text-danger error-message" id="emailError"></div>
                 <label for="email">이메일</label>
-<!--                 <button type="button" class="btn btn-outline-secondary address-search-btn" onclick="sendEmailVerification()">이메일 인증</button> -->            
-			</div>
-
-<!--             <div class="form-floating mb-3 position-relative">
-                <input type="text" class="form-control" id="emailVerificationCode" placeholder="인증 코드">
-                <label for="emailVerificationCode">인증 코드</label>
-                <button type="button" class="btn btn-outline-secondary address-search-btn" onclick="verifyEmail()">인증 확인</button>
-            </div> -->
-
-            <div class="form-floating">
-                <input type="text" class="form-control" id="phone" placeholder="전화번호">
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="phone" placeholder="전화번호" maxlength="13">
+                <div class="text-danger error-message" id="phoneError"></div>
                 <label for="phone">전화번호</label>
             </div>
-
             <div class="form-floating mb-3 position-relative">
                 <input type="text" class="form-control" id="address" placeholder="주소">
+                <button type="button" class="btn btn-outline-secondary address-search-btn" id="addressSearchBtn">주소 검색</button>
+                <div class="text-danger error-message" id="addressError"></div>
                 <label for="address">주소</label>
-                <button type="button" class="btn btn-outline-secondary address-search-btn" onclick="openAddressSearch()">주소 검색</button>
             </div>
-
             <div class="form-floating">
-                <input type="date" class="form-control" id="birth" placeholder="생년월일">
+                <input type="date" class="form-control" id="birth">
+                <div class="text-danger error-message" id="birthError"></div>
                 <label for="birth">생년월일</label>
             </div>
-
             <div>
-                <button class="w-30 btn btn-lg btn-primary" type="submit">가입</button>
-                <button class="w-30 btn btn-lg btn-secondary" type="reset">취소</button>
+                <button class="w-30 btn btn-lg btn-primary" type="submit" id="signupBtn">가입</button>
+                <button class="w-30 btn btn-lg btn-secondary" type="button" id="resetButton">취소</button>
             </div>
         </form>
     </main>
