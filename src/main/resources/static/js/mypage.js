@@ -1,29 +1,88 @@
 $(document).ready(function() {
-    // 수정 버튼 클릭 시 필드를 활성화
-    $('.btn-edit').click(function() {
-        const fieldId = $(this).data('field');
-        if (fieldId) {
-            $('#' + fieldId).removeAttr('readonly');
+    // Enable the editing mode for a field
+    function enableEditing(fieldId) {
+        const inputField = $(`#${fieldId}`);
+        const changeButton = inputField.siblings('button.btn-success');
+        const editButton = inputField.siblings('button.btn-primary');
+        const searchButton = inputField.siblings('button.btn-secondary');
+        
+        inputField.prop('readonly', false);
+        changeButton.show();
+        editButton.hide();
+        if (fieldId === 'memberAddress') {
+            searchButton.show();
         }
-		
-    });
-/*
-    // 인증 이메일 전송 버튼 클릭 시
-    $('#sendVerificationEmail').click(function() {
-        const newEmail = $('#newEmail').val();
-        if (validateEmail(newEmail)) {
-            // 이메일 인증 API 호출 시뮬레이션
-            console.log('Sending verification email to:', newEmail);
-            $('#verificationMessage').text('인증 이메일이 전송되었습니다. 이메일을 확인해 주세요.');
-        } else {
-            $('#verificationMessage').text('유효한 이메일 주소를 입력해 주세요.');
+    }
+
+    // Disable the editing mode for a field
+    function disableEditing(fieldId) {
+        const inputField = $(`#${fieldId}`);
+        const changeButton = inputField.siblings('button.btn-success');
+        const editButton = inputField.siblings('button.btn-primary');
+        const searchButton = inputField.siblings('button.btn-secondary');
+        
+        inputField.prop('readonly', true);
+        changeButton.hide();
+        editButton.show();
+        if (fieldId === 'memberAddress') {
+            searchButton.hide();
         }
+    }
+
+    // Update the field value via AJAX
+    function updateField(fieldId) {
+        const inputField = $(`#${fieldId}`);
+        const newValue = inputField.val();
+        const memberCode = $('#memberCode').val();
+        
+        $.ajax({
+            url: '/javaOrder/member/updateField',
+            method: 'POST',
+            data: {
+                memberCode: memberCode,
+                fieldId: fieldId,
+                newValue: newValue
+            },
+            success: function(response) {
+                // On successful update
+                disableEditing(fieldId);
+                alert('변경이 완료되었습니다.');
+            },
+            error: function() {
+                // On error
+                alert('변경 중 오류가 발생했습니다.');
+            }
+        });
+    }
+
+    // Address search with Daum API
+    function searchAddress() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                const fullAddress = data.address;
+                const extraAddress = data.bname ? (data.bname + (data.buildingName ? ', ' + data.buildingName : '')) : '';
+                const address = extraAddress ? fullAddress + ' (' + extraAddress + ')' : fullAddress;
+                $('#memberAddress').val(address);
+            }
+        }).open();
+    }
+
+    // Bind events to buttons
+    $('button.btn-primary').on('click', function() {
+        const fieldId = $(this).siblings('input').attr('id');
+        enableEditing(fieldId);
     });
 
-    // 이메일 유효성 검증 함수
-    function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }	
-*/
+    $('button.btn-success').on('click', function() {
+        const fieldId = $(this).siblings('input').attr('id');
+        updateField(fieldId);
+    });
+
+    $('#changePasswordBtn').on('click', function() {
+        window.location.href = '/javaOrder/member/changePassword';
+    });
+
+    $('#searchAddressBtn').on('click', function() {
+        searchAddress();
+    });
 });

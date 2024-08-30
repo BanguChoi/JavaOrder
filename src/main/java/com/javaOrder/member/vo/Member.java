@@ -30,6 +30,7 @@ public class Member {
 	@Column(name = "m_name")
 	private String memberName;
 	
+	
 	@Column(name = "m_id")
 	private String memberId;
 	

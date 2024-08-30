@@ -1,12 +1,16 @@
 package com.javaOrder.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.javaOrder.member.service.MemberService;
@@ -79,7 +83,28 @@ public class MemberControll {
 	    model.addAttribute("member", member);
 	    return "/javaOrder/member/mypage";
 	}
-	
+		
+	@PostMapping("/updateField")
+    @ResponseBody
+    public Map<String, Object> updateField(
+            @RequestParam String memberCode,
+            @RequestParam String fieldId,
+            @RequestParam String newValue,
+            HttpSession session) {
+
+        Map<String, Object> response = new HashMap<>();
+        boolean success = memberService.updateMemberField(memberCode, fieldId, newValue);
+
+        if (success) {
+            // 세션에서 현재 회원 정보 가져오기
+            Member updatedMember = memberService.getMemberByCode(memberCode);
+            session.setAttribute("member", updatedMember); // 세션에 새 정보 저장
+        }
+
+        response.put("success", success);
+        return response;
+    }
+    
 	// 회원 목록 페이지
     @GetMapping("/admin/member")
     public String getAllMembers(Model model) {

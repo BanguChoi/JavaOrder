@@ -42,6 +42,40 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return null;
 	}
-
 	
+	// 회원 정보 수정
+	@Transactional
+    @Override
+    public boolean updateMemberField(String memberCode, String fieldId, String newValue) {
+        Member member = memberRepository.findByMemberCode(memberCode);
+        if (member == null) {
+            return false; // 회원이 존재하지 않으면 실패
+        }
+
+        // 필드에 따라 값 업데이트
+        switch (fieldId) {
+            case "memberName":
+                member.setMemberName(newValue);
+                break;
+            case "memberEmail":
+                member.setMemberEmail(newValue);
+                break;
+            case "memberPhone":
+                member.setMemberPhone(newValue);
+                break;
+            case "memberAddress":
+                member.setMemberAddress(newValue);
+                break;
+            default:
+                return false; // 유효하지 않은 필드
+        }
+
+        memberRepository.save(member); // 변경 사항 저장
+        return true;
+    }
+	
+	@Override
+    public Member getMemberByCode(String memberCode) {
+        return memberRepository.findByMemberCode(memberCode);
+    }
 }

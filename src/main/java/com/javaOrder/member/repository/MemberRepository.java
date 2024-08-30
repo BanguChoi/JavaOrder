@@ -6,4 +6,5 @@ import com.javaOrder.member.vo.Member;
 
 public interface MemberRepository extends JpaRepository<Member, String>{
 	public Member findByMemberId(String memberId);
+	public Member findByMemberCode(String memberCode);
 }
