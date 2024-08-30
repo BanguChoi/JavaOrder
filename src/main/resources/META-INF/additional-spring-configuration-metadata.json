@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "com.spring.upload.path",
+  "type": "java.lang.String",
+  "description": "A description for 'com.spring.upload.path'"
+}]}

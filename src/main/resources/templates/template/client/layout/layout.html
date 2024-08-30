@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" class="h-100" data-bs-theme="auto" >
+	<head>
+		<th:block th:insert="~{template/client/fragments/block :: config}"></th:block>
+		<link rel="canonical" href="https://getbootstrap.kr/docs/5.3/examples/sticky-footer-navbar/">
+	</head>
+	<body class="d-flex flex-column h-100">
+		<header>
+			<!-- Fixed navbar -->
+			<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+				<!-- header 추가 내용 -->
+				<th:block th:insert="~{template/client/fragments/block :: header}"></th:block>
+			</nav>
+		</header>
+		
+		<!-- Begin page content -->
+		<main class="flex-shrink-0">
+		  <div class="container">
+			  <!-- layout:fragment는 해당 위치에 content라는 레이아웃의 코드를 불러온다는 의미 -->
+			  <th:block layout:fragment="content"></th:block>
+		  </div>
+		</main>
+		
+		<!-- 공통 레이아웃 페이지에서 th:insert="~{파일경로 :: fragment명}"으로 명시.
+			 Fragment명을 호출하여 레이아웃을 구성할 수 있다.-->
+		<footer class="footer mt-auto py-3 bg-body-tertiary">
+			<!-- footer 추가 내용 -->
+			<th:block th:insert="~{template/client/fragments/block :: footer}"></th:block>
+		</footer>
+		
+		<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> -->
+		<script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="/js/jquery-3.7.1.min.js"></script>
+		<script src="/js/common.js"></script>
+		<th:block layout:fragment="script"></th:block>
+		
+	</body>
+</html>

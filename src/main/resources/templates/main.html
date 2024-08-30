@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="/css/prom_main.css">
+</head>
+<body>
+<p>메인이여!!!! 나와라!</p>
+    <div class="slider">
+        <div class="slides" th:each="promotion : ${promotionList}">
+            <div class="slide"> 	<p>메인이여!!!! 나와라! 너는 아직 맵핑을 이해하지 못했다! / 이 대체 뭐냐!</p>
+                <img th:src="@{/images/{prom_img}(prom_img=${promotion.prom_img})}" 
+                     th:alt="${promotion.prom_title}">
+                <div class="caption" th:text="${promotion.prom_title}"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+    layout:decorate="~{template/client/layout/layout}">
+
+    <!-- 본문 코드가 위치하는 파일로서 상단에 layout:decorate="경로/공통레이아웃파일명"을 선언하여 기본 레이아웃 파일을 사용하겠다는 의미 -->
+    <!-- 나머지 페이지에서 layout:fragment="content" 아래의 코드는 기본 레이아웃의 content라는 부분에 위치한다. -->
+
+    <th:block layout:fragment="content">
+        <div class="text-center m-3">
+            <h3>member Promotion 게시판 리스트</h3>
+        </div>
+        
+       <h1>Promotion List</h1>
+
+	    <table border="1">
+	        <thead>
+	            <tr>
+	                <th>Code</th>
+	                <th>Title</th>
+	                <th>Content</th>
+	                <th>Name</th>
+	                <th>Image</th>
+	                <th>Registration Date</th>
+	            </tr>
+	        </thead>
+		      	<tbody>
+		            <!-- 반복문을 통해 promotionList의 각 Promotion 객체를 출력 -->
+		            <tr th:each="promotion : ${promotionList}"  th:data-no="${promotion.promCode}">
+		                <td th:text="${promotion.promCode}"></td>
+		                <td th:text="${promotion.promTitle}" class="goDetail"></td>
+		                <td th:text="${promotion.promContent}"></td>
+		                <td th:text="${promotion.promName}"></td>
+		                <td>
+		                    <img th:src="@{/images/{promImg}(promImg=${promotion.promImg})}" 
+		                         th:alt="${promotion.promTitle}" style="width: 100px; height: auto;">
+		                </td>
+		                <td th:text="${promotion.regDate}"></td>
+		            </tr>
+
+<!-- 페이징 처리용으로 쓰려고 했으나 실패  -->	       	    
+<!-- 			   	<th:block th:if="${not #strings.isEmpty(promotionList)}"> -->
+<!-- 			   		<tr class="text-center" th:each="promotion : ${promotionList}" th:object="${promotion}" th:data-promCode="*{promCode}"> -->
+<!-- 				   		<td th:text="*{promCode}"></td> -->
+<!-- 				   		<td class="goDetail" th:text="*{promTitle}"></td> -->
+<!-- 				   		<td th:text="*{promContent}"></td> -->
+<!-- 				   		<td class="regDate" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td> -->
+<!-- 			    	</tr> -->
+<!-- 			    </th:block> -->
+<!-- 페이징 처리용으로 쓰려고 했으나 실패  -->
+
+				</tbody>
+   	 </table>
+		    
+    </th:block>
+    <th:block layout:fragment="script">
+        <script src="/js/member/promotion/promotionList.js"></script>        
+    </th:block>
+</html>
+
