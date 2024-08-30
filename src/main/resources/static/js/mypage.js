@@ -5,8 +5,9 @@ $(document).ready(function() {
         if (fieldId) {
             $('#' + fieldId).removeAttr('readonly');
         }
+		
     });
-
+/*
     // 인증 이메일 전송 버튼 클릭 시
     $('#sendVerificationEmail').click(function() {
         const newEmail = $('#newEmail').val();
@@ -23,5 +24,6 @@ $(document).ready(function() {
     function validateEmail(email) {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
-    }
+    }	
+*/
 });

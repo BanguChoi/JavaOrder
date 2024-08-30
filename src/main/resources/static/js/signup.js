@@ -7,7 +7,6 @@ $(document).ready(function() {
         const name = $('#name');
         const id = $('#id');
         const password = $('#password');
-        const confirmPassword = $('#confirmPassword');
         const email = $('#email');
         const phone = $('#phone');
         const address = $('#address');
@@ -15,7 +14,7 @@ $(document).ready(function() {
 
         // 유효성 검사
         if (!checkForm(name, "이름") || !checkForm(id, "아이디") || !validateId(id) ||
-            !validatePassword(password, confirmPassword) || !checkForm(email, "이메일") ||
+            !validatePassword(password) || !checkForm(email, "이메일") ||
             !validateEmail(email) || !checkForm(phone, "전화번호") || !validatePhone(phone) ||
             !checkForm(address, "주소") || !checkForm(birth, "생년월일")) {
             return;
@@ -30,7 +29,7 @@ $(document).ready(function() {
                 memberId: id.val().trim(),
                 memberPasswd: password.val(),
                 memberEmail: email.val().trim(),
-                memberPhone: phone.val().trim().replace(/\D/g, ''), // 포맷 제거 후 저장
+                memberPhone: phone.val().trim(), // 포맷 후 저장
                 memberAddress: address.val().trim(),
                 memberBirth: birth.val(),
                 memberDate: getDateFormat(new Date()), // 가입일 자동 처리
@@ -73,16 +72,23 @@ $(document).ready(function() {
         }
         $(this).val(formattedPhone); // 입력 필드에 포맷 적용
     });
-});
+    
+    // 비밀번호 표시 기능
+    $('#showPassword').on('change', function() {
+        const isChecked = $(this).is(':checked');
+        const passwordField = $('#password');
 
-// 공백 검사 함수
-function checkForm(item, msg) {
-    const $item = $(item);
-    const errorDiv = $item.siblings('.error-message');
-    const message = $item.val().trim() === "" ? `${msg} 입력해 주세요.` : "";
-    errorDiv.text(message); // div에 오류 메시지 설정
-    return !message;
-}
+        if (isChecked) {
+            passwordField.attr('type', 'text');
+        } else {
+            passwordField.attr('type', 'password');
+        }
+    });
+	
+	$('#password').on('focus', function() {
+        $('#passwordError').text('');
+    });
+});
 
 // ID 유효성 검사 함수
 function validateId(id) {
@@ -97,15 +103,17 @@ function validateId(id) {
 }
 
 // 비밀번호 유효성 검사 함수
-function validatePassword(password, confirmPassword) {
+function validatePassword(password) {
     const passwordValue = password.val();
-    const confirmPasswordValue = confirmPassword.val();
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@?.,_])[A-Za-z\d!@?.,_]{8,20}$/;
-    const isValid = passwordRegex.test(passwordValue) && passwordValue === confirmPasswordValue;
-    const passwordErrorDiv = $('#password').siblings('.error-message');
-    const confirmPasswordErrorDiv = $('#confirmPassword').siblings('.error-message');
-    passwordErrorDiv.text(isValid ? '' : "비밀번호는 8~20글자, 대소문자, 숫자 및 특수문자(!@?.,_)를 포함해야 합니다.");
-    confirmPasswordErrorDiv.text(isValid ? '' : "비밀번호 확인이 일치하지 않습니다.");
+    const isValid = passwordRegex.test(passwordValue);
+    const passwordErrorDiv = $('#passwordError');
+    
+    if (isValid) {
+        passwordErrorDiv.text('');
+    } else {
+        passwordErrorDiv.text("비밀번호는 8~20글자, 대소문자, 숫자 및 특수문자(!@?.,_)를 포함해야 합니다.");
+    }
     return isValid;
 }
 
