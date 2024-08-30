@@ -24,7 +24,7 @@ public class OrderItemController {
 	private final OrdersService orderService;
 	
 	// 주문 상세 내역 (주문항목 / 관리자)
-	@GetMapping("admin/orderItemList/{ord_num}")
+	@GetMapping("/orderItemList/{ord_num}")
 	public String orderItemList(@PathVariable Long ord_num, OrderItem orderItem, Model model) {
 		
 		orderItem.setOrderNumber(orderService.getOrder(ord_num));
@@ -37,6 +37,9 @@ public class OrderItemController {
 	
 	@GetMapping("member/orderItemList/{ord_num}")
 	public String orderItemMemberList(@PathVariable Long ord_num, OrderItem orderItem, Model model) {
+		
+		orderItem.setOrderNumber(orderService.getOrder(ord_num));
+		
 		List<OrderItem> orderItemList = orderItemService.orderItemList(orderItem);
 		model.addAttribute("orderItemList", orderItemList);
 		return "member/order/orderItemList";

@@ -37,7 +37,7 @@ public class OrdersTests {
 	@Test
 	public void orderClientListTest() {
 		Optional<Member> memberOptional = memberRepository.findById("M041");
-		List<Orders> orderList = orderRepository.findBymemberCode(memberOptional.get());
+		List<Orders> orderList = orderRepository.findByMemberCode(memberOptional.get());
 		log.info("===========주문 리스트 출력 (회원)============");
 		for(Orders order:orderList) {
 			log.info(order.toString());

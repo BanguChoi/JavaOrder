@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.javaOrder.common.orders.domain.Orders;
 import com.javaOrder.common.orders.service.OrdersService;
+import com.javaOrder.common.vo.PageRequestDTO;
+import com.javaOrder.common.vo.PageResponseDTO;
 import com.javaOrder.member.domain.Member;
 
 import jakarta.servlet.http.HttpSession;
@@ -24,8 +26,8 @@ public class OrdersController {
 	
 	// 주문내역 전체 조회 (관리자)
 	@GetMapping("/admin/orderList")
-	public String orderList(Orders orders, Model model) {
-		List<Orders> orderList = orderService.orderList(orders);
+	public String orderList(PageRequestDTO pageRequestDTO, Model model) {
+		PageResponseDTO<Orders> orderList = orderService.list(pageRequestDTO); 
 		model.addAttribute("orderList", orderList);
 		return "admin/order/orderList";
 	}

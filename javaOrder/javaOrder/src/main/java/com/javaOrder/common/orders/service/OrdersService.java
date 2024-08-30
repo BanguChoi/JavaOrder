@@ -3,6 +3,8 @@ package com.javaOrder.common.orders.service;
 import java.util.List;
 
 import com.javaOrder.common.orders.domain.Orders;
+import com.javaOrder.common.vo.PageRequestDTO;
+import com.javaOrder.common.vo.PageResponseDTO;
 
 public interface OrdersService {
 	// 주문내역 조회 (관리자)
@@ -11,8 +13,9 @@ public interface OrdersService {
 	public List<Orders> orderClientList(String mCode);
 	// 주문내역 조회 (단일)
 	public Orders getOrder(Long ord_num);
-	
 	// 주문상태 수정 (관리자)
 	public void updateOrder(Orders orders);
 
+	// 페이징 처리
+	public PageResponseDTO<Orders> list(PageRequestDTO pageRequestDTO);
 }

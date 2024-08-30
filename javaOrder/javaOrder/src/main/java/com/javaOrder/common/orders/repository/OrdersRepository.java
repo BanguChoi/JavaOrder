@@ -1,12 +1,24 @@
 package com.javaOrder.common.orders.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.javaOrder.common.orders.domain.Orders;
 import com.javaOrder.member.domain.Member;
 
 public interface OrdersRepository extends JpaRepository<Orders, Long>{
-	List<Orders> findBymemberCode(Member mCode);
+	// 로그인한 회원의 주문내역 리스트 검색
+	List<Orders> findByMemberCode(Member mCode);
+	// 회원번호로 주문내역 검색
+	Page<Orders> findByMemberCode(Member mCode, Pageable pageable);
+	
+	// 주문상태로 검색
+	Page<Orders> findByOrderStatus(String orderStatus, Pageable pageable);
+	
+	// 주문 날짜로 검색
+	Page<Orders> findByOrderDateBetween(LocalDateTime startDate, LocalDateTime endDate, Pageable pageable);	
 }
