@@ -10,8 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +23,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Table(name = "Cart_Item")
 public class CartItem {
 		
 	@Id
@@ -58,7 +58,7 @@ public class CartItem {
 	private int optionSyrup;
 	
 	
-	/* 옵션값이 더해진 최종 가격 구하는 로직 */
+	/* 옵션값이 더해진 최종 가격 구하는 로직
 	@PrePersist
     @PreUpdate
 	public void calculateItemPrice() {
@@ -77,6 +77,6 @@ public class CartItem {
 		
 		this.itemPrice = (this.product.getProductPrice() + addPrice) * this.itemNum ;
 	} 
-
+	 */
 }
 

@@ -6,5 +6,5 @@ import com.javaOrder.member.product.domain.Product;
 
 public interface ProductService {
 	List<Product> productList(Product product);
-	Product productDetail(Product product);
+	Product getProductById(String productId);
 }

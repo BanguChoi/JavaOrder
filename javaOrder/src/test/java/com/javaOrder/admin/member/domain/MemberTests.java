@@ -7,9 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.javaOrder.admin.member.repository.MemberRepository;
+import com.javaOrder.common.service.IdGenerationService;
 import com.javaOrder.member.cart.domain.Cart;
 import com.javaOrder.member.cart.repository.CartRepository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,28 +27,46 @@ public class MemberTests {
 	@Setter(onMethod_ = @Autowired)
 	private CartRepository cartRepository;
 	
+	@Setter(onMethod_ = @Autowired)
+	private IdGenerationService idGenerationService;
+	
+    @PersistenceContext
+    private EntityManager entityManager;
+	
+	/**/
 	@Test
+	@Transactional
 	public void createMemberTest() {
+
+		String memberCode = idGenerationService.generateId("M", "member_seq");
+
+		
 		Member member = new Member();
-		member.setMembercode("M0002");
-		member.setMembername("김후추");
-		member.setMemberid("react");
-		member.setMemberpasswd("1234");
-		member.setMemberemail("react@naver.com");
-		member.setMemberphone("010-1234-5678");
-		member.setMemberbirth(LocalDate.now());
-		member.setMemberlast(null);
-		member.setMemberdate(LocalDate.now());
-		member.setMemberstatus("M");
+		
+	    member.setMemberCode(memberCode);
+		
+		member.setMemberName("테스트3");
+		member.setMemberId("test3");
+		member.setMemberPasswd("1234");
+		member.setMemberEmail("test@naver.com");
+		member.setMemberPhone("010-1234-5678");
+		member.setMemberBirth(LocalDate.now());
+		member.setMemberLast(null);
+		member.setMemberDate(LocalDate.now());
+		member.setMemberStatus("M");
 		
 		memberRepository.save(member);
+	    entityManager.flush();
+	    entityManager.clear();
 
 	    Cart cart = new Cart();
 	    cart.setMember(member);
 
 	    cartRepository.save(cart);
+	    entityManager.flush();
 
 	}
+	
 	
 	
 	/*

@@ -20,7 +20,7 @@
 	                <h5 class="card-title" th:text="*{productName}"></h5>
 	               <!--  <p class="card-text" th:text="*{productExplain}"></p> -->
 	                <p class="card-text" th:text="*{productPrice} +'원'"></p>
-	                <a th:href="@{/product/} + *{productId}" class="btn btn-primary productDetailBtn">제품담기</a>
+	                <a th:href="@{'/product/' + *{productId}}" class="btn btn-primary productDetailBtn">제품담기</a>
 	            </div>
 	        </div>
 	    </div>
@@ -47,20 +47,7 @@
 		</ul>
 	</nav>
 	-->
-
-	<th:block layout:fragment="script">
-		<script src="/js/product/productList.js"></script>
-	</th:block>
-
 </html>
-
-
-
-
-
-
-
-
 
 
 

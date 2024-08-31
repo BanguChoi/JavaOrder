@@ -1,17 +1,18 @@
 package com.javaOrder.member.cart.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.javaOrder.admin.member.domain.Member;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.PostLoad;
-import jakarta.persistence.PrePersist;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,22 +30,28 @@ public class Cart {
 	private String cartId;
 
 	
-	@OneToOne
-	@JoinColumn(name = "m_code")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "m_code", referencedColumnName = "m_code")
 	private Member member;
 	
 
 	@Column(name = "cart_price")
 	private int cartPrice;
 	
+	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<CartItem> cartItems = new ArrayList<>();
 	
-	/* 카트 아이디 자동 부여 */
+	
+	/* 카트 아이디 자동 부여 
 	@PrePersist
 	public void preCartId() {
-		this.cartId = "C" + member.getMembercode();
+	    if (member != null) {
+	        this.cartId = "C" + member.getMemberCode();
+	    }
 	}
+	*/
 	
-	/* 카트 아이템 가격 총 합 구하는 로직 */
+	/* 카트 아이템 가격 총 합 구하는 로직
 	@OneToMany(mappedBy = "cart")
 	private List<CartItem> cartItem;
 
@@ -60,7 +67,7 @@ public class Cart {
 		}
 		return total;
 	}
-	
+	 */
 }
 
 

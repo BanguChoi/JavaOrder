@@ -1,13 +1,17 @@
 package com.javaOrder.member.cart.service;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.javaOrder.member.cart.domain.Cart;
 import com.javaOrder.member.cart.repository.CartRepository;
+import com.javaOrder.member.main.controller.MainController;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -15,27 +19,59 @@ import lombok.RequiredArgsConstructor;
 public class CartServiceImpl implements CartService {
 
 	private final CartRepository cartRepository;
-
-	@Override
-	public List<Cart> cartList(Cart cart) {
-		List<Cart> cartList = cartRepository.findAll();
-		return cartList;
-	}
-
+	
 	/*
 	@Override
-	public void insertCart(Cart cart) {
-		cartRepository.save(cart);
+	public Optional<Cart> cartList(Member member) {
+		Optional<Cart> cartList = cartRepository.findByMember(member);
+		return cartList;
 	}
 	*/
+	
+	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
+	
+	/* 로그인한 멤버 카트 찾기 */
+	@Override
+	public Cart getCartByMemberCode(String memberCode) {
+		Cart cart = cartRepository.findByMember_MemberCode(memberCode);
+		if(cart == null) {
+			logger.warn("No cart found for member code: {}", memberCode);
+			cart = new Cart();
+			cart.setCartId("C" + memberCode);
+		} else {
+			logger.info("Found cart with ID: {}", cart.getCartId());
+	    }
+	    if (cart.getCartItems() == null) {
+	        cart.setCartItems(new ArrayList<>());
+		}
+	    logger.info("Cart: {}", cart);
+		return cart;
+	}
+	
+
+	/* 카트 생성 */
+	@Transactional
+	@Override
+	public Cart createCart(String memberCode) {
+        Cart findCart = cartRepository.findByMember_MemberCode(memberCode);
+        
+        if (findCart == null) {
+        	 Cart newCart = new Cart();
+             newCart.setCartId("C" + memberCode);
+        }
+        return findCart;
+    
+	}
+	
+
+	/* 카트 업데이트 */
 	@Override
 	public void updateCart(Cart cart) {
 		Optional<Cart> cartOptional = cartRepository.findById(cart.getCartId());
 		Cart updateCart = cartOptional.get();
 		
-		updateCart.calcCartPrice();
-		// updateCart.setCartPrice(cart.getCartPrice());
+		// updateCart.calcCartPrice();	// 금액 재 계산
 		cartRepository.save(updateCart);
 	}
 

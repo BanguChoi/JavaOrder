@@ -24,10 +24,20 @@
 			<th:block layout:fragment="content">   
 				
 				<div th:object="${productDetail}" class="flex-grow-1" style="width: 75%; height: 100%;">
-					<form>
+					<form th:if="${cart != null}" th:action="@{/cart/insertCartItem}" method="post">
 						<input type="hidden" name="productId" th:value="*{productId}" />
 					</form>
 					
+					<form th:action="@{/cart/insertCartItem}" method="post" class="text-start">
+					    <input type="hidden" name="productId" th:value="${productDetail.productId}" />
+					    <input type="hidden" name="cartId" th:value="${cart != null ? cart.cartId : ''}" />
+					</form>
+					
+					
+					<!-- <form th:action="@{/javaOrder/cart/updateCart}" method="post">
+					    <input type="hidden" name="cartId" th:value="${cart.cartId}" />
+					</form> -->
+
 					<div>
 						<div>
 							<img />
@@ -89,7 +99,7 @@
 					    	</div>
 					    </div>
 					    
-					    <div class="d-flex align-items-center justify-content-center" style="margin-top: 300px;">
+					    <div class="d-flex align-items-center justify-content-center" style="position: absolute; bottom: 180px; right:90px;">
 					    	<label>수량</label>
 					    	<div class="d-flex align-items-center">
 					    		<button type="button" class="btn btn-primary" id="minusBtn">-</button>

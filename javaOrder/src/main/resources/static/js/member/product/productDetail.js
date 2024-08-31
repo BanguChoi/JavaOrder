@@ -15,6 +15,8 @@ $(document).ready(function(){
 	
 	
 	let basePrice = 0;
+	const productId = $('input[name="productId"]').val();
+	
 	
 	function productPrice() {
 		$.ajax({
@@ -75,18 +77,63 @@ $(document).ready(function(){
     });
 	
 	// 페이지 로드 시 초기 가격 불러오기
-    const productId = $('input[name="productId"]').val(); // hidden input에서 productId 가져오기
-    productPrice(productId);
+    productPrice($('input[name="productId"]').val());
 	
 });
 
 
 /* 장바구니 담기 버튼 클릭 시 cartitem으로 form 전송 */
-$('#addCartBtn').on("click", function() {
+$('.addCartBtn').on("click", function(e) {
+	e.preventDefault();
+	
+
+	const cartId = $('input[name="cartId"]').val();
+	
+	let optionSyrup = $("input[name='optionSyrup']:checked").map(function() {
+		return $(this).val();
+	}).get();
+	if (optionSyrup.length === 0) {
+		optionSyrup = [];
+	}
+	
+	
+	if (!cartId) {
+        alert('로그인이 필요한 서비스입니다.');
+        return;
+    }
+
+	// JSON 배열로 전달하기
+	let cartItem = {
+		productId: $('input[name="productId"]').val(),
+		optionSize: $("input[name='optionSize']:checked").val(),
+		optionTemperature: $("input[name='optionTemperature']:checked").val(),
+		optionShot: $("#optionShot").val(),
+		optionSyrup: optionSyrup,
+		count: $("#count").val(),
+		totalPrice: $("#total-price").text()
+	}
+	
 	$.ajax({
-		
-	})
-})
+		url: "/member/cart/insertCartItem",
+		method: "POST",
+		contentType: "application/json",
+		data: JSON.stringify({
+			cartId, cartId,
+			cartItem: cartItem
+		}),
+		success: function(response) {
+            alert('장바구니에 추가되었습니다!');
+			location.href = "/member/main";
+        },
+        error: function(xhr, status, error) {
+            alert('장바구니에 추가하는 데 실패했습니다.');
+			console.error('AJAX 요청 실패:', status, error);
+	        console.error('응답 텍스트:', xhr.responseText);
+        }
+	});
+	console.log("cartId:", cartId);
+	console.log("cartItem:", cartItem);
+});
 
 
 

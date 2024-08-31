@@ -1,7 +1,6 @@
 package com.javaOrder.member.product.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -26,10 +25,9 @@ public class ProductServiceImpl implements ProductService {
 
 	/* 제품 상세페이지 */
 	@Override
-	public Product productDetail(Product product) {
-		Optional<Product> productOptional = productRepository.findById(product.getProductId());
-		Product detail = productOptional.orElseThrow();
-		return detail;
+	public Product getProductById(String productId) {
+		return productRepository.findById(productId).orElseThrow();
+
 	}
 	
 

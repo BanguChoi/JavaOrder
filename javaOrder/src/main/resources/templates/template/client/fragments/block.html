@@ -4,9 +4,11 @@
 	<!-- 공통정보 -->
 	<th:block th:fragment="config">
 		<!-- js 파일 -->
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script src="/assets/js/color-modes.js"></script>
 		<script src="/assets/js/sidebars.js"></script>
-		
+		<script src="/assets/js/header.js"></script>
+	
 	    <meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -30,8 +32,8 @@
 			</form>
 			
 		    <div class="col-md-3 text-end">
-		      <button type="button" class="btn btn-outline-primary me-2">Login</button>
-		      <button type="button" class="btn btn-primary">Sign-up</button>
+		      <button type="button" class="btn btn-outline-primary me-2" id="loginBtn">Login</button>
+		      <button type="button" class="btn btn-primary" id="signUpBtn">Sign-up</button>
 		    </div>
 		</div>
 	</th:block>

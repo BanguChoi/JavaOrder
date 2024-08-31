@@ -4,12 +4,13 @@
 	
 	<th:block th:fragment="cartItemList">
 
-	<th:block th:if="${not #strings.isEmpty(cartItemList)}">
-		<div th:each="cartItem : ${cartItemList}" th:object="${cartItem}" th:data-no="*{itemId}" class="d-flex justify-content-center">
+	<th:block th:if="${cartItemList != null and cartItemList.size() > 0}">
+	
+		<div th:each="cartItem : ${cartItemList}" th:object="${cartItem}" th:data-no="*{itemId}" class="cartItem d-flex justify-content-center">
 			<div>
 				<img class="card-img-top">
 				<h5 class="card-title" th:text="*{product.productName}"></h5>
-				<p class="card-text" th:text="*{itemPrice}"></p>
+				<span class="card-text itemPrice" th:text="*{itemPrice}"></span>원
 			</div>
 			<div>
 				<div>
@@ -42,17 +43,20 @@
 					</div>
 				</div>
 				<div class="d-flex justify-content-center">
-					<button type="button" class="btn btn-primary plusItemBtn">+</button>
-					<p class="card-text" th:text="*{itemNum}"></p>
-					<button type="button" class="btn btn-primary minusItemBtn">-</button>
-					<div>
-						<button type="button"  class="btn btn-primary deleteItemBtn">삭제</button>
-					</div>
+					<button type="button" th:data-item-id="*{itemId}" class="btn btn-primary minusItemBtn">-</button>
+            		<input type="number" th:id="'itemCount' + *{itemId}" class="form-control itemCount" th:value="*{itemNum}" min="1"  readonly>
+					<button type="button" th:data-item-id="*{itemId}" class="btn btn-primary plusItemBtn">+</button>
+		
+				    <button type="button" class="btn btn-primary deleteItemBtn" th:data-item-id="*{itemId}">삭제</button>
 				</div>
 			</div>
 		</div>
+		
+	    <th:block th:if="${cart.cartItems != null and cart.cartItems.size() > 0}">
+	        <span>총 금액:</span>
+	        <span id="cartPrice"></span>
+	    </th:block>
 	</th:block>
-	
 
 	
 </th:block>	
