@@ -20,5 +20,12 @@ public interface OrdersRepository extends JpaRepository<Orders, Long>{
 	Page<Orders> findByOrderStatus(String orderStatus, Pageable pageable);
 	
 	// 주문 날짜로 검색
-	Page<Orders> findByOrderDateBetween(LocalDateTime startDate, LocalDateTime endDate, Pageable pageable);	
+	Page<Orders> findByOrderDateBetween(LocalDateTime startDate, LocalDateTime endDate, Pageable pageable);
+	
+	// 회원
+	// 해당 회원의 주문상태별 주문내역 검색
+	Page<Orders> findByMemberCodeAndOrderStatus(Member member, String status, Pageable pageable);
+	// 해당 회원의 날짜별 주문내역 검색
+	Page<Orders> findByMemberCodeAndOrderDateBetween(Member member, LocalDateTime startDate, LocalDateTime endDate,
+			Pageable pageable);
 }

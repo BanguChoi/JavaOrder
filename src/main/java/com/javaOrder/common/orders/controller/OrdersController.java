@@ -1,7 +1,5 @@
 package com.javaOrder.common.orders.controller;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,19 +25,20 @@ public class OrdersController {
 	// 주문내역 전체 조회 (관리자)
 	@GetMapping("/admin/orderList")
 	public String orderList(PageRequestDTO pageRequestDTO, Model model) {
-		PageResponseDTO<Orders> orderList = orderService.list(pageRequestDTO); 
+		PageResponseDTO<Orders> orderList = orderService.orderList(pageRequestDTO); 
 		model.addAttribute("orderList", orderList);
 		return "admin/order/orderList";
 	}
 	
 	// 회원 주문 내역 조회 (회원)
 	@GetMapping("/member/orderList/")
-	public String orderClientList(HttpSession session ,Model model) {
+	public String orderClientList(HttpSession session, PageRequestDTO pageRequestDTO, Model model) {
 		Member member = (Member) session.getAttribute("member");
 		
 		if(member!=null) {
 //			List<Orders> orderList = orderService.orderClientList(mCode);
-			List<Orders> orderList = orderService.orderClientList(member.getMemberCode());
+//			List<Orders> orderList = orderService.orderClientList(member.getMemberCode());
+			PageResponseDTO<Orders> orderList = orderService.orderClientList(member, pageRequestDTO);
 			model.addAttribute("orderList", orderList);
 			return "member/order/orderList";
 		}else {
