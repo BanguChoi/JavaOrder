@@ -9,6 +9,6 @@ public class AdminMainController {
 	
 	@GetMapping("/javaOrder/admin")
 	public String adminMain(Model model) {
-		return "/admin/dashBoard";
+		return "/admin/dashBoard/dashBoard";
 	}
 }
