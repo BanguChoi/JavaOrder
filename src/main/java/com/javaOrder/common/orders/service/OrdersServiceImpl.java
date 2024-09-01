@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 
 import com.javaOrder.common.orders.domain.Orders;
 import com.javaOrder.common.orders.repository.OrdersRepository;
-import com.javaOrder.common.vo.PageRequestDTO;
-import com.javaOrder.common.vo.PageResponseDTO;
+import com.javaOrder.common.util.vo.PageRequestDTO;
+import com.javaOrder.common.util.vo.PageResponseDTO;
 import com.javaOrder.member.domain.Member;
 import com.javaOrder.member.repository.MemberRepository;
 

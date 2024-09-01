@@ -1,8 +1,8 @@
-package com.javaOrder.member.cartItem.service;
+package com.javaOrder.member.cart.service;
 
 import java.util.List;
 
-import com.javaOrder.member.cartItem.domain.CartItem;
+import com.javaOrder.member.cart.domain.CartItem;
 
 public interface CartItemService {
 	List<CartItem> cartItemList(CartItem cartItem);

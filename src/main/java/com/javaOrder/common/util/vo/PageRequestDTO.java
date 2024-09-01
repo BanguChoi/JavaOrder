@@ -1,4 +1,4 @@
-package com.javaOrder.common.vo;
+package com.javaOrder.common.util.vo;
 
 import java.time.LocalDate;
 

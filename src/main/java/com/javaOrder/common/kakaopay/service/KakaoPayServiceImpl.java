@@ -24,9 +24,9 @@ import com.javaOrder.common.orders.repository.OrderItemRepository;
 import com.javaOrder.common.orders.repository.OrdersRepository;
 import com.javaOrder.common.util.service.IdGenerationService;
 import com.javaOrder.member.cart.domain.Cart;
+import com.javaOrder.member.cart.domain.CartItem;
+import com.javaOrder.member.cart.repository.CartItemRepository;
 import com.javaOrder.member.cart.repository.CartRepository;
-import com.javaOrder.member.cartItem.domain.CartItem;
-import com.javaOrder.member.cartItem.repository.CartItemRepository;
 import com.javaOrder.member.domain.Member;
 import com.javaOrder.member.repository.MemberRepository;
 

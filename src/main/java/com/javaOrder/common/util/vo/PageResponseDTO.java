@@ -1,4 +1,4 @@
-package com.javaOrder.common.vo;
+package com.javaOrder.common.util.vo;
 
 import java.util.List;
 import java.util.stream.Collectors;

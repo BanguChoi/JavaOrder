@@ -1,4 +1,4 @@
-package com.javaOrder.member.cartItem.controller;
+package com.javaOrder.member.cart.controller;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.javaOrder.member.cartItem.domain.CartItem;
-import com.javaOrder.member.cartItem.service.CartItemService;
+import com.javaOrder.member.cart.domain.CartItem;
+import com.javaOrder.member.cart.service.CartItemService;
 
 import lombok.RequiredArgsConstructor;
 

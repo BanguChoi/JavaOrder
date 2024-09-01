@@ -1,8 +1,8 @@
 package com.javaOrder.common.orders.service;
 
 import com.javaOrder.common.orders.domain.Orders;
-import com.javaOrder.common.vo.PageRequestDTO;
-import com.javaOrder.common.vo.PageResponseDTO;
+import com.javaOrder.common.util.vo.PageRequestDTO;
+import com.javaOrder.common.util.vo.PageResponseDTO;
 import com.javaOrder.member.domain.Member;
 
 public interface OrdersService {

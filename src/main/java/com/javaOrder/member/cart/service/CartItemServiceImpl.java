@@ -1,12 +1,12 @@
-package com.javaOrder.member.cartItem.service;
+package com.javaOrder.member.cart.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.javaOrder.member.cartItem.domain.CartItem;
-import com.javaOrder.member.cartItem.repository.CartItemRepository;
+import com.javaOrder.member.cart.domain.CartItem;
+import com.javaOrder.member.cart.repository.CartItemRepository;
 
 import lombok.RequiredArgsConstructor;
 
