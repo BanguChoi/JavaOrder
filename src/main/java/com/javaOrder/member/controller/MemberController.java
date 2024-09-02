@@ -1,7 +1,5 @@
 package com.javaOrder.member.controller;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -79,7 +77,7 @@ public class MemberController {
 	    model.addAttribute("member", member);
 	    return "/member/mypage";
 	}
-	
+	/*
 	// 회원 목록 페이지
     @GetMapping("/admin/member")
     public String getAllMembers(Model model) {
@@ -87,5 +85,5 @@ public class MemberController {
         List<Member> members = memberService.memberList();
         model.addAttribute("members", members);
         return "/admin/memberList"; // 회원 목록을 보여줄 뷰 이름
-    }
+    }*/
 }
