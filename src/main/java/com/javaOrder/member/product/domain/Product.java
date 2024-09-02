@@ -1,0 +1,52 @@
+package com.javaOrder.member.product.domain;
+
+import java.util.Date;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "Product")
+public class Product {
+
+    @Id
+    @Column(name = "p_id", length = 20)
+    private String productId;
+
+    @ManyToOne
+    @JoinColumn(name = "cate_code")
+    private Category category;
+
+    @Column(name = "p_order", nullable = false)
+    private int productOrder;
+
+    @Column(name = "p_ex", length = 500)
+    private String productExplain;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "p_date", nullable = false)
+    private Date productDate;
+
+    @Column(name = "p_sell", length = 10)
+    private String productSell;
+
+    @Column(name = "p_price")
+    private int productPrice;
+
+    @Column(name = "p_name", length = 50, nullable = false)
+    private String productName;
+}

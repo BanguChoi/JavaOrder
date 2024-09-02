@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/client/layout/layout}" >
+	<th:block th:fragment="main">
+	    <div class="container">
+	        <h1 class="my-4">메인 페이지</h1>
+	        
+	        <!-- 로그인 상태에 따라 표시 -->
+	        <div id="loginSection" th:if="${member == null}">
+	            <button type="button" id="signInBtn" class="btn btn-primary">로그인</button>
+	        </div>
+	        
+	        <div id="userInfoSection" th:if="${member != null}">
+	            <div id="userInfo" class="clickable">
+		            <p>안녕하세요, <span th:text="${member.memberName}">회원님</span>!</p>
+		            <p>이메일: <span th:text="${member.memberEmail}">이메일</span></p>
+	            </div>
+	            <form action="/member/signout" method="get">
+	                <button type="submit" class="btn btn-danger">로그아웃</button>
+	            </form>
+	        </div>
+	    </div>
+	</th:block>
+    
+	<th:block layout:fragment="script">
+	    <script src="/js/jquery-3.7.1.min.js"></script>
+	    <script src="/js/common.js"></script>
+	   <!--  <script src="/js/main.js"></script> -->
+	</th:block>
+	
+</html>
