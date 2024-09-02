@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.javaOrder.admin.domain.Category;
 import com.javaOrder.admin.dto.CategoryDTO;
-import com.javaOrder.admin.entity.Category;
 import com.javaOrder.admin.service.CategoryService;
 
 @RestController

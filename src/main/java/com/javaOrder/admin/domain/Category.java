@@ -1,4 +1,4 @@
-package com.javaOrder.admin.entity;
+package com.javaOrder.admin.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

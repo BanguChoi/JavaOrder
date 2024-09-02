@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
 <head>
     <meta charset="UTF-8">
     <title>상품 목록</title>
@@ -22,60 +23,62 @@
     </style>
 </head>
 <body>
-    <h1>상품 목록</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>이미지</th>
-                <th>상품명</th>
-                <th>카테고리 코드</th>
-                <th>상품 코드</th>
-                <th>상품 등록 일자</th>
-                <th>가격</th>
-                <th>간략한 상품 설명</th>
-                <th>상품 게시 여부</th>
-                <th>주문 횟수</th>
-                <th>상세보기</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="product : ${productsPage.content}">
-                <td>
-                    <!-- 상품 코드에 맞는 이미지 로드, 없을 경우 noimg.png -->
-                    <img th:src="@{/images/{productCode}.jpg(productCode=${product.productId})}" 
-                         onerror="this.src='/images/noimg.png'" 
-                         alt="상품 이미지" style="width:100px;"/>
-                </td>
-                <td th:text="${product.productName}"></td>
-                <td th:text="${product.category.code}"></td>
-                <td th:text="${product.productId}"></td>
-                <td th:text="${#dates.format(product.productDate, 'yyyy-MM-dd')}"></td>
-                <td th:text="${#numbers.formatCurrency(product.productPrice)}"></td>
-                <td th:text="${product.productExplain}"></td>
+	<th:block layout:fragment="content">
+	    <h1>상품 목록</h1>
+	    <table>
+	        <thead>
+	            <tr>
+	                <th>이미지</th>
+	                <th>상품명</th>
+	                <th>카테고리 코드</th>
+	                <th>상품 코드</th>
+	                <th>상품 등록 일자</th>
+	                <th>가격</th>
+	                <th>간략한 상품 설명</th>
+	                <th>상품 게시 여부</th>
+	                <th>주문 횟수</th>
+	                <th>상세보기</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <tr th:each="product : ${productsPage.content}">
+	                <td>
+	                    <!-- 상품 코드에 맞는 이미지 로드, 없을 경우 noimg.png -->
+	                    <img th:src="@{/images/{productCode}.jpg(productCode=${product.productId})}" 
+	                         onerror="this.src='/images/noimg.png'" 
+	                         alt="상품 이미지" style="width:100px;"/>
+	                </td>
+	                <td th:text="${product.productName}"></td>
+	                <td th:text="${product.category.code}"></td>
+	                <td th:text="${product.productId}"></td>
+	                <td th:text="${#dates.format(product.productDate, 'yyyy-MM-dd')}"></td>
+	                <td th:text="${#numbers.formatCurrency(product.productPrice)}"></td>
+	                <td th:text="${product.productExplain}"></td>
 
-                <!-- 상품 게시 여부 처리 -->
-                <td>
-                    <span th:text="${product.productSell == 'Y' ? '게시 중' : '미게시'}"></span>
-                </td>
+	                <!-- 상품 게시 여부 처리 -->
+	                <td>
+	                    <span th:text="${product.productSell == 'Y' ? '게시 중' : '미게시'}"></span>
+	                </td>
 
-                <td th:text="${product.productOrder}"></td>
-                <td><a th:href="@{'/products/' + ${product.productId}}">상세보기</a></td>
-            </tr>
-        </tbody>
-    </table>
+	                <td th:text="${product.productOrder}"></td>
+	                <td><a th:href="@{'/products/' + ${product.productId}}">상세보기</a></td>
+	            </tr>
+	        </tbody>
+	    </table>
 
-    <div>
-        <span th:text="'Page: ' + (${productsPage.number + 1}) + ' / ' + ${productsPage.totalPages}"></span>
-        <div>
-            <a th:href="@{/products(page=${productsPage.number - 1})}" th:if="${productsPage.hasPrevious()}">Previous</a>
-            <span th:each="i : ${#numbers.sequence(1, productsPage.totalPages)}">
-                <a th:href="@{/products(page=${i - 1})}" th:text="${i}" th:classappend="${i == productsPage.number + 1} ? 'current' : ''"></a>
-            </span>
-            <a th:href="@{/products(page=${productsPage.number + 1})}" th:if="${productsPage.hasNext()}">Next</a>
-        </div>
-    </div>
-    <div class="actions">
-        <a th:href="@{/products/new}">상품 등록</a>
-    </div>
+	    <div>
+	        <span th:text="'Page: ' + (${productsPage.number + 1}) + ' / ' + ${productsPage.totalPages}"></span>
+	        <div>
+	            <a th:href="@{/products(page=${productsPage.number - 1})}" th:if="${productsPage.hasPrevious()}">Previous</a>
+	            <span th:each="i : ${#numbers.sequence(1, productsPage.totalPages)}">
+	                <a th:href="@{/products(page=${i - 1})}" th:text="${i}" th:classappend="${i == productsPage.number + 1} ? 'current' : ''"></a>
+	            </span>
+	            <a th:href="@{/products(page=${productsPage.number + 1})}" th:if="${productsPage.hasNext()}">Next</a>
+	        </div>
+	    </div>
+	    <div class="actions">
+	        <a th:href="@{/products/new}">상품 등록</a>
+	    </div>
+	</th:block>
 </body>
 </html>

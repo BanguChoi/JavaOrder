@@ -1,9 +1,10 @@
 package com.javaOrder.admin.repository;
 
-import com.javaOrder.admin.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import com.javaOrder.admin.domain.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, String> {
 

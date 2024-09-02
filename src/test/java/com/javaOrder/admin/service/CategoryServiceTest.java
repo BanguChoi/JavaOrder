@@ -1,6 +1,6 @@
 package com.javaOrder.admin.service;
 
-import com.javaOrder.admin.entity.Category;
+import com.javaOrder.admin.domain.Category;
 import com.javaOrder.admin.repository.CategoryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

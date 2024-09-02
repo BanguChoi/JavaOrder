@@ -10,8 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.javaOrder.admin.entity.Product;
-import com.javaOrder.admin.entity.Category;
+import com.javaOrder.admin.domain.Category;
+import com.javaOrder.admin.domain.Product;
 import com.javaOrder.admin.service.CategoryService;
 import com.javaOrder.admin.service.ProductService;
 
