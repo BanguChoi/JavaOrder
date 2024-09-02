@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>상품 상세 정보</title>
+    <style>
+        .product-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .product-image {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            float: left;
+            margin-right: 20px;
+        }
+        .image-actions {
+            display: flex;
+            align-items: center;
+        }
+        .product-info {
+            clear: both;
+            margin-top: 20px;
+        }
+        .product-info div {
+            margin-bottom: 10px;
+        }
+        .actions {
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="product-container">
+        <h1>상품 상세 정보</h1>
+        
+        <!-- 이미지 및 이미지 관리 버튼 -->
+        <div class="image-actions">
+            <img id="productImage" th:src="@{/images/{productCode}.jpg(productCode=${product.productId})}" 
+                 onerror="this.src='/images/noimg.png'" 
+                 alt="상품 이미지" class="product-image">
+            <input type="file" id="imageUpload" style="display: none;" />
+            <button type="button" class="btn" id="manageImageButton">이미지 관리</button>
+            <button type="button" class="btn btn-danger" id="deleteImageButton">이미지 삭제</button> <!-- 삭제 버튼 추가 -->
+        </div>
+
+        <form id="productForm">
+            <input type="hidden" id="productId" th:value="${product.productId}" />
+            <div class="product-info">
+                <div>
+                    <strong>상품명:</strong> 
+                    <input type="text" id="productName" th:value="${product.productName}" />
+                </div>
+                <div>
+                    <strong>카테고리 코드:</strong> 
+                    <span id="categoryCode" th:text="${product.category.code}"></span>
+                </div>
+                <div>
+                    <strong>상품 코드:</strong> 
+                    <span id="productCode" th:text="${product.productId}"></span>
+                </div>
+                <div>
+                    <strong>상품 등록 일자:</strong> 
+                    <span id="productDate" th:text="${#dates.format(product.productDate, 'yyyy-MM-dd')}"></span>
+                </div>
+                <div>
+                    <strong>가격:</strong>
+                    <input type="number" id="productPrice" th:value="${product.productPrice}" />
+                </div>
+                <div>
+                    <strong>주문 횟수:</strong> 
+                    <span id="productOrder" th:text="${product.productOrder}"></span>
+                </div>
+                <div>
+                    <strong>상품 상세 설명:</strong>
+                    <textarea id="productExplain" th:text="${product.productExplain}"></textarea>
+                </div>
+                <div>
+                    <strong>상품 게시 여부:</strong>
+                    <select id="productSell">
+                        <option value="Y" th:selected="${product.productSell == 'Y'}">게시</option>
+                        <option value="N" th:selected="${product.productSell == 'N'}">미게시</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="actions">
+                <button type="button" id="updateButton" class="btn">수정</button>
+                <a href="/products" class="btn">목록으로</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- jQuery 라이브러리 및 외부 JavaScript 파일 로드 -->
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="/js/productDetail.js"></script>
+</body>
+</html>

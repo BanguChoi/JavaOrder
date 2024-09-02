@@ -99,6 +99,7 @@ function checkForm(item, msg) {
 	} else {
 		return true;
 	}
+
 }	
 
 // 수량조절 함수
