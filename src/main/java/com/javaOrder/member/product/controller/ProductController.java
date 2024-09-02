@@ -38,6 +38,7 @@ public class ProductController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private ProductRepository productRepository;
+	
 
 	@GetMapping("/productList")
 	public String productList(Product product, Model model) {
@@ -46,7 +47,13 @@ public class ProductController {
 		return "/member/product/productList";
 	}
 	
-
+	@GetMapping("/productList/{categoryCode}")
+	public List<Product> productCategoryList(String categoryCode) {
+		List<Product> productCategoryList = productService.getProductByCategory(categoryCode);
+		
+		return productCategoryList;
+	}
+	
 
 	@GetMapping("/{productId}")
 	public String productDetail(@PathVariable String productId, Model model, HttpSession session)  {

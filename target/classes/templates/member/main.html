@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/client/layout/layout}" >
+
+	<head>
+		<th:block th:insert="~{template/client/fragments/block :: config}"></th:block>
+		<meta name="theme-color" content="#712cf9"/>
+	</head>
+
+	<body class="d-flex flex-column h-100 text-center">
+		<!-- 헤더 -->
+		<header>
+			<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+			    <th:block th:insert="~{template/client/fragments/block :: header}"></th:block>
+			</nav>
+		</header>
+		
+		<!-- 사이드바 -->
+		<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary position-fixed" style="top: 0; left: 0; width: 250px; height: 100vh; padding-top: 56px;">
+		    <th:block th:insert="~{template/client/fragments/block :: sidebar}"></th:block>
+		</div>
+		
+		<!-- 메인 콘텐츠 영역 -->
+	    <div class="d-flex flex-grow-1 mt-5 pt-2" style="margin-left: 250px; margin-top: 56px; padding-bottom: 56px; overflow-y: auto; height: calc(100vh - 56px);">
+			<th:block layout:fragment="content">   
+				<!-- 상품 리스트 -->           
+				<div class="flex-grow-1" style="width: 75%; height: 100%;">
+					<th:block th:insert="~{member/product/productList :: productList}"></th:block>
+				</div>
+				<!-- 장바구니 -->
+				<div class="" style="width: 25%; height: 100%; overflow-y: auto;">
+					<th:block th:insert="~{member/cart/cart :: cart}"></th:block>
+				</div>
+            </th:block>
+		</div>
+
+	    <!-- 푸터 -->
+		<footer class="footer mt-auto pt-2 bg-body-tertiary fixed-bottom">
+			<th:block th:insert="~{template/client/fragments/block :: footer}"></th:block>
+			<!-- <th:block th:insert="~{javaOrder/member/member/main :: main}"></th:block> -->
+		</footer>   
+		
+		<th:block layout:fragment="script"></th:block>
+	  	<script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="/js/jquery-3.7.1.min.js"></script>
+		<script src="/js/common.js"></script>
+		<script src="/js/main.js"></script>
+		<script src="/js/member/product/productList.js"></script>
+		<script src="/js/member/cart/cart.js"></script>
+		<script src="/js/member/cart/cartItemList.js"></script>
+	</body>
+</html>

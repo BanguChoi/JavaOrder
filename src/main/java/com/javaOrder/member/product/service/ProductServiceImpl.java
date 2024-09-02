@@ -21,7 +21,14 @@ public class ProductServiceImpl implements ProductService {
 		List<Product> productList = productRepository.findAll();
 		return productList;
 	}
-
+	
+	
+	/* 카테고리 선택 후 리스트 */
+	@Override
+	public List<Product> getProductByCategory(String categoryCode) {
+		return productRepository.findByCategoryCategoryCode(categoryCode);
+	}
+	
 	
 
 	/* 제품 상세페이지 */
@@ -30,8 +37,8 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.findById(productId).orElseThrow();
 
 	}
-	
-	
+
+
 	
 	
 }
