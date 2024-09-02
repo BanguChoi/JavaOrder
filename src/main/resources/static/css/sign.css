@@ -97,4 +97,44 @@ body {
 
 .text-danger {
   color: red;
+
+/* .form-signin .checkbox {
+  font-weight: 400;
+} */
+
+/* .form-signin .form-floating:focus-within { */
+  /* z-index: 2; */
+/* } */
+/* .form-signin .form-floating { */
+  /* margin-bottom: 20px; 입력 필드 사이의 간격을 20px로 설정 */
+/* } */
+/* .form-signin input { */
+  /* margin-bottom: -1px; */
+  /* 
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0; */
+/* } */
+
+/* .form-signin input[type="password"] { */
+  /* margin-bottom: 10px; */
+/* 
+  border-top-left-radius: 0;
+  border-top-right-radius: 0; */
+/* } */
+
+/* 주소 상세 입력 칸 추가 스타일 */
+/* .form-signin .address-search-btn { */
+    /* position: absolute; */
+    /* right: 0; */
+    /* top: 50%; */
+    /* transform: tcranslateY(-50%); */
+    /* height: calc(1.5em + .75rem + 2px); 버튼 높이를 입력 필드와 비슷하게 조정 */
+    /* font-size: 0.8rem; 버튼 글자 크기 조정 */
+    /* padding: 0.25rem 0.5rem; 버튼의 상하 여백을 줄여서 크기 조정 */
+    /* color: black; */
+/* } */
+
+/* .form-signin .form-floating button { */
+    /* margin-right: 10px; 버튼의 크기에 맞춰 입력 필드 오른쪽 여백 설정 */
+/* } */
 }

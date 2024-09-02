@@ -61,6 +61,7 @@ function getDateFormat(dateValue){
 	return result;
 }
 
+
 // 폼 전달 함수
 const actionProcess = function(form, method, action){
 	$(form).attr({
@@ -98,4 +99,14 @@ function checkForm(item, msg) {
 	} else {
 		return true;
 	}
-}
+}	
+
+// 수량조절 함수
+const updateCount = function(itemSelector, change) {
+    let $countInput = $(itemSelector);
+    let count = parseInt($countInput.val(), 10);
+
+    // 수량을 변경, 최소 수량 1로 제한
+    let newCount = Math.max(1, count + change);
+    $countInput.val(newCount);
+};
