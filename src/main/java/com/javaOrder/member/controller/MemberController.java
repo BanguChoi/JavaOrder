@@ -74,7 +74,7 @@ public class MemberController {
 	    Member member = (Member) session.getAttribute("member");
 	    if (member == null) {
 	        // 로그인하지 않은 경우 로그인 페이지로 리다이렉트
-	        return "redirect:/member/signin";
+	        return "redirect:/javaOrder/member/signin";
 	    }
 	    model.addAttribute("member", member);
 	    return "/member/mypage";
