@@ -7,5 +7,5 @@ import com.javaOrder.member.product.domain.Product;
 public interface ProductService {
 	List<Product> productList(Product product);
 	Product getProductById(String productId);
-
+	List<Product> productCategoryList(Product product, String categroyCode);
 }

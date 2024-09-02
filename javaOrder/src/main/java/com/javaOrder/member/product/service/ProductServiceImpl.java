@@ -22,6 +22,13 @@ public class ProductServiceImpl implements ProductService {
 		return productList;
 	}
 
+	/* 카테고리 제품 */
+	@Override
+	public List<Product> productCategoryList(Product product, String categroyCode) {
+		List<Product> productCategoryList = productRepository.findByCategory(categroyCode);
+		return productCategoryList;
+	}
+	
 	
 
 	/* 제품 상세페이지 */
