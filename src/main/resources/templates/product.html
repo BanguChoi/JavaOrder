@@ -55,12 +55,12 @@
 
 	    <div>
 	        <div>
-	            <button th:href="@{/products(page=${productsPage.number - 1})}" th:if="${productsPage.hasPrevious()}">←</button>
+	            <a th:href="@{/products(page=${productsPage.number - 1})}" th:if="${productsPage.hasPrevious()}">←</a>
 	            <span th:each="i : ${#numbers.sequence(1, productsPage.totalPages)}">
-	                <button th:href="@{/products(page=${i - 1})}" th:text="${i}" th:classappend="${i == productsPage.number + 1} ? 'current' : ''"></button>
+	                <a th:href="@{/products(page=${i - 1})}" th:text="${i}" th:classappend="${i == productsPage.number + 1} ? 'current' : ''"></a>
 	            </span>
-	            <button th:href="@{/products(page=${productsPage.number + 1})}" th:if="${productsPage.hasNext()}">→</button>
-	        	<button th:href="@{/products/new}">상품 등록</button>
+	            <a th:href="@{/products(page=${productsPage.number + 1})}" th:if="${productsPage.hasNext()}">→</a>
+	        	<a th:href="@{/products/new}">상품 등록</a>
 	        </div>
 	    </div>
 	</th:block>
