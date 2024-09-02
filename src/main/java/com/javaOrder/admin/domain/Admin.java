@@ -1,4 +1,4 @@
-package com.javaOrder.admin.vo;
+package com.javaOrder.admin.domain;
 
 import java.time.LocalDateTime;
 

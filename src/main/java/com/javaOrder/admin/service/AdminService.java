@@ -2,7 +2,7 @@ package com.javaOrder.admin.service;
 
 import java.util.List;
 
-import com.javaOrder.admin.vo.Admin;
+import com.javaOrder.admin.domain.Admin;
 
 public interface AdminService {
 	public void createAdmin(Admin admin);

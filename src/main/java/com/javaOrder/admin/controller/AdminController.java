@@ -8,8 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.javaOrder.member.domain.Member;
 import com.javaOrder.member.service.MemberService;
-import com.javaOrder.member.vo.Member;
+
 
 
 @Controller
@@ -19,6 +20,12 @@ public class AdminController {
 	@Autowired
 	private MemberService memberService;
 	
+	
+	@GetMapping("/")
+	public String adminMain(Model model) {
+		return "/admin/dashBoard/dashBoard";
+	}
+	
 	// 회원 목록 페이지
     @GetMapping("/member")
     public String getAllMembers(Model model) {
@@ -27,7 +34,4 @@ public class AdminController {
         model.addAttribute("members", members);
         return "/javaOrder/admin/member"; // 회원 목록을 보여줄 뷰 이름
     }
-	
-	
-	
 }

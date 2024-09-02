@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.javaOrder.admin.domain.Admin;
 import com.javaOrder.admin.repository.AdminRepository;
-import com.javaOrder.admin.vo.Admin;
-import com.javaOrder.common.service.IdGenerationService;
+import com.javaOrder.common.util.service.IdGenerationService;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	@Override
 	public void createAdmin(Admin admin) {
-		String adminCode = idGenerationService.generateId("A", "admin_seq");
+		String adminCode = idGenerationService.generateId("A", "admin_seq", 3);
 		admin.setAdminCode(adminCode);
 		adminRepository.save(admin);
 	}

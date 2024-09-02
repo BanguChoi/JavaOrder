@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.javaOrder.member.vo.Member;
+import com.javaOrder.member.domain.Member;
 
 import jakarta.servlet.http.HttpSession;
 
