@@ -29,9 +29,9 @@
 			     <button class="btn btn-primary" type="submit">Search</button>
 			</form>
 			
-		    <div class="col-md-5 text-end">
-		      <button type="button" id="loginBtn" class="btn btn-outline-primary me-2">Login</button>
-		      <button type="button" id="signUpBtn" class="btn btn-primary">Sign-up</button>
+		    <div class="col-md-3 text-end">
+		      <button type="button" class="btn btn-outline-primary me-2">Login</button>
+		      <button type="button" class="btn btn-primary">Sign-up</button>
 		    </div>
 		</div>
 	</th:block>
@@ -46,11 +46,19 @@
 	  <ul class="nav nav-pills flex-column mb-auto">
 	    <li>
 	      <a href="#" class="nav-link link-body-emphasis">
+			<!-- <svg class="bi pe-none" width="16" height="16"><use xlink:href="#speedometer2"></use></svg> -->	        
+			Dashboard
+	      </a>
+	    </li>
+	    <li>
+	      <a href="#" class="nav-link link-body-emphasis">
+	        <!-- <svg class="bi pe-none" width="16" height="16"><use xlink:href="#table"></use></svg> -->
 	        Orders
 	      </a>
 	    </li>
 	    <li>
 	      <a href="#" class="nav-link link-body-emphasis">
+	       <!--  <svg class="bi pe-none" width="16" height="16"><use xlink:href="#grid"></use></svg> -->
 	        Products
 	      </a>
 	    </li>
@@ -72,8 +80,6 @@
 	  </ul>
 	  <hr>
 	</th:block>
-
-	
 	<!-- footer -->
 	<th:block th:fragment="footer">
 		<div class="container">

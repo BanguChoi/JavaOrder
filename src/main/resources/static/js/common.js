@@ -46,6 +46,21 @@ function dataCheck(item, output, msg){
 	}
 }
 
+/*	함수명 : getDataFormat(날짜 데이터)
+	설명 : dataValue의 값을 년-월-일 형식(예시 : 2018-01-01)으로 반환 */
+function getDateFormat(dateValue){
+	var year = dateValue.getFullYear();
+	
+	var month = dateValue.getMonth() + 1;
+	month = (month<10) ? "0" + month : month;
+	
+	var day = dateValue.getDate();
+	day = (day<10) ? "0"+day : day;
+	
+	var result = year+"-"+month+"-"+day;
+	return result;
+}
+
 // 폼 전달 함수
 const actionProcess = function(form, method, action){
 	$(form).attr({
@@ -71,25 +86,9 @@ const locationProcess = function(url){
 	location.href = url;
 }
 
-/*	함수명 : getDataFormat(날짜 데이터)
-	설명 : dataValue의 값을 년-월-일 형식(예시 : 2018-01-01)으로 반환 */
-function getDateFormat(dateValue){
-	var year = dateValue.getFullYear();
-	
-	var month = dateValue.getMonth() + 1;
-	month = (month<10) ? "0"+month : month;
-	
-	var day = dateValue.getDate();
-	day = (day<10) ? "0"+day : day;
-	
-	var result = year + "-" + month + "-" + day;
-	return result;
-}
-
 /* 함수명 : checkForm (유효성 체크 대상, 메시지 내용)
- * 출력영역 : placeholder 속성을 이용
- * 예시 : if(!checkForm("#keyword","검색어를")) return;
- * */
+ * 출력영역 : placeholder 속성을 이용.
+ * 예시 : if(!checkForm("#keyword","검색어를")) return; */
 function checkForm(item, msg) {
 	var message = "";
 	if($(item).val().replace(/\s/g,"")==""){

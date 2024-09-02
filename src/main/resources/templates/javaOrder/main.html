@@ -1,0 +1,61 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/client/layout/layout}" >
+
+	<head>
+		<th:block th:insert="~{template/client/fragments/block :: config}"></th:block>
+		<meta name="theme-color" content="#712cf9"/>
+		<link rel="stylesheet" href="/css/main.css">
+	</head>
+	
+	<body class="d-flex h-100 text-center">
+		<!-- 헤더 -->
+		<header class="mb-auto">
+			<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+			    <th:block th:insert="~{template/client/fragments/block :: header}"></th:block>
+			</nav>
+			<th:block th:fragment="header">
+				
+			</th:block>
+		</header>
+		
+		<!-- 사이드바 -->
+		<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary">
+		    <th:block th:insert="~{template/client/fragments/block :: sidebar}"></th:block>
+		</div>
+		
+		
+			<th:block layout:fragment="content">  
+			<div class="d-flex flex-grow-1 mt-5 pt-2">
+        		<h1 class="my-4">메인 페이지</h1>
+        
+		        <!-- 로그인 상태에 따라 표시 -->
+		        <!-- <div class="col-md-3 text-end"> -->
+					<div id="loginSection" th:if="${member == null}">
+			            <button type="button" id="signInBtn" class="btn btn-outline-primary me-2">로그인</button>
+			            <button type="button" id= "signUpBtn" class="btn btn-primary">회원가입</button>
+			        </div>
+			        
+			        <div id="userInfoSection" th:if="${member != null}">
+			            <div id="userInfo" class="clickable">
+				            <p>안녕하세요, <span th:text="${member.memberName}">회원님</span>!</p>
+				            <p>이메일: <span th:text="${member.memberEmail}">이메일</span></p>
+			            </div>
+			            <form action="/javaOrder/member/signout" method="get">
+			                <button type="submit" class="btn btn-danger">로그아웃</button>
+			            </form>
+			        </div>
+		        <!-- </div> -->
+		    </div>
+	    </th:block>
+    	
+    	<footer class="footer mt-auto pt-2 bg-body-tertiary fixed-bottom">
+			<th:block th:insert="~{template/client/fragments/block :: footer}"></th:block>
+		</footer>
+		
+		<th:blcok layout:fragment="script">
+    		<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+			<script src="/js/jquery-3.7.1.min.js"></script>
+			<script src="/js/common.js"></script>
+    		<script src="/js/main.js"></script>
+    	</th:block>
+</html>
