@@ -1,0 +1,20 @@
+@charset "UTF-8";
+body {
+            padding: 20px;
+        }
+        .table-container {
+            margin-top: 20px;
+        }
+        .table th, .table td {
+            text-align: center;
+        }
+        .table th {
+            background-color: #007bff;
+            color: white;
+        }
+        .table td {
+            vertical-align: middle;
+        }
+        .table thead {
+            background-color: #f8f9fa;
+        }
