@@ -44,8 +44,26 @@ $(document).ready(function(){
       	cartPrice += itemPrice * itemCount;
    	 });
 
-    	$('#cartPrice').text(cartPrice + '원');
+    	$('#cartPrice').text(cartPrice);
+		updateCart(cartPrice);
+
   	}
+	
+		
+	function updateCart(cartPrice) {	
+		$.ajax({
+			url: '/cart/updateCart',
+			method: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(cartPrice),
+			success: function(response) {
+			},
+			error: function(xhr, status, error) {
+			  console.error('Error:', xhr.responseText);
+			}
+		});
+	}
+
 
 	
 	$('.deleteItemBtn').click(function(){

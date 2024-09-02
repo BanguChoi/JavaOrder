@@ -45,6 +45,7 @@ public class ProductController {
 		model.addAttribute("productList", productList);
 		return "/member/product/productList";
 	}
+	
 
 
 	@GetMapping("/{productId}")

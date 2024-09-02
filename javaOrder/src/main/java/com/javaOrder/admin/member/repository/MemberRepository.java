@@ -9,5 +9,7 @@ import com.javaOrder.admin.member.domain.Member;
 public interface MemberRepository extends JpaRepository<Member, String>{
 	Optional<Member> findByMemberCode(String memberCode);
 	public Member findByMemberId(String memberId);
-	// Optional<Member> findByMemberId(String memberId);
+	Member findByMemberCode(Member memberCode);
+	Member findCartByMemberCode(String memberCode);
+	
 }

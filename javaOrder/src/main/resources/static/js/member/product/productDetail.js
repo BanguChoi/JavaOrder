@@ -2,6 +2,15 @@
 
 /* 제품 옵션 변경 시 가격 자동반영 */
 $(document).ready(function(){
+	
+
+  	// 기본 옵션 설정
+ 	 $('input[name="optionSize"][value="1"]').prop('checked', true);
+	 $('input[name="optionTemperature"][value="1"]').prop('checked', true);
+ 	 $("#optionShot").val("추가안함");
+
+
+	
 	/* - + 버튼 클릭 */
 	$('#minusBtn').click(function(){
 		updateCount('#count', -1);
@@ -114,7 +123,7 @@ $('.addCartBtn').on("click", function(e) {
 	}
 	
 	$.ajax({
-		url: "/member/cart/insertCartItem",
+		url: "/cart/insertCartItem",
 		method: "POST",
 		contentType: "application/json",
 		data: JSON.stringify({

@@ -7,11 +7,11 @@
 		
 		<div>
 			<th:block th:if="${cart != null}">
-			    
 			    <th:block th:if="${cart.cartItems == null or cart.cartItems.size() == 0}">
-			        <span>장바구니가 비어있습니다.</span><br/><br/>
+			        <span>장바구니가 비어있습니다.</span>
 			    </th:block>
 			</th:block>
+			
 		
 			<div class="cartBtn"> 
 				<button type="button" class="btn btn-primary hereBtn">매장</button>

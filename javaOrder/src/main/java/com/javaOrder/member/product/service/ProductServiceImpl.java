@@ -22,6 +22,7 @@ public class ProductServiceImpl implements ProductService {
 		return productList;
 	}
 
+	
 
 	/* 제품 상세페이지 */
 	@Override
@@ -30,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 	
-
+	
 	
 	
 }

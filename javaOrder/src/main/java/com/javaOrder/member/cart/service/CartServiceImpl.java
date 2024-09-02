@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.javaOrder.admin.member.domain.Member;
+import com.javaOrder.admin.member.repository.MemberRepository;
 import com.javaOrder.member.cart.domain.Cart;
 import com.javaOrder.member.cart.repository.CartRepository;
 import com.javaOrder.member.main.controller.MainController;
@@ -19,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class CartServiceImpl implements CartService {
 
 	private final CartRepository cartRepository;
+	private final MemberRepository memberRepository;
 	
 	/*
 	@Override
@@ -67,12 +70,13 @@ public class CartServiceImpl implements CartService {
 
 	/* 카트 업데이트 */
 	@Override
-	public void updateCart(Cart cart) {
-		Optional<Cart> cartOptional = cartRepository.findById(cart.getCartId());
-		Cart updateCart = cartOptional.get();
+	public void updateCart(int cartPrice, String memberCode) {
+		Member member = memberRepository.findCartByMemberCode(memberCode);
+		Optional<Cart> cartOptonal = cartRepository.findByMember(member);
+		Cart cart = cartOptonal.get();
 		
-		// updateCart.calcCartPrice();	// 금액 재 계산
-		cartRepository.save(updateCart);
+		cart.setCartPrice(cartPrice);
+		cartRepository.save(cart);
 	}
 
 	@Override

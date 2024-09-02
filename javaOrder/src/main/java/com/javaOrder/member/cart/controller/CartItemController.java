@@ -78,30 +78,32 @@ public class CartItemController {
 
 	private CartItem convertToCartItem(Map<String, Object> cartItemData) {
 	    CartItem cartItem = new CartItem();
-	    // cartItemData의 키들이 JavaScript 객체의 키와 일치하는지 확인하세요
+	    
 	    cartItem.setItemNum(Integer.parseInt(cartItemData.get("count").toString()));
 	    
-	    // optionShot 처리
 	    String optionShot = (String) cartItemData.get("optionShot");
 	    cartItem.setOptionShot(optionShot.equals("추가안함") ? 0 : Integer.parseInt(optionShot));
 	    
 	    cartItem.setOptionSize(Integer.parseInt(cartItemData.get("optionSize").toString()));
 	    cartItem.setOptionTemperature(Integer.parseInt(cartItemData.get("optionTemperature").toString()));
 	    
-	 // optionSyrup 처리
 	    List<String> syrupOptions = (List<String>) cartItemData.get("optionSyrup");
 	    int syrupCount = 0;
 	    if (syrupOptions != null) {
 	        for (String syrup : syrupOptions) {
-	            if (syrup.equals("1") || syrup.equals("2")) {  // 카라멜 또는 바닐라가 선택된 경우
+	            if (syrup.equals("1") || syrup.equals("2")) {
 	                syrupCount++;
 	            }
 	        }
 	    }
 	    cartItem.setOptionSyrup(syrupCount);
 
+	    int totalPrice = Integer.parseInt(cartItemData.get("totalPrice").toString().replaceAll(",", ""));
+	    cartItem.setItemPrice(totalPrice);
+
 	    return cartItem;
 	}
+
 	
 
 	/* 카트에 담긴 아이템 옵션 변경 업데이트 */
