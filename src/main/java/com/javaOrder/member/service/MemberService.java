@@ -14,6 +14,18 @@ public interface MemberService {
 	// 로그인 메서드
 	public Member Login(String memberId, String memberPassword);
 	
+	// 회원 수정 메서드
+	boolean updateMemberField(String memberCode, String fieldId, String newValue);
+	
+	// 회원 수정 정보 추가 메서드
+	public Member getMemberByCode(String memberCode);
+	
+	// 비밀번호 변경
+	boolean changePassword(String memberCode, String currentPassword, String newPassword);
+	
+	// 현재 비밀번호 확인
+	boolean validateCurrentPassword(String memberCode, String currentPassword);
+
 	// 현재 로그인한 회원 정보 가져오는 메서드
 	//public Member getCurrentMember();
 }

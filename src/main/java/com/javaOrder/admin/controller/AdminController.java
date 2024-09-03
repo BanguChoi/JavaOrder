@@ -32,6 +32,6 @@ public class AdminController {
         // 모든 회원 데이터 조회
         List<Member> members = memberService.memberList();
         model.addAttribute("members", members);
-        return "/javaOrder/admin/member"; // 회원 목록을 보여줄 뷰 이름
+        return "/admin/member/member"; // 회원 목록을 보여줄 뷰 이름
     }
 }
