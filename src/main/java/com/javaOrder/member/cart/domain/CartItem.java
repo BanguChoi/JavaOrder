@@ -2,7 +2,9 @@ package com.javaOrder.member.cart.domain;
 
 import org.hibernate.annotations.ColumnDefault;
 
-import com.javaOrder.member.product.domain.Product;
+import com.javaOrder.admin.product.domain.Product;
+
+//import com.javaOrder.member.product.domain.Product;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

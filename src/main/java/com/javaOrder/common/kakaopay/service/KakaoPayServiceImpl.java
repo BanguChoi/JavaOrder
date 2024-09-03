@@ -143,7 +143,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 	public void copyCartToOrder(String mCode) {
 		// 주문한 회원의 장바구니 조회
 		Optional<Member> memberOptional = memberRepository.findById(mCode);
-		Cart cart = cartRepository.findBymemberCode(memberOptional.get());
+		Cart cart = cartRepository.findByMember_MemberCode(memberOptional.get().getMemberCode());
 				//.orElseThrow(()-> new IllegalArgumentException("해당 회원의 장바구니가 존재하지 않습니다."));
 		
 		// 해당 장바구니에 담긴 CartItem 조회
@@ -156,7 +156,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		
 		// 새 주문 생성
 		Orders newOrder = Orders.builder()
-				.memberCode(cart.getMemberCode())
+				.memberCode(cart.getMember())
 				.orderDate(LocalDateTime.now())
 				.orderPrice(cart.getCartPrice())
 				.orderStatus("W")

@@ -1,4 +1,4 @@
-package com.javaOrder.admin.domain;
+package com.javaOrder.admin.product.domain;
 
 import java.util.Date;
 

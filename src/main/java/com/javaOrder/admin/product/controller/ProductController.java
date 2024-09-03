@@ -1,4 +1,4 @@
-package com.javaOrder.admin.controller;
+package com.javaOrder.admin.product.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,10 +10,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.javaOrder.admin.domain.Category;
-import com.javaOrder.admin.domain.Product;
-import com.javaOrder.admin.service.CategoryService;
-import com.javaOrder.admin.service.ProductService;
+import com.javaOrder.admin.product.domain.Category;
+import com.javaOrder.admin.product.domain.Product;
+import com.javaOrder.admin.product.service.CategoryService;
+import com.javaOrder.admin.product.service.ProductService;
+import com.javaOrder.member.cart.domain.Cart;
+import com.javaOrder.member.cart.service.CartItemService;
+import com.javaOrder.member.cart.service.CartService;
+import com.javaOrder.member.domain.Member;
+import com.javaOrder.member.product.repository.ProductRepository;
+
+import jakarta.servlet.http.HttpSession;
+import lombok.Setter;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,6 +38,15 @@ public class ProductController {
 
     @Autowired
     private CategoryService categoryService;
+    
+    @Setter(onMethod_ = @Autowired)
+	private CartService cartService;
+	
+	@Setter(onMethod_ = @Autowired)
+	private CartItemService cartItemService;
+	
+	@Setter(onMethod_ = @Autowired)
+	private ProductRepository productRepository;
 
     private final Path imageUploadPath = Paths.get("C:/uploads/images"); // 이미지 저장 경로
 
@@ -154,4 +171,35 @@ public class ProductController {
     private String getExtension(String filename) {
         return filename.substring(filename.lastIndexOf(".") + 1);
     }
+    
+    // 장바구니
+    @GetMapping("/productList")
+	public String productList(Product product, Model model) {
+		List<Product> productList = productService.productList(product);
+		model.addAttribute("productList", productList);
+		return "/member/product/productList";
+	}
+
+	@GetMapping("/{productId}")
+	public String productDetail(@PathVariable String productId, Model model, HttpSession session)  {
+		Product productDetail = productService.getProductById(productId);	
+		
+		Member member = (Member) session.getAttribute("member");
+		if(member != null) {
+			Cart cart = cartService.getCartByMemberCode(member.getMemberCode());
+			model.addAttribute("cart", cart);
+		}
+
+		model.addAttribute("productDetail", productDetail);
+		return "/member/product/productDetail";
+	}
+	
+	/* 제품 가격 데이터만 전송. 상세페이지 ajax 용 */
+	@GetMapping("/totalPrice")
+	@ResponseBody
+	public int totalPrice(@RequestParam String productId) {
+		Product product = productRepository.findById(productId).orElseThrow();
+		return product.getProductPrice();
+	}
+    
 }

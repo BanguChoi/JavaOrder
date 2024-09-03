@@ -11,6 +11,7 @@ import com.javaOrder.member.domain.Member;
 public interface MemberRepository extends JpaRepository<Member, String>{
 	public Member findByMemberId(String memberId);
 	
+	public Member findCartByMemberCode(String memberCode);
 	
 	// 검색어를 포함하는 이름 검색
 	public Page<Member> findByMemberNameContaining(String keyword, Pageable pageable);

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.javaOrder.admin.member.domain.Member;
 import com.javaOrder.member.cart.domain.Cart;
 import com.javaOrder.member.cart.service.CartItemService;
 import com.javaOrder.member.cart.service.CartService;
+import com.javaOrder.member.domain.Member;
 import com.javaOrder.member.product.domain.Product;
 import com.javaOrder.member.product.repository.ProductRepository;
 import com.javaOrder.member.product.service.ProductService;

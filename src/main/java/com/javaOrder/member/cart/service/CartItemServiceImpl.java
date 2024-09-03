@@ -8,12 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.javaOrder.admin.member.domain.Member;
 import com.javaOrder.common.service.IdGenerationService;
 import com.javaOrder.member.cart.domain.Cart;
 import com.javaOrder.member.cart.domain.CartItem;
 import com.javaOrder.member.cart.repository.CartItemRepository;
 import com.javaOrder.member.cart.repository.CartRepository;
+import com.javaOrder.member.domain.Member;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

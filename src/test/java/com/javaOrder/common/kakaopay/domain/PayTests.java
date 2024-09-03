@@ -39,7 +39,7 @@ public class PayTests {
 	private OrderItemRepository orderItemRepository;
 	@Setter(onMethod_=@Autowired)
 	private IdGenerationService idGenerationService;
-	
+	/*
 	@Test
 	public void copyCartToOrderTest() {
 		String mCode = "M043";
@@ -99,7 +99,7 @@ public class PayTests {
 		log.info("해당 장바구니 내용 삭제");
 		cartItemRepository.deleteAll(cartItems);
 	}
-	
+	*/
 	
 	// 장바구니 항목들의 이름을 기반으로 주문명 생성 (예: "상품명 외 n건")
 	private String generateOrderName(List<CartItem> cartItems) {

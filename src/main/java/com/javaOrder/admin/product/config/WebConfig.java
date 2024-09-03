@@ -1,4 +1,4 @@
-package com.javaOrder.admin.config;
+package com.javaOrder.admin.product.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;

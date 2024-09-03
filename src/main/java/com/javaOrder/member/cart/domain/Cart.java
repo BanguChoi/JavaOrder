@@ -3,7 +3,7 @@ package com.javaOrder.member.cart.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.javaOrder.admin.member.domain.Member;
+import com.javaOrder.member.domain.Member;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

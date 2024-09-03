@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import com.javaOrder.common.util.service.IdGenerationService;
 import com.javaOrder.common.util.vo.PageRequestDTO;
 import com.javaOrder.common.util.vo.PageResponseDTO;
+import com.javaOrder.member.cart.domain.Cart;
+import com.javaOrder.member.cart.repository.CartRepository;
 import com.javaOrder.member.domain.Member;
 import com.javaOrder.member.repository.MemberRepository;
 
@@ -26,12 +28,18 @@ public class MemberServiceImpl implements MemberService {
 	
 	private final MemberRepository memberRepository;
 	private final IdGenerationService idGenerationService;
+	private final CartRepository cartRepository;
 	
 	@Transactional
 	@Override
 	public void insertMemberCode(Member member) {
 		String memberCode = idGenerationService.generateId("M", "member_seq", 4);
 		member.setMemberCode(memberCode);
+		
+		Cart cart = new Cart();
+	    cart.setMember(member);
+	    cartRepository.save(cart);
+	    
 		memberRepository.save(member);
 	}
 	

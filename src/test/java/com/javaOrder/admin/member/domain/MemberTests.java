@@ -6,10 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.javaOrder.admin.member.repository.MemberRepository;
 import com.javaOrder.common.service.IdGenerationService;
 import com.javaOrder.member.cart.domain.Cart;
 import com.javaOrder.member.cart.repository.CartRepository;
+import com.javaOrder.member.domain.Member;
+import com.javaOrder.member.repository.MemberRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
