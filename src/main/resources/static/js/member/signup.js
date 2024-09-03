@@ -33,13 +33,14 @@ $(document).ready(function() {
                 memberAddress: address.val().trim(),
                 memberBirth: birth.val(),
                 memberDate: getDateFormat(new Date()), // 가입일 자동 처리
+				memberLast: getDateFormat(new Date()),
                 memberStatus: 'M' // 상태값 자동 설정
             }
-        }).done(function(response) {
+        }).done(function() {
             // 성공 시 메인 화면으로 리다이렉트
-            window.location.href = '/javaOrder/main';
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            $('#error').text('회원가입에 실패했습니다: ' + textStatus);
+            location.href = '/';
+        }).fail(function() {
+            $('#error').text('회원가입에 실패했습니다: ');
         });
     });
 
@@ -56,23 +57,37 @@ $(document).ready(function() {
 
     // 취소 버튼 클릭 시 처리
     $('#resetButton').on('click', function() {
-        window.location.href = '/javaOrder/main';
+        window.location.href = '/';
     });
 
     // 전화번호 자동 포맷 함수
-    $('#phone').on('input', function() {
-        const phoneValue = $(this).val().replace(/\D/g, ''); // 숫자 외의 모든 문자 제거
-        let formattedPhone = '';
-        if (phoneValue.length > 6) {
-            formattedPhone = phoneValue.replace(/^(\d{3})(\d{4})(\d{4})$/, '$1-$2-$3');
-        } else if (phoneValue.length > 3) {
-            formattedPhone = phoneValue.replace(/^(\d{3})(\d{0,4})$/, '$1-$2');
+	$('#phone').on('input', function() {
+       let phoneValue = $(this).val().replace(/\D/g, ''); // 숫자 외의 모든 문자 제거
+
+       // 전화번호 길이에 따른 하이폰 추가
+       if (phoneValue.length > 11) {
+           phoneValue = phoneValue.slice(0, 11); // 최대 11자리로 제한
+       }
+
+       let formattedPhone = '';
+       if (phoneValue.length > 7) {
+           formattedPhone = phoneValue.replace(/^(\d{3})(\d{4})(\d{0,4})$/, '$1-$2-$3');
+       } else if (phoneValue.length > 3) {
+           formattedPhone = phoneValue.replace(/^(\d{3})(\d{0,4})$/, '$1-$2');
+       } else {
+           formattedPhone = phoneValue;
+       }
+
+       $(this).val(formattedPhone);
+	   
+        // 유효성 검사
+        if (phoneValue.length < 10 || phoneValue.length > 11) {
+            $('#phoneError').text('전화번호는 10자리 또는 11자리 숫자만 포함할 수 있습니다.');
         } else {
-            formattedPhone = phoneValue;
+            $('#phoneError').text('');
         }
-        $(this).val(formattedPhone); // 입력 필드에 포맷 적용
     });
-    
+
     // 비밀번호 표시 기능
     $('#showPassword').on('change', function() {
         const isChecked = $(this).is(':checked');
@@ -84,9 +99,14 @@ $(document).ready(function() {
             passwordField.attr('type', 'password');
         }
     });
-	
-	$('#password').on('focus', function() {
+
+    $('#password').on('focus', function() {
         $('#passwordError').text('');
+    });
+	
+	$('#name, #id, #password, #email, #phone, #address, #birth').on('input', function() {
+        const errorDiv = $(`#${this.id}Error`);
+        errorDiv.text('');
     });
 });
 
@@ -97,7 +117,7 @@ function validateId(id) {
     // ID는 대소문자와 숫자만 허용
     const idRegex = /^[a-zA-Z0-9]{6,12}$/;
     const isValid = idRegex.test(idValue);
-    const errorDiv = $('#id').siblings('.error-message');
+    const errorDiv = $('#idError');
     errorDiv.text(isValid ? '' : "아이디는 6~12글자 대소문자와 숫자만 포함할 수 있습니다.");
     return isValid;
 }
@@ -105,10 +125,10 @@ function validateId(id) {
 // 비밀번호 유효성 검사 함수
 function validatePassword(password) {
     const passwordValue = password.val();
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@?.,_])[A-Za-z\d!@?.,_]{8,20}$/;
+    const passwordRegex = /^(?=.*[!@?.,_])[A-Za-z\d!?@.,_-+#$%^&*]{8,20}$/;
     const isValid = passwordRegex.test(passwordValue);
     const passwordErrorDiv = $('#passwordError');
-    
+
     if (isValid) {
         passwordErrorDiv.text('');
     } else {
@@ -122,7 +142,7 @@ function validateEmail(email) {
     const emailValue = email.val().trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValid = emailRegex.test(emailValue);
-    const errorDiv = $('#email').siblings('.error-message');
+    const errorDiv = $('#emailError');
     errorDiv.text(isValid ? '' : "유효한 이메일 주소를 입력해 주세요.");
     return isValid;
 }
@@ -132,7 +152,17 @@ function validatePhone(phone) {
     const phoneValue = phone.val().trim().replace(/\D/g, ''); // 숫자만 추출
     const phoneRegex = /^\d{10,11}$/; // 10자리 또는 11자리 전화번호 허용
     const isValid = phoneRegex.test(phoneValue);
-    const errorDiv = $('#phone').siblings('.error-message');
+    const errorDiv = $('#phoneError');
     errorDiv.text(isValid ? '' : "전화번호는 10자리 또는 11자리 숫자만 포함할 수 있습니다.");
     return isValid;
+}
+
+// 폼 필드가 비어있거나 유효성 검사를 통과하지 못할 경우
+function checkForm(field, fieldName) {
+    if (field.val().trim() === "") {
+        $(`#${field.attr('id')}Error`).text(`${fieldName}을(를) 입력해 주세요.`);
+        return false;
+    }
+    $(`#${field.attr('id')}Error`).text('');
+    return true;
 }
