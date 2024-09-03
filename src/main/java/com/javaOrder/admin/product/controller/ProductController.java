@@ -28,8 +28,9 @@ import com.javaOrder.admin.product.domain.Product;
 import com.javaOrder.admin.product.repository.ProductRepository;
 import com.javaOrder.admin.product.service.CategoryService;
 import com.javaOrder.admin.product.service.ProductService;
+import com.javaOrder.common.util.vo.PageRequestDTO;
+import com.javaOrder.common.util.vo.PageResponseDTO;
 import com.javaOrder.member.cart.domain.Cart;
-import com.javaOrder.member.cart.service.CartItemService;
 import com.javaOrder.member.cart.service.CartService;
 import com.javaOrder.member.domain.Member;
 
@@ -47,12 +48,10 @@ public class ProductController {
     
     @Autowired
 	private CartService cartService;
-	
-    @Autowired
-	private CartItemService cartItemService;
     
     @Autowired
 	private ProductRepository productRepository;
+	
 
     private final Path imageUploadPath = Paths.get("C:/uploads/images"); // 이미지 저장 경로
 
@@ -181,15 +180,15 @@ public class ProductController {
     
     
 	@GetMapping("/productList")
-	public String productList(Product product, Model model) {
-		List<Product> productList = productService.productList(product);
+	public String productList(PageRequestDTO pageRequestDTO, Model model) {
+		PageResponseDTO<Product> productList = productService.productList(pageRequestDTO);
+		
 		model.addAttribute("productList", productList);
-		return "/member/product/productList";
+		return "member/products/productList :: productList";
 	}
 	
 
-
-	@GetMapping("/{productId}")
+	@GetMapping("/{productId}/detail")
 	public String productDetail(@PathVariable String productId, Model model, HttpSession session)  {
 		Product productDetail = productService.getProductById(productId);	
 		
@@ -200,8 +199,10 @@ public class ProductController {
 		}
 
 		model.addAttribute("productDetail", productDetail);
-		return "/member/product/productDetail";
+		return "member/products/productDetail";
 	}
+	
+	
 	
 	/* 제품 가격 데이터만 전송. 상세페이지 ajax 용 */
 	@GetMapping("/totalPrice")
@@ -210,6 +211,7 @@ public class ProductController {
 		Product product = productRepository.findById(productId).orElseThrow();
 		return product.getProductPrice();
 	}
+	
     
     
     

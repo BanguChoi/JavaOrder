@@ -2,7 +2,6 @@
 
 /* 제품 옵션 변경 시 가격 자동반영 */
 $(document).ready(function(){
-	
 
   	// 기본 옵션 설정
  	 $('input[name="optionSize"][value="1"]').prop('checked', true);
@@ -10,9 +9,9 @@ $(document).ready(function(){
  	 $("#optionShot").val("추가안함");
 
 
-	
 	/* - + 버튼 클릭 */
 	$('#minusBtn').click(function(){
+		console.log("클릭");
 		updateCount('#count', -1);
 		calcTotalPrice();
 	});
@@ -22,14 +21,13 @@ $(document).ready(function(){
 		calcTotalPrice();
 	});
 	
-	
 	let basePrice = 0;
 	const productId = $('input[name="productId"]').val();
 	
 	
 	function productPrice() {
 		$.ajax({
-			url: "/product/totalPrice",
+			url: "/products/totalPrice",
 			method: "GET",
 			data: {
 				productId: productId

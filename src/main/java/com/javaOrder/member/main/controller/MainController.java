@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.javaOrder.admin.product.domain.Product;
 import com.javaOrder.admin.product.service.ProductService;
+import com.javaOrder.common.util.vo.PageRequestDTO;
+import com.javaOrder.common.util.vo.PageResponseDTO;
 import com.javaOrder.member.cart.domain.Cart;
 import com.javaOrder.member.cart.domain.CartItem;
 import com.javaOrder.member.cart.service.CartItemService;
@@ -68,7 +70,8 @@ public class MainController {
 
 
 		/* 로그인 전에는 제품리스트만 출력 */
-		List<Product> productList = productService.productList(new Product());
+		PageRequestDTO pageRequestDTO = new PageRequestDTO();
+		PageResponseDTO<Product> productList = productService.productList(pageRequestDTO);
 		model.addAttribute("productList", productList);	
 		
 		Cart cart = cartService.getCartByMemberCode(loggedInMember.getMemberCode());
@@ -78,7 +81,7 @@ public class MainController {
         model.addAttribute("cartItemList", cartItemList);
 
         
-		return "/member/main";
+		return "member/main";
 	}
 
 }

@@ -3,7 +3,12 @@
 	layout:decorate="~{template/client/layout/layout}" >
 	<th:block th:fragment="productList">
 
-
+	
+	<form id="searchForm">
+		<input type="hidden" name="page" id="page" th:value="${productList.pageRequestDTO.page}" />
+		<input type="hidden" name="size" id="size" th:value="${productList.pageRequestDTO.size}" />
+	</form>
+	
 	
 	<form class="d-flex mx-auto" role="search">
 	     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -21,19 +26,18 @@
 		<button type="button" class="btn btn-primary etcBtn">Etc</button>
 	</div>
 		
-	<div th:if="${#lists.size(productList) == 0}">
+	<div th:if="${#lists.size(productList.dtoList) == 0}">
 	    <div class="text-center">등록된 제품이 없습니다.</div>
 	</div>
 	
-	<div th:if="${not #lists.isEmpty(productList)}" class="container d-flex justify-content-center">
-	    <div th:each="product : ${productList}" th:object="${product}" th:data-no="*{productId}">
-	        <div class="card mx-2" style="width: 14rem;">
-	            <img class="card-img-top" src="*{}">
+	<div th:if="${not #lists.isEmpty(productList.dtoList)}" class="container d-flex flex-wrap justify-content-center ">
+	    <div th:each="product : ${productList.dtoList}" th:object="${product}" th:data-no="*{productId}">
+	        <div class="card mx-4 mb-4" style="width: 14rem;">
+	            <img class="card-img-top" th:src="@{/images/{productCode}.jpg(productCode=${product.productId})}" onerror="this.src='/images/noimg.png'">
 	            <div class="card-body">
 	                <h5 class="card-title" th:text="*{productName}"></h5>
-	               <!--  <p class="card-text" th:text="*{productExplain}"></p> -->
 	                <p class="card-text" th:text="*{productPrice} +'원'"></p>
-	                <a th:href="@{'/product/' + *{productId}}" class="btn btn-primary productDetailBtn">제품담기</a>
+	                <a th:href="@{'/products/' + *{productId} +'/detail'}" class="btn btn-primary productDetailBtn">제품담기</a>
 	            </div>
 	        </div>
 	    </div>
@@ -41,11 +45,11 @@
 	
 	
 	
-	<!-- 
+	 
 	<nav aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">
 
-			<li class="page-item" th:if="$productList.prev}">
+			<li class="page-item" th:if="${productList.prev}">
 				<a th:data-number="${productList.prevPage}" class="page-link">Previous</a>
 			</li>
 			
@@ -59,7 +63,7 @@
 			</li>
 		</ul>
 	</nav>
-	-->
+
 </html>
 
 

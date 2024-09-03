@@ -20,8 +20,8 @@
 			    <div class="d-flex flex-grow-1 pt-2" style="margin-left: 280px; padding-bottom: 56px; overflow-y: auto; height: calc(100vh - 56px);">
 
 					<!-- 상품 리스트 -->           
-					<div class="" style="width: 75%; height: 100%; overflow-y: auto;">
-						<th:block th:insert="~{member/product/productList :: productList}"></th:block>
+					<div id="productListContainer" style="width: 75%; height: 100%; overflow-y: auto;">
+						<th:block  th:insert="~{member/products/productList :: productList}"></th:block>
 					</div>
 					<!-- 장바구니 -->
 					<div class="" style="width: 25%; height: 100%; overflow-y: auto;">
@@ -34,16 +34,16 @@
 	    <!-- 푸터 -->
 		<footer class="footer mt-auto pt-2 bg-body-tertiary fixed-bottom">
 			<th:block th:insert="~{template/client/fragments/block :: footer}"></th:block>
-			<!-- <th:block th:insert="~{javaOrder/member/member/main :: main}"></th:block> -->
 		</footer>   
 		
-		<th:block layout:fragment="script"></th:block>
-	  	<script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
-		<script src="/js/jquery-3.7.1.min.js"></script>
-		<script src="/js/common.js"></script>
-		<script src="/js/main.js"></script>
-		<script src="/js/member/product/productList.js"></script>
-		<script src="/js/member/cart/cart.js"></script>
-		<script src="/js/member/cart/cartItemList.js"></script>
+		<th:block layout:fragment="script">
+		  	<script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+			<script src="/js/jquery-3.7.1.min.js"></script>
+			<script src="/js/common.js"></script>
+			<script src="/js/main.js"></script>
+			<script src="/js/member/products/productList.js"></script>
+			<script src="/js/member/cart/cart.js"></script>
+			<script src="/js/member/cart/cartItemList.js"></script>
+		</th:block>
 	</body>
 </html>
