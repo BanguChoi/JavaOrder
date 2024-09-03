@@ -7,11 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.javaOrder.admin.member.domain.Member;
-import com.javaOrder.admin.member.repository.MemberRepository;
 import com.javaOrder.member.cart.domain.Cart;
 import com.javaOrder.member.cart.repository.CartRepository;
+import com.javaOrder.member.domain.Member;
 import com.javaOrder.member.main.controller.MainController;
+import com.javaOrder.member.repository.MemberRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

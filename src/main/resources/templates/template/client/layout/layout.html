@@ -8,28 +8,19 @@
 	</head>
 	<body class="d-flex h-100 text-center">
 		<!-- header -->
-		<header class="mb-auto">
-	  		<nav class="navbar navbar-expand-md navbar-dark fixed-top">
-	<!-- <body class="d-flex flex-column h-100"> -->
-		<!-- header -->
-		<!-- <header>
-	  		<nav class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"> -->
-	  			<th:block th:insert="~{template/client/fragments/block :: header}"></th:block>
-	  		</nav>	
-		</header>
+		
 		
 		
 		<!-- sidebar -->
-		<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary">
+		<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary position-fixed" style="top: 0; left: 0; width: 250px; height: 100vh; padding-top: 56px;">
   			<th:block th:insert="~{template/client/fragments/block :: sidebar}"></th:block>
 		</div>
 		
 		
 		<!-- main -->
 		<main class="d-flex flex-column w-100 mt-5 pt-2">
-		  <div class="container">
 		   	<th:block layout:fragment="content"></th:block>
-		  </div>
+
 		</main>
 		
 		

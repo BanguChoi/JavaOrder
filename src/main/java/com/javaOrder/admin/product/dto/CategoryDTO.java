@@ -1,4 +1,4 @@
-package com.javaOrder.admin.dto;
+package com.javaOrder.admin.product.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

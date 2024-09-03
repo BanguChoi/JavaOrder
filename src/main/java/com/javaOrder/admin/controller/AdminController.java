@@ -17,6 +17,7 @@ import com.javaOrder.member.service.MemberService;
 @RequestMapping("javaOrder/admin/*")
 //@RequiredArgsConstructor
 public class AdminController {
+	
 	@Autowired
 	private MemberService memberService;
 	

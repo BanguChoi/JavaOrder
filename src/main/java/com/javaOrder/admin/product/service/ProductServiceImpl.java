@@ -1,14 +1,17 @@
-package com.javaOrder.admin.service;
+package com.javaOrder.admin.product.service;
 
-import com.javaOrder.admin.domain.Category;
-import com.javaOrder.admin.domain.Product;
-import com.javaOrder.admin.repository.CategoryRepository;
-import com.javaOrder.admin.repository.ProductRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.javaOrder.admin.product.domain.Category;
+import com.javaOrder.admin.product.domain.Product;
+import com.javaOrder.admin.product.repository.CategoryRepository;
+import com.javaOrder.admin.product.repository.ProductRepository;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -65,4 +68,17 @@ public class ProductServiceImpl implements ProductService {
     public Product saveProduct(Product product) {
         return productRepository.save(product);
     }
+    
+    
+    
+	/* 제품 리스트 */
+    @Override
+	public List<Product> productList(Product product) {
+		List<Product> productList = productRepository.findAll();
+		return productList;
+	}
+
+	
+
+    
 }

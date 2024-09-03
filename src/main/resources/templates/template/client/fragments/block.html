@@ -27,38 +27,10 @@
    		<link href="/css/sticky-footer-navbar.css" rel="stylesheet">
 	</th:block>
 	
-	<!-- header -->
-	<th:block th:fragment="header">
-		<div class="container">		
-			<form class="d-flex mx-auto" role="search">
-			     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-			     <button class="btn btn-primary" type="submit">Search</button>
-			</form>
-			
-			<!-- 로그인 상태에 따라 표시 -->
-			<!-- <div class="col-md-3 text-end"> -->
-			<div class="col-md-3 text-end" id="loginSection" th:if="${session.member == null}">
-			    <button type="button" id="signInBtn" class="btn btn-outline-primary me-2">로그인</button>
-			    <button type="button" id= "signUpBtn" class="btn btn-primary">회원가입</button>
-			</div>
-			 
-			<div class="col-md-3 text-end" id="userInfoSection" th:if="${session.member != null}">
-			    <div id="userInfo" class="clickable">
-			        <p>안녕하세요, <span th:text="${session.member.memberName}">회원님</span>!</p>
-			        <p>이메일: <span th:text="${session.member.memberEmail}">이메일</span></p>
-				    <form class="text-center" action="/javaOrder/member/signout" method="get">
-				        	<button type="submit" class="btn btn-danger btn-sm">로그아웃</button>
-				    </form>    
-			    </div>
-			    
-			</div>
-		</div>
-	</th:block>
-	
 	
 	<!-- 왼쪽 사이드 메뉴바 -->
 	<th:block th:fragment="sidebar">
-		<a href="/javaOrder/main" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"  style="width: 200px;">
+		<a href="member/main" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"  style="width: 200px;">
 	    	<span class="fs-4">JavaOrder로고</span>
 	    </a>
 	  <hr>
@@ -91,7 +63,34 @@
             </ul>
           </li>
 	  </ul>
+	  
+	  
+	  
+  			<!-- 로그인 상태에 따라 표시 -->
+		<!-- <div class="col-md-3 text-end"> -->
+		<div class="col-md-12 " id="loginSection" th:if="${session.member == null}">
+		    <button type="button" id="signInBtn" class="btn btn-outline-primary me-2">로그인</button>
+		    <button type="button" id= "signUpBtn" class="btn btn-primary">회원가입</button>
+		</div>
+		 
+		<div class="col-md-12 mb-2" id="userInfoSection" th:if="${session.member != null}">
+		    <div id="userInfo" class="clickable">
+		        <p>안녕하세요, <span th:text="${session.member.memberName}">회원님</span>!</p>
+		        <p>이메일: <span th:text="${session.member.memberEmail}">이메일</span></p>
+			    <form class="text-center" action="/javaOrder/member/signout" method="get">
+			        	<button type="submit" class="btn btn-danger btn-sm">로그아웃</button>
+			    </form>    
+		    </div>
+		    
+		</div>
+	  
 	  <hr>
+	  
+	  	
+			
+
+
+	  
 	</th:block>
 	<!-- footer -->
 	<th:block th:fragment="footer">

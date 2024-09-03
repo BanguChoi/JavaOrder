@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.javaOrder.admin.member.domain.Member;
 import com.javaOrder.member.cart.domain.Cart;
 import com.javaOrder.member.cart.service.CartService;
+import com.javaOrder.member.domain.Member;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;

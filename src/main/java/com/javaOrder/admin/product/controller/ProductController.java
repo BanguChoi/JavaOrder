@@ -1,4 +1,10 @@
-package com.javaOrder.admin.controller;
+package com.javaOrder.admin.product.controller;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -7,19 +13,27 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.javaOrder.admin.domain.Category;
-import com.javaOrder.admin.domain.Product;
-import com.javaOrder.admin.service.CategoryService;
-import com.javaOrder.admin.service.ProductService;
+import com.javaOrder.admin.product.domain.Category;
+import com.javaOrder.admin.product.domain.Product;
+import com.javaOrder.admin.product.repository.ProductRepository;
+import com.javaOrder.admin.product.service.CategoryService;
+import com.javaOrder.admin.product.service.ProductService;
+import com.javaOrder.member.cart.domain.Cart;
+import com.javaOrder.member.cart.service.CartItemService;
+import com.javaOrder.member.cart.service.CartService;
+import com.javaOrder.member.domain.Member;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/products")
@@ -30,6 +44,15 @@ public class ProductController {
 
     @Autowired
     private CategoryService categoryService;
+    
+    @Autowired
+	private CartService cartService;
+	
+    @Autowired
+	private CartItemService cartItemService;
+    
+    @Autowired
+	private ProductRepository productRepository;
 
     private final Path imageUploadPath = Paths.get("C:/uploads/images"); // 이미지 저장 경로
 
@@ -154,4 +177,44 @@ public class ProductController {
     private String getExtension(String filename) {
         return filename.substring(filename.lastIndexOf(".") + 1);
     }
+    
+    
+    
+	@GetMapping("/productList")
+	public String productList(Product product, Model model) {
+		List<Product> productList = productService.productList(product);
+		model.addAttribute("productList", productList);
+		return "/member/product/productList";
+	}
+	
+
+
+	@GetMapping("/{productId}")
+	public String productDetail(@PathVariable String productId, Model model, HttpSession session)  {
+		Product productDetail = productService.getProductById(productId);	
+		
+		Member member = (Member) session.getAttribute("member");
+		if(member != null) {
+			Cart cart = cartService.getCartByMemberCode(member.getMemberCode());
+			model.addAttribute("cart", cart);
+		}
+
+		model.addAttribute("productDetail", productDetail);
+		return "/member/product/productDetail";
+	}
+	
+	/* 제품 가격 데이터만 전송. 상세페이지 ajax 용 */
+	@GetMapping("/totalPrice")
+	@ResponseBody
+	public int totalPrice(@RequestParam String productId) {
+		Product product = productRepository.findById(productId).orElseThrow();
+		return product.getProductPrice();
+	}
+    
+    
+    
+    
+    
+    
+    
 }

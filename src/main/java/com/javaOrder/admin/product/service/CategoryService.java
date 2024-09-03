@@ -1,7 +1,8 @@
-package com.javaOrder.admin.service;
+package com.javaOrder.admin.product.service;
 
-import com.javaOrder.admin.domain.Category;
-import com.javaOrder.admin.repository.CategoryRepository;
+import com.javaOrder.admin.product.domain.Category;
+import com.javaOrder.admin.product.repository.CategoryRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

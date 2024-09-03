@@ -8,12 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.javaOrder.admin.member.domain.Member;
-import com.javaOrder.common.service.IdGenerationService;
+import com.javaOrder.common.util.service.IdGenerationService;
 import com.javaOrder.member.cart.domain.Cart;
 import com.javaOrder.member.cart.domain.CartItem;
 import com.javaOrder.member.cart.repository.CartItemRepository;
 import com.javaOrder.member.cart.repository.CartRepository;
+import com.javaOrder.member.domain.Member;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -53,7 +53,7 @@ public class CartItemServiceImpl implements CartItemService {
 	public CartItem insertCartItem(String cartId, CartItem cartItem) {
 		Cart cart = cartRepository.findById(cartId).orElseThrow();
 		
-		String cartItemId = idGenerationService.generateId(cart.getCartId(), "item_id_seq");
+		String cartItemId = idGenerationService.generateId(cart.getCartId(), "item_id_seq", 4);
 		cartItem.setItemId(cartItemId);
 		cartItem.setCart(cart);
 		
