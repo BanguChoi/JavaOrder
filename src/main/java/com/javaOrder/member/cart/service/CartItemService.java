@@ -10,6 +10,5 @@ public interface CartItemService {
 	void updateCartItem(String itemId, int itemNum);
 	void deleteCartItem(String itemId);
 	CartItem insertCartItem(String cartId, CartItem cartItem);
->>>>>>> origin/cart2
 
 }
