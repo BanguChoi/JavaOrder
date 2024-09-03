@@ -156,3 +156,13 @@ public class MemberController {
 	    return response;
 	}
 }
+	/*
+	// 회원 목록 페이지
+    @GetMapping("/admin/member")
+    public String getAllMembers(Model model) {
+        // 모든 회원 데이터 조회
+        List<Member> members = memberService.memberList();
+        model.addAttribute("members", members);
+        return "/admin/memberList"; // 회원 목록을 보여줄 뷰 이름
+    }*/
+}

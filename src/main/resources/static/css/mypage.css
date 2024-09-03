@@ -6,10 +6,11 @@ body {
     color: #212529; /* 기본 텍스트 색상 */
 }
 
-/* 컨테이너 *
-.container {
-    margin-top: 10px; 컨테이너 상단 여백
-} */
+
+h1 {
+    margin-bottom: 30px;
+    color: #343a40;
+}
 
 /* 카드 스타일 */
 .card {
