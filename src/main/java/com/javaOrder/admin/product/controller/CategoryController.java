@@ -13,7 +13,7 @@ import com.javaOrder.admin.product.dto.CategoryDTO;
 import com.javaOrder.admin.product.service.CategoryService;
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/admin/categories")
 public class CategoryController {
 
     @Autowired
