@@ -23,7 +23,7 @@ $(document).ready(function() {
         // AJAX 요청을 통해 서버로 데이터 전송
         $.ajax({
             type: 'POST',
-            url: '/javaOrder/member/signup',
+            url: '/member/signup',
             data: {
                 memberName: name.val().trim(),
                 memberId: id.val().trim(),
@@ -38,7 +38,7 @@ $(document).ready(function() {
             }
         }).done(function() {
             // 성공 시 메인 화면으로 리다이렉트
-            location.href = '/';
+            location.href = '/member/main';
         }).fail(function() {
             $('#error').text('회원가입에 실패했습니다: ');
         });
@@ -57,7 +57,7 @@ $(document).ready(function() {
 
     // 취소 버튼 클릭 시 처리
     $('#resetButton').on('click', function() {
-        window.location.href = '/';
+        window.location.href = '/member/main';
     });
 
     // 전화번호 자동 포맷 함수

@@ -3,12 +3,12 @@ $(".page-item a").on("click", function(e){
 	e.preventDefault();
 	/*$("#searchForm").find("input[name='pageNum']").val($(this).attr("href"));*/
 	$("#page").val($(this).data("number"));
-	actionProcess("#searchForm", "get", "/javaOrder/member/orderList/");
+	actionProcess("#searchForm", "get", "/member/orderList/");
 });
 
 // 전체 데이터 조회
 $("#allSearchBtn").on("click", function(){
-	locationProcess("/javaOrder/member/orderList/");
+	locationProcess("/member/orderList/");
 });
 
 $(document).ready(function(){
@@ -55,5 +55,5 @@ $("#searchBtn").on("click", function(){
 	
 	$("#page").val(1); // 페이지 초기화
 	
-	actionProcess("#searchForm", "get", "/javaOrder/member/orderList/");
+	actionProcess("#searchForm", "get", "/member/orderList/");
 });

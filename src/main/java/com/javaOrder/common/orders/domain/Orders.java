@@ -52,6 +52,10 @@ public class Orders {
 	@ColumnDefault(value="W")
 	private String orderStatus;
 	
+	@Column(name="ord_takeout", nullable=false)
+	@ColumnDefault("0")
+	private Integer orderTakeout;	// 수령방식
+	
 	// 상품명 필요
 	@Column(length=100, name="ord_name", nullable=false)
 	private String orderName;

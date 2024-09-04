@@ -14,7 +14,7 @@ import com.javaOrder.member.service.MemberService;
 
 
 @Controller
-@RequestMapping("javaOrder/admin/*")
+@RequestMapping("/admin/*")
 //@RequiredArgsConstructor
 public class AdminController {
 	

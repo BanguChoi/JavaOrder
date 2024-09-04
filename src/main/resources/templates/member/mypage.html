@@ -8,6 +8,7 @@
 
 <th:block layout:fragment="content">
 	<div class="card-body">
+	<div class="container">
 	    <!-- 회원 정보 출력 -->
 		<div th:if="${member != null}" th:object="${member}">
 		    <!-- 회원 코드 숨기기 -->
@@ -90,6 +91,7 @@
 	    <div class="d-flex justify-content-end mt-3">
 	        <a href="/" class="btn btn-secondary">메인 페이지로 돌아가기</a>
 	    </div>
+	</div>
 	</div>
 </th:block>
 

@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/javaOrder/member/*")
+@RequestMapping("/member/*")
 @RequiredArgsConstructor
 public class MemberController {
 	
@@ -84,7 +84,7 @@ public class MemberController {
 	}
 	
 	// 회원 정보 처리
-	@PostMapping("/javaOrder/member/updateField")
+	@PostMapping("/updateField")
     @ResponseBody
     public Map<String, Object> updateField(
             @RequestParam String memberCode,

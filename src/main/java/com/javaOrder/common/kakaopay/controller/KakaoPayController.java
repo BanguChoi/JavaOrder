@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -31,8 +32,9 @@ public class KakaoPayController {
 	private final CartItemRepository cartItemRepository;
 //	private final OrdersRepository orderRepository;
 	// 결제 준비
-	@GetMapping("/pay/ready/")
-    public String ready(HttpSession session, PayReadyRequestVO readyRequest, Model model) {
+	@GetMapping("/pay/ready/{takeout}")
+    public String ready(@PathVariable Integer takeout, HttpSession session,
+    		PayReadyRequestVO readyRequest, Model model) {
 		Member member = (Member) session.getAttribute("member");
 		Cart cart = cartRepository.findByMember_MemberCode(member.getMemberCode());
 			//.orElseThrow(()-> new IllegalArgumentException("해당 회원의 장바구니가 존재하지 않습니다."));
@@ -55,6 +57,7 @@ public class KakaoPayController {
 				.totalAmount(cart.getCartPrice())					// 총금액
 				.taxFreeAmount(0)									// 비과세
 				.vatAmount(0)										// 부가세
+				.takeout(takeout)
 				.build();
 
         KakaoPayReadyResponse readyResponse = payService.ready(readyRequest);

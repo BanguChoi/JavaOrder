@@ -1,4 +1,5 @@
-$("#productDetailBtn").on("click", function(){
+$(".productDetailBtn").on("click", function(){
+	console.log(productId);
 	locationProcess("/products/" + productId + "/detail");	
 });
 

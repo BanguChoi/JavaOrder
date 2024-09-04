@@ -86,6 +86,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 				.orderStatus("W")
 				.orderName("상품명")
 				.tid(readyResponse.getTid())
+				.orderTakeout(payReadyRequest.getTakeout())
 				.build();
 		
 		orderRepository.save(order);
@@ -181,8 +182,6 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 					.orderitemSize(cartItem.getOptionSize())
 					.orderitemTemp(cartItem.getOptionTemperature())
 					.orderitemSyrup(cartItem.getOptionSyrup())
-					.orderitemTakeout(0)
-					.orderitemExfee(0)
 					.build();
 			
 			orderItemRepository.save(newOrderItem);

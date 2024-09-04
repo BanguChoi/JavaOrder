@@ -4,6 +4,7 @@
 	layout:decorate="~{template/client/layout/layout}" >
 
 <th:block layout:fragment="content">
+<div class="container">
 	<h3>주문내역 조회</h3>
 	
 	<table class="table table-hover table-striped">
@@ -37,7 +38,7 @@
 					<td th:text="*{orderitemSize==0?'Small':orderitemSize==1?'Medium':'Large'}"></td>
 					<td th:text="*{orderitemTemp==0?'Ice':'Hot'}"></td>
 					<td th:text="*{orderitemSyrup != null ? orderitemSyrup:'-'}"></td>
-					<td th:text="*{orderitemTakeout==0?'픽업':'매장'}"></td>
+					<td th:text="*{orderitemTakeout==1?'픽업':'매장'}"></td>
 				</tr>
 			</th:block>
 		</tbody>
@@ -46,6 +47,7 @@
 	<div class="text-end">
 		<button type="button" class="btn btn-primary btn-sm" id="orderListBtn">목록</button>
 	</div>
+</div>
 </th:block>
 		
 <th:block layout:fragment="script">

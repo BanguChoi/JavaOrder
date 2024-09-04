@@ -30,7 +30,7 @@
 	
 	<!-- 왼쪽 사이드 메뉴바 -->
 	<th:block th:fragment="sidebar">
-		<a href="member/main" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"  style="width: 200px;">
+		<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"  style="width: 200px;">
 	    	<span class="fs-4">JavaOrder로고</span>
 	    </a>
 	  <hr>
@@ -57,8 +57,8 @@
               마이페이지
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
-            	<li><a class="dropdown-item" href="/javaOrder/member/mypage">회원 정보</a></li>
-             	<li><a class="dropdown-item" href="/javaOrder/member/orderList/">주문 내역</a></li>
+            	<li><a class="dropdown-item" href="/member/mypage">회원 정보</a></li>
+             	<li><a class="dropdown-item" href="/member/orderList/">주문 내역</a></li>
               	<li><a class="dropdown-item" href="#">문의 내역</a></li>
             </ul>
           </li>
@@ -77,7 +77,7 @@
 		    <div id="userInfo" class="clickable">
 		        <p>안녕하세요, <span th:text="${session.member.memberName}">회원님</span>!</p>
 		        <p>이메일: <span th:text="${session.member.memberEmail}">이메일</span></p>
-			    <form class="text-center" action="/javaOrder/member/signout" method="get">
+			    <form class="text-center" action="/member/signout" method="get">
 			        	<button type="submit" class="btn btn-danger btn-sm">로그아웃</button>
 			    </form>    
 		    </div>

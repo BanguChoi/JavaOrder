@@ -1,8 +1,8 @@
 //로그인
 $("#signInBtn").on("click", function(){
-	location.href = "/javaOrder/member/signin";
+	location.href = "/member/signin";
 });
 //마이페이지
 $('#userInfo').on('click',function(){
-	location.href = "/javaOrder/member/mypage";
+	location.href = "/member/mypage";
 });

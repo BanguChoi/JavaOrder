@@ -84,7 +84,7 @@ $(document).ready(function() {
         const memberCode = $('#memberCode').val();
         
         $.ajax({
-            url: '/javaOrder/member/updateField',
+            url: '/member/updateField',
             method: 'POST',
             data: {
                 memberCode: memberCode,
@@ -127,7 +127,7 @@ $(document).ready(function() {
 
     // 비밀번호 수정 페이지로 이동
     $('#changePasswordBtn').on('click', function() {
-        location.href = '/javaOrder/member/editPasswd';
+        location.href = '/member/editPasswd';
     });
 
     // 주소 검색 버튼 클릭 시 처리

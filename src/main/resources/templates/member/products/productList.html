@@ -5,7 +5,7 @@
 
 	
 	<form id="searchForm">
-		<input type="hidden" name="page" id="page" th:value="${productList.pageRequestDTO.page}" />
+		<input type="hidden" th:field="${productList.pageRequestDTO.page}" />
 		<input type="hidden" name="size" id="size" th:value="${productList.pageRequestDTO.size}" />
 	</form>
 	
