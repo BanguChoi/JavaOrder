@@ -81,9 +81,14 @@ public class ProductServiceImpl implements ProductService {
 	public PageResponseDTO<Product> productList(PageRequestDTO pageRequestDTO) {
 		Pageable pageable = PageRequest.of(
 				pageRequestDTO.getPage()-1, 
-				pageRequestDTO.getSize(), Sort.by("productName").ascending());
-    	
+				pageRequestDTO.getSize(), Sort.by("productDate").ascending());
+    
 		Page<Product> result = productRepository.findAll(pageable);
+		
+		/* 카테고리 기능 */
+		List<Product> list = productRepository.findAll();
+		
+		
 		
 		/* 검색기능
 		String status = pageRequestDTO.getStatus();
@@ -97,6 +102,13 @@ public class ProductServiceImpl implements ProductService {
     	
 		List<Product> productList = result.getContent().stream().collect(Collectors.toList());
 		long totalCount = result.getTotalElements();
+		
+
+		
+		
+		
+		
+		
 		
 		PageResponseDTO<Product> responseDTO = PageResponseDTO.<Product>withAll()
 				.dtoList(productList)

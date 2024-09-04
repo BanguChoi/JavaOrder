@@ -11,7 +11,6 @@ $(document).ready(function(){
 
 	/* - + 버튼 클릭 */
 	$('#minusBtn').click(function(){
-		console.log("클릭");
 		updateCount('#count', -1);
 		calcTotalPrice();
 	});
@@ -35,6 +34,7 @@ $(document).ready(function(){
 			success: function(price){
 				basePrice = price;
 				calcTotalPrice();
+				console.log("가격 가져오기 성공");
 			},
 			error: function(error) {
 				console.log('가격을 가져오는 중 오류 발생:', error);
@@ -44,7 +44,7 @@ $(document).ready(function(){
 	
 	function calcTotalPrice() {
 		let calcPrice = basePrice;
-		let count = parseInt($('#count').val(), 10);
+		let count = parseInt($('#count').val(), 10) || 1;
 		
 		// 사이즈 옵션
 		let sizePrice = 0;
@@ -57,7 +57,7 @@ $(document).ready(function(){
 
         // 샷 옵션
         let shotPrice = 0;
-        let shotCount = $('#optionShot').val();
+        let shotCount = $('#optionShot').val() || 0;
         if (shotCount !== "추가안함") {
             shotPrice = parseInt(shotCount) * 500;
         }
@@ -95,7 +95,7 @@ $('.addCartBtn').on("click", function(e) {
 	
 
 	const cartId = $('input[name="cartId"]').val();
-	
+ 
 	let optionSyrup = $("input[name='optionSyrup']:checked").map(function() {
 		return $(this).val();
 	}).get();
@@ -111,21 +111,22 @@ $('.addCartBtn').on("click", function(e) {
 
 	// JSON 배열로 전달하기
 	let cartItem = {
-		productId: $('input[name="productId"]').val(),
-		optionSize: $("input[name='optionSize']:checked").val(),
-		optionTemperature: $("input[name='optionTemperature']:checked").val(),
-		optionShot: $("#optionShot").val(),
-		optionSyrup: optionSyrup,
-		count: $("#count").val(),
-		totalPrice: $("#total-price").text()
+	    productId: $('input[name="productId"]').val(),
+	    optionSize: parseInt($("input[name='optionSize']:checked").val()) || 0,
+	    optionTemperature: parseInt($("input[name='optionTemperature']:checked").val()) || 0,
+	    optionShot: parseInt($('#optionShot').val()) || 0,
+	    optionSyrup: optionSyrup.map(Number),
+	    count: parseInt($('#count').val()) || 1,
+	    totalPrice: parseInt($('#total-price').text().replace(/,/g, '')) || 0
 	}
+
 	
 	$.ajax({
 		url: "/cart/insertCartItem",
 		method: "POST",
 		contentType: "application/json",
 		data: JSON.stringify({
-			cartId, cartId,
+			cartId: cartId,
 			cartItem: cartItem
 		}),
 		success: function(response) {
@@ -133,9 +134,13 @@ $('.addCartBtn').on("click", function(e) {
 			location.href = "/member/main";
         },
         error: function(xhr, status, error) {
-            alert('장바구니에 추가하는 데 실패했습니다.');
-			console.error('AJAX 요청 실패:', status, error);
-	        console.error('응답 텍스트:', xhr.responseText);
+			alert('장바구니에 추가하는 데 실패했습니다.');
+			   console.error('AJAX 요청 실패:', status, error);
+			   console.error('응답 텍스트:', xhr.responseText);
+			   console.error('전송한 데이터:', JSON.stringify({
+			       cartId: cartId,
+			       cartItem: cartItem
+			   }));
         }
 	});
 	console.log("cartId:", cartId);

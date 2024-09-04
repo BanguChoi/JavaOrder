@@ -6,3 +6,4 @@ $("#signInBtn").on("click", function(){
 $('#userInfo').on('click',function(){
 	location.href = "/javaOrder/member/mypage";
 });
+

@@ -183,6 +183,7 @@ public class ProductController {
 	public String productList(PageRequestDTO pageRequestDTO, Model model) {
 		PageResponseDTO<Product> productList = productService.productList(pageRequestDTO);
 		
+		
 		model.addAttribute("productList", productList);
 		return "member/products/productList :: productList";
 	}
