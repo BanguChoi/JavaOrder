@@ -23,7 +23,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/products/*")
+@RequestMapping("/admin/products")
 public class ProductController {
 
     @Autowired
