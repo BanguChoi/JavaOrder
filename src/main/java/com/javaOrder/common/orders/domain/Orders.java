@@ -9,8 +9,6 @@ import com.javaOrder.member.domain.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -34,9 +32,9 @@ import lombok.ToString;
 @Table(name="orders")
 @SequenceGenerator(name="orders_generator", sequenceName="orders_seq", initialValue = 10001, allocationSize = 1)
 public class Orders {
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "orders_generator")
 	@Id
 	@Column(name="ord_num")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "orders_generator")
 	private Long orderNumber;
 	
 	@ManyToOne
@@ -57,6 +55,9 @@ public class Orders {
 	// 상품명 필요
 	@Column(length=100, name="ord_name", nullable=false)
 	private String orderName;
+	// 주문 시 고유 번호
+	@Column(name="tid", length=50, nullable=true)
+	private String tid;
 }
 
 /**********************************************************************************
