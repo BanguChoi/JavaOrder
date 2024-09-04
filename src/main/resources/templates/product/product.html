@@ -1,30 +1,13 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/layout}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/admin/layout/layout}" >
 <head>
-    <meta charset="UTF-8">
-    <title>상품 목록</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .actions a {
-            margin-right: 10px;
-        }
-    </style>
+	<title>상품 관리 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/product.css}">
 </head>
 <body>
 	<th:block layout:fragment="content">
-	    <h1>상품 목록</h1>
 	    <table>
 	        <tbody th:each="product : ${productsPage.content}">
 	            <tr>
@@ -39,7 +22,7 @@
 	                <td th:text="${product.productId}"></td>
 	                <td th:text="${#dates.format(product.productDate, 'yyyy-MM-dd')}"></td>
 	                <td th:text="${#numbers.formatCurrency(product.productPrice)}"></td>
-	                <td rowspan="3"><a th:href="@{'/products/' + ${product.productId}}">상세보기</a></td>
+	                <td rowspan="3"><a th:href="@{'/admin/products/' + ${product.productId}}">상세보기</a></td>
 	            </tr>
 	            <tr>
 	                <td rowspan="2" colspan="3" th:text="${product.productExplain}"></td>
@@ -56,12 +39,12 @@
 
 	    <div>
 	        <div>
-	            <a th:href="@{/products(page=${productsPage.number - 1})}" th:if="${productsPage.hasPrevious()}">←</a>
+	            <a th:href="@{/admin/products(page=${productsPage.number - 1})}" th:if="${productsPage.hasPrevious()}">←</a>
 	            <span th:each="i : ${#numbers.sequence(1, productsPage.totalPages)}">
-	                <a th:href="@{/products(page=${i - 1})}" th:text="${i}" th:classappend="${i == productsPage.number + 1} ? 'current' : ''"></a>
+	                <a th:href="@{/admin/products(page=${i - 1})}" th:text="${i}" th:classappend="${i == productsPage.number + 1} ? 'current' : ''"></a>
 	            </span>
-	            <a th:href="@{/products(page=${productsPage.number + 1})}" th:if="${productsPage.hasNext()}">→</a>
-	        	<a th:href="@{/products/new}">상품 등록</a>
+	            <a th:href="@{/admin/products(page=${productsPage.number + 1})}" th:if="${productsPage.hasNext()}">→</a>
+	        	<a th:href="@{/admin/products/new}">상품 등록</a>
 	        </div>
 	    </div>
 	</th:block>

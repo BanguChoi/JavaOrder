@@ -1,17 +1,14 @@
 package com.javaOrder.admin.product.service;
 
-import java.util.List;
+import com.javaOrder.admin.product.domain.Category;
+import com.javaOrder.admin.product.domain.Product;
+import com.javaOrder.admin.product.repository.CategoryRepository;
+import com.javaOrder.admin.product.repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.javaOrder.admin.product.domain.Category;
-import com.javaOrder.admin.product.domain.Product;
-import com.javaOrder.admin.product.repository.CategoryRepository;
-import com.javaOrder.admin.product.repository.ProductRepository;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -23,7 +20,6 @@ public class ProductServiceImpl implements ProductService {
     private CategoryRepository categoryRepository;
 
     @Override
-    @Transactional
     public Product createProduct(String categoryCode, String productName, Integer price) {
         // 카테고리 코드로 카테고리 엔티티 조회
         Category category = categoryRepository.findById(categoryCode)
@@ -49,7 +45,6 @@ public class ProductServiceImpl implements ProductService {
         product.setProductName(productName);
         product.setProductPrice(price);  // 가격은 null일 수 있음
 
-        // 상품을 저장하고 반환
         return productRepository.save(product);
     }
 
@@ -68,17 +63,4 @@ public class ProductServiceImpl implements ProductService {
     public Product saveProduct(Product product) {
         return productRepository.save(product);
     }
-    
-    
-    
-	/* 제품 리스트 */
-    @Override
-	public List<Product> productList(Product product) {
-		List<Product> productList = productRepository.findAll();
-		return productList;
-	}
-
-	
-
-    
 }

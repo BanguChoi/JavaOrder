@@ -1,42 +1,29 @@
 package com.javaOrder.admin.product.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.javaOrder.admin.product.domain.Category;
+import com.javaOrder.admin.product.domain.Product;
+import com.javaOrder.admin.product.service.CategoryService;
+import com.javaOrder.admin.product.service.ProductService;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.javaOrder.admin.product.domain.Category;
-import com.javaOrder.admin.product.domain.Product;
-import com.javaOrder.admin.product.repository.ProductRepository;
-import com.javaOrder.admin.product.service.CategoryService;
-import com.javaOrder.admin.product.service.ProductService;
-import com.javaOrder.member.cart.domain.Cart;
-import com.javaOrder.member.cart.service.CartItemService;
-import com.javaOrder.member.cart.service.CartService;
-import com.javaOrder.member.domain.Member;
-
-import jakarta.servlet.http.HttpSession;
-
 @Controller
-@RequestMapping("/products")
+@RequestMapping("/admin/products")
 public class ProductController {
 
     @Autowired
@@ -44,15 +31,6 @@ public class ProductController {
 
     @Autowired
     private CategoryService categoryService;
-    
-    @Autowired
-	private CartService cartService;
-	
-    @Autowired
-	private CartItemService cartItemService;
-    
-    @Autowired
-	private ProductRepository productRepository;
 
     private final Path imageUploadPath = Paths.get("C:/uploads/images"); // 이미지 저장 경로
 
@@ -60,23 +38,32 @@ public class ProductController {
     public String listProducts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "productId") String sortBy,  // 정렬 기준
+            @RequestParam(defaultValue = "asc") String direction,     // 정렬 방향
             Model model) {
 
-        Page<Product> productsPage = productService.getProducts(PageRequest.of(page, size));
+        // 정렬 방향 설정
+        Sort.Direction sortDirection = direction.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+
+        // 정렬 기준과 방향을 포함한 PageRequest 생성
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
+
+        // 정렬된 페이지 데이터 가져오기
+        Page<Product> productsPage = productService.getProducts(pageRequest);
         model.addAttribute("productsPage", productsPage);
 
-        return "product";
+        return "product/product";
     }
 
     @GetMapping("/{id}")
     public String showProductDetails(@PathVariable("id") String productId, Model model) {
         if ("new".equals(productId)) {
-            return "redirect:/products/new";
+            return "redirect:/admin/products/new";
         }
 
         Product product = productService.getProductById(productId);
         model.addAttribute("product", product);
-        return "productDetail";
+        return "product/productDetail";
     }
 
     @PutMapping("/{id}")
@@ -99,7 +86,7 @@ public class ProductController {
     public String showProductForm(Model model) {
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
-        return "productForm";
+        return "product/productForm";
     }
 
     @PostMapping
@@ -139,14 +126,14 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("이미지 업로드 중 오류가 발생했습니다.");
         }
     }
-    
+
     @PostMapping("/deleteImage")
     @ResponseBody
     public ResponseEntity<String> deleteProductImage(@RequestParam("productId") String productId) {
         try {
             // 상품 정보 가져오기
             Product product = productService.getProductById(productId);
-            
+
             if (product.getProductImage() == null || product.getProductImage().isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("이미지가 없습니다.");
             }
@@ -177,44 +164,4 @@ public class ProductController {
     private String getExtension(String filename) {
         return filename.substring(filename.lastIndexOf(".") + 1);
     }
-    
-    
-    
-	@GetMapping("/productList")
-	public String productList(Product product, Model model) {
-		List<Product> productList = productService.productList(product);
-		model.addAttribute("productList", productList);
-		return "/member/product/productList";
-	}
-	
-
-
-	@GetMapping("/{productId}")
-	public String productDetail(@PathVariable String productId, Model model, HttpSession session)  {
-		Product productDetail = productService.getProductById(productId);	
-		
-		Member member = (Member) session.getAttribute("member");
-		if(member != null) {
-			Cart cart = cartService.getCartByMemberCode(member.getMemberCode());
-			model.addAttribute("cart", cart);
-		}
-
-		model.addAttribute("productDetail", productDetail);
-		return "/member/product/productDetail";
-	}
-	
-	/* 제품 가격 데이터만 전송. 상세페이지 ajax 용 */
-	@GetMapping("/totalPrice")
-	@ResponseBody
-	public int totalPrice(@RequestParam String productId) {
-		Product product = productRepository.findById(productId).orElseThrow();
-		return product.getProductPrice();
-	}
-    
-    
-    
-    
-    
-    
-    
 }

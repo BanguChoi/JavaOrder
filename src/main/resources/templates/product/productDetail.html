@@ -1,59 +1,13 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/admin/layout/layout}" >
 <head>
-    <meta charset="UTF-8">
-    <title>상품 상세 정보</title>
-    <style>
-        .product-container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-        }
-        .product-image {
-            width: 100%;
-            max-width: 300px;
-            height: auto;
-            float: left;
-            margin-right: 20px;
-        }
-        .image-actions {
-            display: flex;
-            align-items: center;
-        }
-        .product-info {
-            clear: both;
-            margin-top: 20px;
-        }
-        .product-info div {
-            margin-bottom: 10px;
-        }
-        .actions {
-            margin-top: 20px;
-        }
-        .btn {
-            padding: 8px 12px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .btn:hover {
-            background-color: #0056b3;
-        }
-        .btn-danger {
-            background-color: #dc3545;
-        }
-        .btn-danger:hover {
-            background-color: #c82333;
-        }
-    </style>
+	<title>상품 상세 정보</title>
+    <link rel="stylesheet" th:href="@{/css/product.css}">
 </head>
 <body>
-    <div class="product-container">
+	<div class="product-container">
         <h1>상품 상세 정보</h1>
         
         <!-- 이미지 및 이미지 관리 버튼 -->
@@ -63,7 +17,7 @@
                  alt="상품 이미지" class="product-image">
             <input type="file" id="imageUpload" style="display: none;" />
             <button type="button" class="btn" id="manageImageButton">이미지 관리</button>
-            <button type="button" class="btn btn-danger" id="deleteImageButton">이미지 삭제</button> <!-- 삭제 버튼 추가 -->
+            <button type="button" class="btn btn-danger" id="deleteImageButton">이미지 삭제</button>
         </div>
 
         <form id="productForm">
@@ -108,12 +62,10 @@
             
             <div class="actions">
                 <button type="button" id="updateButton" class="btn">수정</button>
-                <a href="/products" class="btn">목록으로</a>
+                <a href="/admin/products" class="btn">목록으로</a>  <!-- 경로 수정 -->
             </div>
         </form>
     </div>
-
-    <!-- jQuery 라이브러리 및 외부 JavaScript 파일 로드 -->
     <script src="/js/jquery-3.7.1.min.js"></script>
     <script src="/js/productDetail.js"></script>
 </body>
