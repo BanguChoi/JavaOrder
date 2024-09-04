@@ -7,6 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/product.css}">
 </head>
 <body>
+<th:block layout:fragment="content">
     <div class="form-container">
         <h1>상품 등록</h1>
         <form id="productForm">
@@ -55,5 +56,6 @@
 
     <script src="/js/jquery-3.7.1.min.js"></script>
     <script src="/js/productForm.js"></script>
+</th:block>
 </body>
 </html>
