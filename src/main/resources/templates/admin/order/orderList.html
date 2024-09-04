@@ -69,7 +69,7 @@
 					<td th:text="*{orderNumber}"></td>
 					<td th:text="*{memberCode.memberCode}"></td>
 					<td>
-						<a th:href="@{/javaOrder/admin/orderItemList/} + *{orderNumber}" th:text="*{orderName}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a>
+						<a th:href="@{/admin/orderItemList/} + *{orderNumber}" th:text="*{orderName}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a>
 					</td>
 					<td th:text="*{orderPrice}"></td>
 					<td th:text="*{orderDate}"></td>

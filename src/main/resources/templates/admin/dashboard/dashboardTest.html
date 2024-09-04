@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{template/admin/layout/layout}" >
-
-<th:block th:insert="~{template/client/fragments/block :: config}">
-	<style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Statistics Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -16,21 +17,9 @@
             margin: 20px 0;
         }
     </style>
-</th:block>
-
-<th:block layout:fragment="content">
-<div class="container">
-	<h3>대시보드</h3>
-	
-	<div> 주문별 통계정보 출력</div>
-	
-	<h1>Top 5 Selling Products</h1>
-    
-    <!-- Top 5 Selling Products Pie Chart -->
-    <canvas id="topSellingProductsChart"></canvas>
-	
-	<hr />
-	<h1>Order Statistics Dashboard</h1>
+</head>
+<body>
+    <h1>Order Statistics Dashboard</h1>
 
     <!-- Weekly Sales Bar Chart -->
     <h2>Weekly Sales</h2>
@@ -39,60 +28,8 @@
     <!-- Monthly Sales Line Chart -->
     <h2>Monthly Sales</h2>
     <canvas id="monthlySalesChart"></canvas>
-</div>
-</th:block>
-		
-<th:block layout:fragment="script">
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script>
-	 // Sample data: Top 5 selling products
-	    const topSellingProductsData = {
-	        labels: ['A0101', 'B0101', 'C0101', 'D0101', 'E0101'], // Example product IDs
-	        datasets: [{
-	            label: 'Sales',
-	            data: [5000, 4500, 4000, 3500, 3000], // Example sales quantities for the top 5 products
-	            backgroundColor: [
-	                'rgba(255, 99, 132, 0.2)',
-	                'rgba(54, 162, 235, 0.2)',
-	                'rgba(255, 206, 86, 0.2)',
-	                'rgba(75, 192, 192, 0.2)',
-	                'rgba(153, 102, 255, 0.2)'
-	            ],
-	            borderColor: [
-	                'rgba(255, 99, 132, 1)',
-	                'rgba(54, 162, 235, 1)',
-	                'rgba(255, 206, 86, 1)',
-	                'rgba(75, 192, 192, 1)',
-	                'rgba(153, 102, 255, 1)'
-	            ],
-	            borderWidth: 1
-	        }]
-	    };
-	
-	    // Top Selling Products Pie Chart
-	    const ctxTopSelling = document.getElementById('topSellingProductsChart').getContext('2d');
-	    new Chart(ctxTopSelling, {
-	        type: 'pie',
-	        data: topSellingProductsData,
-	        options: {
-	            responsive: true,
-	            plugins: {
-	                legend: {
-	                    position: 'top',
-	                },
-	                tooltip: {
-	                    callbacks: {
-	                        label: function(tooltipItem) {
-	                            const label = tooltipItem.label || '';
-	                            const value = tooltipItem.raw || 0;
-	                            return `${label}: ${value} units`;
-	                        }
-	                    }
-	                }
-	            }
-	        }
-	    });
-    
         // Sample data
         const weeklySalesData = {
             labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'], // Example week labels
@@ -152,5 +89,5 @@
             }
         });
     </script>
-</th:block>
+</body>
 </html>

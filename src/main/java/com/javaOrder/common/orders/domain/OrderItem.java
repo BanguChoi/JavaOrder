@@ -9,7 +9,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,7 +40,7 @@ public class OrderItem {
 	@JoinColumn(name="ord_num")
 	private Orders orderNumber;	// 주문번호
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="p_id")
 	private Product productId;	// 상품번호
 	
@@ -64,13 +63,13 @@ public class OrderItem {
 	@Column(name="oi_syrup", nullable=true)
 	private Integer orderitemSyrup;	// 시럽
 	
-	@Column(name="oi_takeout", nullable=false)
-	@ColumnDefault("0")
-	private Integer orderitemTakeout;	// 수령방식
+//	@Column(name="oi_takeout", nullable=false)
+//	@ColumnDefault("0")
+//	private Integer orderitemTakeout;	// 수령방식
 	
-	@Column(name="oi_exfee", nullable=false)
-	@ColumnDefault("0")
-	private Integer orderitemExfee;	// 추가비용
+//	@Column(name="oi_exfee", nullable=false)
+//	@ColumnDefault("0")
+//	private Integer orderitemExfee;	// 추가비용
 	
 	
 //	public void preOrderId() {
@@ -92,7 +91,7 @@ public class OrderItem {
 	    oi_temp NUMBER NOT NULL,
 	    oi_syrup NUMBER,
 	    oi_takeout NUMBER NOT NULL,
-	    oi_exfee NUMBER DEFAULT 0 NOT NULL,
+//	    oi_exfee NUMBER DEFAULT 0 NOT NULL,
 	    CONSTRAINT pk_order_item PRIMARY KEY (oi_id),
 	    CONSTRAINT fk_order_item_orders FOREIGN KEY (ord_num) REFERENCES Orders(ord_num),
 	    CONSTRAINT fk_order_item_product FOREIGN KEY (p_id) REFERENCES Product(p_id)

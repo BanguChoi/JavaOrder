@@ -3,10 +3,10 @@ package com.javaOrder.member.cart.domain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.javaOrder.common.service.IdGenerationService;
+import com.javaOrder.admin.product.repository.ProductRepository;
+import com.javaOrder.common.util.service.IdGenerationService;
 import com.javaOrder.member.cart.repository.CartItemRepository;
 import com.javaOrder.member.cart.repository.CartRepository;
-import com.javaOrder.member.product.repository.ProductRepository;
 
 import lombok.extern.slf4j.Slf4j;
 

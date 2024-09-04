@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.javaOrder.member.product.repository.ProductRepository;
+import com.javaOrder.admin.product.domain.Product;
+import com.javaOrder.admin.product.repository.ProductRepository;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;

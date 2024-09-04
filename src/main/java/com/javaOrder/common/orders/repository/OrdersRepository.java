@@ -28,4 +28,10 @@ public interface OrdersRepository extends JpaRepository<Orders, Long>{
 	// 해당 회원의 날짜별 주문내역 검색
 	Page<Orders> findByMemberCodeAndOrderDateBetween(Member member, LocalDateTime startDate, LocalDateTime endDate,
 			Pageable pageable);
+	
+	// 주문번호로 주문 찾기
+//	Optional<Orders> findByOrderNumber(Long partnerOrderId);
+	Orders findByOrderNumber(Long partnerOrderId);
+	// tid로 주문 찾기
+	Orders findByTid(String tid);
 }

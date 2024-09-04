@@ -2,49 +2,26 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{template/client/layout/layout}" >
 
-	<head>
-		<th:block th:insert="~{template/client/fragments/block :: config}"></th:block>
-		<meta name="theme-color" content="#712cf9"/>
-	</head>
+<!-- 메인 콘텐츠 영역 -->
+<th:block layout:fragment="content">   
+    <div class="d-flex flex-grow-1 pt-2" style="margin-left: 280px; padding-bottom: 56px; overflow-y: auto; height: calc(100vh - 56px);">
 
-	<body class="d-flex flex-column h-100 text-center">
-
-		
-		<!-- 사이드바 -->
-		<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary position-fixed" style="top: 0; left: 0; width: 250px; height: 100vh; padding-top: 56px;">
-		    <th:block th:insert="~{template/client/fragments/block :: sidebar}"></th:block>
+		<!-- 상품 리스트 -->           
+		<div id="productListContainer" style="width: 75%; height: 100%; overflow-y: auto;">
+			<th:block  th:insert="~{member/products/productList :: productList}"></th:block>
 		</div>
-		
-		<!-- 메인 콘텐츠 영역 -->
-			<th:block layout:fragment="content">   
-			    <div class="d-flex flex-grow-1 pt-2" style="margin-left: 280px; padding-bottom: 56px; overflow-y: auto; height: calc(100vh - 56px);">
+		<!-- 장바구니 -->
+		<div class="" style="width: 25%; height: 100%; overflow-y: auto;">
+			<th:block th:insert="~{member/cart/cart :: cart}"></th:block>
+		</div>		
+	</div>
 
-					<!-- 상품 리스트 -->           
-					<div id="productListContainer" style="width: 75%; height: 100%; overflow-y: auto;">
-						<th:block  th:insert="~{member/products/productList :: productList}"></th:block>
-					</div>
-					<!-- 장바구니 -->
-					<div class="" style="width: 25%; height: 100%; overflow-y: auto;">
-						<th:block th:insert="~{member/cart/cart :: cart}"></th:block>
-					</div>		
-				</div>
+</th:block>
 
-            </th:block>
-
-	    <!-- 푸터 -->
-		<footer class="footer mt-auto pt-2 bg-body-tertiary fixed-bottom">
-			<th:block th:insert="~{template/client/fragments/block :: footer}"></th:block>
-		</footer>   
-		
-		
-		<script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
-		<th:block layout:fragment="script">
-			<script src="/js/jquery-3.7.1.min.js"></script>
-			<script src="/js/common.js"></script>
-			<script src="/js/main.js"></script>
-			<script src="/js/member/products/productList.js"></script>
-			<script src="/js/member/cart/cart.js"></script>
-			<script src="/js/member/cart/cartItemList.js"></script>	  	
-		</th:block>
+<th:block layout:fragment="script">
+	<script src="/js/member/products/productList.js"></script>
+	<script src="/js/member/cart/cart.js"></script>
+	<script src="/js/member/cart/cartItemList.js"></script>
+</th:block>
 	</body>
 </html>
