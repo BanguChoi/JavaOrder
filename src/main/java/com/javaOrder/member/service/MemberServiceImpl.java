@@ -73,7 +73,7 @@ public class MemberServiceImpl implements MemberService {
 		if("memberCode".equals(searchType) && keyword != null) {
 			Optional<Member> memberOptional = memberRepository.findById(keyword);
             if (memberOptional.isPresent()) {
-                result = memberRepository.findByMemberId(memberOptional.get(), pageable);
+                result = memberRepository.findByMemberCode(keyword, pageable);
             } else {
                 // 기본 전체 리스트 반환 (검색 결과가 없을 경우)
                 result = memberRepository.findAll(pageable);

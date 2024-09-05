@@ -13,6 +13,8 @@ public interface MemberRepository extends JpaRepository<Member, String>{
 	public Member findCartByMemberCode(String memberCode);
 	public Member findByMemberCode(String memberCode);
 	
+	// 회원 번호 검색
+	public Page<Member> findByMemberCode(String memberCode, Pageable pageable);
 	// 검색어를 포함하는 이름 검색
 	public Page<Member> findByMemberNameContaining(String keyword, Pageable pageable);
 	// 검색어를 포함하는 주소 검색
@@ -27,4 +29,5 @@ public interface MemberRepository extends JpaRepository<Member, String>{
 	public Page<Member> findByMemberLastBetween(LocalDateTime startDate, LocalDateTime endDate, Pageable pageable);
 	// 회원 가입일 기준 검색
 	public Page<Member> findByMemberDateBetween(LocalDateTime startDate, LocalDateTime endDate, Pageable pageable);
+	
 }

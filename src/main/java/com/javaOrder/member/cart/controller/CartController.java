@@ -51,8 +51,10 @@ public class CartController {
 	@PostMapping("/updateCart")
 	public String updateCart(@RequestBody int cartPrice, HttpSession session) {
 		Member member = (Member) session.getAttribute("member");
-		String memberCode = member.getMemberCode();
-		cartService.updateCart(cartPrice, memberCode);
+		if(member != null) {
+			String memberCode = member.getMemberCode();
+			cartService.updateCart(cartPrice, memberCode);
+		}
 		return "redirect:/";
 	}
 

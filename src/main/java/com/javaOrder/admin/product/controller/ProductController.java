@@ -38,7 +38,6 @@ import com.javaOrder.member.domain.Member;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/admin/products")
 public class ProductController {
 
     @Autowired
@@ -56,7 +55,7 @@ public class ProductController {
 
     private final Path imageUploadPath = Paths.get("C:/uploads/images"); // 이미지 저장 경로
 
-    @GetMapping
+    @GetMapping("/admin/products")
     public String listProducts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
@@ -74,10 +73,10 @@ public class ProductController {
         Page<Product> productsPage = productService.getProducts(pageRequest);
         model.addAttribute("productsPage", productsPage);
 
-        return "product/product";
+        return "admin/product/product";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/admin/products/{id}")
     public String showProductDetails(@PathVariable("id") String productId, Model model) {
         if ("new".equals(productId)) {
             return "redirect:/admin/products/new";
@@ -85,10 +84,10 @@ public class ProductController {
 
         Product product = productService.getProductById(productId);
         model.addAttribute("product", product);
-        return "product/productDetail";
+        return "admin/product/productDetail";
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/admin/products/{id}")
     @ResponseBody
     public ResponseEntity<String> updateProduct(@PathVariable("id") String productId, @RequestBody Product product) {
         Product existingProduct = productService.getProductById(productId);
@@ -104,11 +103,11 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/new")
+    @GetMapping("/admin/products/new")
     public String showProductForm(Model model) {
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
-        return "product/productForm";
+        return "admin/product/productForm";
     }
 
     @PostMapping
@@ -122,7 +121,7 @@ public class ProductController {
         return ResponseEntity.ok("상품이 성공적으로 등록되었습니다.");
     }
 
-    @PostMapping("/uploadImage")
+    @PostMapping("/admin/products/uploadImage")
     @ResponseBody
     public ResponseEntity<String> uploadProductImage(@RequestParam("image") MultipartFile image, @RequestParam("productId") String productId) {
         if (image.isEmpty()) {
@@ -149,7 +148,7 @@ public class ProductController {
         }
     }
 
-    @PostMapping("/deleteImage")
+    @PostMapping("/admin/products/deleteImage")
     @ResponseBody
     public ResponseEntity<String> deleteProductImage(@RequestParam("productId") String productId) {
         try {
@@ -187,7 +186,9 @@ public class ProductController {
         return filename.substring(filename.lastIndexOf(".") + 1);
     }
     
-	@GetMapping("/productList")
+    
+    // 회원 측 상품 페이지
+	@GetMapping("/products/productList")
 	public String productList(PageRequestDTO pageRequestDTO, Model model) {
 		PageResponseDTO<Product> productList = productService.productList(pageRequestDTO);
 		
@@ -197,7 +198,7 @@ public class ProductController {
 	}
 	
 
-	@GetMapping("/{productId}/detail")
+	@GetMapping("/products/{productId}/detail")
 	public String productDetail(@PathVariable String productId, Model model, HttpSession session)  {
 		Product productDetail = productService.getProductById(productId);	
 		
@@ -211,10 +212,8 @@ public class ProductController {
 		return "member/products/productDetail";
 	}
 	
-	
-	
 	/* 제품 가격 데이터만 전송. 상세페이지 ajax 용 */
-	@GetMapping("/totalPrice")
+	@GetMapping("/products/totalPrice")
 	@ResponseBody
 	public int totalPrice(@RequestParam String productId) {
 		Product product = productRepository.findById(productId).orElseThrow();

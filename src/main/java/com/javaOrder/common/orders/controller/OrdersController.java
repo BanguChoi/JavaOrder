@@ -40,7 +40,7 @@ public class OrdersController {
 			model.addAttribute("orderList", orderList);
 			return "member/order/orderList";
 		}else {
-			return "redirect:/javaOrder/member/signin";
+			return "redirect:/member/signin";
 		}
 	}
 	
@@ -51,7 +51,7 @@ public class OrdersController {
 		orders.setOrderStatus(status);
 		
 		orderService.updateOrder(orders);
-		return "redirect:/javaOrder/admin/orderList";
+		return "redirect:/admin/orderList";
 	}
 	
 	
