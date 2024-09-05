@@ -1,8 +1,5 @@
 package com.javaOrder.admin.product.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -81,35 +78,31 @@ public class ProductServiceImpl implements ProductService {
 	public PageResponseDTO<Product> productList(PageRequestDTO pageRequestDTO) {
 		Pageable pageable = PageRequest.of(
 				pageRequestDTO.getPage()-1, 
-				pageRequestDTO.getSize(), Sort.by("productDate").ascending());
-    
-		Page<Product> result = productRepository.findAll(pageable);
+				pageRequestDTO.getSize(), Sort.by("productDate").descending());
+		Page<Product> result;
 		
-		/* 카테고리 기능 */
-		List<Product> list = productRepository.findAll();
-		
-		
-		
-		/* 검색기능
-		String status = pageRequestDTO.getStatus();
-		if(status != null) {
-			result = productRepository.findByProductName(productName, pageable);
+		/* 검색기능 */
+		String keyWord = pageRequestDTO.getKeyword();
+		if(keyWord != null) {
+			result = productRepository.findByProductNameContaining(keyWord, pageable);
 		} else {
 			result = productRepository.findAll(pageable);
 		}
-		*/
+		
+		/* 카테고리 기능
 
-    	
-		List<Product> productList = result.getContent().stream().collect(Collectors.toList());
+		List<Product> productList;
+		
+		if(category != null && !category.equals("ALL")) {
+			productList = result.getContent().stream()
+					.filter(product -> product.getCategory().equals(category))
+					.collect(Collectors.toList());
+		} else {
+			productList = result.getContent();
+		}
+		 */
 		long totalCount = result.getTotalElements();
-		
 
-		
-		
-		
-		
-		
-		
 		PageResponseDTO<Product> responseDTO = PageResponseDTO.<Product>withAll()
 				.dtoList(productList)
 				.pageRequestDTO(pageRequestDTO)
@@ -118,6 +111,8 @@ public class ProductServiceImpl implements ProductService {
 		
 		return responseDTO;
 	}
+    
+    
     
     
 	

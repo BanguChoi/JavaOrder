@@ -131,7 +131,7 @@ $('.addCartBtn').on("click", function(e) {
 		}),
 		success: function(response) {
             alert('장바구니에 추가되었습니다!');
-			location.href = "/member/main";
+			location.href = "/";
         },
         error: function(xhr, status, error) {
 			alert('장바구니에 추가하는 데 실패했습니다.');
