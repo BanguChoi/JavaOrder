@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -41,6 +42,8 @@ public class ProductController {
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "productId") String sortBy,  // 정렬 기준
             @RequestParam(defaultValue = "asc") String direction,     // 정렬 방향
+            @RequestParam(required = false) String searchValue,       // 검색어
+            @RequestParam(required = false) String searchType,        // 검색 조건 (상품명, 카테고리 코드, 등록일자)
             Model model) {
 
         // 정렬 방향 설정
@@ -49,10 +52,38 @@ public class ProductController {
         // 정렬 기준과 방향을 포함한 PageRequest 생성
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
 
-        // 정렬된 페이지 데이터 가져오기
-        Page<Product> productsPage = productService.getProducts(pageRequest);
-        model.addAttribute("productsPage", productsPage);
+        // 검색 기능 추가
+        Page<Product> productsPage;
+        if (searchValue != null && !searchValue.isEmpty()) {
+            switch (searchType) {
+                case "productName":
+                    productsPage = productService.findByProductNameContaining(searchValue, pageRequest);
+                    break;
+                case "categoryCode":
+                    productsPage = productService.findByCategoryCode(searchValue, pageRequest);
+                    break;
+                case "productDate":
+                    try {
+                        // String을 LocalDate로 변환
+                        LocalDate productDate = LocalDate.parse(searchValue);
+                        productsPage = productService.findByProductDate(productDate, pageRequest);
+                    } catch (Exception e) {
+                        // 날짜 변환 오류 처리
+                        model.addAttribute("errorMessage", "잘못된 날짜 형식입니다. yyyy-MM-dd 형식으로 입력하세요.");
+                        productsPage = productService.getProducts(pageRequest); // 기본 목록 반환
+                    }
+                    break;
+                default:
+                    productsPage = productService.getProducts(pageRequest);
+                    break;
+            }
+        } else {
+            // 검색 조건이 없을 경우 전체 목록 조회
+            productsPage = productService.getProducts(pageRequest);
+        }
 
+        // 모델에 검색 결과 추가
+        model.addAttribute("productsPage", productsPage);
         return "product/product";
     }
 

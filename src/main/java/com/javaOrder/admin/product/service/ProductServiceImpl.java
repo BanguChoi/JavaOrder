@@ -1,4 +1,3 @@
-
 package com.javaOrder.admin.product.service;
 
 import com.javaOrder.admin.product.domain.Category;
@@ -10,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -63,5 +64,21 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product saveProduct(Product product) {
         return productRepository.save(product);
+    }
+
+    // 검색 기능 구현
+    @Override
+    public Page<Product> findByProductNameContaining(String productName, Pageable pageable) {
+        return productRepository.findByProductNameContaining(productName, pageable);
+    }
+
+    @Override
+    public Page<Product> findByCategoryCode(String categoryCode, Pageable pageable) {
+        return productRepository.findByCategory_Code(categoryCode, pageable);
+    }
+
+    @Override
+    public Page<Product> findByProductDate(LocalDate productDate, Pageable pageable) {
+        return productRepository.findByProductDate(productDate, pageable);
     }
 }

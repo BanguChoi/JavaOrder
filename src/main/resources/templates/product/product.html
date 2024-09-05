@@ -8,6 +8,20 @@
 </head>
 <body>
 	<th:block layout:fragment="content">
+		<form th:action="@{/admin/products/search}" method="get">
+	        <div>
+	            <input type="text" id="searchValue" name="searchValue" placeholder="검색어를 입력하세요" />
+
+	            <select id="searchType" name="searchType">
+	                <option value="productName">상품명</option>
+	                <option value="categoryCode">카테고리 코드</option>
+	                <option value="productDate">등록일자</option>
+	            </select>
+
+	            <button type="submit">검색</button>
+	        </div>
+	    </form>
+		
 	    <table>
 	        <tbody th:each="product : ${productsPage.content}">
 	            <tr>
