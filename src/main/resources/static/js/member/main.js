@@ -7,3 +7,8 @@ $('#userInfo').on('click',function(){
 
 	location.href = "/member/mypage";
 });
+
+// 회원가입
+$('#signUpBtn').click(function(){
+	locationProcess("/member/signup");
+})
