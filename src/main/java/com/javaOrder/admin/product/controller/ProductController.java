@@ -30,8 +30,8 @@ import com.javaOrder.admin.product.domain.Product;
 import com.javaOrder.admin.product.repository.ProductRepository;
 import com.javaOrder.admin.product.service.CategoryService;
 import com.javaOrder.admin.product.service.ProductService;
-import com.javaOrder.common.util.vo.PageRequestDTO;
-import com.javaOrder.common.util.vo.PageResponseDTO;
+import com.javaOrder.common.util.vo.ProductPageRequestDTO;
+import com.javaOrder.common.util.vo.ProductPageResponseDTO;
 import com.javaOrder.member.cart.domain.Cart;
 import com.javaOrder.member.cart.service.CartService;
 import com.javaOrder.member.domain.Member;
@@ -221,9 +221,8 @@ public class ProductController {
     
     // 회원 측 상품 페이지
 	@GetMapping("/products/productList")
-	public String productList(PageRequestDTO pageRequestDTO, Model model) {
-		PageResponseDTO<Product> productList = productService.productList(pageRequestDTO);
-		
+	public String productList(ProductPageRequestDTO productPageRequestDTO, Model model) {
+		ProductPageResponseDTO<Product> productList = productService.productList(productPageRequestDTO);
 		
 		model.addAttribute("productList", productList);
 		return "member/products/productList :: productList";

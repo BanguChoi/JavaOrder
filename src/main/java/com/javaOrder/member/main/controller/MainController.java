@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.javaOrder.admin.product.domain.Product;
 import com.javaOrder.admin.product.service.ProductService;
-import com.javaOrder.common.util.vo.PageRequestDTO;
-import com.javaOrder.common.util.vo.PageResponseDTO;
+import com.javaOrder.common.util.vo.ProductPageRequestDTO;
+import com.javaOrder.common.util.vo.ProductPageResponseDTO;
 import com.javaOrder.member.cart.domain.Cart;
 import com.javaOrder.member.cart.domain.CartItem;
 import com.javaOrder.member.cart.service.CartItemService;
@@ -75,8 +75,8 @@ public class MainController {
 	        model.addAttribute("cartItemList", cartItemList);
 		}
 		/* 로그인 전에는 제품리스트만 출력 */
-		PageRequestDTO pageRequestDTO = new PageRequestDTO();
-		PageResponseDTO<Product> productList = productService.productList(pageRequestDTO);
+		ProductPageRequestDTO productPageRequestDTO = new ProductPageRequestDTO();
+		ProductPageResponseDTO<Product> productList = productService.productList(productPageRequestDTO);
 		model.addAttribute("productList", productList);
 		
 		return "member/main";

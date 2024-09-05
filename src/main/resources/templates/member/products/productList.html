@@ -4,34 +4,35 @@
 
 <th:block th:fragment="productList">
 	<form id="searchForm">
-		<input type="hidden" name="page" id="size" th:value="${productList.pageRequestDTO.page}" />
-		<input type="hidden" name="size" id="size" th:value="${productList.pageRequestDTO.size}" />
+		<input type="hidden" name="page" id="size" th:value="${productList.productPageRequestDTO.page}" />
+		<input type="hidden" name="size" id="size" th:value="${productList.productPageRequestDTO.size}" />
+		<input type="hidden" name="category" id="category" th:value="${productList.productPageRequestDTO.category}"/>
+		<div class="d-flex mx-auto">
+			<input class="form-control me-2" name="keyword"  id="keyword" type="search" placeholder="Search" aria-label="Search">
+     		<button class="btn btn-primary searchBtn" type="submit">Search</button>
+     	</div>
 	</form>
-	<!-- 
-	<form id="category">
-		<input type="text" name="category" id="category" th:value="${productList.category.code}"/>
-	</form>
-	 -->
-	<form class="d-flex mx-auto" role="search">
-	     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-	     <button class="btn btn-primary" type="submit">Search</button>
-	</form>
+	 
+	
+    	
+	
+
 	
 	<div class="mt-4 mb-4">
-		<img style="width:100%; height:200px; background-color:gray;"/>
+		<img style="width:100%; height:350px; background-color:gray;"/>
 	</div>
 	
 	<div class="mb-4 d-flex justify-content-center">
-		<button type="button" class="btn btn-outline-secondary me-4">ALL</button>
+		<button type="button" class="allBtn btn btn-outline-secondary me-4" data-category="ALL">ALL</button>
 		<div class="btn-group me-4">
 		  <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 		    Coffee
 		  </button>
-		  <ul class="dropdown-menu">
-		    <li><a class="dropdown-item" id="A01">콜드 브루 커피</a></li>
-		    <li><a class="dropdown-item" id="A02">브루드 커피</a></li>
-		    <li><a class="dropdown-item" id="A03">에스프레소</a></li>
-		    <li><a class="dropdown-item" id="A04">프라푸치노</a></li>
+		  <ul class="dropdown-menu cateBtn">
+		    <li><a class="dropdown-item" data-category="A01">콜드 브루 커피</a></li>
+		    <li><a class="dropdown-item" data-category="A02">브루드 커피</a></li>
+		    <li><a class="dropdown-item" data-category="A03">에스프레소</a></li>
+		    <li><a class="dropdown-item" data-category="A04">프라푸치노</a></li>
 		  </ul>
 		</div>
 		
@@ -39,13 +40,13 @@
 		  <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 		    Non-Coffee
 		  </button>
-		  <ul class="dropdown-menu">
-		  	<li><a class="dropdown-item" id="A05">블렌디드</a></li>
-		    <li><a class="dropdown-item" id="A06">리프레셔</a></li>
-		    <li><a class="dropdown-item" id="A07">피지오</a></li>
-		    <li><a class="dropdown-item" id="A08">티</a></li>
-		    <li><a class="dropdown-item" id="A09">기타 제조 음료</a></li>
-		    <li><a class="dropdown-item" id="A10">주스</a></li>
+		  <ul class="dropdown-menu cateBtn">
+		  	<li><a class="dropdown-item" data-category="A05">블렌디드</a></li>
+		    <li><a class="dropdown-item" data-category="A06">리프레셔</a></li>
+		    <li><a class="dropdown-item" data-category="A07">피지오</a></li>
+		    <li><a class="dropdown-item" data-category="A08">티</a></li>
+		    <li><a class="dropdown-item" data-category="A09">기타 제조 음료</a></li>
+		    <li><a class="dropdown-item" data-category="A10">주스</a></li>
 		  </ul>
 		</div>
 		
@@ -53,10 +54,10 @@
 		  <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 		    Bakery
 		  </button>
-		  <ul class="dropdown-menu">
-		    <li><a class="dropdown-item" id="B01">브레드</a></li>
-		    <li><a class="dropdown-item" id="B02">케이크</a></li>
-		    <li><a class="dropdown-item" id="B03">샌드위치</a></li>
+		  <ul class="dropdown-menu cateBtn">
+		    <li><a class="dropdown-item" data-category="B01">브레드</a></li>
+		    <li><a class="dropdown-item" data-category="B02">케이크</a></li>
+		    <li><a class="dropdown-item" data-category="B03">샌드위치</a></li>
 		  </ul>
 		</div>
 		
@@ -64,11 +65,11 @@
 		  <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 		    Etc
 		  </button>
-		  <ul class="dropdown-menu">
-		    <li><a class="dropdown-item" id="B04">수프</a></li>
-		    <li><a class="dropdown-item" id="B05">과일, 요거트</a></li>
-		    <li><a class="dropdown-item" id="B06">스낵, 미니 디저트</a></li>
-		    <li><a class="dropdown-item" id="B07">아이스크림</a></li>
+		  <ul class="dropdown-menu cateBtn">
+		    <li><a class="dropdown-item" data-category="B04">수프</a></li>
+		    <li><a class="dropdown-item" data-category="B05">과일, 요거트</a></li>
+		    <li><a class="dropdown-item" data-category="B06">스낵, 미니 디저트</a></li>
+		    <li><a class="dropdown-item" data-category="B07">아이스크림</a></li>
 		  </ul>
 		</div>
 	</div>
