@@ -44,7 +44,7 @@ public class Product {
     @Column(name = "p_sell", length = 10)
     private String productSell;
 
-    @Column(name = "p_price", nullable = true)  // 가격 필드를 nullable로 설정
+    @Column(name = "p_price", nullable = true)
     private Integer productPrice;
 
     @Column(name = "p_name", nullable = false, length = 50)

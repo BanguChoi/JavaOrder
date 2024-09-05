@@ -25,7 +25,9 @@
 	                <td rowspan="3"><a th:href="@{'/admin/products/' + ${product.productId}}">상세보기</a></td>
 	            </tr>
 	            <tr>
-	                <td rowspan="2" colspan="3" th:text="${product.productExplain}"></td>
+	                <td rowspan="2" colspan="3">
+	                    <span class="productExplain" th:text="${product.productExplain}"></span>
+	                </td>
 
 	                <!-- 상품 게시 여부 처리 -->
 	                <td rowspan="2">
@@ -48,5 +50,17 @@
 	        </div>
 	    </div>
 	</th:block>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const explains = document.querySelectorAll('.productExplain');
+            explains.forEach(function(explain) {
+                const text = explain.textContent;
+                if (text.length > 40) {
+                    explain.textContent = text.substring(0, 40) + '...';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
