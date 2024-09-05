@@ -1,5 +1,7 @@
 package com.javaOrder.admin.product.repository;
 
+import java.time.LocalDate;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,8 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.javaOrder.admin.product.domain.Product;
-
-import java.time.LocalDate;
 
 public interface ProductRepository extends JpaRepository<Product, String> {
 
@@ -24,4 +24,6 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
     // 등록일자를 기준으로 검색하는 메서드
     Page<Product> findByProductDate(LocalDate productDate, Pageable pageable);
+    
+    
 }
