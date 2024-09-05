@@ -30,7 +30,4 @@ public class CategoryController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("카테고리 생성 중 오류가 발생했습니다.");
         }
     }
-
-
-
 }

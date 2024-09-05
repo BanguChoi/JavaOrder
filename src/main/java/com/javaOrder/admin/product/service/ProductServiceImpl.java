@@ -17,6 +17,8 @@ import com.javaOrder.admin.product.repository.ProductRepository;
 import com.javaOrder.common.util.vo.PageRequestDTO;
 import com.javaOrder.common.util.vo.PageResponseDTO;
 
+import java.time.LocalDate;
+
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -71,7 +73,6 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.save(product);
     }
     
-    
 	/* 제품 리스트 + 페이징 + 검색기능 */
     @Override
 	public PageResponseDTO<Product> productList(PageRequestDTO pageRequestDTO) {
@@ -106,4 +107,20 @@ public class ProductServiceImpl implements ProductService {
 		
 		return responseDTO;
 	}
+
+    // 검색 기능 구현
+    @Override
+    public Page<Product> findByProductNameContaining(String productName, Pageable pageable) {
+        return productRepository.findByProductNameContaining(productName, pageable);
+    }
+
+    @Override
+    public Page<Product> findByCategoryCode(String categoryCode, Pageable pageable) {
+        return productRepository.findByCategory_Code(categoryCode, pageable);
+    }
+
+    @Override
+    public Page<Product> findByProductDate(LocalDate productDate, Pageable pageable) {
+        return productRepository.findByProductDate(productDate, pageable);
+    }
 }

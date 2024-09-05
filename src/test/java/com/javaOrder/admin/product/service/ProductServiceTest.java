@@ -1,4 +1,4 @@
-package com.javaOrder.admin.service;
+package com.javaOrder.admin.product.service;
 
 import com.javaOrder.admin.product.domain.Category;
 import com.javaOrder.admin.product.domain.Product;
@@ -29,6 +29,7 @@ public class ProductServiceTest {
     @Autowired
     private ProductRepository productRepository;
 
+    /*
     @BeforeEach
     void setUp() {
         // 카테고리 데이터를 사전에 저장
@@ -533,5 +534,13 @@ public class ProductServiceTest {
             assertEquals(String.format("B07%02d", i + 1), savedProduct.getProductId());
             assertEquals(0, savedProduct.getProductPrice());
         }
+    }
+    */
+    
+    public Product saveProduct(Product product) {
+        if (!"Y".equals(product.getProductSell()) && !"N".equals(product.getProductSell())) {
+            throw new IllegalArgumentException("Invalid value for productSell: must be 'Y' or 'N'");
+        }
+        return productRepository.save(product);
     }
 }

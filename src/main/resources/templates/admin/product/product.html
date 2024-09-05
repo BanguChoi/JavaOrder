@@ -8,6 +8,20 @@
 </head>
 <body>
 	<th:block layout:fragment="content">
+		<form th:action="@{/admin/products/search}" method="get">
+	        <div>
+	            <input type="text" id="searchValue" name="searchValue" placeholder="검색어를 입력하세요" />
+
+	            <select id="searchType" name="searchType">
+	                <option value="productName">상품명</option>
+	                <option value="categoryCode">카테고리 코드</option>
+	                <option value="productDate">등록일자</option>
+	            </select>
+
+	            <button type="submit">검색</button>
+	        </div>
+	    </form>
+		
 	    <table>
 	        <tbody th:each="product : ${productsPage.content}">
 	            <tr>
@@ -26,10 +40,11 @@
 	            </tr>
 	            <tr>
 	                <td rowspan="2" colspan="3">
-	                    <span class="productExplain" th:text="${product.productExplain}"></span>
-	                </td>
+					    <span class="productExplain" 
+					          th:text="${product.productExplain != null && #strings.length(product.productExplain) > 40 ? #strings.substring(product.productExplain, 0, 40) + '...' : product.productExplain != null ? product.productExplain : ''}">
+					    </span>
+					</td>
 
-	                <!-- 상품 게시 여부 처리 -->
 	                <td rowspan="2">
 	                    <span th:text="${product.productSell == 'Y' ? '게시 중' : '미게시'}"></span>
 	                </td>
@@ -50,17 +65,5 @@
 	        </div>
 	    </div>
 	</th:block>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const explains = document.querySelectorAll('.productExplain');
-            explains.forEach(function(explain) {
-                const text = explain.textContent;
-                if (text.length > 40) {
-                    explain.textContent = text.substring(0, 40) + '...';
-                }
-            });
-        });
-    </script>
 </body>
 </html>

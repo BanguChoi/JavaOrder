@@ -1,3 +1,4 @@
+
 package com.javaOrder.admin.product.domain;
 
 import java.util.Date;
@@ -41,8 +42,8 @@ public class Product {
     @Column(name = "p_date")
     private Date productDate = new Date();
 
-    @Column(name = "p_sell", length = 10)
-    private String productSell;
+    @Column(name = "p_sell", length = 1, nullable = false, columnDefinition = "CHAR(1) DEFAULT 'N'")
+    private String productSell = "N";  // 기본값 N
 
     @Column(name = "p_price", nullable = true)
     private Integer productPrice;

@@ -1,4 +1,4 @@
-package com.javaOrder.admin.service;
+package com.javaOrder.admin.product.service;
 
 import com.javaOrder.admin.product.domain.Category;
 import com.javaOrder.admin.product.repository.CategoryRepository;
