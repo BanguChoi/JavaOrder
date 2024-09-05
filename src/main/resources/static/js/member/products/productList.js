@@ -7,7 +7,7 @@ $(".productDetailBtn").on("click", function(){
 $(document).on("click", ".page-item a", function(e){
 	e.preventDefault();
     var pageNum = $(this).data("number");
-    $("#page").val(pageNum);
+    $("#searchForm input[name='page']").val(pageNum);
 		
 	$("#searchForm").attr({
         "method": "get",
