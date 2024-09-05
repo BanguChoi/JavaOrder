@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{template/client/layout/layout}" >
-	<th:block th:fragment="productList">
 
+<th:block th:fragment="productList">
 	<form id="searchForm">
 		<input type="hidden" th:field="${productList.pageRequestDTO.page}" />
 		<input type="hidden" name="size" id="size" th:value="${productList.pageRequestDTO.size}" />
@@ -67,8 +67,6 @@
 		    <li><a class="dropdown-item" id="B07">아이스크림</a></li>
 		  </ul>
 		</div>
-		
-		
 	</div>
 		
 	<div th:if="${#lists.size(productList.dtoList) == 0}">
@@ -87,10 +85,7 @@
 	        </div>
 	    </div>
 	</div>
-
-	
-	
-	 
+ 
 	<nav aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">
 
@@ -108,7 +103,7 @@
 			</li>
 		</ul>
 	</nav>
-	</th:block>
+</th:block>
 </html>
 
 
