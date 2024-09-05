@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+	
+	<!-- 공통정보 -->
+	<th:block th:fragment="config">
+		<!-- js 파일 -->
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>		
+		<script src="/assets/js/color-modes.js"></script>
+		<script src="/assets/js/sidebars.js"></script>
+		<script src="/assets/js/header.js"></script>
+
+	    <meta charset="utf-8">
+	    <meta name="theme-color" content="#712cf9"/>
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	    <title>JavaOrder</title>
+	
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+		<link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+		<!-- css 파일 -->
+   		<link href="/css/headers.css" rel="stylesheet">
+   		<link href="/css/main.css" rel="stylesheet">
+   		<link href="/css/sidebars.css" rel="stylesheet">
+   		<link href="/css/sticky-footer-navbar.css" rel="stylesheet">
+	</th:block>
+	
+	
+	<!-- 왼쪽 사이드 메뉴바 -->
+	<th:block th:fragment="sidebar">
+		<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"  style="width: 200px;">
+	    	<span class="fs-4">JavaOrder로고</span>
+	    </a>
+	  <hr>
+	  <ul class="nav nav-pills flex-column mb-auto">
+	  	<li>&nbsp;</li>
+	    <li>
+	      <a href="/" class="nav-link link-body-emphasis">
+	        Orders
+	      </a>
+	    </li>
+	    <li>
+	      <a href="#" class="nav-link link-body-emphasis">
+	       <!--  <svg class="bi pe-none" width="16" height="16"><use xlink:href="#grid"></use></svg> -->
+	        Products
+	      </a>
+	    </li>
+	    <li>
+	      <a href="/" class="nav-link link-body-emphasis">
+	        Customers
+	      </a>
+	    </li>
+	    <li class="nav-item dropend">
+            <a class="nav-link dropdown-toggle link-body-emphasis" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              마이페이지
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+            	<li><a class="dropdown-item" href="/member/mypage">회원 정보</a></li>
+             	<li><a class="dropdown-item" href="/member/orderList/">주문 내역</a></li>
+              	<li><a class="dropdown-item" href="#">문의 내역</a></li>
+            </ul>
+          </li>
+	  </ul>
+	  
+	  
+	  
+  			<!-- 로그인 상태에 따라 표시 -->
+		<!-- <div class="col-md-3 text-end"> -->
+		<div class="col-md-12 " id="loginSection" th:if="${session.member == null}">
+		    <button type="button" id="signInBtn" class="btn btn-outline-primary me-2">로그인</button>
+		    <button type="button" id= "signUpBtn" class="btn btn-primary">회원가입</button>
+		</div>
+		 
+		<div class="col-md-12 mb-2" id="userInfoSection" th:if="${session.member != null}">
+		    <div id="userInfo" class="clickable">
+		        <p>안녕하세요, <span th:text="${session.member.memberName}">회원님</span>!</p>
+		        <p>이메일: <span th:text="${session.member.memberEmail}">이메일</span></p>
+			    <form class="text-center" action="/member/signout" method="get">
+			        	<button type="submit" class="btn btn-danger btn-sm">로그아웃</button>
+			    </form>    
+		    </div>
+		    
+		</div>
+	  
+	  <hr>
+	  
+	  	
+			
+
+
+	  
+	</th:block>
+	<!-- footer -->
+	<th:block th:fragment="footer">
+		<div class="container">
+    		<p class="text-body-secondary">
+				사업자등록번호: 121-12-12345 | 대표: 홍길동 | 개인정보보호책임자: 김철수 | 이메일: javaOrder@naver.com | 서울특별시 강남구 테헤란로
+			</p>
+  		</div>
+	</th:block>
+</html>

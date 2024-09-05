@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/admin/layout/layout}" >
+
+<th:block layout:fragment="content">
+	<h3>주문내역 조회</h3>
+	
+	<!-- <form id="orderItemData">
+		<input type="hidden" id="orderNumber" th:value="${#lists.first(orderItemList).orderNumber.orderNumber}" />
+	</form> -->
+	
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr>
+				<th>주문번호</th>
+				<th>상품명</th>
+				<th>수량</th>
+				<th>가격</th>
+				<th>추가금액</th>
+				<th>샷추가</th>
+				<th>사이즈</th>
+				<th>Ice/Hot</th>
+				<th>시럽</th>
+				<th>수령방식</th>				
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${#lists.size(orderItemList) == 0}">
+				<td colspan="10">주문 항목 내역이 없습니다. 잠시 후 다시 시도해 주세요</td>
+			</tr>
+			
+			<th:block th:if="${not #lists.isEmpty(orderItemList)}">
+				<tr class="text-center" th:each="orderItem : ${orderItemList}" th:object="${orderItem}">
+					<td th:text="*{orderNumber.orderNumber}"></td>
+					<td th:text="*{productId.productName}"></td>
+					<td th:text="*{orderitemNumber}"></td>
+					<td th:text="*{orderitemPrice}"></td>
+					<td th:text="*{orderitemExfee}"></td>
+					<td th:text="*{orderitemShot}"></td>
+					<td th:text="*{orderitemSize==0?'Small':orderitemSize==1?'Medium':'Large'}"></td>
+					<td th:text="*{orderitemTemp==0?'Ice':'Hot'}"></td>
+					<td th:text="*{orderitemSyrup != null ? orderitemSyrup:'-'}"></td>
+					<td th:text="*{orderitemTakeout==0?'픽업':'매장'}"></td>
+				</tr>
+			</th:block>
+		</tbody>
+	</table>
+	
+	<div class="text-end">
+		<button type="button" class="btn btn-primary btn-sm" id="orderListBtn">목록</button>
+	</div>
+</th:block>
+		
+<th:block layout:fragment="script">
+	<script src="/js/admin/order/orderItemList.js"></script>
+</th:block>
+</html>

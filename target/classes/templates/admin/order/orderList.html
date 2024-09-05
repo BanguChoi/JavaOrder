@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/admin/layout/layout}" >
+
+<th:block layout:fragment="content">
+	<h3>전체 주문내역 조회</h3>
+	
+	<div id="orderSearch" class="my-2">
+		<form id="searchForm">
+			<!--/*페이징 처리를 위한 파라미터*/-->
+			<input type="hidden" name="page" id="page" th:value="${orderList.pageRequestDTO.page}">
+			<input type="hidden" name="size" id="size" th:value="${orderList.pageRequestDTO.size}">
+			
+			<div class="row g-2 align-items-center">
+				<div class="col-auto">
+					<label for="search">검색조건</label>
+				</div>
+				<div class="col-auto">
+					<select class="form-select form-select-sm" id="searchType" name="searchType">
+						<option value="memberCode">회원(번호)</option>
+						<option value="orderStatus">주문상태</option>
+						<option value="orderDate">작성일자</option>
+					</select>
+				</div>
+				<div class="col-auto textArea">
+					<input type="text" id="keyword" name="keyword" placeholder="검색어를 입력하세요" class="form-control form-control-sm" />
+				</div>
+				<div class="col-auto selectArea">
+					<select class="form-select form-select-sm" id="status" name="status">
+						<option value="W">주문대기</option>
+						<option value="S">주문접수</option>
+						<option value="P">준비완료</option>
+						<option value="E">픽업완료</option>
+					</select>
+				</div>
+				<div class="col-auto dateArea">
+					<input type="date" id="startDate" name="startDate" placeholder="시작일자" class="form-control form-control-sm" />
+				</div>
+				<div class="col-auto dateArea">
+					<input type="date" id="endDate" name="endDate" placeholder="종료일자" class="form-control form-control-sm" />
+				</div>
+				<div class="col-auto">
+					<button type="button" id="searchBtn" class="btn btn-primary btn-sm">Search</button>
+					<button type="button" id="allSearchBtn" class="btn btn-primary btn-sm">All Search</button>
+				</div>
+			</div>		
+		</form>
+	</div>
+	
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr>
+				<th>주문번호</th>
+				<th>회원번호</th>
+				<th>상품명</th>
+				<th>총금액</th>
+				<th>주문일자</th>
+				<th>주문상태</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${#lists.size(orderList.dtoList) == 0}">
+				<td colspan="6">주문 내역이 없습니다.</td>
+			</tr>
+			
+			<th:block th:if="${not #strings.isEmpty(orderList.dtoList)}">
+				<tr class="text-center" th:each="order:${orderList.dtoList}" th:object="${order}" th:data-no="*{orderNumber}">
+					<td th:text="*{orderNumber}"></td>
+					<td th:text="*{memberCode.memberCode}"></td>
+					<td>
+						<a th:href="@{/admin/orderItemList/} + *{orderNumber}" th:text="*{orderName}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a>
+					</td>
+					<td th:text="*{orderPrice}"></td>
+					<td th:text="*{orderDate}"></td>
+					<td><!-- th:text="*{orderStatus}" th:value="*{orderStatus}" -->
+						<div class="btn-group">
+						  <button th:text="*{orderStatus=='E'?'픽업완료':orderStatus=='P'?'준비완료':orderStatus=='S'?'주문접수':orderStatus=='W'?'주문대기':'N/A'}" 
+						  class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+						  <ul class="dropdown-menu">
+						    <li><button class="dropdown-item statusBtn" th:value="W">주문대기</button></li>
+						    <li><button class="dropdown-item statusBtn" th:value="S">주문접수</button></li>
+						    <li><button class="dropdown-item statusBtn" th:value="P">준비완료</button></li>
+						    <li><button class="dropdown-item statusBtn" th:value="E">픽업완료</button></li>
+						    <!-- <li><button class="dropdown-item statusBtn" th:value="C">주문취소</button></li> -->
+						  </ul>
+						</div>
+					</td>
+				</tr>
+			</th:block>
+		</tbody>
+	</table>
+	
+	
+	<nav aria-label="Page navigation example">
+	  <ul class="pagination justify-content-center">
+	  	<!-- 이전 바로가기 10개 존재여부를 prev필드의 값으로 확인 -->
+	    <li class="page-item" th:if="${orderList.prev}">
+	      <a th:data-number="${orderList.prevPage}" class="page-link">Previous</a>
+	    </li>
+	    
+	    <!-- 바로가기 번호 출력 -->
+	    <li th:each="number:${orderList.pageNumList}" th:classappend="'page-item '+ ${(orderList.current == number) ? 'active':''}">
+	    	<a class="page-link" th:text="${number}" th:data-number="${number}"></a>
+	    </li>
+	    
+		<!-- 다음 바로가기 10개 존재 여부를 next 필드의 값으로 확인 -->	    
+	    <li class="page-item" th:if="${orderList.next}">
+	      <a th:data-number="${orderList.nextPage}" class="page-link">Next</a>
+	    </li>
+	  </ul>
+	</nav>
+</th:block>
+		
+<th:block layout:fragment="script">
+	<script src="/js/admin/order/orderList.js"></script>
+</th:block>
+</html>

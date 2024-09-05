@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{template/client/layout/layout}" class="h-100" data-bs-theme="auto" >
+
+<th:block layout:fragment="config">
+	<link href="/css/mypage.css" rel="stylesheet">
+</th:block>
+
+<th:block layout:fragment="content">
+	<div class="card-body">
+	<div class="container">
+	    <!-- 회원 정보 출력 -->
+		<div th:if="${member != null}" th:object="${member}">
+		    <!-- 회원 코드 숨기기 -->
+		    <input type="hidden" id="memberCode" name="memberCode" th:value="${member.memberCode}">
+		    
+		    <!-- 이름 -->
+		    <div class="input-group mb-3">
+		        <label for="memberName" class="form-label">이름</label>
+		        <input type="text" id="memberName" name="memberName" class="form-control" th:value="*{memberName}" readonly>
+		        <button type="button" class="btn btn-primary ms-2 updateBtn" data-field="memberName">수정</button>
+		        <button type="button" class="btn btn-success ms-2" style="display:none;">변경</button>
+		        <div id="memberNameError" class="text-danger"></div>
+		    </div>
+		    
+		    <!-- 아이디 -->
+		    <div class="input-group mb-3">
+		        <label for="memberId" class="form-label">아이디</label>
+		        <input type="text" id="memberId" name="memberId" class="form-control" th:value="*{memberId}" readonly>
+		        <button type="button" class="btn btn-primary ms-2 updateBtn" data-field="memberId">수정</button>
+		        <button type="button" class="btn btn-success ms-2" style="display:none;">변경</button>
+		        <div id="memberIdError" class="text-danger"></div>
+		    </div>
+		    
+		    <!-- 비밀번호 -->
+		    <div class="input-group mb-3">
+		        <label for="memberPasswd" class="form-label">비밀번호</label>
+		        <input type="password" id="memberPasswd" name="memberPasswd" class="form-control" th:value="*{memberPasswd}" readonly>
+		        <button type="button" class="btn btn-primary ms-2 " id="changePasswordBtn">수정</button>
+		    </div>
+		    
+		    <!-- 이메일 -->
+		    <div class="input-group mb-3">
+		        <label for="memberEmail" class="form-label">이메일</label>
+		        <input type="email" id="memberEmail" name="memberEmail" class="form-control" th:value="*{memberEmail}" readonly>
+		        <button type="button" class="btn btn-primary ms-2 updateBtn" data-field="memberEmail">수정</button>
+		        <button type="button" class="btn btn-success ms-2" style="display:none;">변경</button>
+		        <div id="memberEmailError" class="text-danger"></div>
+		    </div>
+		    
+		    <!-- 전화번호 -->
+		    <div class="input-group mb-3">
+		        <label for="memberPhone" class="form-label">전화번호</label>
+		        <input type="text" id="memberPhone" name="memberPhone" class="form-control" th:value="*{memberPhone}" readonly>
+		        <button type="button" class="btn btn-primary ms-2 updateBtn" data-field="memberPhone">수정</button>
+		        <button type="button" class="btn btn-success ms-2" style="display:none;">변경</button>
+		        <div id="memberPhoneError" class="text-danger"></div>
+		    </div>
+		    
+		    <!-- 주소 -->
+		    <div class="input-group mb-3">
+		        <label for="memberAddress" class="form-label">주소</label>
+		        <input type="text" id="memberAddress" name="memberAddress" class="form-control" th:value="*{memberAddress}" readonly>
+		        <button type="button" class="btn btn-primary ms-2 updateBtn" data-field="memberAddress">수정</button>
+		        <button type="button" class="btn btn-success ms-2" style="display:none;">변경</button>
+		        <button type="button" class="btn btn-secondary ms-2" id="searchAddressBtn" style="display:none;">주소 검색</button>
+		        <div id="memberAddressError" class="text-danger"></div>
+		    </div>
+		    
+		    <!-- 생년월일 -->
+		    <div class="input-group mb-3">
+		        <label for="memberBirth" class="form-label">생년월일</label>
+		        <input type="date" id="memberBirth" name="memberBirth" class="form-control" th:value="*{memberBirth}" readonly>
+		        <button type="button" class="btn btn-primary ms-2 updateBtn" data-field="memberBirth">수정</button>
+		        <button type="button" class="btn btn-success ms-2" style="display:none;">변경</button>
+		        <div id="memberBirthError" class="text-danger"></div>
+		    </div>
+		    
+		    <!-- 가입일 -->
+		    <div class="input-group mb-3">
+		        <label for="memberDate" class="form-label">가입일</label>
+		        <input type="text" id="memberDate" name="memberDate" class="form-control" th:value="*{memberDate}" readonly>
+		    </div>
+		</div>
+		
+		<!-- 로그인하지 않은 경우 메시지 출력 -->
+		<div th:if="${member == null}">
+		    <p>로그인 해주세요.</p>
+		</div>
+	            
+	    <div class="d-flex justify-content-end mt-3">
+	        <a href="/" class="btn btn-secondary">메인 페이지로 돌아가기</a>
+	    </div>
+	</div>
+	</div>
+</th:block>
+
+<th:block layout:fragment="script">    
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/js/member/mypage.js"></script>
+</th:block>
+
+</html>

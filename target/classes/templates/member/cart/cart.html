@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/client/layout/layout}" >
+	
+	<th:block th:fragment="cart">
+		<th:block th:insert="~{member/cart/cartItemList :: cartItemList}"></th:block>
+		
+		<div>
+			<th:block th:if="${cart != null}">
+			    <th:block th:if="${cart.cartItems == null or cart.cartItems.size() == 0}">
+			        <span>장바구니가 비어있습니다.</span>
+			    </th:block>
+			</th:block>
+			
+		
+			<div class="cartBtn"> 
+				<button type="button" class="btn btn-primary hereBtn">매장</button>
+				<button type="button" class="btn btn-primary togoBtn">포장</button>
+			</div>
+		</div>
+	</th:block>
+	
+	<th:block layout:fragment="script">
+		<script src="/js/member/cart/cart.js"></script>
+	</th:block>
+</html>

@@ -1,0 +1,140 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 중앙 정렬을 위해 추가 */
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin .form-floating {
+  margin-bottom: 20px; /* 입력 필드 사이의 간격을 20px로 설정 */
+}
+
+.form-signin input {
+  margin-bottom: -1px;
+}
+
+.form-signin input[type="password"] {
+  padding-right: 2.5rem; /* 체크박스 공간을 확보하기 위해 오른쪽 패딩 추가 */
+  width: 100%; /* 입력 필드 너비를 100%로 설정하여 원래 크기로 복구 */
+}
+
+/* 비밀번호 표시 체크박스 스타일 */
+.password-container {
+  position: relative; /* 체크박스를 입력 필드에 상대적으로 배치 */
+  display: flex;
+  flex-direction: column;
+}
+
+.password-container label {
+  display: inline-block;
+  margin-bottom: 5px; /* 라벨과 입력 필드 사이의 간격 설정 */
+}
+
+.password-container #password {
+  padding-right: 2.5rem; /* 체크박스 공간을 확보하기 위해 오른쪽 패딩 추가 */
+}
+
+/* 체크박스 스타일 */
+.password-container #showPassword {
+  position: absolute;
+  right: 10px; /* 체크박스의 위치 조정 */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  width: 20px; /* 체크박스 크기 조정 */
+  height: 20px; /* 체크박스 크기 조정 */
+}
+
+/* 에러 메시지 스타일 */
+.password-container .error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 5px; /* 입력 필드와 에러 메시지 사이의 간격 설정 */
+  margin-left: 0; /* 에러 메시지 위치 조정 */
+}
+
+/* 주소 입력 필드의 스타일은 기존 그대로 유지 */
+#address {
+  width: 100%; /* 필드의 너비를 전체 너비로 설정 */
+  white-space: nowrap; /* 텍스트가 한 줄로 유지되도록 설정 */
+  overflow: hidden; /* 넘치는 부분 숨기기 */
+  text-overflow: ellipsis; /* 넘치는 부분에 '...' 추가 */
+}
+
+.form-signin .address-search-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: calc(1.5em + .75rem + 2px); /* 버튼 높이를 입력 필드와 비슷하게 조정 */
+  font-size: 0.8rem; /* 버튼 글자 크기 조정 */
+  padding: 0.25rem 0.5rem; /* 버튼의 상하 여백을 줄여서 크기 조정 */
+  color: black;
+  z-index: 1; /* 버튼이 입력 필드 위에 표시되도록 설정 */
+}
+
+.form-signin .form-floating button {
+  margin-right: 10px; /* 버튼의 크기에 맞춰 입력 필드 오른쪽 여백 설정 */
+}
+
+.text-danger {
+  color: red;
+
+/* .form-signin .checkbox {
+  font-weight: 400;
+} */
+
+/* .form-signin .form-floating:focus-within { */
+  /* z-index: 2; */
+/* } */
+/* .form-signin .form-floating { */
+  /* margin-bottom: 20px; 입력 필드 사이의 간격을 20px로 설정 */
+/* } */
+/* .form-signin input { */
+  /* margin-bottom: -1px; */
+  /* 
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0; */
+/* } */
+
+/* .form-signin input[type="password"] { */
+  /* margin-bottom: 10px; */
+/* 
+  border-top-left-radius: 0;
+  border-top-right-radius: 0; */
+/* } */
+
+/* 주소 상세 입력 칸 추가 스타일 */
+/* .form-signin .address-search-btn { */
+    /* position: absolute; */
+    /* right: 0; */
+    /* top: 50%; */
+    /* transform: tcranslateY(-50%); */
+    /* height: calc(1.5em + .75rem + 2px); 버튼 높이를 입력 필드와 비슷하게 조정 */
+    /* font-size: 0.8rem; 버튼 글자 크기 조정 */
+    /* padding: 0.25rem 0.5rem; 버튼의 상하 여백을 줄여서 크기 조정 */
+    /* color: black; */
+/* } */
+
+/* .form-signin .form-floating button { */
+    /* margin-right: 10px; 버튼의 크기에 맞춰 입력 필드 오른쪽 여백 설정 */
+/* } */
+}

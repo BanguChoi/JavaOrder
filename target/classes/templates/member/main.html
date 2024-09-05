@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/client/layout/layout}" >
+
+<!-- 메인 콘텐츠 영역 -->
+<th:block layout:fragment="content">   
+    <div class="d-flex flex-grow-1 pt-2" style="margin-left: 280px; padding-bottom: 56px; overflow-y: auto; height: calc(100vh - 56px);">
+
+		<!-- 상품 리스트 -->           
+		<div id="productListContainer" style="width: 75%; height: 100%; overflow-y: auto;">
+			<th:block  th:insert="~{member/products/productList :: productList}"></th:block>
+		</div>
+		<!-- 장바구니 -->
+		<div class="" style="width: 25%; height: 100%; overflow-y: auto;">
+			<th:block th:insert="~{member/cart/cart :: cart}"></th:block>
+		</div>		
+	</div>
+
+</th:block>
+
+<th:block layout:fragment="script">
+	<script src="/js/member/products/productList.js"></script>
+	<script src="/js/member/cart/cart.js"></script>
+	<script src="/js/member/cart/cartItemList.js"></script>
+</th:block>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+/* main.css */
+
+/* 페이지 전체 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+
+/* 클릭 가능한 영역 스타일 */
+.clickable {
+    cursor: pointer;
+    color: #007bff;
+    text-decoration: none;
+    text-align:center;
+    height:60px;
+    line-height:10px;
+    padding: 10px 10px; /* 공간을 위한 패딩 */
+    border: 1px solid #007bff; /* 테두리 추가 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    background-color: #f8f9fa; /* 배경색 추가 */
+    display: inline-block; /* 가로로 붙어있는 박스 */
+    margin-bottom: 5px;
+    transition: background-color 0.3s, border-color 0.3s; /* 호버 효과를 위한 트랜지션 */
+}
+
+.clickable:hover {
+    background-color: #e9ecef; /* 호버 시 배경색 변경 */
+    border-color: #0056
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비밀번호 변경</title>
+    <link href="/css/editPasswd.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>비밀번호 변경</h1>
+        <form id="passwordForm">
+            <!-- 현재 비밀번호 -->
+            <div>
+                <label for="currentPassword">현재 비밀번호:</label>
+                <input type="password" id="currentPassword" name="currentPassword">
+                <span id="currentPasswordError" class="error"></span>
+                <input type="checkbox" id="showCurrentPassword"> 비밀번호 표시
+            </div>
+
+            <!-- 새 비밀번호 -->
+            <div id="newPasswordContainer" style="display: none;">
+                <label for="newPassword">새 비밀번호:</label>
+                <input type="password" id="newPassword" name="newPassword">
+                <span id="passwordError" class="error"></span>
+                <input type="checkbox" id="showNewPassword"> 비밀번호 표시
+            </div>
+
+            <!-- 수정 버튼 -->
+            <button type="button" id="verifyPasswordBtn" class="btn btn-primary">현재 비밀번호 확인</button>
+            <!-- 변경 버튼 -->
+            <button type="button" id="changePasswordBtn" class="btn btn-success" style="display:none;">비밀번호 변경</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/member/editPasswd.js"></script>
+</body>
+</html>

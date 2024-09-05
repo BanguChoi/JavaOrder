@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/client/layout/layout}" >
+	<th:block th:fragment="productList">
+
+	<form id="searchForm">
+		<input type="hidden" th:field="${productList.pageRequestDTO.page}" />
+		<input type="hidden" name="size" id="size" th:value="${productList.pageRequestDTO.size}" />
+		<input type="hidden" name="categoryCode" id="categoryCode" th:value="*{category.code}"/>	
+	</form>
+
+	
+	<form class="d-flex mx-auto" role="search">
+	     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+	     <button class="btn btn-primary" type="submit">Search</button>
+	</form>
+	
+	<div class="mt-4 mb-4">
+		<img style="width:100%; height:200px; background-color:gray;"/>
+	</div>
+	
+	<div th:object="${productList}" class="mb-4 d-flex justify-content-center">
+
+		<button type="button" class="btn btn-outline-secondary me-4 cateBtn">ALL</button>
+		<div class="btn-group me-4">
+		  <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+		    Coffee
+		  </button>
+		  <ul class="dropdown-menu">
+		    <li><a class="dropdown-item cateBtn" id="A01">콜드 브루 커피</a></li>
+		    <li><a class="dropdown-item cateBtn" id="A02">브루드 커피</a></li>
+		    <li><a class="dropdown-item cateBtn" id="A03">에스프레소</a></li>
+		    <li><a class="dropdown-item cateBtn" id="A04">프라푸치노</a></li>
+		  </ul>
+		</div>
+		
+		<div class="btn-group me-4">
+		  <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+		    Non-Coffee
+		  </button>
+		  <ul class="dropdown-menu">
+		  	<li><a class="dropdown-item cateBtn" id="A05">블렌디드</a></li>
+		    <li><a class="dropdown-item cateBtn" id="A06">리프레셔</a></li>
+		    <li><a class="dropdown-item cateBtn" id="A07">피지오</a></li>
+		    <li><a class="dropdown-item cateBtn" id="A08">티</a></li>
+		    <li><a class="dropdown-item cateBtn" id="A09">기타 제조 음료</a></li>
+		    <li><a class="dropdown-item cateBtn" id="A10">주스</a></li>
+		  </ul>
+		</div>
+		
+		<div class="btn-group me-4">
+		  <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+		    Bakery
+		  </button>
+		  <ul class="dropdown-menu">
+		    <li><a class="dropdown-item cateBtn" id="B01">브레드</a></li>
+		    <li><a class="dropdown-item cateBtn" id="B02">케이크</a></li>
+		    <li><a class="dropdown-item cateBtn" id="B03">샌드위치</a></li>
+		  </ul>
+		</div>
+		
+		<div class="btn-group">
+		  <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+		    Etc
+		  </button>
+		  <ul class="dropdown-menu">
+		    <li><a class="dropdown-item cateBtn" id="B04">수프</a></li>
+		    <li><a class="dropdown-item cateBtn" id="B05">과일, 요거트</a></li>
+		    <li><a class="dropdown-item cateBtn" id="B06">스낵, 미니 디저트</a></li>
+		    <li><a class="dropdown-item cateBtn" id="B07">아이스크림</a></li>
+		  </ul>
+		</div>
+	</div>
+		
+		
+	<div th:if="${#lists.size(productList.dtoList) == 0}">
+	    <div class="text-center">등록된 제품이 없습니다.</div>
+	</div>
+	
+	<div th:if="${not #lists.isEmpty(productList.dtoList)}" class="container d-flex flex-wrap justify-content-center ">
+	    <div th:each="product : ${productList.dtoList}" th:object="${product}" th:data-no="*{productId}">
+	        <div class="card mx-4 mb-4" style="width: 14rem;">
+	            <img class="card-img-top" th:src="@{/images/{productCode}.jpg(productCode=${product.productId})}" onerror="this.src='/images/noimg.png'">
+	            <div class="card-body">
+	                <h5 class="card-title" th:text="*{productName}"></h5>
+	                <p class="card-text" th:text="*{productPrice} +'원'"></p>
+	                <a th:href="@{'/products/' + *{productId} +'/detail'}" class="btn btn-primary productDetailBtn">제품담기</a>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	
+	
+	 
+	<nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+
+			<li class="page-item" th:if="${productList.prev}">
+				<a th:data-number="${productList.prevPage}" class="page-link">Previous</a>
+			</li>
+			
+			<li th:each="number : ${productList.pageNumList}"
+				th:classappend="'page-item ' + ${(productList.current == number) ? 'active' : ''}">
+				<a class="page-link" th:text="${number}" th:data-number="${number}"></a>
+			</li>
+			
+			<li class="page-item" th:if="${productList.next}">
+				<a th:data-number="${productList.nextPage}" class="page-link">Next</a>
+			</li>
+		</ul>
+	</nav>
+
+</html>
+
+
+

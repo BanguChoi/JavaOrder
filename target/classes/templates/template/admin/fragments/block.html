@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+	
+	<!-- 공통정보 -->
+	<th:block th:fragment="config">
+		<!-- js 파일 -->
+		<script src="/assets/js/color-modes.js"></script>
+		<script src="/assets/js/sidebars.js"></script>
+		
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	    <title>JavaOrder :: Admin</title>
+	
+    	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+		<link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+		<!-- css 파일 -->
+   		<link href="/css/headers.css" rel="stylesheet">
+   		<link href="/css/sidebars.css" rel="stylesheet">
+   		<link href="/css/sticky-footer-navbar.css" rel="stylesheet">	
+	</th:block>
+	
+	<!-- header -->
+	<th:block th:fragment="header">
+		<div class="container-fluid">		
+		    <div class="col-md-12 text-end">
+		      <button type="button" class="btn btn-outline-primary me-2">Login</button>
+		      <button type="button" class="btn btn-primary">Sign-up</button>
+		    </div>
+		</div>
+	</th:block>
+	
+	
+	<!-- 왼쪽 사이드 메뉴바 -->
+	<th:block th:fragment="sidebar">
+		<a href="/admin/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"  style="width: 200px;">
+	      <span class="fs-4">JavaOrder로고</span>
+	    </a>
+	  <hr>
+	  <ul class="nav nav-pills flex-column mb-auto">
+	    <li>
+	      <a href="/admin/" class="nav-link link-body-emphasis">
+			<!-- <svg class="bi pe-none" width="16" height="16"><use xlink:href="#speedometer2"></use></svg> -->	        
+			Dash Board
+	      </a>
+	    </li>
+	    <hr />
+	    <li>
+	      <a href="/admin/memberList" class="nav-link link-body-emphasis">
+	        <!-- <svg class="bi pe-none" width="16" height="16"><use xlink:href="#people-circle"></use></svg> -->
+	        Member
+	      </a>
+	    </li>
+	    <li>
+	      <a href="#" class="nav-link link-body-emphasis">
+	       <!--  <svg class="bi pe-none" width="16" height="16"><use xlink:href="#grid"></use></svg> -->
+	        Products
+	      </a>
+	    </li>
+	    <li>
+	      <a href="/admin/orderList" class="nav-link link-body-emphasis">
+	        <!-- <svg class="bi pe-none" width="16" height="16"><use xlink:href="#table"></use></svg> -->
+	        Orders
+	      </a>
+	    </li>
+	    <li>
+	      <a href="#" class="nav-link link-body-emphasis">
+	       <!--  <svg class="bi pe-none" width="16" height="16"><use xlink:href="#grid"></use></svg> -->
+	        Promotion
+	      </a>
+	    </li>
+	    <hr/>
+	    <li>
+	      <a href="#" class="nav-link link-body-emphasis">
+	       <!--  <svg class="bi pe-none" width="16" height="16"><use xlink:href="#grid"></use></svg> -->
+	        Info
+	      </a>
+	    </li>
+	    <li>
+	      <a href="#" class="nav-link link-body-emphasis">
+	       <!--  <svg class="bi pe-none" width="16" height="16"><use xlink:href="#grid"></use></svg> -->
+	        QnA
+	      </a>
+	    </li>
+	  </ul>
+	  <hr>
+	  <!--  
+	  <div class="dropdown">
+	    <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+	      <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+	      <strong>mdo</strong>
+	    </a>
+	    
+	    <ul class="dropdown-menu text-small shadow">
+	      <li><a class="dropdown-item" href="#">New project...</a></li>
+	      <li><a class="dropdown-item" href="#">Settings</a></li>
+	      <li><a class="dropdown-item" href="#">Profile</a></li>
+	      <li><hr class="dropdown-divider"></li>
+	      <li><a class="dropdown-item" href="#">Sign out</a></li>
+	    </ul>
+	    
+	  </div>
+	  -->
+	</th:block>
+
+	
+	<!-- footer -->
+	<th:block th:fragment="footer">
+		<div class="container">
+    		<p class="text-body-secondary">
+				사업자등록번호: 121-12-12345 | 대표: 홍길동 | 개인정보보호책임자: 김철수 | 이메일: javaOrder@naver.com | 서울특별시 강남구 테헤란로
+			</p>
+  		</div>
+	</th:block>
+</html>
