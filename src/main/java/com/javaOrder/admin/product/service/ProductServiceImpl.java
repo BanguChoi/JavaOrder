@@ -1,14 +1,21 @@
 package com.javaOrder.admin.product.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
 import com.javaOrder.admin.product.domain.Category;
 import com.javaOrder.admin.product.domain.Product;
 import com.javaOrder.admin.product.repository.CategoryRepository;
 import com.javaOrder.admin.product.repository.ProductRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
+import com.javaOrder.common.util.vo.PageRequestDTO;
+import com.javaOrder.common.util.vo.PageResponseDTO;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -63,4 +70,40 @@ public class ProductServiceImpl implements ProductService {
     public Product saveProduct(Product product) {
         return productRepository.save(product);
     }
+    
+    
+	/* 제품 리스트 + 페이징 + 검색기능 */
+    @Override
+	public PageResponseDTO<Product> productList(PageRequestDTO pageRequestDTO) {
+		Pageable pageable = PageRequest.of(
+				pageRequestDTO.getPage()-1, 
+				pageRequestDTO.getSize(), Sort.by("productDate").ascending());
+    
+		Page<Product> result = productRepository.findAll(pageable);
+		
+		/* 카테고리 기능 */
+		List<Product> list = productRepository.findAll();
+		
+		
+		/* 검색기능
+		String status = pageRequestDTO.getStatus();
+		if(status != null) {
+			result = productRepository.findByProductName(productName, pageable);
+		} else {
+			result = productRepository.findAll(pageable);
+		}
+		*/
+
+    	
+		List<Product> productList = result.getContent().stream().collect(Collectors.toList());
+		long totalCount = result.getTotalElements();
+		
+		PageResponseDTO<Product> responseDTO = PageResponseDTO.<Product>withAll()
+				.dtoList(productList)
+				.pageRequestDTO(pageRequestDTO)
+				.totalCount(totalCount)
+				.build();
+		
+		return responseDTO;
+	}
 }

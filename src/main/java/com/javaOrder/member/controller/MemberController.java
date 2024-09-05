@@ -1,10 +1,15 @@
 package com.javaOrder.member.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.javaOrder.member.domain.Member;
@@ -14,7 +19,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/javaOrder/member/*")
+@RequestMapping("/member/*")
 @RequiredArgsConstructor
 public class MemberController {
 	
@@ -76,6 +81,79 @@ public class MemberController {
 	    }
 	    model.addAttribute("member", member);
 	    return "/member/mypage";
+	}
+	
+	// 회원 정보 처리
+	@PostMapping("/updateField")
+    @ResponseBody
+    public Map<String, Object> updateField(
+            @RequestParam String memberCode,
+            @RequestParam String fieldId,
+            @RequestParam String newValue,
+            HttpSession session) {
+
+        Map<String, Object> response = new HashMap<>();
+        boolean success = memberService.updateMemberField(memberCode, fieldId, newValue);
+
+        if (success) {
+            // 세션에서 현재 회원 정보 가져오기
+            Member updatedMember = memberService.getMemberByCode(memberCode);
+            session.setAttribute("member", updatedMember); // 세션에 새 정보 저장
+        }
+
+        response.put("success", success);
+        return response;
+    }
+	
+	// 비밀번호 변경 페이지
+	@GetMapping("/editPasswd")
+	public String getMethodName() {
+		return "/member/editPasswd";
+	}
+	
+	// 비밀번호 변경
+	@PostMapping("/verifyPassword")
+	@ResponseBody
+	public Map<String, Object> verifyPassword(
+	        @RequestParam("currentPassword") String currentPassword,
+	        HttpSession session) {
+
+	    Map<String, Object> response = new HashMap<>();
+	    Member member = (Member) session.getAttribute("member");
+
+	    if (member != null && member.getMemberPasswd().equals(currentPassword)) {
+	        response.put("success", true);
+	    } else {
+	        response.put("success", false);
+	        response.put("message", "현재 비밀번호가 일치하지 않습니다.");
+	    }
+
+	    return response;
+	}
+	
+	// 현재 비밀번호 확인
+	@PostMapping("/changePassword")
+	@ResponseBody
+	public Map<String, Object> changePassword(
+	        @RequestParam String currentPassword,
+	        @RequestParam String newPassword,
+	        HttpSession session) {
+	    Map<String, Object> response = new HashMap<>();
+	    Member member = (Member) session.getAttribute("member");
+	    
+	    if (member != null && memberService.validateCurrentPassword(member.getMemberCode(), currentPassword)) {
+	        if (memberService.changePassword(member.getMemberCode(), currentPassword, newPassword)) {
+	            response.put("success", true);
+	        } else {
+	            response.put("success", false);
+	            response.put("message", "비밀번호 변경에 실패했습니다.");
+	        }
+	    } else {
+	        response.put("success", false);
+	        response.put("message", "현재 비밀번호가 올바르지 않습니다.");
+	    }
+	    
+	    return response;
 	}
 	/*
 	// 회원 목록 페이지

@@ -4,6 +4,7 @@
 	layout:decorate="~{template/client/layout/layout}" >
 
 <th:block layout:fragment="content">
+<div class="container">
 	<h3>회원 주문내역 조회</h3>
 	
 	<div id="orderSearch" class="my-2">
@@ -63,7 +64,7 @@
 				<tr class="text-center" th:each="order:${orderList.dtoList}" th:object="${order}" th:data-no="*{orderNumber}">
 					<td th:text="*{orderNumber}"></td>
 					<td>
-						<a th:href="@{/javaOrder/member/orderItemList/} + *{orderNumber}" th:text="*{orderName}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a>
+						<a th:href="@{/member/orderItemList/} + *{orderNumber}" th:text="*{orderName}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a>
 					</td>
 					<td th:text="*{orderPrice}"></td>
 					<td th:text="*{orderDate}"></td>
@@ -72,6 +73,7 @@
 			</th:block>
 		</tbody>
 	</table>
+</div>
 </th:block>
 		
 <th:block layout:fragment="script">

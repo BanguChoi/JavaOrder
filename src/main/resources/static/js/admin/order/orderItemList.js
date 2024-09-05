@@ -1,3 +1,3 @@
 $("#orderListBtn").click(function(){
-	locationProcess('/javaOrder/admin/orderList');
+	locationProcess('/admin/orderList');
 });

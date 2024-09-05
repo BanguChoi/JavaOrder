@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.javaOrder.common.orders.domain.Orders;
 import com.javaOrder.common.orders.service.OrdersService;
@@ -16,7 +15,6 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/javaOrder/*")
 @RequiredArgsConstructor
 public class OrdersController {
 

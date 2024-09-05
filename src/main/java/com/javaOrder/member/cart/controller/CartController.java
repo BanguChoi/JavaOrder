@@ -53,7 +53,7 @@ public class CartController {
 		Member member = (Member) session.getAttribute("member");
 		String memberCode = member.getMemberCode();
 		cartService.updateCart(cartPrice, memberCode);
-		return "redirect:/member/main";
+		return "redirect:/";
 	}
 
 	@DeleteMapping("/deleteCart/{cartId}")

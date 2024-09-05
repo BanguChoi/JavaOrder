@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
@@ -35,6 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@Transactional
 @RequiredArgsConstructor
 public class KakaoPayServiceImpl implements KakaoPayService {
 	@Value("${kakaopayJavaOrder.kakaopay-secret-key}")
@@ -46,38 +48,26 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 	@Value("${kakaopayJavaOrder.host}")
 	private String hostURL;
 	
-	private String tid;
-	
+	// 결제 요청
 	public KakaoPayReadyResponse ready(PayReadyRequestVO payReadyRequest) {
 		// Request Header
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", "DEV_SECRET_KEY "+kakaoSecretKey);
 		headers.setContentType(MediaType.APPLICATION_JSON);
 
-		//		// Request param
-//		KakaoPayReadyRequest readyRequest = KakaoPayReadyRequest.builder()
-//				.cid(cid)
-//				.partnerOrderId("1")
-//				.partnerUserId("1")
-//				.itemName("상품명")
-//				.quantity(1)
-//				.totalAmount(1100)
-//				.taxFreeAmount(0)
-//				.vatAmount(100)
-//				.approvalUrl(hostURL+"/approve/"+agent+"/"+openType)
-//				.cancelUrl(hostURL+"/cancel/"+agent+"/"+openType)
-//				.failUrl(hostURL+"/fail/"+agent+"/"+openType)
-//				.build();
+		String orderNumber = payReadyRequest.getPartnerOrderId();
+		String memberCode = payReadyRequest.getPartnerUserId();
+		
 		KakaoPayReadyRequest readyRequest = KakaoPayReadyRequest.builder()
 			.cid(cid)
-			.partnerOrderId("10003")
+			.partnerOrderId(payReadyRequest.getPartnerOrderId())
 			.partnerUserId(payReadyRequest.getPartnerUserId())
 			.itemName(payReadyRequest.getItemName())
 			.quantity(payReadyRequest.getQuantity())
 			.totalAmount(payReadyRequest.getTotalAmount())
 			.taxFreeAmount(payReadyRequest.getTaxFreeAmount())
 			.vatAmount(payReadyRequest.getVatAmount())
-			.approvalUrl(hostURL+"/pay/approve/")
+			.approvalUrl(hostURL+"/pay/approve?orderNumber="+orderNumber+"&memberCode="+memberCode)
 			.cancelUrl(hostURL+"/pay/cancel/")
 			.failUrl(hostURL+"/pay/fail/")
 			.build();
@@ -91,9 +81,18 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		);
 		KakaoPayReadyResponse readyResponse = response.getBody();
 		
-		// 주문번호와 TID 매핑해서 저장
-		// Mapping TID with partner_order_id than save it to use for approval request.
-		this.tid = readyResponse.getTid();
+		Orders order = Orders.builder()
+				.orderNumber(Long.valueOf(orderNumber))
+				.memberCode(memberRepository.findById(memberCode).get())
+				.orderPrice(0)
+				.orderStatus("W")
+				.orderName("상품명")
+				.tid(readyResponse.getTid())
+				.orderTakeout(payReadyRequest.getTakeout())
+				.build();
+		
+		orderRepository.save(order);
+		
 		return readyResponse;
 	}
 	
@@ -104,11 +103,11 @@ public class KakaoPayServiceImpl implements KakaoPayService {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "SECRET_KEY " + kakaoSecretKey);
         headers.setContentType(MediaType.APPLICATION_JSON);
-
+        
         // Request param
         ApproveRequest approveRequest = ApproveRequest.builder()
                 .cid(cid)
-                .tid(tid)
+                .tid(orderRepository.findByOrderNumber(Long.valueOf(payApproveRequest.getPartnerOrderId())).getTid())
                 .partnerOrderId(payApproveRequest.getPartnerOrderId())
                 .partnerUserId(payApproveRequest.getPartnerUserId())
                 .pgToken(pgToken)
@@ -132,6 +131,8 @@ public class KakaoPayServiceImpl implements KakaoPayService {
         }
     }
 	
+	
+	
 	private final MemberRepository memberRepository;
 	private final CartRepository cartRepository;
 	private final OrdersRepository orderRepository;
@@ -140,7 +141,7 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 	private final IdGenerationService idGenerationService;
 	
 	@Override
-	public void copyCartToOrder(String mCode) {
+	public void copyCartToOrder(String mCode, String orderNumber) {
 		// 주문한 회원의 장바구니 조회
 		Optional<Member> memberOptional = memberRepository.findById(mCode);
 		Cart cart = cartRepository.findByMember_MemberCode(memberOptional.get().getMemberCode());
@@ -154,22 +155,25 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		// 첫번째 상품명을 기반으로 orderName 설정 (000외 n개)
 		String orderName = generateOrderName(cartItems);
 		
-		// 새 주문 생성
-		Orders newOrder = Orders.builder()
-				.memberCode(cart.getMember())
-				.orderDate(LocalDateTime.now())
-				.orderPrice(cart.getCartPrice())
-				.orderStatus("W")
-				.orderName(orderName)
-				.build();
+		// 주문 불러오기
+		Orders newOrder = orderRepository.findByOrderNumber(Long.valueOf(orderNumber));
+
+		// 주문 내용 갱신
+		newOrder.setMemberCode(cart.getMember());
+		newOrder.setOrderDate(LocalDateTime.now());
+		newOrder.setOrderPrice(cart.getCartPrice());
+		newOrder.setOrderStatus("W");
+		newOrder.setOrderName(orderName);
 		
 		orderRepository.save(newOrder);
 		
-		// 주문항목 ID 생성
-		String orderItemId = idGenerationService.generateId(String.valueOf(newOrder.getOrderNumber()), "order_item_seq", 3);
+
 		
 		// 장바구니 항목을 주문 항목으로 변환
 		for (CartItem cartItem : cartItems) {
+			// 주문항목 ID 생성
+			String orderItemId = idGenerationService.generateId(String.valueOf(newOrder.getOrderNumber()), "order_item_seq", 5);
+			
 			OrderItem newOrderItem = OrderItem.builder()
 					.orderitemId(orderItemId)
 					.orderNumber(newOrder)
@@ -180,25 +184,30 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 					.orderitemSize(cartItem.getOptionSize())
 					.orderitemTemp(cartItem.getOptionTemperature())
 					.orderitemSyrup(cartItem.getOptionSyrup())
-					.orderitemTakeout(0)
-					.orderitemExfee(0)
 					.build();
 			
 			orderItemRepository.save(newOrderItem);
 		}
 		
 		// 해당 장바구니 내용 삭제
-		cartItemRepository.deleteAll(cartItems);
-		
-//		return newOrder;
+//		cartItemRepository.deleteAll(cartItems);
+		cartItemRepository.deleteByCart(cart);
 	}
 	
+	
+	// 주문번호 생성
+	@Override
+	public String generateOrderNumber() {
+		String orderNumber = idGenerationService.generateId("", "orders_seq", 5);
+		return orderNumber;
+	}
 	
 	// 장바구니 총 계산
 	// ?
 	
 	// 장바구니 항목들의 이름을 기반으로 주문명 생성 (예: "상품명 외 n건")
-	private String generateOrderName(List<CartItem> cartItems) {
+	@Override
+	public String generateOrderName(List<CartItem> cartItems) {
 	    if (cartItems.isEmpty()) {
 	        return "주문 상품 없음";
 	    }

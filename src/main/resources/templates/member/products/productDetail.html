@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/client/layout/layout}" >	
+	
+	<head>
+		<th:block th:insert="~{template/client/fragments/block :: config}"></th:block>
+		<meta name="theme-color" content="#712cf9"/>
+	</head>
+
+	<body class="d-flex h-100 text-center">
+		
+		<!-- 사이드바 -->
+		<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary position-fixed" style="top: 0; left: 0; width: 250px; height: 100vh; padding-top: 56px;">
+		    <th:block th:insert="~{template/client/fragments/block :: sidebar}"></th:block>
+		</div>
+		
+		
+		<th:block layout:fragment="content">  
+		<div class="d-flex flex-grow-1 pt-2" style="margin-left: 280px; padding-bottom: 56px; overflow-y: auto; height: calc(100vh - 56px);">
+			
+			<div th:object="${productDetail}" class="flex-grow-1" style="width: 75%; height: 100%;">
+				<form th:if="${cart != null}" th:action="@{/cart/insertCartItem}" method="post">
+					<input type="hidden" name="productId" th:value="*{productId}" />
+				</form>
+				
+				<form th:action="@{/cart/insertCartItem}" method="post" class="text-start">
+				    <input type="hidden" name="productId" th:value="${productDetail.productId}" />
+				    <input type="hidden" name="cartId" th:value="${cart != null ? cart.cartId : ''}" />
+				</form>
+				
+				<form id="category">
+					<input type="hidden" name="categoryCode" th:value="*{category.code}"/>
+				</form>
+				
+				<div>
+					<h5 class="text-start" th:text="*{productName}"></h5>
+					<p class="text-start" th:text="*{productExplain}"></p>
+					<img class="img-fluid rounded float-start" style="width:70%;" th:src="@{/images/} + *{productId} + '.jpg'" onerror="this.src='/images/noimg.png'">
+				</div>
+				
+			</div>
+			<div style="width: 25%; height: 100%;">
+			<!-- 옵션값 받아서 cartItem에 저장하는 form -->
+				<form th:action="@{/cart/insertCartItem}" method="post" class="text-start">
+					<th:block th:if="${#strings.startsWith(productDetail.category.code, 'A')}">		
+				    <input type="hidden" name="productId" th:value="${productDetail.productId}" />	
+					<div class="mb-3">
+				    	<label>Size</label>		
+			        	<input type="radio" class="btn-check" name="optionSize" id="sizeS" value="1"/>
+			        	<label class="btn btn-outline-primary" for="sizeS">S</label>
+			        	<input type="radio" class="btn-check" name="optionSize" id="sizeM" value="2"/>
+			        	<label class="btn btn-outline-primary" for="sizeM">M (+700)</label>
+		        		<input type="radio" class="btn-check" name="optionSize" id="sizeL" value="3"/>
+			        	<label class="btn btn-outline-primary" for="sizeL">L (+1400)</label>
+				    </div>
+				    
+				    <div class="mb-3">
+				   		<label>ICE/HOT</label>
+						<input type="radio" class="btn-check" name="optionTemperature" id="ice" value="1"/>
+			        	<label class="btn btn-outline-primary" for="ice">ICE</label>
+			        	<input type="radio" class="btn-check" name="optionTemperature" id="hot" value="2"/>
+			        	<label class="btn btn-outline-primary" for="hot">HOT</label>
+				    </div>
+				    
+   			    	<div class="d-flex align-items-center mb-3">
+   					    <label>샷추가</label>
+			        	<select class="form-select" name="optionShot" id="optionShot" style="width: auto;">
+						    <option value="0">추가안함</option>
+						    <option value="1">1샷 (+500)</option>
+						    <option value="2">2샷 (+1000)</option>
+						    <option value="3">3샷 (+1500)</option>
+						    <option value="4">4샷 (+2000)</option>
+						    <option value="5">5샷 (+2500)</option>
+						    <option value="6">6샷 (+3000)</option>
+						    <option value="7">7샷 (+3500)</option>
+						    <option value="8">8샷 (+4000)</option>
+						    <option value="9">9샷 (+4500)</option>
+					  	</select>
+				    </div>
+				    
+				    <div class="mb-3 d-flex align-items-center">
+				    
+				    
+				    	
+				    	<label>시럽</label>
+				    	<div class="d-flex align-items-center">
+				    		<input type="checkbox" name="optionSyrup" class="btn-check" id="caramel" value="1"/>
+			        		<label class="btn btn-outline-primary" for="caramel" >카라멜(+500)</label>
+			        	</div>
+			        	<div class="d-flex align-items-center">
+			        		<input type="checkbox" name="optionSyrup" class="btn-check" id="vanila" value="2"/>	
+			        		<label class="btn btn-outline-primary" for="vanila">바닐라(+500)</label>
+				    	</div>
+				    </div>
+				    </th:block>
+				    
+				    <div class="d-flex align-items-center justify-content-center" style="position: absolute; bottom: 180px; right:90px;">
+				    	<label>수량</label>
+				    	<div class="d-flex align-items-center">
+				    		<button type="button" class="btn btn-primary" id="minusBtn">-</button>
+							<input type="text" value="1" id="count" class="form-control text-center" style="width: 50px; margin-left: 5px; margin-right: 5px;" readonly />
+							<button type="button" class="btn btn-primary" id="plusBtn">+</button>
+				    	</div>
+				    </div>
+				    
+				    <div style="position: absolute; bottom: 120px; right:100px;">
+				    	총 가격: <span id="total-price"></span>원
+				    </div>
+				    
+			    	<button type="submit" class="btn btn-primary addCartBtn"
+			    		style="position: absolute; bottom: 60px; right:100px;">
+			    		장바구니담기
+			    	</button>
+				</form>
+				
+				
+				
+			</div>
+		</div>
+		</th:block>
+		
+		<footer class="footer mt-auto pt-2 bg-body-tertiary fixed-bottom">
+			<th:block th:insert="~{template/client/fragments/block :: footer}"></th:block>
+		</footer> 
+		
+		<th:block layout:fragment="script">
+		  	<script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+			<script src="/js/jquery-3.7.1.min.js"></script>
+			<script src="/js/common.js"></script>
+			<script src="/js/member/products/productDetail.js"></script>
+		</th:block>
+	</body>
+</html>

@@ -19,7 +19,7 @@
 	            <p>안녕하세요, <span th:text="${member.memberName}">회원님</span>!</p>
 	            <p>이메일: <span th:text="${member.memberEmail}">이메일</span></p>
             </div>
-            <form action="/javaOrder/member/signout" method="get">
+            <form action="/member/signout" method="get">
                 <button type="submit" class="btn btn-danger">로그아웃</button>
             </form>
         </div>

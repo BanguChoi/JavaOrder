@@ -81,8 +81,8 @@ public class CartItemController {
 	    
 	    cartItem.setItemNum(Integer.parseInt(cartItemData.get("count").toString()));
 	    
-	    String optionShot = (String) cartItemData.get("optionShot");
-	    cartItem.setOptionShot(optionShot.equals("추가안함") ? 0 : Integer.parseInt(optionShot));
+	    int optionShot = (int) cartItemData.get("optionShot");
+	    cartItem.setOptionShot(optionShot);
 	    
 	    cartItem.setOptionSize(Integer.parseInt(cartItemData.get("optionSize").toString()));
 	    cartItem.setOptionTemperature(Integer.parseInt(cartItemData.get("optionTemperature").toString()));
@@ -90,13 +90,9 @@ public class CartItemController {
 	    List<String> syrupOptions = (List<String>) cartItemData.get("optionSyrup");
 	    int syrupCount = 0;
 	    if (syrupOptions != null) {
-	        for (String syrup : syrupOptions) {
-	            if (syrup.equals("1") || syrup.equals("2")) {
-	                syrupCount++;
-	            }
-	        }
+	        syrupCount = syrupOptions.size();
 	    }
-	    cartItem.setOptionSyrup(syrupCount);
+	    cartItem.setOptionSyrup(syrupCount);;
 
 	    int totalPrice = Integer.parseInt(cartItemData.get("totalPrice").toString().replaceAll(",", ""));
 	    cartItem.setItemPrice(totalPrice);

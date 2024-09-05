@@ -17,4 +17,5 @@ public class PayReadyRequestVO {
 	private Integer totalAmount;		// 총금액
 	private Integer taxFreeAmount;
 	private Integer vatAmount;
+	private Integer takeout;	// 수령방식
 }
