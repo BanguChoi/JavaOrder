@@ -59,7 +59,6 @@ $(document).ready(function(){
 			success: function(response) {
 			},
 			error: function(xhr, status, error) {
-			  console.error('Error:', xhr.responseText);
 			}
 		});
 	}
@@ -84,7 +83,6 @@ $(document).ready(function(){
 	                }
 	            },
 	            error: function(xhr, status, error) {
-	                console.error('Error:', error);
 	                alert('삭제 중 오류가 발생했습니다.');
 	            }
 	        });

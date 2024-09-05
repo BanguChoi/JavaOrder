@@ -13,20 +13,21 @@
 		<h1 class="h3 mb-3 fw-normal">로그인해 주세요</h1>
 			<form id="loginForm" action="/member/signin" method="post">
 			<div class="form-floating">
-	      		<input type="text" class="form-control" id="id" name="memberId">
+	      		<input type="text" class="form-control" id="id" name="memberId" autocomplete="memberid">
 	   			<label for="id">id</label>
 	   		</div>
 	   		
 	    	<div class="form-floating">
-	      		<input type="password" class="form-control" id="password" name="memberPassword">
+	      		<input type="password" class="form-control" id="password" name="memberPassword" autocomplete="current-password">
 	      		<label for="password">Password</label>
 	    	</div>
 	
 	    	<!-- <div class="checkbox mb-3">
 	      		<label>
-	       			<input type="checkbox" value="remember-me"> Remember me
+					<input type="checkbox" id="rememberMe" name="rememberMe"> 아이디 기억하기
 	      		</label>
 	    	</div> -->	
+	    	
 	    	<div id="error" th:text="${error}" style="display:none;"></div>
 	    	
 	    	<button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>

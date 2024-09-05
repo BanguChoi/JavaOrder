@@ -77,7 +77,7 @@ public class MemberController {
 	    Member member = (Member) session.getAttribute("member");
 	    if (member == null) {
 	        // 로그인하지 않은 경우 로그인 페이지로 리다이렉트
-	        return "redirect:/javaOrder/member/signin";
+	        return "redirect:/member/signin";
 	    }
 	    model.addAttribute("member", member);
 	    return "/member/mypage";
@@ -115,7 +115,7 @@ public class MemberController {
 	@PostMapping("/verifyPassword")
 	@ResponseBody
 	public Map<String, Object> verifyPassword(
-	        @RequestParam("currentPassword") String currentPassword,
+	        @RequestParam String currentPassword,
 	        HttpSession session) {
 
 	    Map<String, Object> response = new HashMap<>();

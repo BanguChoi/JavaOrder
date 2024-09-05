@@ -1,6 +1,7 @@
 package com.javaOrder.member.cart.service;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -73,11 +74,19 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public void updateCart(int cartPrice, String memberCode) {
 		Member member = memberRepository.findCartByMemberCode(memberCode);
-		Optional<Cart> cartOptonal = cartRepository.findByMember(member);
-		Cart cart = cartOptonal.get();
 		
-		cart.setCartPrice(cartPrice);
-		cartRepository.save(cart);
+		if(member == null) {
+			throw new NoSuchElementException("회원정보를 조회할 수 없음");
+		}
+		Optional<Cart> cartOptonal = cartRepository.findByMember(member);
+		
+		if(cartOptonal.isPresent()) {
+			Cart cart = cartOptonal.get();
+			cart.setCartPrice(cartPrice);
+			cartRepository.save(cart);
+		} else {
+			throw new NoSuchElementException(memberCode + " 회원의 카트를 찾을 수 없음");
+		}
 	}
 
 	@Override
