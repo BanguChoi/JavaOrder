@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
@@ -35,6 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@Transactional
 @RequiredArgsConstructor
 public class KakaoPayServiceImpl implements KakaoPayService {
 	@Value("${kakaopayJavaOrder.kakaopay-secret-key}")
@@ -188,9 +190,8 @@ public class KakaoPayServiceImpl implements KakaoPayService {
 		}
 		
 		// 해당 장바구니 내용 삭제
-		cartItemRepository.deleteAll(cartItems);
-		
-//		return newOrder;
+//		cartItemRepository.deleteAll(cartItems);
+		cartItemRepository.deleteByCart(cart);
 	}
 	
 	

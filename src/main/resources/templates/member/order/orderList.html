@@ -64,7 +64,7 @@
 				<tr class="text-center" th:each="order:${orderList.dtoList}" th:object="${order}" th:data-no="*{orderNumber}">
 					<td th:text="*{orderNumber}"></td>
 					<td>
-						<a th:href="@{/javaOrder/member/orderItemList/} + *{orderNumber}" th:text="*{orderName}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a>
+						<a th:href="@{/member/orderItemList/} + *{orderNumber}" th:text="*{orderName}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a>
 					</td>
 					<td th:text="*{orderPrice}"></td>
 					<td th:text="*{orderDate}"></td>

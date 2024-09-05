@@ -7,8 +7,9 @@
 </th:block>
 
 <th:block layout:fragment="content">
+<div class="container">
 	<div class="card-body">
-	<div class="container">
+	
 	    <!-- 회원 정보 출력 -->
 		<div th:if="${member != null}" th:object="${member}">
 		    <!-- 회원 코드 숨기기 -->

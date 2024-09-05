@@ -14,12 +14,12 @@
 				<th>상품명</th>
 				<th>수량</th>
 				<th>가격</th>
-				<th>추가금액</th>
+				<!-- <th>추가금액</th> -->
 				<th>샷추가</th>
 				<th>사이즈</th>
 				<th>Ice/Hot</th>
 				<th>시럽</th>
-				<th>수령방식</th>				
+<!-- 				<th>수령방식</th>				 -->
 			</tr>
 		</thead>
 		<tbody>
@@ -33,12 +33,12 @@
 					<td th:text="*{productId.productName}"></td>
 					<td th:text="*{orderitemNumber}"></td>
 					<td th:text="*{orderitemPrice}"></td>
-					<td th:text="*{orderitemExfee}"></td>
+					<!-- <td th:text="*{orderitemExfee}"></td> -->
 					<td th:text="*{orderitemShot}"></td>
 					<td th:text="*{orderitemSize==0?'Small':orderitemSize==1?'Medium':'Large'}"></td>
 					<td th:text="*{orderitemTemp==0?'Ice':'Hot'}"></td>
 					<td th:text="*{orderitemSyrup != null ? orderitemSyrup:'-'}"></td>
-					<td th:text="*{orderitemTakeout==1?'픽업':'매장'}"></td>
+					<!-- <td th:text="*{orderitemTakeout==1?'픽업':'매장'}"></td> -->
 				</tr>
 			</th:block>
 		</tbody>
