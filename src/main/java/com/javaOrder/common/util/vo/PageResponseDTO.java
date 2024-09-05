@@ -1,53 +1,36 @@
-package com.javaOrder.common.util.vo;
+package com.javaOrder.admin.product.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import lombok.Builder;
-import lombok.Data;
+import com.javaOrder.admin.product.domain.Category;
+import com.javaOrder.admin.product.dto.CategoryDTO;
+import com.javaOrder.admin.product.service.CategoryService;
 
-// 응답
+@RestController
+@RequestMapping("/admin/categories")
+public class CategoryController {
 
-@Data
-public class PageResponseDTO<E> {
-	private List<E> dtoList;
-	private List<Integer> pageNumList;
-	private PageRequestDTO pageRequestDTO;
-	private boolean prev;
-	private boolean next;
-	private int totalCount;
-	private int prevPage;
-	private int nextPage;
-	private int totalPage;
-	private int current;
-	
-	@Builder(builderMethodName = "withAll")
-	public PageResponseDTO(List<E> dtoList, PageRequestDTO pageRequestDTO, long totalCount) {
-		this.dtoList = dtoList;
-		this.pageRequestDTO = pageRequestDTO;
-		this.totalCount = (int) totalCount;
-		
-		int end = (int) (Math.ceil(pageRequestDTO.getPage() / 10.0)) * 10;
-		int start = end - 9;
-		int last = (int) (Math.ceil((totalCount / (double) pageRequestDTO.getSize())));
-		
-		end = end > last ? last : end;
-		
-		this.prev = start > 1;
-		this.next = totalCount > end * pageRequestDTO.getSize();
-		this.pageNumList = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
-		/*1~10까지 반복해서 list에 담는 과정*/
-		
-		
-		if(prev) {
-			this.prevPage = start - 1;
-		}
-		if(next) {
-			this.nextPage = end + 1;
-		}
-		
-		this.totalPage = this.pageNumList.size();
-		this.current = pageRequestDTO.getPage();
-	}
+    @Autowired
+    private CategoryService categoryService;
+
+    @PostMapping("/create")
+    public ResponseEntity<?> createCategory(@RequestBody CategoryDTO categoryDTO) {
+        try {
+            System.out.println("Received CategoryDTO: " + categoryDTO);
+            Category newCategory = categoryService.createCategory(categoryDTO.getPrefix(), categoryDTO.getName());
+            return ResponseEntity.ok(newCategory);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("카테고리 생성 중 오류가 발생했습니다.");
+        }
+    }
+
+
+
 }

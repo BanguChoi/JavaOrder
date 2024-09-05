@@ -1,3 +1,4 @@
+
 package com.javaOrder.admin.product.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;

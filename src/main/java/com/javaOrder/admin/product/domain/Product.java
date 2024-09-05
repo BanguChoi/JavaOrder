@@ -1,3 +1,4 @@
+
 package com.javaOrder.admin.product.domain;
 
 import java.util.Date;
