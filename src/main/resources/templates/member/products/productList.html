@@ -4,8 +4,8 @@
 
 <th:block th:fragment="productList">
 	<form id="searchForm">
-		<input type="text" name="page" id="size" th:value="${productList.pageRequestDTO.page}" />
-		<input type="text" name="size" id="size" th:value="${productList.pageRequestDTO.size}" />
+		<input type="hidden" name="page" id="size" th:value="${productList.pageRequestDTO.page}" />
+		<input type="hidden" name="size" id="size" th:value="${productList.pageRequestDTO.size}" />
 	</form>
 	<!-- 
 	<form id="category">
