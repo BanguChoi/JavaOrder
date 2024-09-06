@@ -219,10 +219,14 @@ public class ProductController {
     }
     
     
+    
+    
+    
+    
     // 회원 측 상품 페이지
 	@GetMapping("/products/productList")
-	public String productList(ProductPageRequestDTO productPageRequestDTO, Model model) {
-		ProductPageResponseDTO<Product> productList = productService.productList(productPageRequestDTO);
+	public String productList(ProductPageRequestDTO productPageRequestDTO, Model model, HttpSession session) {
+		ProductPageResponseDTO<Product> productList = productService.productList(productPageRequestDTO, session);
 		
 		model.addAttribute("productList", productList);
 		return "member/products/productList :: productList";
