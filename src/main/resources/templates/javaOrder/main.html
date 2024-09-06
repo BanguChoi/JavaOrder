@@ -1,0 +1,32 @@
+<!-- <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/client/layout/layout}" >
+
+	<th:block th:insert="~{template/client/fragments/block :: config}">
+		<meta name="theme-color" content="#712cf9"/>
+		<link rel="stylesheet" href="/css/main.css">
+	</th:block>
+
+<th:block layout:fragment="header">
+	로그인 상태에 따라 표시
+    <div class="col-md-3 text-end">
+	<div id="loginSection" th:if="${member == null}">
+        <button type="button" id="signInBtn" class="btn btn-outline-primary me-2">로그인</button>
+        <button type="button" id= "signUpBtn" class="btn btn-primary">회원가입</button>
+    </div>
+    
+    <div id="userInfoSection" th:if="${member != null}">
+        <div id="userInfo" class="clickable">
+            <p>안녕하세요, <span th:text="${member.memberName}">회원님</span>!</p>
+            <p>이메일: <span th:text="${member.memberEmail}">이메일</span></p>
+        </div>
+        <form action="/javaOrder/member/signout" method="get">
+            <button type="submit" class="btn btn-danger">로그아웃</button>
+        </form>
+    </div>
+</th:block>
+
+    	
+<th:blcok layout:fragment="script">
+   	<script src="/js/member/main.js"></script>
+</th:block>
+</html> -->

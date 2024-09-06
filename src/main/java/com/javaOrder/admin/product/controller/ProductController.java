@@ -1,4 +1,3 @@
-
 package com.javaOrder.admin.product.controller;
 
 import java.io.File;
@@ -72,8 +71,8 @@ public class ProductController {
         // 정렬 기준과 방향을 포함한 PageRequest 생성
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
 
-        // 검색 기능 추가
-        Page<Product> productsPage;
+        // 검색 로직 통합
+        Page<Product> productsPage = productService.getProducts(pageRequest);
         if (searchValue != null && !searchValue.isEmpty()) {
             switch (searchType) {
                 case "productName":
@@ -84,28 +83,18 @@ public class ProductController {
                     break;
                 case "productDate":
                     try {
-                        // String을 LocalDate로 변환
+                        // 날짜 검색을 위해 검색어를 LocalDate로 변환
                         LocalDate productDate = LocalDate.parse(searchValue);
                         productsPage = productService.findByProductDate(productDate, pageRequest);
                     } catch (Exception e) {
-                        // 날짜 변환 오류 처리
                         model.addAttribute("errorMessage", "잘못된 날짜 형식입니다. yyyy-MM-dd 형식으로 입력하세요.");
-                        productsPage = productService.getProducts(pageRequest); // 기본 목록 반환
                     }
                     break;
-                default:
-                    productsPage = productService.getProducts(pageRequest);
-                    break;
             }
-        } else {
-            // 검색 조건이 없을 경우 전체 목록 조회
-            productsPage = productService.getProducts(pageRequest);
         }
 
-        // 모델에 검색 결과 추가
         model.addAttribute("productsPage", productsPage);
         return "admin/products/product";
-
     }
 
     @GetMapping("/admin/products/{id}")

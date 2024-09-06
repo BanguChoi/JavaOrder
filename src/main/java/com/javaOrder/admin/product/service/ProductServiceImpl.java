@@ -50,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
         product.setProductId(newProductCode);
         product.setCategory(category);
         product.setProductName(productName);
-        product.setProductPrice(price);  // 가격은 null일 수 있음
+        product.setProductPrice(price);
 
         return productRepository.save(product);
     }

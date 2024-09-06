@@ -25,8 +25,6 @@ public interface ProductRepository extends JpaRepository<Product, String> {
     // 등록일자를 기준으로 검색하는 메서드
     Page<Product> findByProductDate(LocalDate productDate, Pageable pageable);
 
-	Page<Product> findByProductNameContainingAndCategory_Code(String keyWord, String categoryCode, Pageable pageable);
-
-    
-    
+    // 상품명을 부분 일치 검색하고, 카테고리 코드로도 검색하는 메서드
+    Page<Product> findByProductNameContainingAndCategory_Code(String keyWord, String categoryCode, Pageable pageable);
 }
