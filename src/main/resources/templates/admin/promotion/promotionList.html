@@ -36,7 +36,7 @@
 					<th:block th:if="${not #strings.isEmpty(promotionList.dtoList)}">		
 						<tr class="text-center" th:each="promotion : ${promotionList.dtoList}" th:object="${promotion}"  th:data-no="*{promCode}">
 							<td th:text="*{promCode}"></td>
-							<td><a th:href="@{/adminPromotion/} + *{promCode}" th:text="*{promTitle}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a></td>
+							<td><a th:href="@{/admin/promotion/} + *{promCode}" th:text="*{promTitle}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a></td>
 							<td class="content" th:text="*{promContent}"></td>
 							<td class="date" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
 						</tr>

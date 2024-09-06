@@ -13,5 +13,5 @@
 
 /*  목록 버튼 클릭 시 처리 이벤트 */
 $("#noticesListBtn").click(function(){
-	locationProcess("/memberNotices/noticesList");
+	locationProcess("/member/notices/noticesList");
 });

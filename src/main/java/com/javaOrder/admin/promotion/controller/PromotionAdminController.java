@@ -36,7 +36,7 @@ public class PromotionAdminController {
 	@PostMapping("/promotionInsert")
 	public String promotionInsert(Promotion promotion) {
 		service.promotionInsert(promotion);
-		return "redirect:/adminPromotion/promotionList";
+		return "redirect:/admin/promotion/promotionList";
 	}
 	
 	@GetMapping("/{promCode}")
@@ -60,13 +60,13 @@ public class PromotionAdminController {
 	@PostMapping("/promotionUpdate")
 	public String promotionUpdate(Promotion promotion) {
 		service.promotionUpdate(promotion);
-		return "redirect:/adminPromotion/"+promotion.getPromCode();//이동이 안될시 확인 확인 성공
+		return "redirect:/admin/promotion/"+promotion.getPromCode();//이동이 안될시 확인 확인 성공
 	}
 	
 	@PostMapping("/promotionDelete")
 	public String promotionDelete(Promotion promotion) {
 		service.promotionDelete(promotion);
-		return "redirect:/adminPromotion/promotionList"; //이동이 안될시 확인 성공
+		return "redirect:/admin/promotion/promotionList"; //이동이 안될시 확인 성공
 	}
 	
 	

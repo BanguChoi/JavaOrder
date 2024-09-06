@@ -1,7 +1,7 @@
 
 /* 수정버튼 클릭 */
 $("#updateFormBtn").on("click", function(){
-	actionProcess("#dataForm", "post", "/memberBoard/updateForm");
+	actionProcess("#dataForm", "post", "/member/board/updateForm");
 	/*pwdInit("visible");
 	btnInit();
 	buttonCheck = "updateButton";*/
@@ -35,7 +35,7 @@ $(document).ready(function() {
             success: function(response) {
 				if(response=="일치"){
 					if(confirm("정말 삭제하시겠습니까?")){							
-						actionProcess("#dataForm", "post", "/memberBoard/boardDelete");
+						actionProcess("#dataForm", "post", "/member/board/boardDelete");
 					}
 				}
 				else if(response=="불일치"){
@@ -54,10 +54,10 @@ $(document).ready(function() {
 
 /* 등록 버튼 클릭 시 처리 버튼 */
 $("#insertFormBtn").click(function(){
-	locationProcess("/memberBoard/insertForm");
+	locationProcess("/member/board/insertForm");
 });
 
 /*  목록 버튼 클릭 시 처리 이벤트 */
 $("#boardListBtn").click(function(){
-	locationProcess("/memberBoard/boardList");
+	locationProcess("/member/board/boardList");
 });

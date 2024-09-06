@@ -39,7 +39,7 @@ public class NoticesAdminController {
 		@PostMapping("/noticesInsert")
 		public String noticesInsert(Notices notices) {
 			service.noticesInsert(notices);
-			return "redirect:/adminNotices/noticesList";
+			return "redirect:/admin/notices/noticesList";
 		}
 		
 		@GetMapping("/{noticesNo}")
@@ -63,14 +63,14 @@ public class NoticesAdminController {
 		@PostMapping("/noticesUpdate")
 		public String noticesUpdate(Notices notices) {
 			service.noticesUpdate(notices);
-			return "redirect:/adminNotices/"+notices.getNoticesNo();//이동이 안될시 확인
+			return "redirect:/admin/notices/"+notices.getNoticesNo();//이동이 안될시 확인
 		}
 		
 		
 		@PostMapping("/noticesDelete")
 		public String noticesDelete(Notices notices) {
 			service.noticesDelete(notices);
-			return "redirect:/adminNotices/noticesList"; //이동이 안될시 확인 성공
+			return "redirect:/admin/notices/noticesList"; //이동이 안될시 확인 성공
 		}
 		
 }

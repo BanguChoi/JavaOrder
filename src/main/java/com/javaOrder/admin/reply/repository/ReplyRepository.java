@@ -16,5 +16,5 @@ public interface ReplyRepository extends JpaRepository<Reply, Long> {
 	 * */
 	@Query("SELECT r FROM Reply r WHERE r.board.boardNo = ?1")//boardNo 대소문자 구분 확인 필요
 	List<Reply> findByBoardNo(Long boardNo);
-	List<Reply> findByreplyName(String replyName);
+	List<Reply> findByReplyName(String replyName);
 }
