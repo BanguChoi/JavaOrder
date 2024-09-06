@@ -31,14 +31,12 @@ public class promotionMemberController {
 		return "member/promotion/promotionList";
 	}
 	
-	@GetMapping("/{promCode}")
-	public String promotionDetail(@PathVariable Long promCode, Promotion promotion, Model model) {
-		promotion.setPromCode(promCode);
+	@GetMapping("/{promotionCode}")
+	public String promotionDetail(@PathVariable Long promotionCode, Promotion promotion, Model model) {
+		promotion.setPromotionCode(promotionCode);
 		Promotion detail = service.promotionDetail(promotion);
 		model.addAttribute("detail",detail);
 		
-		String newLine = System.getProperty("line.separator").toString();
-		model.addAttribute("newLine", newLine);
 		return "member/promotion/promotionDetail";
 	}
 }
