@@ -7,42 +7,32 @@
 <div class="container">
 	<h3>주문내역 조회</h3>
 	
-	<table class="table table-hover table-striped">
-		<thead>
-			<tr>
-				<th>주문번호</th>
-				<th>상품명</th>
-				<th>수량</th>
-				<th>가격</th>
-				<!-- <th>추가금액</th> -->
-				<th>샷추가</th>
-				<th>사이즈</th>
-				<th>Ice/Hot</th>
-				<th>시럽</th>
-<!-- 				<th>수령방식</th>				 -->
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:if="${#lists.size(orderItemList) == 0}">
-				<td colspan="10">주문 항목 내역이 없습니다. 잠시 후 다시 시도해 주세요</td>
-			</tr>
-			
-			<th:block th:if="${not #lists.isEmpty(orderItemList)}">
-				<tr class="text-center" th:each="orderItem : ${orderItemList}" th:object="${orderItem}">
-					<td th:text="*{orderNumber.orderNumber}"></td>
-					<td th:text="*{productId.productName}"></td>
-					<td th:text="*{orderitemNumber}"></td>
-					<td th:text="*{orderitemPrice}"></td>
-					<!-- <td th:text="*{orderitemExfee}"></td> -->
-					<td th:text="*{orderitemShot}"></td>
-					<td th:text="*{orderitemSize==0?'Small':orderitemSize==1?'Medium':'Large'}"></td>
-					<td th:text="*{orderitemTemp==0?'Ice':'Hot'}"></td>
-					<td th:text="*{orderitemSyrup != null ? orderitemSyrup:'-'}"></td>
-					<!-- <td th:text="*{orderitemTakeout==1?'픽업':'매장'}"></td> -->
-				</tr>
-			</th:block>
-		</tbody>
-	</table>
+<th:block th:if="${#lists.size(orderItemList) == 0}">
+		<div class="row border-bottom py-3">
+			주문 항목 내역이 없습니다. 잠시 후 다시 시도해 주세요.
+		</div>	
+	</th:block>
+	<th:block th:if="${not #lists.isEmpty(orderItemList)}">
+		<div class="row border-bottom py-3 text-start" th:each="orderItem : ${orderItemList}" th:object="${orderItem}"> 
+			<div class="col-2">
+				<img th:src="@{/images/{orderItem.productId.productCode}.jpg(orderItem.productId.productCode=*{productId.productId})}" onerror="this.src='/images/noimg.png'" class="img-fluid">
+			</div>
+			<div class="col-6">
+			    <h5 th:text="*{productId.productName}"></h5>
+			    <p>
+			    <span th:text="*{orderitemNumber}">1</span>개 <span th:text="*{orderitemPrice}">원</span></p>
+			    <p>옵션 : 
+			    	<span th:text="*{orderitemShot==0}?'':${orderItem.orderitemShot}+'샷'"></span>&nbsp;
+			    	<span th:text="*{orderitemSize==0?'Small':orderitemSize==1?'Medium':'Large'}"></span>&nbsp;
+			    	<span th:text="*{orderitemTemp==0?'Ice':'Hot'}"></span>&nbsp;
+			    	<span th:text="*{orderitemSyrup == 0 ? '':orderitemSyrup==1?'카라멜시럽':'바닐라시럽'}"></span>
+			    </p>
+			</div>
+			<div class="col-4 text-end">
+			    <a th:href="@{'/products/'+*{productId.productId} + '/detail'}" class="btn btn-outline-primary productDetailBtn">제품 담기</a>
+			</div>
+		</div>
+	</th:block>
 	
 	<div class="text-end">
 		<button type="button" class="btn btn-primary btn-sm" id="orderListBtn">목록</button>

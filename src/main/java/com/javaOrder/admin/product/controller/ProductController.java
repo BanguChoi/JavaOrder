@@ -104,7 +104,7 @@ public class ProductController {
 
         // 모델에 검색 결과 추가
         model.addAttribute("productsPage", productsPage);
-        return "product/product";
+        return "admin/products/product";
 
     }
 
@@ -116,7 +116,7 @@ public class ProductController {
 
         Product product = productService.getProductById(productId);
         model.addAttribute("product", product);
-        return "admin/product/productDetail";
+        return "admin/products/productDetail";
     }
 
     @PutMapping("/admin/products/{id}")
@@ -139,7 +139,7 @@ public class ProductController {
     public String showProductForm(Model model) {
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
-        return "admin/product/productForm";
+        return "admin/products/productForm";
     }
 
     @PostMapping
