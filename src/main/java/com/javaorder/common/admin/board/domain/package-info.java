@@ -1,0 +1,1 @@
+package com.javaorder.common.admin.board.domain;

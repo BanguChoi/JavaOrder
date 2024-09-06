@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+ layout:decorate="~{template/client/layout/layout}">
+ 
+ <th:block layout:fragment="content">
+ 	<div class="text-center"><h3> board 문의 게시판 상세</h3></div>
+ 	
+ 	<div class="container">
+		<div th:object="${detail}" >
+		
+			<form id="dataForm">
+				<input type="hidden" th:field="*{boardNo}"/>
+			</form>
+			
+			<table class="table table-bordered">
+				<tbody class="text-center">
+					<tr>
+						<td class="col-md-3">제목</td>
+						<td class="col-md-3 text-start" th:text="*{boardTitle}"></td>
+						<td class="col-md-3">작성일</td>
+						<td class="col-md-3 text-start" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+					</tr>					
+					<tr class="board-table-tr-height">
+						<td class="col-md-3 aligh-middle">글내용</td>
+						<td colspan="3" class="col-md-9 text-start" th:utext="${#strings.replace(detail.boardContent, newLine, '&lt;br /&gt;')}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<form id="deleteForm">						
+				<div class="mb-3 row">
+						<label class="col-sm-2 col-form-label">비밀번호</label>
+						<input class="col-sm-4"  th:field="*{boardPasswd}" />				
+					</div>
+				</form>
+			<div class="text-end mb-3">
+				<button type="button" id="updateFormBtn" class="btn btn-primary btn-sm">글수정</button>
+				<button type="button" id="boardDeleteBtn" class="btn btn-primary btn-sm">글삭제</button>
+				<button type="button" id="insertFormBtn" class="btn btn-primary btn-sm">글쓰기</button>
+				<button type="button" id="boardListBtn" class="btn btn-primary btn-sm">글목록</button>
+			</div>
+			
+			<!--댓글화면 구현(comment) 나중에 / 이거** 주석처리 주의/-->
+			
+			
+			
+			<form id="commentForm">
+				<input type="hidden" name="id" id="id" value="0" />
+				<div class="row mb-3">
+					<label for="nickname" class="col-sm-1 col-form-label">작성자</label>
+					<div class="col-sm-3">
+						<input type="text" name="replyName" id="replyName"  class="form-control"/>
+					</div>
+					<button type="button" id="replyInsertBtn" class="btn btn-secondary col-sm-1 sendBtn mx-2">저장</button>
+				</div>
+				<div class="row mb-3">
+					<label for="replyContent" class="col-sm-1 col-form-label">댓글내용</label>
+					<div class="col-sm-11">
+						<textarea name="replyContent" id="replyContent" class="form-control" rows="3"></textarea>
+					</div>
+				</div>
+			</form>
+			
+			<div id="commentList">
+				<div class="card mb-2" id="item-template">
+					<h5 class="card-header">
+						<span class="replyName"></span>
+						<span class="regDate"></span>
+						<a href="#" class="btn btn-secondary btn-sm commentUpdateFormBtn">수정</a>
+						<a href="#" class="btn btn-secondary btn-sm commentDeleteBtn">삭제</a>
+					</h5>
+					<div class="card-body">
+						<p class="card-text"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	 	
+ 	<!-- <th:block th:insert="~{client/board/reply :: reply}"></th:block> -->
+ </th:block>
+ 
+ <th:block layout:fragment="script">
+ 	<script src="/js/member/board/boardDetail.js"></script>
+ 	<script src="/js/member/reply/comment.js"></script>
+ </th:block>
+</html>
