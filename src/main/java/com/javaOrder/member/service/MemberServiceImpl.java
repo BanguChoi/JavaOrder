@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.javaOrder.common.util.service.IdGenerationService;
+import com.javaOrder.common.util.service.MaskingUtils;
 import com.javaOrder.common.util.vo.PageRequestDTO;
 import com.javaOrder.common.util.vo.PageResponseDTO;
 import com.javaOrder.member.cart.domain.Cart;
@@ -94,18 +95,27 @@ public class MemberServiceImpl implements MemberService {
 			result = memberRepository.findAll(pageable);
 		}
 		
-		List<Member> memberList = result.getContent().stream().collect(Collectors.toList());		
+		List<Member> memberList = result.getContent().stream()
+				.map(member -> {
+			        // 마스킹 처리
+			        member.setMemberName(MaskingUtils.maskName(member.getMemberName()));
+			        member.setMemberId(MaskingUtils.maskId(member.getMemberId()));
+			        member.setMemberEmail(MaskingUtils.maskEmail(member.getMemberEmail()));
+			        member.setMemberPhone(MaskingUtils.maskPhone(member.getMemberPhone()));
+			        return member;
+			    })
+				.collect(Collectors.toList());		
 		Long totalCount = result.getTotalElements();
 		
 		PageResponseDTO<Member> responseDTO = PageResponseDTO.<Member>withAll()
-											.dtoList(memberList)
-											.pageRequestDTO(pageRequestDTO)
-											.totalCount(totalCount)
-											.build();
-		
+			.dtoList(memberList)
+			.pageRequestDTO(pageRequestDTO)
+			.totalCount(totalCount)
+			.build();
 		return responseDTO;
 	}
 
+	
 	// 회원 로그인
 	@Override
 	public Member Login(String memberId, String memberPassword) {
