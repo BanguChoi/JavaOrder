@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+	</head>
+	<body>
+<div id="commentList">
+    <!-- 댓글 템플릿 -->
+    <div id="item-template" class="reply" style="display: none;">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="name">작성자 이름</h5>
+                <small class="cdate">작성일</small>
+            </div>
+            <div class="card-body">
+                <p class="card-text">댓글 내용</p>
+                <button type="button" class="btn btn-primary commentUpdateFormBtn">수정</button>
+                <button type="button" class="btn btn-danger commentDeleteBtn">삭제</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 실제 댓글 항목 (하드코딩된 예시) -->
+    <div class="reply" data-id="1">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="name">홍길동</h5>
+                <small class="cdate">2024-09-01</small>
+            </div>
+            <div class="card-body">
+                <p class="card-text">이것은 댓글 내용입니다.</p>
+                <button type="button" class="btn btn-primary commentUpdateFormBtn">수정</button>
+                <button type="button" class="btn btn-danger commentDeleteBtn">삭제</button>
+            </div>
+        </div>
+    </div>
+    <div class="reply" data-id="2">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="name">이순신</h5>
+                <small class="cdate">2024-09-02</small>
+            </div>
+            <div class="card-body">
+                <p class="card-text">다른 댓글 내용입니다.</p>
+                <button type="button" class="btn btn-primary commentUpdateFormBtn">수정</button>
+                <button type="button" class="btn btn-danger commentDeleteBtn">삭제</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 댓글 작성 폼 -->
+<div id="commentForm">
+    <input type="hidden" id="id" value="0">
+    <div class="form-group">
+        <label for="replyName">작성자</label>
+        <input type="text" id="replyName" class="form-control" placeholder="작성자 이름">
+    </div>
+    <div class="form-group">
+        <label for="replyContent">댓글 내용</label>
+        <textarea id="replyContent" class="form-control" placeholder="댓글 내용을 입력하세요"></textarea>
+    </div>
+    <button type="button" id="commentInsertBtn" class="btn btn-success">등록</button>
+    <button type="button" id="commentUpdateBtn" class="btn btn-warning" style="display: none;">수정</button>
+    <button type="button" class="btn btn-secondary resetBtn" style="display: none;">취소</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+		
+	</body>
+</html>
