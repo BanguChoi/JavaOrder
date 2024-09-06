@@ -2,7 +2,6 @@ package com.javaOrder.admin.product.service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,8 +14,8 @@ import com.javaOrder.admin.product.domain.Category;
 import com.javaOrder.admin.product.domain.Product;
 import com.javaOrder.admin.product.repository.CategoryRepository;
 import com.javaOrder.admin.product.repository.ProductRepository;
-import com.javaOrder.common.util.vo.PageRequestDTO;
-import com.javaOrder.common.util.vo.PageResponseDTO;
+import com.javaOrder.common.util.vo.ProductPageRequestDTO;
+import com.javaOrder.common.util.vo.ProductPageResponseDTO;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -71,41 +70,6 @@ public class ProductServiceImpl implements ProductService {
     public Product saveProduct(Product product) {
         return productRepository.save(product);
     }
-    
-	/* 제품 리스트 + 페이징 + 검색기능 */
-    @Override
-	public PageResponseDTO<Product> productList(PageRequestDTO pageRequestDTO) {
-		Pageable pageable = PageRequest.of(
-				pageRequestDTO.getPage()-1, 
-				pageRequestDTO.getSize(), Sort.by("productDate").descending());
-    
-		Page<Product> result = productRepository.findAll(pageable);
-		
-		/* 카테고리 기능 
-		List<Product> list = productRepository.findAll();
-		*/
-		
-		/* 검색기능
-		String status = pageRequestDTO.getStatus();
-		if(status != null) {
-			result = productRepository.findByProductName(productName, pageable);
-		} else {
-			result = productRepository.findAll(pageable);
-		}
-		*/
-
-    	
-		List<Product> productList = result.getContent().stream().collect(Collectors.toList());
-		long totalCount = result.getTotalElements();
-		
-		PageResponseDTO<Product> responseDTO = PageResponseDTO.<Product>withAll()
-				.dtoList(productList)
-				.pageRequestDTO(pageRequestDTO)
-				.totalCount(totalCount)
-				.build();
-		
-		return responseDTO;
-	}
 
     // 검색 기능 구현
     @Override
@@ -122,4 +86,48 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> findByProductDate(LocalDate productDate, Pageable pageable) {
         return productRepository.findByProductDate(productDate, pageable);
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    /* 제품 리스트 + 페이징 + 검색기능 */
+    @Override
+   	public ProductPageResponseDTO<Product> productList(ProductPageRequestDTO productPageRequestDTO) {
+   		Pageable pageable = PageRequest.of(
+   				productPageRequestDTO.getPage()-1, 
+   				productPageRequestDTO.getSize(), Sort.by("productDate").descending());
+   		
+   		Page<Product> result;
+   		String keyWord = productPageRequestDTO.getKeyword();
+   		String categoryCode = productPageRequestDTO.getCategory();
+   		
+   		if (keyWord != null && !keyWord.isEmpty()) {
+   	        if (categoryCode != null && !categoryCode.isEmpty()) {
+   	            result = productRepository.findByProductNameContainingAndCategory_Code(keyWord, categoryCode, pageable);
+   	        } else {
+   	            result = productRepository.findByProductNameContaining(keyWord, pageable);
+   	        }
+   	    } else {
+   	        if (categoryCode != null && !categoryCode.isEmpty()) {
+   	            result = productRepository.findByCategory_Code(categoryCode, pageable);
+   	        } else {
+   	            result = productRepository.findAll(pageable);
+   	        }
+   	    }
+   		
+   		List<Product> productList = result.getContent();
+   		long totalCount = result.getTotalElements();
+
+   		ProductPageResponseDTO<Product> responseDTO = ProductPageResponseDTO.<Product>withAll()
+   				.dtoList(productList)
+   				.productPageRequestDTO(productPageRequestDTO)
+   				.totalCount(totalCount)
+   				.build();
+   		
+   		return responseDTO;
+   	}
 }
