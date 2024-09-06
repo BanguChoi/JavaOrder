@@ -1,10 +1,7 @@
 package com.javaOrder.admin.product.service;
 
-import com.javaOrder.admin.product.domain.Category;
-import com.javaOrder.admin.product.domain.Product;
-import com.javaOrder.admin.product.repository.CategoryRepository;
-import com.javaOrder.admin.product.repository.ProductRepository;
-import com.javaOrder.admin.product.service.ProductServiceImpl;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import com.javaOrder.admin.product.domain.Category;
+import com.javaOrder.admin.product.domain.Product;
+import com.javaOrder.admin.product.repository.CategoryRepository;
+import com.javaOrder.admin.product.repository.ProductRepository;
 
 @SpringBootTest
 @Transactional
@@ -29,7 +29,7 @@ public class ProductServiceTest {
     @Autowired
     private ProductRepository productRepository;
 
-    /*
+/*    
     @BeforeEach
     void setUp() {
         // 카테고리 데이터를 사전에 저장
@@ -534,8 +534,8 @@ public class ProductServiceTest {
             assertEquals(String.format("B07%02d", i + 1), savedProduct.getProductId());
             assertEquals(0, savedProduct.getProductPrice());
         }
-    }
-    */
+    }*/
+    
     
     public Product saveProduct(Product product) {
         if (!"Y".equals(product.getProductSell()) && !"N".equals(product.getProductSell())) {
