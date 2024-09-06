@@ -6,7 +6,7 @@ $("#noticesUpdateBtn").on("click", function(){
 //이미지업로드시 풀기			if(!chkFile("#file")) return; // 이미지 파일만 업로드
 //		}
 	//	actionProcess("#updateForm", "post", "/promotion/promotionUpdate");
-		actionFileProcess("#updateForm", "post", "/adminNotices/noticesUpdate");
+		actionFileProcess("#updateForm", "post", "/admin/notices/noticesUpdate");
 //	}
 });
 
@@ -19,5 +19,5 @@ $("#noticesCancelBtn").on("click", function(){
 
 
 $("#noticesListBtn").on("click", function(){
-	locationProcess("/adminNotices/noticesList");
+	locationProcess("/admin/notices/noticesList");
 });

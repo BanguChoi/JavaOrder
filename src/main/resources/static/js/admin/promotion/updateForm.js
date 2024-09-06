@@ -8,7 +8,7 @@ $("#promotionUpdateBtn").on("click", function(){
 		}
 	//	actionProcess("#updateForm", "post", "/promotion/promotionUpdate");
 		console.log("클릭");
-		actionFileProcess("#updateForm", "post", "/adminPromotion/promotionUpdate");
+		actionFileProcess("#updateForm", "post", "/admin/promotion/promotionUpdate");
 	}
 });
 
@@ -21,5 +21,5 @@ $("#promotionCancelBtn").on("click", function(){
 
 
 $("#promotionListBtn").on("click", function(){
-	locationProcess("/adadminPromotionmin/promotionList");
+	locationProcess("/admin/promotion/promotionList");
 });

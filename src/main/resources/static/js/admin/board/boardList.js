@@ -1,6 +1,6 @@
 // 글쓰기 버튼
 $("#insertFormBtn").on("click", function(){
-	locationProcess("/adminBoard/insertForm");
+	locationProcess("/admin/board/insertForm");
 });
 
 
@@ -9,5 +9,5 @@ $(".page-item a").on("click", function(e){
 	e.preventDefault();
 	/*$("#searchForm").find("input[name='pageNum']").val($(this).attr("href"));*/
 	$("#page").val($(this).data("number"));
-	actionProcess("#searchForm", "get", "/adminBoard/boardList");
+	actionProcess("#searchForm", "get", "/admin/board/boardList");
 });

@@ -18,7 +18,7 @@ import com.javaOrder.common.util.vo.PageResponseDTO;
 import lombok.Setter;
 
 @Controller
-@RequestMapping("/adminBoard/*")
+@RequestMapping("/admin/board/*")
 public class BoardAdminController {
 	
 

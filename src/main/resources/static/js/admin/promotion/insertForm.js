@@ -8,7 +8,7 @@ $("#promotionInsertBtn").on("click", function(){
 //		if($("#file").val()!=""){			// 업로드할 이미지 파일 존재 시
 //			if(!chkFile("#file")) return;	//이미지 파일만 업로드 가능 common에 선언
 //		}
-		actionProcess("#insertForm", "POST", "/adminPromotion/promotionInsert");
+		actionProcess("#insertForm", "POST", "/admin/promotion/promotionInsert");
 //		actionFileProcess("#insertForm", "POST", "/promotion/promotionInsert");
 //	}
 });
@@ -22,6 +22,6 @@ $("#promotionCancelBtn").on("click", function(){
 
 
 $("#promotionListBtn").on("click", function(){
-	locationProcess("/adminPromotion/promotionList");
+	locationProcess("/admin/promotion/promotionList");
 });
 

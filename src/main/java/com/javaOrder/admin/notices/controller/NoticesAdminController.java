@@ -17,7 +17,7 @@ import lombok.Setter;
 
 
 @Controller
-@RequestMapping("/adminNotices/*")
+@RequestMapping("/admin/notices/*")
 public class NoticesAdminController {
 
 		@Setter(onMethod_=@Autowired)

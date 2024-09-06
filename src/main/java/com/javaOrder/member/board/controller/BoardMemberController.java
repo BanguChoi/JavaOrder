@@ -18,7 +18,7 @@ import com.javaOrder.member.board.service.BoardMemberService;
 import lombok.Setter;
 
 @Controller
-@RequestMapping("/memberBoard/*")
+@RequestMapping("/member/board/*")
 public class BoardMemberController { 
 	
 	@Setter(onMethod_=@Autowired)

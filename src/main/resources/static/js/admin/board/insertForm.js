@@ -9,7 +9,7 @@ $("#boardInsertBtn").on("click", function(){
 //			if(!chkFile("#file")) return;	//이미지 파일만 업로드 가능
 //		}
 		
-		actionProcess("#insertForm", "POST", "/memberBoard/boardInsert");
+		actionProcess("#insertForm", "POST", "/member/board/boardInsert");
 //		actionFileProcess("#insertForm", "POST", "/board/boardInsert");
 //	}
 });
@@ -21,5 +21,5 @@ $("#boardCancelBtn").on("click", function(){
 });
 
 $("#boardListBtn").on("click", function(){
-	locationProcess("/memberBoard/boardList");
+	locationProcess("/member/board/boardList");
 })

@@ -15,7 +15,7 @@ import com.javaOrder.common.util.vo.PageResponseDTO;
 import lombok.Setter;
 
 @Controller
-@RequestMapping("/memberPromotion/*")
+@RequestMapping("/member/promotion/*")
 public class promotionMemberController {
 
 	

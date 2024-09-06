@@ -4,14 +4,14 @@ $(".goDetail").on("click", function(){
 	let promCode = $(this).parents("tr").data("no");
 	console.log("글번호 : "+promCode);
 	
-	locationProcess("/adminPromotion/"+promCode);
+	locationProcess("/admin/promotion/"+promCode);
 });
 
 
 // 글쓰기 버튼
     $("#insertFormBtn").on("click", function(){
         console.log("클릭");  // 확인용
-        locationProcess("/adminPromotion/insertForm");
+        locationProcess("/admin/promotion/insertForm");
     });
 
 
@@ -20,5 +20,5 @@ $(".page-item a").on("click", function(e){
 	e.preventDefault();
 
 	$("#page").val($(this).data("number"));
-	actionProcess("#searchForm", "get", "/adminPromotion/promotionList");
+	actionProcess("#searchForm", "get", "/admin/promotion/promotionList");
 });

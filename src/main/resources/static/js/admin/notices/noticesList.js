@@ -4,14 +4,14 @@ $(".goDetail").on("click", function(){
 	let noticesNo = $(this).parents("tr").data("no");
 	console.log("글번호 : "+noticesNo);
 	
-	locationProcess("/adminNotices/"+noticesNo);
+	locationProcess("/admin/notices/"+noticesNo);
 });
 
 
 // 글쓰기 버튼
     $("#insertFormBtn").on("click", function(){
         console.log("클릭");  // 확인용
-        locationProcess("/adminNotices/insertForm");
+        locationProcess("/admin/notices/insertForm");
     });
 
 
@@ -20,5 +20,5 @@ $(".page-item a").on("click", function(e){
 	e.preventDefault();
 
 	$("#page").val($(this).data("number"));
-	actionProcess("#searchForm", "get", "/adminNotices/noticesList");
+	actionProcess("#searchForm", "get", "/admin/notices/noticesList");
 });

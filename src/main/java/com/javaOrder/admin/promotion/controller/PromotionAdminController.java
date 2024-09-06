@@ -16,16 +16,11 @@ import com.javaOrder.common.util.vo.PageResponseDTO;
 import lombok.Setter;
 
 @Controller
-@RequestMapping("/adminPromotion/*")
+@RequestMapping("/admin/promotion/*")
 public class PromotionAdminController {
 	
 	@Setter(onMethod_=@Autowired)
 	private PromotionAdminService service;
-	
-	@GetMapping("/")
-	public String main() {
-		return "/main";
-	}
 
 	@GetMapping("/promotionList")
 	public String promotionList(Promotion promotion, PageRequestDTO pageRequestDTO, Model model) {

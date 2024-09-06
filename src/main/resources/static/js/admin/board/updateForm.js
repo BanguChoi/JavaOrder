@@ -7,7 +7,7 @@ $("#boardUpdateBtn").on("click", function(){
 //			if(!chkFile("#file")) return; // 이미지 파일만 업로드
 //		}		
 //		actionFileProcess("#updateForm", "post", "/board/boardUpdate")
-		actionProcess("#updateForm", "post", "/adminBoard/boardUpdate");
+		actionProcess("#updateForm", "post", "/admin/board/boardUpdate");
 //	}
 });
 $(document).ready(function() {
@@ -30,7 +30,7 @@ $(document).ready(function() {
             success: function(response) {
 				if(response=="일치"){
      
-                	actionProcess("#updateForm", "post", "/adminBoard/boardUpdate");
+                	actionProcess("#updateForm", "post", "/admin/board/boardUpdate");
 				}
 				else if(response=="불일치"){
 					alert("비밀번호가 일치하지 않습니다");
@@ -54,7 +54,7 @@ $("#boardCancelBtn").on("click", function(){
 });
 
 $("#boardListBtn").on("click", function(){
-	locationProcess("/adminBoard/boardList");
+	locationProcess("/admin/board/boardList");
 });
 
 

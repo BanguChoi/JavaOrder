@@ -15,7 +15,7 @@ import com.javaOrder.common.util.vo.PageResponseDTO;
 import lombok.Setter;
 
 @Controller
-@RequestMapping("/memberNotices")
+@RequestMapping("/member/notices/*")
 public class NoticesMemberController {
 
 	@Setter(onMethod_=@Autowired)
