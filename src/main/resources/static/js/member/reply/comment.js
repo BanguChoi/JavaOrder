@@ -14,6 +14,7 @@ const template = (data) => {
 }//여기까지가 template를 구성한다.
 
 
+
 const dataReset = () => { //Form 명만 맞으면 OK
 	$('#commentForm').each(function(){
 		this.reset();
