@@ -43,9 +43,4 @@ public class ReplyServiceImpl implements ReplyService{
 	public void replyDelete(Reply reply) {
 		replyRepository.deleteById(reply.getReplyId());
 	}
-
-	@Override
-	public List<Reply> replyListByBoardNo(Long boardNo) {
-        return replyRepository.findByBoardBoardNo(boardNo);
-    }
 }
