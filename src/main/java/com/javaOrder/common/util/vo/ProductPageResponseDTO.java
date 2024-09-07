@@ -27,7 +27,6 @@ public class ProductPageResponseDTO<E> {
 		this.dtoList = dtoList;
 		this.productPageRequestDTO = productPageRequestDTO;
 		this.totalCount = (int) totalCount;
-		this.category = category;
 		
 		int end = (int) (Math.ceil(productPageRequestDTO.getPage() / 10.0)) * 10;
 		int start = end - 9;

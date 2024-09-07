@@ -51,13 +51,10 @@ $(document).ready(function() {
 		if(!chkData("#keyword", "제품명을")) return; 
 		else {
 			$("#searchForm input[name='page']").val(1);
-			productLoad();
-		
+			productLoad();	
 		}
 	});
 	
-	
-
 	
 	/* 카테고리, 검색, 페이징에 동일하게 사용해서 함수로 빼냄 */
 	function productLoad() {
