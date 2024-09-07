@@ -28,13 +28,10 @@ public class ReplyController {
 	private final ReplyService replyService;
 	
 	@GetMapping(value="/all/{boardNo}", produces=MediaType.APPLICATION_JSON_VALUE)
-//	public List<Reply> replyList(@PathVariable("no") Reply reply){
-	public List<Reply> replyList(@PathVariable Long boardNo, Reply reply, Board board){		
-		board.setBoardNo(boardNo);
-		reply.setBoard(board);
-		List<Reply> replyList = replyService.replyList(reply);
-		return replyList;
-	}
+    public List<Reply> replyList(@PathVariable Long boardNo) {
+        return replyService.replyListByBoardNo(boardNo);
+    }
+	
 	
 	@PostMapping(value="/replyInsert", consumes="application/json", produces=MediaType.APPLICATION_JSON_VALUE)
 	public Reply replyInsert(@RequestBody Reply reply) {
@@ -49,6 +46,8 @@ public class ReplyController {
 		Reply result = replyService.replyUpdate(reply);
 		return result;
 	}
+	
+	
 	
 	@DeleteMapping(value="/{replyId}", produces=MediaType.TEXT_PLAIN_VALUE)
 	public void replyDelete(@PathVariable Long replyId, Reply reply) {
