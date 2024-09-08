@@ -41,7 +41,7 @@ public class BoardAdminController {
 	@PostMapping("/boardInsert")
 	public String boardInsert(Board board) {
 		service.boardInsert(board);
-		return "redirect:/adminBoard/boardList";
+		return "redirect:/admin/board/boardList";
 	}
 	
 	@GetMapping("/{boardNo}")
@@ -66,14 +66,14 @@ public class BoardAdminController {
 	@PostMapping("/boardDelete")
 	public String boardDelete(Board board) {
 		service.boardDelete(board);
-		return "redirect:/adminBoard/boardList";
+		return "redirect:/admin/board/boardList";
 	}
 	
 	@PostMapping("/boardUpdate")
 	public String boardUpdate(@ModelAttribute Board board, Model model) {		
 		try {
 			service.boardUpdate(board);			     
-			return "redirect:/adminBoard/" + board.getBoardNo();
+			return "redirect:/admin/board/" + board.getBoardNo();
 			
 	  	}catch (IllegalArgumentException e){ 
 	  		model.addAttribute("updateData", board);

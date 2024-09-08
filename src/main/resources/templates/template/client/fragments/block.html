@@ -85,7 +85,7 @@
 		 
 		<div class="col-md-12 mb-2" id="userInfoSection" th:if="${session.member != null}">
 		    <div id="userInfo" class="clickable">
-		        <p>안녕하세요, <span th:text="${session.member.memberName}">회원님</span>!</p>
+		        <p>안녕하세요, <span th:text="${session.member.memberName}"></span> 회원님!</p>
 		        <p>이메일: <span th:text="${session.member.memberEmail}">이메일</span></p>
 			    <form class="text-center" action="/member/signout" method="get">
 			        	<button type="submit" class="btn btn-danger btn-sm">로그아웃</button>
@@ -93,12 +93,6 @@
 		    </div>
 		    
 		</div>
-	  
-	  <hr>
-	  
-	  	
-			
-
 
 	  
 	</th:block>

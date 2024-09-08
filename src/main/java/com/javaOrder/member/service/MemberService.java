@@ -25,7 +25,7 @@ public interface MemberService {
 	
 	// 현재 비밀번호 확인
 	boolean validateCurrentPassword(String memberCode, String currentPassword);
-
+	
 	// 현재 로그인한 회원 정보 가져오는 메서드
 	//public Member getCurrentMember();
 }
