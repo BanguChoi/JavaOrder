@@ -36,36 +36,36 @@
 			
 			<!--댓글화면 구현(comment) 나중에 / 이거** 주석처리 주의/-->
 			
-			<form id="commentForm">
-				<input type="hidden" name="id" id="id" value="0" />
-				<div class="row mb-3">
-					<label for="nickname" class="col-sm-1 col-form-label">작성자</label>
-					<div class="col-sm-3">
-						<input type="text" name="nickname" id="nickname" maxlength="8" class="form-control"/>
-					</div>
-					<button type="button" id="commentInsertBtn" class="btn btn-secondary col-sm-1 sendBtn mx-2">저장</button>
-				</div>
-				<div class="row mb-3">
-					<label for="body" class="col-sm-1 col-form-label">댓글내용</label>
-					<div class="col-sm-11">
-						<textarea name="body" id="body" class="form-control" rows="3"></textarea>
-					</div>
-				</div>
-			</form>
+<!-- 			<form id="commentForm"> -->
+<!-- 				<input type="hidden" name="id" id="id" value="0" /> -->
+<!-- 				<div class="row mb-3"> -->
+<!-- 					<label for="nickname" class="col-sm-1 col-form-label">작성자</label> -->
+<!-- 					<div class="col-sm-3"> -->
+<!-- 						<input type="text" name="nickname" id="nickname" maxlength="8" class="form-control"/> -->
+<!-- 					</div> -->
+<!-- 					<button type="button" id="commentInsertBtn" class="btn btn-secondary col-sm-1 sendBtn mx-2">저장</button> -->
+<!-- 				</div> -->
+<!-- 				<div class="row mb-3"> -->
+<!-- 					<label for="body" class="col-sm-1 col-form-label">댓글내용</label> -->
+<!-- 					<div class="col-sm-11"> -->
+<!-- 						<textarea name="body" id="body" class="form-control" rows="3"></textarea> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</form> -->
 			
-			<div id="commentList">
-				<div class="card mb-2" id="item-template">
-					<h5 class="card-header">
-						<span class="name"></span>
-						<span class="cdate"></span>
-						<a href="#" class="btn btn-secondary btn-sm commentUpdateFormBtn">수정</a>
-						<a href="#" class="btn btn-secondary btn-sm commentDeleteBtn">삭제</a>
-					</h5>
-					<div class="card-body">
-						<p class="card-text"></p>
-					</div>
-				</div>
-			</div>
+<!-- 			<div id="commentList"> -->
+<!-- 				<div class="card mb-2" id="item-template"> -->
+<!-- 					<h5 class="card-header"> -->
+<!-- 						<span class="name"></span> -->
+<!-- 						<span class="cdate"></span> -->
+<!-- 						<a href="#" class="btn btn-secondary btn-sm commentUpdateFormBtn">수정</a> -->
+<!-- 						<a href="#" class="btn btn-secondary btn-sm commentDeleteBtn">삭제</a> -->
+<!-- 					</h5> -->
+<!-- 					<div class="card-body"> -->
+<!-- 						<p class="card-text"></p> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 		</div>
 	</div>
 	 	
@@ -74,6 +74,6 @@
  
  <th:block layout:fragment="script">
  	<script src="/js/admin/board/boardDetail.js"></script>
-<!--  	<script src="/js/admin/reply/comment.js"></script> -->
+ 	<script src="/js/admin/reply/comment.js"></script>
  </th:block>
 </html>

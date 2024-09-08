@@ -18,7 +18,7 @@ $(document).ready(function() {
             success: function(response) {
 				if(response=="일치"){
      
-                	actionProcess("#updateForm", "post", "/memberBoard/boardUpdate");
+                	actionProcess("#updateForm", "post", "/member/board/boardUpdate");
 				}
 				else if(response=="불일치"){
 					alert("비밀번호가 일치하지 않습니다");
@@ -42,7 +42,7 @@ $("#boardCancelBtn").on("click", function(){
 });
 
 $("#boardListBtn").on("click", function(){
-	locationProcess("/memberBoard/boardList");
+	locationProcess("/member/board/boardList");
 });
 
 

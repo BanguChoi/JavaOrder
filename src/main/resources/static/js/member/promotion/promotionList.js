@@ -4,9 +4,6 @@ $(".goDetail").on("click", function(){
 	locationProcess("/member/promotion/"+promCode);
 });
 
-// 글쓰기 버튼 없음
-
-
 $(".page-item a").on("click", function(e){
 	e.preventDefault();
 

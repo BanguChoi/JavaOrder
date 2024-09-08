@@ -1,11 +1,5 @@
 // 제목 클릭 시 상세페이지 이동
-$(".goDetail").on("click", function(){
-	// let no = $(this).parents("tr").attr("data-no");
-	let noticesNo = $(this).parents("tr").data("no");
-	console.log("글번호 : "+noticesNo);
-	
-	locationProcess("/memberNotices/"+noticesNo);
-});
+
 
 
 // 글쓰기 버튼
@@ -16,5 +10,5 @@ $(".page-item a").on("click", function(e){
 	e.preventDefault();
 
 	$("#page").val($(this).data("number"));
-	actionProcess("#searchForm", "get", "/memberNotices/noticesList");
+	actionProcess("#searchForm", "get", "/member/notices/noticesList");
 });

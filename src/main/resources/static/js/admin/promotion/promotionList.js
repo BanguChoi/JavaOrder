@@ -1,13 +1,3 @@
-// 제목 클릭 시 상세페이지 이동
-$(".goDetail").on("click", function(){
-	// let no = $(this).parents("tr").attr("data-no");
-	let promCode = $(this).parents("tr").data("no");
-	console.log("글번호 : "+promCode);
-	
-	locationProcess("/admin/promotion/"+promCode);
-});
-
-
 // 글쓰기 버튼
 $("#insertFormBtn").on("click", function(){
     console.log("클릭");  // 확인용

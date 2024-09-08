@@ -145,7 +145,6 @@ public class PromotionAdminController {
 		
 		service.promotionUpdate(promotion);
 		return "redirect:/admin/promotion/"+promotion.getPromotionCode();//이동이 안될시 확인 확인 성공
-
 	}
 	
 	// 주문상태 수정 (주문대기(W) / 주문접수(S) / 주문준비완료(P) / 픽업완료(E) / 주문취소(C) : 주문취소는 일단 보류

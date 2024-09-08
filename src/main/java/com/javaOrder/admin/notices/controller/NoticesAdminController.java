@@ -39,7 +39,7 @@ public class NoticesAdminController {
 		@PostMapping("/noticesInsert")
 		public String noticesInsert(Notices notices) {
 			service.noticesInsert(notices);
-			return "redirect:/admin/Notices/noticesList";
+			return "redirect:/admin/notices/noticesList";
 		}
 		
 		@GetMapping("/{noticesNo}")
