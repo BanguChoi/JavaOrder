@@ -17,6 +17,7 @@ public class ReplyServiceImpl implements ReplyService{
 	//생성자주입
 	private final ReplyRepository replyRepository;
 	
+	
 	@Override
 	public List<Reply> replyList(Reply reply) {
 		List<Reply> replyList = replyRepository.findByBoardNo(reply.getBoard().getBoardNo());
@@ -43,5 +44,11 @@ public class ReplyServiceImpl implements ReplyService{
 	public void replyDelete(Reply reply) {
 		replyRepository.deleteById(reply.getReplyId());
 	}
-        return replyRepository.findByBoardBoardNo(boardNo);
+    //    return replyRepository.findByBoardBoardNo(boardNo);
+	
+	@Override
+	public List<Reply> replyListByBoardNo(Long boardNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
