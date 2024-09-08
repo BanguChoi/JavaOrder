@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
     private CategoryRepository categoryRepository;
 
     @Override
-    public Product createProduct(String categoryCode, String productName, Integer price) {
+    public Product createProduct(String categoryCode, String productName, Integer price, String productExplain) {
         // 카테고리 코드로 카테고리 엔티티 조회
         Category category = categoryRepository.findById(categoryCode)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid category code: " + categoryCode));
@@ -51,6 +51,7 @@ public class ProductServiceImpl implements ProductService {
         product.setCategory(category);
         product.setProductName(productName);
         product.setProductPrice(price);
+        product.setProductExplain(productExplain);  // 설명 추가
 
         return productRepository.save(product);
     }
