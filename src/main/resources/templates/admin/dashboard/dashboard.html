@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/admin/layout/layout}" >
+
+<th:block layout:fragment="content">
+	<div class="mb-5"> <h1>대시보드</h1>주문별 통계정보</div>
+	
+	<hr />
+	
+	<h2 class="mt-5">인기 상품/카테고리 Top 5</h2>
+	<div class="top5 row">
+		
+		<div class="top5Product col-6 row">
+			<h3>상품별</h3>
+				<div class="col-auto ms-5">
+					<select class="form-select top5Prod" aria-label="Top5 Product">
+					  <option value="week">주별</option>
+					  <option value="month">월별</option>
+					  <option value="quarter">분기별</option>
+					  <option value="year">연별</option>
+					</select>
+				</div> 
+				<canvas class="col-9 ms-5" id="topSellingProdPie" width="500px" height="500px"></canvas>
+		</div>
+		<div class="top5Category col-6 row">
+			<h3>카테고리별</h3> 
+			<div class="col-auto ms-5">
+				<select class="form-select top5Cate" aria-label="Top5 Category">
+				  <option value="week">주별</option>
+				  <option value="month">월별</option>
+				  <option value="quarter">분기별</option>
+				  <option value="year">연별</option>
+				</select>
+			</div>
+			<canvas class="col-9 ms-5" id="topSellingCatePie" width="500px" height="500px"></canvas>
+		</div>
+	</div>
+	
+	<hr />
+	
+	<h1 class="my-2">총 매출</h1>
+	<div class="row totalSales">
+		<div class="col-auto ms-5">
+			<select class="form-select totalSales" aria-label="Total Sales">
+				<option value="daily">일별</option>
+			 	<option value="week">주별</option>
+			  	<option value="month">월별</option>
+			  	<option value="quarter">분기별</option>
+			  	<option value="year">연별</option>
+			</select>
+		</div>
+		<canvas class="col-12 m-2" id="totalSalesChart" width="1000%" height="300%"></canvas>
+	</div>
+	
+	<hr />
+</th:block>
+		
+<th:block layout:fragment="script">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/admin/dashboard/dashboard.js"></script>
+</th:block>
+</html>
