@@ -7,10 +7,8 @@
 
     <th:block layout:fragment="content">
         <div class="text-center m-3">
-            <h3>member 공지 게시판 리스트</h3>
+            <h3>공지 게시판</h3>
         </div>
-        
-       <h1>member Notices List</h1>
 
 	    <div id="noticesSearch" class="my-2">
 			<form id="searchForm">
@@ -20,7 +18,7 @@
 			</form>
 		</div>
 
-	    <table border="1">
+	    <table class="table table-hover table-striped">
 	        <thead>
 	            <tr>
 	                <th>Code</th>
@@ -39,16 +37,15 @@
 					<th:block th:if="${not #strings.isEmpty(noticesList.dtoList)}">		
 						<tr class="text-center" th:each="notices : ${noticesList.dtoList}" th:object="${notices}"  th:data-no="*{noticesNo}">
 							<td th:text="*{noticesNo}"></td>
-							<td><a th:href="@{/member/notices/} + *{noticesNo}" th:text="*{noticesTitle}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a></td>
-							<td class="content" th:text="*{noticesContent}"></td>
+							<td><a th:href="@{/member/notices/} + *{noticesNo}" th:text="${#strings.length(notices.noticesTitle) >10 ? #strings.substring(notices.noticesTitle, 0, 10) + '...' : notices.noticesTitle}" 
+							class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a></td>
+							<td class="content" th:text="${notices.noticesContent != null && #strings.length(notices.noticesContent) > 15 ? #strings.substring(notices.noticesContent, 0, 15) + '...' : notices.noticesContent != null ? notices.noticesContent : ''}"></td>
+							<td class="name" th:text="*{noticesName}"></td>
 							<td class="date" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
 						</tr>
 					</th:block>
 				</tbody>
    	 	</table>
-	    <div class="text-end">
-			<button type="button" id="insertFormBtn" class="btn btn-primary btn-sm mb-2">글쓰기</button>					
-	    </div>
 	    <nav aria-label="Page navigation example">
   			<ul class="pagination justify-content-center">
 				<!--/* 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인. */-->

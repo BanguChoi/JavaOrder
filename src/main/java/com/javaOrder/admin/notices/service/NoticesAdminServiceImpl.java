@@ -84,5 +84,9 @@ public class NoticesAdminServiceImpl implements NoticesAdminService {
 		Notices updateData = noticesOptional.orElseThrow();
 		return updateData;
 	}
-
+	
+	@Override
+	public Optional<Notices> getLatestNotice() {
+		return repository.findLatestNotice();
+	}
 }

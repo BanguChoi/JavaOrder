@@ -14,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -39,6 +40,7 @@ public class Reply {
 	@Column(name = "reply_name", nullable = false)
 	private String replyName;//nickname
 	
+	@Lob
 	@Column(name="reply_content")
 	private String replyContent;//body?
 	

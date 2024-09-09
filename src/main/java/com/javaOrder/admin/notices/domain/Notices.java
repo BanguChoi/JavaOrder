@@ -2,7 +2,6 @@ package com.javaOrder.admin.notices.domain;
 
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
@@ -10,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -20,8 +20,8 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity
-@Table(name = "notices2")
-@SequenceGenerator(name="notices_code_seq", initialValue = 100001,  allocationSize = 50)
+@Table(name = "notices")
+@SequenceGenerator(name="notices_code_seq", initialValue = 1,  allocationSize = 1)
 public class Notices {//위에 시퀀스 네임 바꿔주기
 
 		@Id
@@ -32,6 +32,7 @@ public class Notices {//위에 시퀀스 네임 바꿔주기
 		@Column(name="notices_title", nullable = false)
 		private String noticesTitle;
 		
+		@Lob
 		@Column(name="notices_content", nullable = false)
 		private String noticesContent;
 
@@ -39,7 +40,6 @@ public class Notices {//위에 시퀀스 네임 바꿔주기
 		private String noticesName;				
 		
 		@CreationTimestamp
-		@ColumnDefault(value="sysDate")
 		private LocalDateTime regDate;	//작성일
 		
 		

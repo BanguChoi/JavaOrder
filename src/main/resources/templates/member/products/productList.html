@@ -3,6 +3,7 @@
 	layout:decorate="~{template/client/layout/layout}" >
 
 <th:block th:fragment="productList">
+	
 	<form id="searchForm">
 		<input type="hidden" name="page" id="size" th:value="${productList.productPageRequestDTO.page}" />
 		<input type="hidden" name="size" id="size" th:value="${productList.productPageRequestDTO.size}" />

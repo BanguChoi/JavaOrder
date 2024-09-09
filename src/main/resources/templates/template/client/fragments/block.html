@@ -27,6 +27,12 @@
    		<link href="/css/sticky-footer-navbar.css" rel="stylesheet">
 	</th:block>
 	
+	<!-- header -->
+	<th:block th:fragment="header">
+		<div class="container-fluid">		
+		    
+		</div>
+	</th:block>
 	
 	<!-- 왼쪽 사이드 메뉴바 -->
 	<th:block th:fragment="sidebar">
@@ -41,12 +47,12 @@
 	        Orders
 	      </a>
 	    </li>
-	    <li>
-	      <a href="#" class="nav-link link-body-emphasis">
-	       <!--  <svg class="bi pe-none" width="16" height="16"><use xlink:href="#grid"></use></svg> -->
-	        Products
-	      </a>
-	    </li>
+<!-- 	    <li> -->
+<!-- 	      <a href="#" class="nav-link link-body-emphasis"> -->
+<!-- 	        <svg class="bi pe-none" width="16" height="16"><use xlink:href="#grid"></use></svg> -->
+<!-- 	        Products -->
+<!-- 	      </a> -->
+<!-- 	    </li> -->
 	    <li>
 	      <a href="/member/promotion/promotionList" class="nav-link link-body-emphasis">
 	        Promotion
@@ -78,12 +84,12 @@
 	  
   			<!-- 로그인 상태에 따라 표시 -->
 		<!-- <div class="col-md-3 text-end"> -->
-		<div class="col-md-12 " id="loginSection" th:if="${session.member == null}">
+		<div class="mb-5" id="loginSection" th:if="${session.member == null}">
 		    <button type="button" id="signInBtn" class="btn btn-outline-primary me-2">로그인</button>
 		    <button type="button" id= "signUpBtn" class="btn btn-primary">회원가입</button>
 		</div>
 		 
-		<div class="col-md-12 mb-2" id="userInfoSection" th:if="${session.member != null}">
+		<div class="mb-5" id="userInfoSection" th:if="${session.member != null}">
 		    <div id="userInfo" class="clickable">
 		        <p>안녕하세요, <span th:text="${session.member.memberName}"></span> 회원님!</p>
 		        <p>이메일: <span th:text="${session.member.memberEmail}">이메일</span></p>

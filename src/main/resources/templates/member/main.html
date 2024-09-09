@@ -3,7 +3,14 @@
 	layout:decorate="~{template/client/layout/layout}" >
 
 <!-- 메인 콘텐츠 영역 -->
-<th:block layout:fragment="content">   
+<th:block layout:fragment="content">
+	<header class="my-2">
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+			<div class="text-start col-7" style="margin-left:270px; background-color:#2f2f2f">
+				<a id="latestNoticeLink"></a>
+			</div>
+		</nav>	
+	</header>   
     <div class="d-flex flex-grow-1 pt-2" style="margin: 20px; padding-bottom: 56px; overflow-y: auto; height: calc(100vh - 56px);">
 
 		<!-- 상품 리스트 -->           
