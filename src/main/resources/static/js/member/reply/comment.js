@@ -1,7 +1,6 @@
 /*
 	const template = (data) => {
-	    let $div = $('#replyList');
-	    
+	    let $div = $('#replyList');	    
 	    let $element = $('#item-template').clone().removeAttr('id');
 	    $element.attr("data-id", data.replyId); // replyId를 사용
 	    $element.addClass("reply"); // 댓글(reply) 생성
@@ -28,7 +27,8 @@
 
 	    // #replyList에 복사한 요소를 추가합니다.
 	    $div.append($element);
-	}
+	}
+
 const dataReset = () => { // Form 명만 맞으면 OK
     $('#replyForm').each(function() {
         this.reset();

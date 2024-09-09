@@ -44,4 +44,5 @@ public class ReplyServiceImpl implements ReplyService{
 	public void replyDelete(Long replyId) {
 		replyRepository.deleteById(replyId);
 	}
+        return replyRepository.findByBoardBoardNo(boardNo);
 }

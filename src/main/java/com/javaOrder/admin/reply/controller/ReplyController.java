@@ -30,6 +30,7 @@ public class ReplyController {
 //	public List<Reply> replyList(@PathVariable("no") Reply reply){
 	public List<Reply> replyList(@PathVariable Long boardNo){		
 		List<Reply> replyList = replyService.replyList(boardNo);
+
 		return replyList;
 	}
 	
@@ -46,6 +47,16 @@ public class ReplyController {
 		Reply result = replyService.replyUpdate(reply);
 		return result;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@DeleteMapping(value="/{replyId}", produces=MediaType.TEXT_PLAIN_VALUE)
 	public void replyDelete(@PathVariable Long replyId) {
