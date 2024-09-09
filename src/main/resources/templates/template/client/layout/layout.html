@@ -6,26 +6,25 @@
 		<link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
 		<link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sticky-footer-navbar/">
 	</head>
-	<body class="d-flex h-100 text-center">
+	<body class="d-flex flex-column h-100 text-center">
 	
 		<!-- header -->
 		<!-- <th:block th:insert="~{template/admin/fragments/block :: header}"></th:block> -->
 		
-		<!-- sidebar -->
-		<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary position-fixed" style="top: 0; left: 0; width: 250px; height: 100vh; padding-top: 56px;">
-  			<th:block th:insert="~{template/client/fragments/block :: sidebar}"></th:block>
-		</div>
-		
-		
-		<!-- main -->
-		<main class="d-flex flex-column w-100 pt-2" style="margin-left:250px; width:250px;">
-		   	<th:block layout:fragment="content"></th:block>
-
-		</main>
-		
+		<div class="d-flex flex-grow-1">
+			<!-- sidebar -->
+			<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary position-fixed" style="top: 0; left: 0; width: 250px; height: 100vh; padding-top: 56px;">
+	  			<th:block th:insert="~{template/client/fragments/block :: sidebar}"></th:block>
+			</div>
+s			
+			<!-- main -->
+			<main class="d-flex flex-grow-1 flex-column w-100 pt-2" style="margin-left:250px; width:250px;">
+			   	<th:block layout:fragment="content"></th:block>
+			</main>
+		</div>		
 		
 		<!-- footer -->
-		<footer class="footer mt-auto pt-2 bg-body-tertiary fixed-bottom">
+		<footer class="footer mt-auto pt-2 bg-body-tertiary">
 			<th:block th:insert="~{template/client/fragments/block :: footer}"></th:block>
 		</footer>
 		
