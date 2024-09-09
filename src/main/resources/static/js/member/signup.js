@@ -37,8 +37,8 @@ $(document).ready(function() {
                 memberStatus: 'M' // 상태값 자동 설정
             }
         }).done(function() {
-            // 성공 시 메인 화면으로 리다이렉트
-            location.href = '/member/main';
+            // 성공 시 로그인 화면으로 리다이렉트
+            location.href = '/member/signin';
         }).fail(function() {
             $('#error').text('회원가입에 실패했습니다: ');
         });
@@ -57,7 +57,7 @@ $(document).ready(function() {
 
     // 취소 버튼 클릭 시 처리
     $('#resetButton').on('click', function() {
-        window.location.href = '/member/main';
+        window.location.href = '/';
     });
 
     // 전화번호 자동 포맷 함수
@@ -125,7 +125,7 @@ function validateId(id) {
 // 비밀번호 유효성 검사 함수
 function validatePassword(password) {
     const passwordValue = password.val();
-    const passwordRegex = /^(?=.*[!@?.,_])[A-Za-z\d!?@.,_-+#$%^&*]{8,20}$/;
+    const passwordRegex = /^(?=.*[!@?.,_])[A-Za-z\d!?@.,_+\-$%^&*]{8,20}$/;
     const isValid = passwordRegex.test(passwordValue);
     const passwordErrorDiv = $('#passwordError');
 

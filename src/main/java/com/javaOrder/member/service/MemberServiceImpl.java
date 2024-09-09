@@ -1,5 +1,6 @@
 package com.javaOrder.member.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -184,11 +185,37 @@ public class MemberServiceImpl implements MemberService {
 	        // 비밀번호 변경
 	    	member.setMemberPasswd(newPassword);
 	        //수정일 갱신
-	        member.setMemberLast(LocalDateTime.now());
+	        member.setMemberLast(LocalDate.now());
 	        memberRepository.save(member);
 	        return true;
 	    }
 	    return false;
 	}
+	
+	// 회원 탈퇴
+	@Override
+	public boolean deleteMember(String memberCode) {
+		try {
+            Member member = memberRepository.findByMemberCode(memberCode);
+
+            if (member != null) {
+                member.setMemberName(memberCode);
+                member.setMemberId(memberCode);
+                member.setMemberPasswd(memberCode);
+                member.setMemberEmail(null);
+                member.setMemberPhone(memberCode);
+                member.setMemberAddress(null);
+                member.setMemberBirth(LocalDate.of(0001, 1, 1));
+                member.setMemberStatus("N");
+
+                memberRepository.save(member);
+                return true; // 성공적으로 null로 설정됨
+            } else {
+                return false; // 회원이 존재하지 않음
+            }
+        } catch (Exception e) {
+            return false; // 오류 발생
+        }
+    }
 	
 }
