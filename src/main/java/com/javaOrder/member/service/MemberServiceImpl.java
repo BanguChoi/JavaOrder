@@ -40,6 +40,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		/* 회원가입시 카트 자동생성 */
         Cart cart = new Cart();
+        cart.setCartId("C" + memberCode);
         cart.setMember(member);   
         cartRepository.save(cart);
 	}
