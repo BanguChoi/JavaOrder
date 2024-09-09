@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -162,4 +163,12 @@ public class PromotionAdminController {
 		service.promotionDelete(promotion);
 		return "redirect:/admin/promotion/promotionList"; //이동이 안될시 확인 성공
 	}
+	
+	
+	// 프로모션 메인에 출력
+	@GetMapping("/ongoing")
+    public ResponseEntity<List<Promotion>> getOngoingPromotions() {
+        List<Promotion> ongoingPromotions = service.getOngoingPromotions();
+        return ResponseEntity.ok(ongoingPromotions);
+    }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.javaOrder.admin.promotion.domain.Promotion;
 
@@ -27,6 +28,8 @@ public interface PromotionRepository extends JpaRepository<Promotion, Long> {
 	Page<Promotion> findByPromotionStartDateLessThanEqualAndPromotionEndDateGreaterThanEqual(LocalDate startDate,
 			LocalDate endDate, Pageable pageable);
 	
+	@Query("SELECT p FROM Promotion p WHERE p.promotionStatus = 'P'")
+    List<Promotion> findOngoingPromotions();
 //	List<Promotion> findByOrderByNoDesc(); //얘 뭐야 왜 얘 있으면 에러생겨??
 	
 }

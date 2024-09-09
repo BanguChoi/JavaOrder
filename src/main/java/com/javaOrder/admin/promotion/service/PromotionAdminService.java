@@ -1,5 +1,7 @@
 package com.javaOrder.admin.promotion.service;
 
+import java.util.List;
+
 import com.javaOrder.admin.promotion.domain.Promotion;
 import com.javaOrder.common.util.vo.PageRequestDTO;
 import com.javaOrder.common.util.vo.PageResponseDTO;
@@ -21,6 +23,8 @@ public interface PromotionAdminService {
 	void savePromotion(Promotion updatePromotion);
 	// 프로모션 상태 수정
 	void updatePromotion(Promotion promotion);
+	// 프로모션 이미지 메인에 출력
+	List<Promotion> getOngoingPromotions();
 	
 
 }

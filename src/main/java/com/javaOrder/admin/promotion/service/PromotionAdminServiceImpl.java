@@ -142,5 +142,11 @@ public class PromotionAdminServiceImpl implements PromotionAdminService {
 	public void promotionDelete(Promotion promotion) {
 		promotionRepository.deleteById(promotion.getPromotionCode());
 	}
+	
+	// 프로모션 이미지 메인에 출력
+	@Override
+	public List<Promotion> getOngoingPromotions() {
+        return promotionRepository.findOngoingPromotions();
+	}
 
 }

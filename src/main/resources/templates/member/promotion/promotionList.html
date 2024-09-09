@@ -56,7 +56,7 @@
 			<th:block th:if="${not #strings.isEmpty(promotionList.dtoList)}">
 				<div class="text-center m-2" th:each="promotion : ${promotionList.dtoList}" th:object="${promotion}"  th:data-no="*{promotionCode}">
 					<div class="card" style="width: 18rem;">
-					  <img th:src="@{/images/promotion/{promotion.productCode}.jpg(promotion.productCode=${promotion.promotionCode})}" onerror="this.src='/images/noimg.png'"
+					  <img th:src="@{/images/promotion/{promotion.promotionCode}.jpg(promotion.promotionCode=${promotion.promotionCode})}" onerror="this.src='/images/noimg.png'"
 					   class="goDetail card-img-top img-fluid img-thumbnail" style="height:400px; overflow:hidden;"  alt="프로모션 이미지">
 					  <div class="card-body">
 					    <h5 class="card-title"><a th:href="@{/member/promotion/} + *{promotionCode}"
