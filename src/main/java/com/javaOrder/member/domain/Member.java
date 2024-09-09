@@ -1,7 +1,6 @@
 package com.javaOrder.member.domain;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -50,7 +49,7 @@ public class Member {
 	private LocalDate memberBirth;
 	
 	@Column(name = "m_last")
-	private LocalDateTime memberLast;
+	private LocalDate memberLast;
 	
 	@Column(name = "m_date")
 	private LocalDate memberDate;

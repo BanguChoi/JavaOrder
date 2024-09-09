@@ -155,13 +155,21 @@ public class MemberController {
 	    
 	    return response;
 	}
-	/*
-	// 회원 목록 페이지
-    @GetMapping("/admin/member")
-    public String getAllMembers(Model model) {
-        // 모든 회원 데이터 조회
-        List<Member> members = memberService.memberList();
-        model.addAttribute("members", members);
-        return "/admin/memberList"; // 회원 목록을 보여줄 뷰 이름
-    }*/
+	
+	@PostMapping("/delete")
+	@ResponseBody
+	public String deleteMember(@RequestParam String memberCode, HttpSession session) {
+	    try {
+	        boolean success = memberService.deleteMember(memberCode);
+	        if (success) {
+	            session.invalidate(); // 세션 무효화
+	            return "회원 탈퇴가 완료되었습니다.";
+	        } else {
+	            return "회원 탈퇴 실패: 회원이 존재하지 않거나 처리 중 오류가 발생했습니다.";
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace(); // 예외를 로그에 기록
+	        return "회원 탈퇴 중 오류가 발생했습니다.";
+	    }
+	}
 }

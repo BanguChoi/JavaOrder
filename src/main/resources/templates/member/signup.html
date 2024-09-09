@@ -13,19 +13,19 @@
         <h1 class="h3 mb-3 fw-normal">회원가입</h1>
         <form id="signupForm">
             <div class="form-floating">
-                <input type="text" class="form-control" id="name" placeholder="이름" maxlength="20">
+                <input type="text" class="form-control" id="name" placeholder="이름" maxlength="20" autocomplete="username">
                 <label for="name">이름</label>
                 <div class="text-danger error-message" id="nameError"></div>
             </div>
             
             <div class="form-floating">
-                <input type="text" class="form-control" id="id" placeholder="아이디" maxlength="12">
+                <input type="text" class="form-control" id="id" placeholder="아이디" maxlength="12" autocomplete="userId">
                 <label for="id">아이디</label>
                 <div class="text-danger error-message" id="idError"></div>
             </div>
             
            <div class="form-floating password-container">
-			  <input type="password" id="password" class="form-control" placeholder="비밀번호">
+			  <input type="password" id="password" class="form-control" placeholder="비밀번호" autocomplete="current-password">
 			  <label for="password">비밀번호</label>
 			  <input type="checkbox" id="showPassword" class="form-check-input">
 			</div>
