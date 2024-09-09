@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.javaOrder.admin.board.domain.Board;
 import com.javaOrder.admin.reply.domain.Reply;
 import com.javaOrder.admin.reply.service.ReplyService;
 
@@ -29,10 +28,8 @@ public class ReplyController {
 	
 	@GetMapping(value="/all/{boardNo}", produces=MediaType.APPLICATION_JSON_VALUE)
 //	public List<Reply> replyList(@PathVariable("no") Reply reply){
-	public List<Reply> replyList(@PathVariable Long boardNo, Reply reply, Board board){		
-		board.setBoardNo(boardNo);
-		reply.setBoard(board);
-		List<Reply> replyList = replyService.replyList(reply);
+	public List<Reply> replyList(@PathVariable Long boardNo){		
+		List<Reply> replyList = replyService.replyList(boardNo);
 		return replyList;
 	}
 	
@@ -44,15 +41,14 @@ public class ReplyController {
 	}
 	
 	@PutMapping(value="/{replyId}", consumes="application/json", produces=MediaType.APPLICATION_JSON_VALUE)
-	public Reply replyUpdate(@PathVariable Long replyId, @RequestBody Reply reply, Board board) {
+	public Reply replyUpdate(@PathVariable Long replyId, @RequestBody Reply reply) {
 		reply.setReplyId(replyId);
 		Reply result = replyService.replyUpdate(reply);
 		return result;
 	}
 	
 	@DeleteMapping(value="/{replyId}", produces=MediaType.TEXT_PLAIN_VALUE)
-	public void replyDelete(@PathVariable Long replyId, Reply reply) {
-		reply.setReplyId(replyId);
-		replyService.replyDelete(reply);
+	public void replyDelete(@PathVariable Long replyId) {
+		replyService.replyDelete(replyId);
 	}
 }
