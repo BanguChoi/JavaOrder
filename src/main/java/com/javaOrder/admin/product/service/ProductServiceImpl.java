@@ -170,20 +170,29 @@ public class ProductServiceImpl implements ProductService {
    		
    		// 순위 3개만 앞으로 정렬
    		// 카테고리 진입 시 top 제품 사라지도록. ALL 로 돌아오면 다시 노출
-   		int pageNumber = pageable.getPageNumber();
+   		int currentPage = productPageRequestDTO.getPage();
    		
-   		if(pageNumber == 0 && (categoryCode == null || categoryCode.isEmpty() || "ALL".equals(categoryCode))) {
-   			if(!topProductList.isEmpty()) {
-   	   			productList.addAll(0, topProductList);
-   	   		}
-   		}
-
+   		List<Product> finalProductList;
+   	    if (currentPage == 1) {
+   	        finalProductList = new ArrayList<>(topProductList);
+   	        for (Product product : productList) {
+   	            if (!finalProductList.contains(product)) {
+   	                finalProductList.add(product);
+   	            }
+   	        }
+   	    } else {
+   	        finalProductList = productList;
+   	    }
+   	   
+ 
    		ProductPageResponseDTO<Product> responseDTO = ProductPageResponseDTO.<Product>withAll()
-   				.dtoList(productList)
+   				.dtoList(finalProductList)
    				.productPageRequestDTO(productPageRequestDTO)
    				.totalCount(totalCount)
    				.build();
-
+   		
+   		// 순위 3개에 뱃지를 달아주기 위해
+   		responseDTO.setTopProductList(topProductList);
    		
    		return responseDTO;
    	}

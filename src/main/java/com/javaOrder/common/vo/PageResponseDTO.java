@@ -1,11 +1,8 @@
 package com.javaOrder.common.vo;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import com.javaOrder.admin.product.domain.Product;
 
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +13,6 @@ public class PageResponseDTO<E> {
 
 	private List<E> dtoList;
 	private List<Integer> pageNumList;
-	private List<Product> topProductList;
 	private PageRequestDTO pageRequestDTO;
 	private boolean prev;
 	private boolean next;
@@ -32,7 +28,7 @@ public class PageResponseDTO<E> {
 		this.dtoList = dtoList;
 		this.pageRequestDTO = pageRequestDTO;
 		this.totalCount = (int)totalCount;
-		this.topProductList = new ArrayList<>();
+
 
 		int end = (int)(Math.ceil(pageRequestDTO.getPage() / 10.0)) * 10;	// Math.ceil(): 주어진 숫자보다 크거나 같은 가장 작은 정수를 반환
 		int start = end - 9;
@@ -56,5 +52,6 @@ public class PageResponseDTO<E> {
 		this.totalPage = this.pageNumList.size();
 		this.current = this.pageRequestDTO.getPage();
 	}
+
 
 }
