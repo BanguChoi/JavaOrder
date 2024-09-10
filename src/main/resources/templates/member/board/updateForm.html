@@ -7,7 +7,8 @@
 	
 	<div class="container">
 		<div th:object="${updateData}">
-			<form id="updateForm" name="updateForm" th:action="@{/memberBoard/boardUpdate}" method="get">
+			<form id="updateForm" name="updateForm" th:action="@{/member/board/boardUpdate}" method="get"> 
+									<!--이걸 왜적었지? th:action="@{/member/board/boardUpdate}" -->
 				<input type="hidden" id="boardNo" name="boardNo" th:value="*{boardNo}"/>			
 				<div class="mb-3 row">
 					<label class="col-sm-2 col-form-label">글제목</label>
@@ -23,7 +24,7 @@
 				</div>
 				<div class="mb-3 row">
 					<label class="col-sm-2 col-form-label">비밀번호</label>
-					<input class="col-sm-4"  th:field="*{boardPasswd}" />					
+					<input class="col-sm-4"  id="boardPasswd" name="boardPasswd" autocomplete=off />					
 				</div>
 				<div class="text-end">
 					<button type="button" id="boardUpdateBtn" class="btn btn-primary btn-sm">글저장</button>

@@ -3,7 +3,7 @@
  layout:decorate="~{template/admin/layout/layout}">
 
 <th:block layout:fragment="content">
-	<div class="text-center"><h3>board 문의 게시판 입력</h3></div>
+	<div class="text-center"><h3>admin board 문의 게시판 입력</h3></div>
 	
 	<div class="container">
 		<form id="insertForm" th:object=${board}>		
@@ -21,7 +21,7 @@
 			</div>
 			<div class="mb-3 row">
 				<label class="col-sm-2 col-form-label">비밀번호</label>
-				<div class="col-sm-10">
+				<div class="col-sm-2">
 					<input type="password" class="form-control" th:field="*{boardPasswd}" />
 				</div>
 			</div>

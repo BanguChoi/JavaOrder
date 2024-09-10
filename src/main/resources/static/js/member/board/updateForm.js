@@ -8,7 +8,7 @@ $(document).ready(function() {
         var formData = $("#updateForm").serialize();
 
         $.ajax({
-            url: "/memberBoard/pwdConfirm",
+            url: "/member/board/pwdConfirm",
             method: "POST", 
             dataType:"text",
 			data: {

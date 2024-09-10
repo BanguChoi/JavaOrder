@@ -2,19 +2,9 @@
 /* 수정버튼 클릭 */
 $("#updateFormBtn").on("click", function(){
 	actionProcess("#dataForm", "post", "/member/board/updateForm");
-	/*pwdInit("visible");
-	btnInit();
-	buttonCheck = "updateButton";*/
 });
 
-/* 삭제버튼 클릭 시 처리 이벤트
-$("#boardDeleteBtn").on("click", function(){
-	if(confirm("정말 삭제하시겠습니까?")){
-		
-		actionProcess("#dataForm", "post", "/memberBoard/boardDelete");
-	}	
-});
-*/
+
 // 비밀번호 삭제...
 $(document).ready(function() {
     $("#boardDeleteBtn").on("click", function(event) {

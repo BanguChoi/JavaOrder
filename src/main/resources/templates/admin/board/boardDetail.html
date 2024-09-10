@@ -3,7 +3,7 @@
  layout:decorate="~{template/admin/layout/layout}">
  
  <th:block layout:fragment="content">
- 	<div class="text-center"><h3> board 문의 게시판 상세</h3></div>
+ 	<div class="text-center"><h3>admin board 문의 게시판 상세</h3></div>
  	
  	<div class="container">
 		<div th:object="${detail}" >
@@ -29,7 +29,7 @@
 			
 			<div class="text-end mb-3">
 				<button type="button" id="updateFormBtn" class="btn btn-primary btn-sm">글수정</button>
-				<button type="button" id="boardDeleteBtn" class="btn btn-primary btn-sm">글삭제</button>
+<!-- 				<button type="button" id="boardDeleteBtn" class="btn btn-primary btn-sm">글삭제</button> 글 삭제 안함 숨김 처림-->
 				<button type="button" id="insertFormBtn" class="btn btn-primary btn-sm">글쓰기</button>
 				<button type="button" id="boardListBtn" class="btn btn-primary btn-sm">글목록</button>
 			</div>
@@ -37,11 +37,12 @@
 			<!--댓글화면 구현(comment) 나중에 / 이거** 주석처리 주의/-->
 			
 			<form id="replyForm">
-				<input type="hidden" name="id" id="id" value="0" />
+				<div class="text-start mb-3"><h4>답변</h4></div>
+				<input type="hidden" name="replyId" id="replyId" value="0" />					
 				<div class="row mb-3">
 					<label for="replyName" class="col-sm-1 col-form-label">작성자</label>
 					<div class="col-sm-3">
-						<input type="text" name="replyName" id="replyName" class="form-control"/>
+						<input type="text" name="replyName" id="replyName"  class="form-control"/>
 					</div>
 					<button type="button" id="replyInsertBtn" class="btn btn-secondary col-sm-1 sendBtn mx-2">저장</button>
 				</div>
@@ -52,9 +53,10 @@
 					</div>
 				</div>
 			</form>
-			
-			<div id="replyList">
-				<div class="card mb-2" id="item-template">
+
+	<!-- 아래 보이면 안되는 구역 수정필요 입력된 내용이 중앙에 정렬됨 제목의 표현이 regDate까지 적용됨 -->		
+			<div id="replyList" >
+				<div class="card mb-2" id="item-template" style="display: none">
 					<h5 class="card-header">
 						<span class="replyName"></span>
 						<span class="regDate"></span>
@@ -74,6 +76,6 @@
  
  <th:block layout:fragment="script">
  	<script src="/js/admin/board/boardDetail.js"></script>
- 	<script src="/js/member/reply/comment.js"></script>
+ 	<script src="/js/admin/reply/comment.js"></script>
  </th:block>
 </html>
