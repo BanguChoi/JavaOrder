@@ -2,10 +2,8 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
 	layout:decorate="~{template/admin/layout/layout}">	
 	
-	<th:block layout:fragment="content">
-		<div class="text-center"><h3>admin board 게시판 리스트</h3></div>	
-
-		<h1> admin board 게시판 리스트</h1>
+	<th:block layout:fragment="content">	
+		<h1 class="m-3"> 문의 게시판</h1>
 
 		<div id="boardSearch" class="my-2">
 			<form id="searchForm">
@@ -18,10 +16,10 @@
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr class="text-center">
-						<th class="col-md-2">글번호</th>
-						<th class="col-md-4">글제목</th>
-						<th class="col-md-2">글내용</th>
-						<th class="col-md-3">등록일</th>						
+						<th class="col-md-1">글번호</th>
+						<th class="col-md-auto">글제목</th>
+						<th class="col-md-auto">글내용</th>
+						<th class="col-md-2">등록일</th>						
 					</tr>
 				</thead>
 				<tbody class="list">
@@ -41,10 +39,6 @@
 				</tbody>
 			</table>
 		</div>	
-		
-		<div class="text-end">
-			<button type="button" id="insertFormBtn" class="btn btn-primary btn-sm mb-2">글쓰기</button>
-		</div>
 		
 		<nav aria-label="Page navigation example">
   			<ul class="pagination justify-content-center">
