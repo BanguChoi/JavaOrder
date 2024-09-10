@@ -16,8 +16,8 @@
 				<input type="hidden" name="size" id="size" th:value="${noticesList.pageRequestDTO.size}">
 			</form>
 		</div>
-
-	    <table border="1">
+		<div class="board-table-height">
+		    <table class="table table-bordered table-hover">
 	        <thead>
 	            <tr>
 	                <th>공지번호</th>
@@ -43,7 +43,8 @@
 						</tr>
 					</th:block>
 				</tbody>
-   	 	</table>
+   	 		</table>
+   	 	</div>
 	    <div class="text-end">
 			<button type="button" id="insertFormBtn" class="btn btn-primary btn-sm mb-2">글쓰기</button>					
 	    </div>

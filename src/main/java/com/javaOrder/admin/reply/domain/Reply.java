@@ -42,7 +42,7 @@ public class Reply {
 //	@Lob 현재는 추가하면 안됨 댓글을 못 불러옴
 //	@Lob
 	@Column(name="reply_content")
-	private String replyContent;//body?
+	private String replyContent;
 	
 	@CreationTimestamp
 	@ColumnDefault(value = "sysDate")
