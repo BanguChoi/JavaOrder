@@ -39,9 +39,9 @@ public class BoardAdminServiceImpl implements BoardAdminService {
 	
 	@Override
 	public PageResponseDTO<Board> list(PageRequestDTO pageRequestDTO){
-	Pageable pageable = PageRequest.of(
-				pageRequestDTO.getPage() -1,
-				pageRequestDTO.getSize(), Sort.by("boardNo").descending());
+		Pageable pageable = PageRequest.of(
+			pageRequestDTO.getPage() -1,
+			pageRequestDTO.getSize(), Sort.by("boardNo").descending());
 		
 		Page<Board> result = repository.findAll(pageable);
 		List<Board> boardList = result.getContent().stream().collect(Collectors.toList());

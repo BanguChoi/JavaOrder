@@ -41,8 +41,6 @@ public class Notices {//위에 시퀀스 네임 바꿔주기
 		
 		@CreationTimestamp
 		private LocalDateTime regDate;	//작성일
-		
-		
 
 //		private String adminCode; //작성자코드 추후 연결
 

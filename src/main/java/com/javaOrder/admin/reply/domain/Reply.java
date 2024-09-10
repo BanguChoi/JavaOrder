@@ -40,7 +40,8 @@ public class Reply {
 	@Column(name = "reply_name", nullable = false)
 	private String replyName;//nickname
 	
-	@Lob
+//	@Lob 현재는 추가하면 안됨 댓글을 못 불러옴
+//	@Lob
 	@Column(name="reply_content")
 	private String replyContent;//body?
 	
@@ -51,6 +52,8 @@ public class Reply {
 	@ManyToOne
 	@JoinColumn(name = "boardNo")
 	private Board board;
+
+	
 
 //관리자코드 	
 //	private String adminCode;

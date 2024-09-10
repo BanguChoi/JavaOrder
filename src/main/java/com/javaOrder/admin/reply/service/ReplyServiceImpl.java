@@ -19,30 +19,31 @@ public class ReplyServiceImpl implements ReplyService{
 	
 	
 	@Override
-	public List<Reply> replyList(Reply reply) {
-		List<Reply> replyList = replyRepository.findByBoardNo(reply.getBoard().getBoardNo());
-		
+	public List<Reply> replyList(Long boardNo) {
+		List<Reply> replyList = replyRepository.findByBoardNo(boardNo);		
 		return replyList;
 	}
 	
 	@Override
-	public Reply replyInsert(Reply reply) {
+	public Reply replyInsert(Reply reply) {		
 		Reply result = replyRepository.save(reply);
 		return result;
 	}
 	
+
 	@Override
 	public Reply replyUpdate(Reply reply) {
 		Optional<Reply> replyOptional = replyRepository.findById(reply.getReplyId());
-		Reply updateReply = replyOptional.get();
-		updateReply.setReplyContent(reply.getReplyContent());
-		Reply result = replyRepository.save(updateReply);
+		Reply replyUpdate = replyOptional.get();
+		reply.setReplyId(reply.getReplyId());
+		replyUpdate.setReplyContent(reply.getReplyContent());
+		Reply result = replyRepository.save(replyUpdate);
 		return result;
 	}
 	
 	@Override
-	public void replyDelete(Reply reply) {
-		replyRepository.deleteById(reply.getReplyId());
+	public void replyDelete(Long replyId) {
+		replyRepository.deleteById(replyId);
 	}
     //    return replyRepository.findByBoardBoardNo(boardNo);
 	

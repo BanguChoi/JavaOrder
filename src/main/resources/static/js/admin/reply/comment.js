@@ -1,4 +1,4 @@
-/*
+/* 복구용
 	const template = (data) => {
 	    let $div = $('#replyList');	    
 	    let $element = $('#item-template').clone().removeAttr('id');

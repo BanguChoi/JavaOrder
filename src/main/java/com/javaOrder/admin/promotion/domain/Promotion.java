@@ -34,10 +34,6 @@ public class Promotion {
 
 	@Column(name="prom_img", nullable = true)
 	private String promotionImage; // 이미지  null 추후 추가
-	//디테일 나중에	private String prom_detail_img; 이미지용 
-	
-	/*
-	 * @Transient private MultipartFile file; //파일 업로드를 위한 필드 jaka*/
 	
 	@CreationTimestamp
 	@Column(name="prom_regdate")

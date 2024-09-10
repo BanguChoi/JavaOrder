@@ -2,14 +2,10 @@ $("#boardUpdateBtn").on("click", function(){
 	if(!chkData("#boardTitle", "제목을")) return;
 	else if(!chkData("#boardContent", "내용을")) return;
 	if(!chkData("#boardPasswd", "비밀번호를")) return;
-//	else{
-//		if($("#file").val()!=""){ // 업로드할 이미지 파일이 존재한다면
-//			if(!chkFile("#file")) return; // 이미지 파일만 업로드
-//		}		
-//		actionFileProcess("#updateForm", "post", "/board/boardUpdate")
+
 		actionProcess("#updateForm", "post", "/admin/board/boardUpdate");
-//	}
 });
+
 $(document).ready(function() {
     $("#boardUpdateBtn").on("click", function(event) {
         event.preventDefault(); // 기본 폼 제출 동작을 방지
@@ -42,10 +38,7 @@ $(document).ready(function() {
 			}
         });
     });
-
 });
-
-
 
 $("#boardCancelBtn").on("click", function(){
 	$("#updateForm").each(function(){
@@ -57,12 +50,13 @@ $("#boardListBtn").on("click", function(){
 	locationProcess("/admin/board/boardList");
 });
 
-
+/* 필요없는듯
 // errorHandling.js
 $(document).ready(function() {
-	const errorMessage = /*[[${errorMessage}]]*/'';
+	const errorMessage = /*[[${errorMessage}]]* /''; // 주석 확인
 	if(errorMessage!=''){
 		alert(errorMessage);
 		return;
 	}
 });
+*/
