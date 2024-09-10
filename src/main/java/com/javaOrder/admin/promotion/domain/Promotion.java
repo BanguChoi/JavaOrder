@@ -31,13 +31,7 @@ public class Promotion {
 	
 	@Column(name="prom_title", nullable = false)
 	private String promotionTitle;
-	
-//	@Column(name="prom_content", nullable = false)
-//	private String promotionContent;
 
-//	@Column(name="prom_name", nullable = false)
-//	private String promotionName;
-	
 	@Column(name="prom_img", nullable = true)
 	private String promotionImage; // 이미지  null 추후 추가
 	//디테일 나중에	private String prom_detail_img; 이미지용 

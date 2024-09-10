@@ -87,6 +87,6 @@ public class NoticesAdminServiceImpl implements NoticesAdminService {
 	
 	@Override
 	public Optional<Notices> getLatestNotice() {
-		return repository.findLatestNotice();
+		return repository.findFirstByOrderByRegDateDesc();
 	}
 }

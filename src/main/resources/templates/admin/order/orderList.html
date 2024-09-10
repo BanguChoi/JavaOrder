@@ -56,6 +56,7 @@
 				<th>상품명</th>
 				<th>총금액</th>
 				<th>주문일자</th>
+				<th>수령방식</th>
 				<th>주문상태</th>
 			</tr>
 		</thead>
@@ -73,6 +74,7 @@
 					</td>
 					<td th:text="*{orderPrice}"></td>
 					<td th:text="*{orderDate}"></td>
+					<td th:text="*{orderTakeout==0?'매장':orderTakeout==1?'픽업':'N/A'}"></td>
 					<td><!-- th:text="*{orderStatus}" th:value="*{orderStatus}" -->
 						<div class="btn-group">
 						  <button th:text="*{orderStatus=='E'?'픽업완료':orderStatus=='P'?'준비완료':orderStatus=='S'?'주문접수':orderStatus=='W'?'주문대기':'N/A'}" 
