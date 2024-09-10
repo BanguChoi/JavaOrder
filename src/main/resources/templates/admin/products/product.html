@@ -10,14 +10,14 @@
     <th:block layout:fragment="content">
         <form th:action="@{/admin/products}" method="get" class="search-form">
             <div>
-                <input type="text" id="searchValue" name="searchValue" placeholder="검색어를 입력하세요" />
+                <input type="text" id="searchValue" name="searchValue" placeholder="검색어를 입력하세요"/>
                 <select id="searchType" name="searchType">
                     <option value="productName">상품명</option>
                     <option value="categoryCode">카테고리 코드</option>
                     <option value="productDate">등록일자</option>
                 </select>
-                <button type="submit">검색</button>
-                <button type="button" onclick="window.location.href='/admin/products';">초기화</button>
+                <button class="btn btn-primary" type="submit">검색</button>
+                <button class="btn btn-primary" type="button" onclick="window.location.href='/admin/products';">초기화</button>
             </div>
         </form>
         
@@ -54,23 +54,23 @@
             <div style="display: flex; gap: 10px;">
                 <form th:action="@{/admin/products}" method="get" th:if="${productsPage.hasPrevious()}">
                     <input type="hidden" name="page" th:value="${productsPage.number - 1}" />
-                    <button type="submit">←</button>
+                    <button type="submit" class="btn btn-primary">←</button>
                 </form>
 
                 <span th:each="i : ${#numbers.sequence(1, productsPage.totalPages)}">
                     <form th:action="@{/admin/products}" method="get" style="display: inline-block;">
                         <input type="hidden" name="page" th:value="${i - 1}" />
-                        <button type="submit" th:classappend="${i == productsPage.number + 1} ? 'current' : ''" th:text="${i}"></button>
+                        <button type="submit" th:classappend="${i == productsPage.number + 1} ? 'current' : ''" th:text="${i}" class="btn btn-primary"></button>
                     </form>
                 </span>
 
                 <form th:action="@{/admin/products}" method="get" th:if="${productsPage.hasNext()}">
                     <input type="hidden" name="page" th:value="${productsPage.number + 1}" />
-                    <button type="submit">→</button>
+                    <button type="submit" class="btn btn-primary">→</button>
                 </form>
 
                 <form th:action="@{/admin/products/new}" method="get">
-                    <button type="submit">상품 등록</button>
+                    <button type="submit" class="btn btn-primary">상품 등록</button>
                 </form>
             </div>
         </div>
