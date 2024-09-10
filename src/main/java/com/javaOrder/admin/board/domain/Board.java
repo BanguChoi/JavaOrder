@@ -32,11 +32,11 @@ public class Board {
 	@Column(name="board_title", nullable = false)
 	private String boardTitle;
 	
-//	@Lob 주의 최종 커밋 적용
+//	@Lob
 	@Column(name="board_content", nullable = false)
 	private String boardContent;
 
-	//최종 커밋시에는 컬럼 wd 로 변경 ws 
+	//최종 커밋시에는 컬럼 wd 로  ws 오타 수정
 	@Column(name="board_passws", nullable = false)
 	private String boardPasswd;
 		

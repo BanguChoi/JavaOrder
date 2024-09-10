@@ -20,9 +20,9 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity
-@Table(name = "notices2")//커밋시 이름 2 제거 필요 0910
+@Table(name = "notices")//커밋시 이름 2 제거 필요 0910 여기도 커밋 필용ㅇ벗음 변경필요시 문즤
 @SequenceGenerator(name="notices_code_seq", initialValue = 100001,  allocationSize = 50)
-public class Notices {//위에 시퀀스 네임 바꿔주기
+public class Notices {
 
 		@Id
 		@Column(name="notices_no")
@@ -32,7 +32,7 @@ public class Notices {//위에 시퀀스 네임 바꿔주기
 		@Column(name="notices_title", nullable = false)
 		private String noticesTitle;
 
-// 커밋시 lob 추가 
+//최종 커밋시 lob 추가 
 //		@Lob
 		@Column(name="notices_content", nullable = false)
 		private String noticesContent;

@@ -18,6 +18,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+//프로모션은ㅇ 건드리면 안됨 뭔가 잘못 됬으면 문의
 @Setter
 @Getter
 @ToString
@@ -35,7 +36,7 @@ public class Promotion {
 	private String promTitle;
 	
 	//@Lob 푸쉬에 항상 조심
-//	@Lob 이부분은 물어보고 커밋
+//	@Lob 이부분은 물어보고 커밋 이제 없음 그림 한자응로 대체
 	@Column(name="prom_content", nullable = false)
 	private String promContent;
 
@@ -44,7 +45,7 @@ public class Promotion {
 	
 	@Column(name="prom_img", nullable = true)
 	private String promImg; // 이미지  null 추후 추가
-	//디테일 나중에	private String prom_detail_img; 이미지용 
+	//디테일 나중에	private String prom_detail_img; 이미지용  
 	
 	@Transient
 	private MultipartFile file;	//파일 업로드를 위한 필드  jaka
