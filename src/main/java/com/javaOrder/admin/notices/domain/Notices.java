@@ -32,7 +32,7 @@ public class Notices {//위에 시퀀스 네임 바꿔주기
 		@Column(name="notices_title", nullable = false)
 		private String noticesTitle;
 
-		// 커밋시 lob 추가 
+// 커밋시 lob 추가 
 //		@Lob
 		@Column(name="notices_content", nullable = false)
 		private String noticesContent;
@@ -42,7 +42,7 @@ public class Notices {//위에 시퀀스 네임 바꿔주기
 		
 		@CreationTimestamp
 		@ColumnDefault(value="sysDate")
-		private LocalDateTime noticesDate;	//이름변경 0910
+		private LocalDateTime regDate;	//이름변경 0910
 		
 		
 

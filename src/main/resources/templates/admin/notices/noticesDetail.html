@@ -17,7 +17,7 @@
 						<tr>
 							<td class="col-md-4 text-center"><strong>제목</strong>: <span th:text="*{noticesTitle}"></span></td>
 							<td class="col-md-4 text-center"><strong>작성자</strong>: <span th:text="*{noticesName}"></span></td>
-							<td class="col-md-4 text-center"><strong>작성일</strong>: <span th:text="*{#temporals.format(noticesDate, 'yyyy-MM-dd HH:mm:ss')}"></span></td>
+							<td class="col-md-4 text-center"><strong>작성일</strong>: <span th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></span></td>
 						</tr>
 						<tr>
 						<!-- 		내용	Content -->

@@ -42,7 +42,7 @@ public class Board {
 		
 	@CreationTimestamp
 	@ColumnDefault(value = "sysDate")
-	private LocalDateTime boardDate;// board date변경 regDate >> boardDate 0910
+	private LocalDateTime regDate;// board date변경 regDate >> regDate 0910
 
 
 	

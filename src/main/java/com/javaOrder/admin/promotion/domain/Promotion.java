@@ -35,7 +35,7 @@ public class Promotion {
 	private String promTitle;
 	
 	//@Lob 푸쉬에 항상 조심
-//	@Lob
+//	@Lob 이부분은 물어보고 커밋
 	@Column(name="prom_content", nullable = false)
 	private String promContent;
 
@@ -51,7 +51,7 @@ public class Promotion {
 	
 	@CreationTimestamp
 	@ColumnDefault(value="sysDate")
-	private LocalDateTime promotionDate;	//이름변경 0910
+	private LocalDateTime regDate;	//이름변경 0910
 
 	
 

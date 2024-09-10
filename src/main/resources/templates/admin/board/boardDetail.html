@@ -18,7 +18,7 @@
 						<td class="col-md-3">제목</td>
 						<td class="col-md-3 text-start" th:text="*{boardTitle}"></td>
 						<td class="col-md-3">작성일</td>
-						<td class="col-md-3 text-start" th:text="*{#temporals.format(boardDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+						<td class="col-md-3 text-start" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
 					</tr>					
 					<tr class="board-table-tr-height">
 						<td class="col-md-3 aligh-middle">글내용</td>
@@ -54,12 +54,12 @@
 				</div>
 			</form>
 
-	<!-- 아래 보이면 안되는 구역 수정필요 입력된 내용이 중앙에 정렬됨 제목의 표현이 boardDate까지 적용됨 -->		
+	<!-- 아래 보이면 안되는 구역 수정필요 입력된 내용이 중앙에 정렬됨 제목의 표현이 regDate까지 적용됨 -->		
 			<div id="replyList" >
 				<div class="card mb-2" id="item-template" style="display: none">
 					<h5 class="card-header">
 						<span class="replyName"></span>
-						<span class="boardDate"></span>
+						<span class="regDate"></span>
 						<a href="#" class="btn btn-secondary btn-sm replyUpdateFormBtn">수정</a>
 						<a href="#" class="btn btn-secondary btn-sm replyDeleteBtn">삭제</a>
 					</h5>
