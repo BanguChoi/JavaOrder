@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.javaOrder.admin.promotion.domain;
 
 import org.junit.jupiter.api.Test;

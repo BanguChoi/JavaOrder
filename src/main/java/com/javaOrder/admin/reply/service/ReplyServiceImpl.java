@@ -45,11 +45,4 @@ public class ReplyServiceImpl implements ReplyService{
 	public void replyDelete(Long replyId) {
 		replyRepository.deleteById(replyId);
 	}
-    //    return replyRepository.findByBoardBoardNo(boardNo);
-	
-	@Override
-	public List<Reply> replyListByBoardNo(Long boardNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
