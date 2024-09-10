@@ -13,7 +13,7 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url: '/categories/create',
+            url: '/admin/categories/create',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
