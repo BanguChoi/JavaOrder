@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaOrder.admin.board.domain.Board;
 import com.javaOrder.admin.board.service.BoardAdminService;
+import com.javaOrder.admin.domain.Admin;
 import com.javaOrder.common.util.vo.PageRequestDTO;
 import com.javaOrder.common.util.vo.PageResponseDTO;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.Setter;
 
 @Controller
@@ -45,12 +47,21 @@ public class BoardAdminController {
 	}
 	
 	@GetMapping("/{boardNo}")
-	public String boardDetail(@PathVariable Long boardNo, Board board, Model model) {
+	public String boardDetail(@PathVariable Long boardNo, Board board, HttpSession session, Model model) {
 		board.setBoardNo(boardNo);
 		Board detail = service.boardDetail(board);
 		model.addAttribute("detail",detail);
 		
 		String newLine = System.getProperty("line.separator").toString();
+		
+		Admin admin = (Admin) session.getAttribute("admin");
+		if(admin == null) {
+			model.addAttribute("adminName", "관리자가 로그인하지 않았습니다.");
+			return "redirect:/admin/";
+		}else {
+			model.addAttribute("adminName", admin.getAdminName());
+		}
+		
 		model.addAttribute("newLine", newLine);
 		return "admin/board/boardDetail";
 	}

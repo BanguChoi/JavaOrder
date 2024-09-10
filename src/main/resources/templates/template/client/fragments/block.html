@@ -27,6 +27,11 @@
    		<link href="/css/sticky-footer-navbar.css" rel="stylesheet">
 	</th:block>
 	
+	<!-- header -->
+	<th:block th:fragment="header">
+		<div class="container-fluid">		
+		</div>
+	</th:block>
 	
 	<!-- 왼쪽 사이드 메뉴바 -->
 	<th:block th:fragment="sidebar">
@@ -41,12 +46,12 @@
 	        Orders
 	      </a>
 	    </li>
-	    <li>
-	      <a href="#" class="nav-link link-body-emphasis">
-	       <!--  <svg class="bi pe-none" width="16" height="16"><use xlink:href="#grid"></use></svg> -->
-	        Products
-	      </a>
-	    </li>
+<!-- 	    <li> -->
+<!-- 	      <a href="#" class="nav-link link-body-emphasis"> -->
+<!-- 	        <svg class="bi pe-none" width="16" height="16"><use xlink:href="#grid"></use></svg> -->
+<!-- 	        Products -->
+<!-- 	      </a> -->
+<!-- 	    </li> -->
 	    <li>
 	      <a href="/member/promotion/promotionList" class="nav-link link-body-emphasis">
 	        Promotion
@@ -62,11 +67,11 @@
 	        QnA
 	      </a>
 	    </li>
-	    <li class="nav-item dropend">
+	    <li class="nav-item dropdown-center">
             <a class="nav-link dropdown-toggle link-body-emphasis" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               마이페이지
             </a>
-            <ul class="dropdown-menu dropdown-menu-dark">
+            <ul class="dropdown-menu dropdown-menu-dark" style="position:absolute; z-index: 1050;">
             	<li><a class="dropdown-item" href="/member/mypage">회원 정보</a></li>
              	<li><a class="dropdown-item" href="/member/orderList/">주문 내역</a></li>
               	<li><a class="dropdown-item" href="#">문의 내역</a></li>
@@ -76,16 +81,15 @@
 	  
 	  
 	  
-  			<!-- 로그인 상태에 따라 표시 -->
-		<!-- <div class="col-md-3 text-end"> -->
-		<div class="col-md-12 " id="loginSection" th:if="${session.member == null}">
+  		<!-- 로그인 상태에 따라 표시 -->
+		<div class="mb-5 pb-5" id="loginSection" th:if="${session.member == null}">
 		    <button type="button" id="signInBtn" class="btn btn-outline-primary me-2">로그인</button>
 		    <button type="button" id= "signUpBtn" class="btn btn-primary">회원가입</button>
 		</div>
 		 
-		<div class="col-md-12 mb-2" id="userInfoSection" th:if="${session.member != null}">
+		<div class="mb-5 pb-5" id="userInfoSection" th:if="${session.member != null}">
 		    <div id="userInfo" class="clickable">
-		        <p>안녕하세요, <span th:text="${session.member.memberName}">회원님</span>!</p>
+		        <p>안녕하세요, <span th:text="${session.member.memberName}"></span> 회원님!</p>
 		        <p>이메일: <span th:text="${session.member.memberEmail}">이메일</span></p>
 			    <form class="text-center" action="/member/signout" method="get">
 			        	<button type="submit" class="btn btn-danger btn-sm">로그아웃</button>
@@ -93,21 +97,15 @@
 		    </div>
 		    
 		</div>
-	  
-	  <hr>
-	  
-	  	
-			
-
 
 	  
 	</th:block>
 	<!-- footer -->
 	<th:block th:fragment="footer">
 		<div class="container">
-    		<p class="text-body-secondary">
-				사업자등록번호: 121-12-12345 | 대표: 홍길동 | 개인정보보호책임자: 김철수 | 이메일: javaOrder@naver.com | 서울특별시 강남구 테헤란로
-			</p>
-  		</div>
+				<p class="text-body-secondary">
+					사업자등록번호: 121-12-12345 | 대표: 홍길동 | 개인정보보호책임자: 김철수 | 이메일: javaOrder@naver.com | 서울특별시 강남구 테헤란로
+				</p>
+			</div>
 	</th:block>
 </html>

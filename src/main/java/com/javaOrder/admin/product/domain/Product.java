@@ -30,7 +30,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "cate_code", nullable = false)
-    private Category category;  // 카테고리 코드와의 관계
+    private Category category;
 
     @Column(name = "p_order", nullable = false)
     private int productOrder;
@@ -42,8 +42,8 @@ public class Product {
     @Column(name = "p_date")
     private Date productDate = new Date();
 
-    @Column(name = "p_sell", length = 1, nullable = false, columnDefinition = "CHAR(1) DEFAULT 'N'")
-    private String productSell = "N";  // 기본값 N
+    @Column(name = "p_sell", length = 1, nullable = false, columnDefinition = "CHAR(1) DEFAULT 'Y'")
+    private String productSell = "Y";
 
     @Column(name = "p_price", nullable = true)
     private Integer productPrice;

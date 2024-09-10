@@ -11,14 +11,14 @@
 	<body class="text-center">
 		<main class="form-signin">
 		<h1 class="h3 mb-3 fw-normal">로그인해 주세요</h1>
-			<form id="loginForm" action="/member/signin" method="post">
+			<form id="loginForm" action="/admin/signin" method="post">
 			<div class="form-floating">
-	      		<input type="text" class="form-control" id="id" name="memberId" autocomplete="memberid">
+	      		<input type="text" class="form-control" id="id" name="adminId" autocomplete=off>
 	   			<label for="id">id</label>
 	   		</div>
 	   		
 	    	<div class="form-floating">
-	      		<input type="password" class="form-control" id="password" name="memberPassword" autocomplete="current-password">
+	      		<input type="password" class="form-control" id="password" name="adminPassword" autocomplete=off>
 	      		<label for="password">Password</label>
 	    	</div>
 	
@@ -26,8 +26,6 @@
 	    	
 	    	<button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
 	  	</form>
-	  	<p class="mt-5 mb-3 text-muted">처음이신가요?&nbsp;
-	  	<a th:href="@{/member/signup}">회원가입</a></p>
 		</main>
 		
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

@@ -40,7 +40,7 @@
 				<div class="row mb-3">
 					<label for="replyName" class="col-sm-1 col-form-label">작성자</label>
 					<div class="col-sm-3">
-						<input type="text" name="replyName" id="replyName"  class="form-control"/>
+						<input type="text" name="replyName" id="replyName" th:value="${adminName}" class="form-control" readonly/>
 					</div>
 					<button type="button" id="replyInsertBtn" class="btn btn-secondary col-sm-1 sendBtn mx-2">저장</button>
 				</div>

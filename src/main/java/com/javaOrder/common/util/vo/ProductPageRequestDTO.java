@@ -17,7 +17,7 @@ public class ProductPageRequestDTO {
 	private int page = 1;
 	
 	@Builder.Default
-	private int size = 10;
+	private int size = 12;
 	
 	// 검색 조건 필드 추가
     private String searchType;   // 검색타입 (회원번호, 주문상태, 날짜)
@@ -25,6 +25,6 @@ public class ProductPageRequestDTO {
     private String status;		 // 검색할 주문상태
     private LocalDate startDate; // 검색 시작 날짜
     private LocalDate endDate;   // 검색 종료 날짜
-    private String category;	// 카테고리
+    private String category;	 // 카테고리
 	
 }

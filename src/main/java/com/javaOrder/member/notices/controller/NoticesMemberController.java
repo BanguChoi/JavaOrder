@@ -1,6 +1,9 @@
 package com.javaOrder.member.notices.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +44,11 @@ public class NoticesMemberController {
 		model.addAttribute("newLine", newLine);
 		return "member/notices/noticesDetail";
 	}
-		
 	
+	@GetMapping("/latest")
+	public ResponseEntity<Notices> getLatestNotice(){
+		Optional<Notices> notice = service.getLatestNotice();
+		
+		return ResponseEntity.ok(notice.get());
+	}
 }

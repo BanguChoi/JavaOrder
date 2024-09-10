@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.javaOrder.admin.domain.Admin;
 import com.javaOrder.admin.notices.domain.Notices;
 import com.javaOrder.admin.notices.service.NoticesAdminService;
 import com.javaOrder.common.util.vo.PageRequestDTO;
 import com.javaOrder.common.util.vo.PageResponseDTO;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.Setter;
 
 
@@ -33,9 +35,17 @@ public class NoticesAdminController {
 		}
 		
 		@GetMapping("/insertForm")
-		public String insertForm(Notices notices) {
-			return "admin/notices/insertForm";
+		public String insertForm(Notices notices, HttpSession session, Model model) {
+			Admin admin = (Admin) session.getAttribute("admin");
+			if(admin == null) {
+				model.addAttribute("adminName", "관리자가 로그인하지 않았습니다.");
+				return "redirect:/admin/";
+			}else {
+				model.addAttribute("adminName", admin.getAdminName());
+				return "admin/notices/insertForm";
+			}
 		}
+		
 		@PostMapping("/noticesInsert")
 		public String noticesInsert(Notices notices) {
 			service.noticesInsert(notices);

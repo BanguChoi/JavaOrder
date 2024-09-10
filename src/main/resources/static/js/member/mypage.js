@@ -36,8 +36,8 @@ $(document).ready(function() {
         const errorDiv = $(`#${fieldId}Error`);
         
         // 필드가 공백이 아닌 경우 유효성 검사 수행
-        if (fieldId === 'memberName' || fieldId === 'memberId' || fieldId === 'memberEmail' || fieldId === 'memberPhone' || fieldId === 'memberAddress' || fieldId === 'memberBirth') {
-            if (value === '') {
+        if (['memberName', 'memberId', 'memberEmail', 'memberPhone', 'memberAddress', 'memberBirth'].includes(fieldId)) {
+            if (value === '' ) {
                 errorDiv.text('이 필드는 비워둘 수 없습니다.');
                 return false;
             }
@@ -140,4 +140,27 @@ $(document).ready(function() {
         const errorDiv = $(`#${this.id}Error`);
         errorDiv.text('');
     });
+	
+	// 회원 탈퇴
+	$('#deleteAccountBtn').on('click', function() {
+        const memberCode = $('#memberCode').val();
+
+        if (confirm('정말로 회원 탈퇴를 하시겠습니까?')) {
+            $.ajax({
+                url: '/member/delete',
+                method: 'POST',
+                data: { memberCode: memberCode },
+                success: function(response) {
+                    alert(response);
+                    if (response.includes("완료되었습니다.")) {
+                        window.location.href = '/'; // 메인 페이지로 리다이렉트
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error('AJAX 요청 중 오류 발생:', textStatus, errorThrown);
+                    alert('회원 탈퇴 중 오류가 발생했습니다.');
+                }
+            });
+        }
+    });	
 });

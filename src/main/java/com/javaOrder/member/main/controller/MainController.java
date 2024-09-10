@@ -41,25 +41,12 @@ public class MainController {
 	
 	@GetMapping("/")
 	public String main(Model model, HttpSession session) {
-								    // : 사용자가 로그인한 후 현재 세션에서 그 사용자를 식별하는 데 사용
-		
-		// 임시 로그인 사용자 생성 (테스트용, 실제 사용자 객체로 대체 필요)
-//		if (loggedInMember == null) {
-//            loggedInMember = new Member();
-//            loggedInMember.setMemberCode("M0007");
-//            loggedInMember.setMemberName("홍길동");
-//            session.setAttribute("member", loggedInMember);
-//        } 
+
 		if(session.getAttribute("member") != null) {
 			Member loggedInMember = (Member) session.getAttribute("member");
 			
 			try {
 	        	Cart cart = cartService.getCartByMemberCode(loggedInMember.getMemberCode());
-//	            logger.info("Retrieved cart: {}", cart);
-//	            logger.info("Cart ID: {}", cart.getCartId());
-//	            logger.info("Cart Price: {}", cart.getCartPrice());
-//	            logger.info("Cart Items: {}", cart.getCartItems());
-//	            logger.info("Cart Items Size: {}", cart.getCartItems() != null ? cart.getCartItems().size() : "null");
 	            model.addAttribute("cart", cart);
 	        } catch (Exception e) {
 	        	logger.error("Error retrieving cart: {}", e.getMessage());
@@ -73,10 +60,12 @@ public class MainController {
 			
 	        List<CartItem> cartItemList = cartItemService.cartItemList(loggedInMember);
 	        model.addAttribute("cartItemList", cartItemList);
+	        
+	        
 		}
 		/* 로그인 전에는 제품리스트만 출력 */
 		ProductPageRequestDTO productPageRequestDTO = new ProductPageRequestDTO();
-		ProductPageResponseDTO<Product> productList = productService.productList(productPageRequestDTO);
+		ProductPageResponseDTO<Product> productList = productService.productList(productPageRequestDTO, session);
 		model.addAttribute("productList", productList);
 		
 		return "member/main";

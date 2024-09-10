@@ -8,12 +8,6 @@
 		<meta name="theme-color" content="#712cf9"/>
 	</head>
 	<body class="d-flex h-100 text-center">
-		<!-- header -->
-		<header class="mb-auto">
-	  		<nav class="navbar navbar-expand-md navbar-dark fixed-top">
-	  			<th:block th:insert="~{template/admin/fragments/block :: header}"></th:block>
-	  		</nav>	
-		</header>
 		
 		
 		<!-- sidebar -->
@@ -23,16 +17,13 @@
 		
 		
 		<!-- main -->
-		<main class="d-flex flex-column w-100 pt-2">
-		  <div class="container">
+		<main class="d-flex flex-column w-100 pt-2 m-5">
 		   	<th:block layout:fragment="content"></th:block>
-		  </div>
 		</main>
 		
 		<script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="/js/jquery-3.7.1.min.js"></script>
 		<script src="/js/common.js"></script>
 		<th:block layout:fragment="script"></th:block>
-		
 	</body>
 </html>

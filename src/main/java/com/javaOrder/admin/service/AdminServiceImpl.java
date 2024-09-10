@@ -32,4 +32,14 @@ public class AdminServiceImpl implements AdminService {
 		return adminList;
 	}
 
+	// 관리자 로그인
+	@Override
+	public Admin Login(String adminId, String adminPassword) {
+		Admin admin = adminRepository.findByAdminId(adminId);
+		if(admin != null && admin.getAdminPasswd().equals(adminPassword)) {
+			return admin;
+		}
+		return null;
+	}
+	
 }

@@ -17,6 +17,7 @@ public class ReplyServiceImpl implements ReplyService{
 	//생성자주입
 	private final ReplyRepository replyRepository;
 	
+	
 	@Override
 	public List<Reply> replyList(Long boardNo) {
 		List<Reply> replyList = replyRepository.findByBoardNo(boardNo);		

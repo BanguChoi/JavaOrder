@@ -3,8 +3,15 @@
 	layout:decorate="~{template/client/layout/layout}" >
 
 <!-- 메인 콘텐츠 영역 -->
-<th:block layout:fragment="content">   
-    <div class="d-flex flex-grow-1 pt-2" style="margin-left: 280px; padding-bottom: 56px; overflow-y: auto; height: calc(100vh - 56px);">
+<th:block layout:fragment="content">
+	<header class="my-2">
+		<nav class="navbar navbar-expand-md navbar-dark sticky-top">
+			<div class="text-start col-7 ms-3 p-1" style="background-color:#2f2f2f">
+				<a id="latestNoticeLink" class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"></a>
+			</div>
+		</nav>	
+	</header>   
+    <div class="d-flex flex-grow-1" style="margin: 20px; overflow-y: auto; height: calc(100vh - 56px);">
 
 		<!-- 상품 리스트 -->           
 		<div id="productListContainer" style="width: 75%; height: 100%; overflow-y: auto;">
@@ -22,6 +29,7 @@
 	<script src="/js/member/products/productList.js"></script>
 	<script src="/js/member/cart/cart.js"></script>
 	<script src="/js/member/cart/cartItemList.js"></script>
+	<script src="/js/member/promotion/promotionBanner.js"></script>
 </th:block>
 	</body>
 </html>

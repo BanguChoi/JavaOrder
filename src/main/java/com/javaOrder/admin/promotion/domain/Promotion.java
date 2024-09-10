@@ -1,10 +1,9 @@
 package com.javaOrder.admin.promotion.domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,7 +12,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,41 +21,34 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity
-@Table(name = "promotion2") //최종커밋시 2지우기 0910
-@SequenceGenerator(name="prom_code_seq", initialValue = 100001,  allocationSize = 10)
+@Table(name = "promotion")
+@SequenceGenerator(name="prom_code_seq", initialValue = 1,  allocationSize = 1)
 public class Promotion {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prom_code_seq")
 	@Column(name="prom_code")
-	private	Long promCode;
+	private	Long promotionCode;
 	
 	@Column(name="prom_title", nullable = false)
-	private String promTitle;
-	
-	//@Lob 푸쉬에 항상 조심
-//	@Lob 이부분은 물어보고 커밋 이제 없음 그림 한자응로 대체
-	@Column(name="prom_content", nullable = false)
-	private String promContent;
+	private String promotionTitle;
 
-	@Column(name="prom_name", nullable = false)
-	private String promName;
-	
 	@Column(name="prom_img", nullable = true)
-	private String promImg; // 이미지  null 추후 추가
-	//디테일 나중에	private String prom_detail_img; 이미지용  
-	
-	@Transient
-	private MultipartFile file;	//파일 업로드를 위한 필드  jaka
-	
+	private String promotionImage; // 이미지  null 추후 추가
+
 	@CreationTimestamp
-	@ColumnDefault(value="sysDate")
-	private LocalDateTime regDate;	//이름변경 0910
-
+	@Column(name="prom_regdate")
+	private LocalDateTime regDate;	//작성일
 	
+	@Column(name="a_code")
+	private String adminCode;		// 작성 관리자
+	
+	@Column(name="prom_start")
+	private LocalDate promotionStartDate;	// 시작일
+	
+	@Column(name="prom_end")
+	private LocalDate promotionEndDate;		// 종료일
 
-//관리자 코드 	private String a_code;
-//시작 추후추가	private LocalDate prom_startDate
-//종료 추후추가	private LocalDate prom_endDate;
-
+	@Column(name="prom_status")
+	private String promotionStatus = "N";		// 프로모션 진행여부 N:안함 P:진행중 E:종료
 }

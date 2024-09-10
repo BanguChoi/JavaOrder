@@ -1,8 +1,12 @@
 package com.javaOrder.admin.product.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,8 +18,13 @@ import com.javaOrder.admin.product.domain.Category;
 import com.javaOrder.admin.product.domain.Product;
 import com.javaOrder.admin.product.repository.CategoryRepository;
 import com.javaOrder.admin.product.repository.ProductRepository;
+import com.javaOrder.common.orders.repository.OrderItemRepository;
+import com.javaOrder.common.orders.repository.OrdersRepository;
 import com.javaOrder.common.util.vo.ProductPageRequestDTO;
 import com.javaOrder.common.util.vo.ProductPageResponseDTO;
+import com.javaOrder.member.domain.Member;
+
+import jakarta.servlet.http.HttpSession;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -25,9 +34,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+    
+    @Autowired
+    private OrderItemRepository orderItemRepository;
+    
+    @Autowired
+    private OrdersRepository ordersRepository;
+    
+    
+	private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
+
 
     @Override
-    public Product createProduct(String categoryCode, String productName, Integer price) {
+    public Product createProduct(String categoryCode, String productName, Integer price, String productExplain) {
         // 카테고리 코드로 카테고리 엔티티 조회
         Category category = categoryRepository.findById(categoryCode)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid category code: " + categoryCode));
@@ -51,6 +70,7 @@ public class ProductServiceImpl implements ProductService {
         product.setCategory(category);
         product.setProductName(productName);
         product.setProductPrice(price);
+        product.setProductExplain(productExplain);  // 설명 추가
 
         return productRepository.save(product);
     }
@@ -94,13 +114,38 @@ public class ProductServiceImpl implements ProductService {
     
     
     
-    /* 제품 리스트 + 페이징 + 검색기능 */
+    /* 제품 리스트 + 페이징 + 검색기능 + 회원 로그인시 가장 많이 주문한 제품1순위 첫번째 출력 */
     @Override
-   	public ProductPageResponseDTO<Product> productList(ProductPageRequestDTO productPageRequestDTO) {
-   		Pageable pageable = PageRequest.of(
-   				productPageRequestDTO.getPage()-1, 
-   				productPageRequestDTO.getSize(), Sort.by("productDate").descending());
+   	public ProductPageResponseDTO<Product> productList(ProductPageRequestDTO productPageRequestDTO, HttpSession session) {
+   		Member member = (Member) session.getAttribute("member");
+   		Pageable pageable;
    		
+   		/* 해당 회원의 구매율 탑 제품 */
+   		List<Product> topProductList = new ArrayList<>();
+
+   		if(member != null) {
+   			String memberCode = member.getMemberCode();
+   			
+   			logger.info("memberCode: " + memberCode);		
+   			
+   			
+   			List<Object[]> topOrderItems = orderItemRepository.findTop3ProductsByMemberCode(memberCode);
+   			
+   			List<String> topProductId = topOrderItems.stream()
+						.map(objects -> (String)objects[0])
+						.collect(Collectors.toList());
+   			
+   			if(!topProductId.isEmpty()) {
+   				topProductList = productRepository.findAllById(topProductId);
+   			}							
+   		} 
+		pageable = PageRequest.of(
+   				productPageRequestDTO.getPage()-1, 
+   				productPageRequestDTO.getSize(),
+   				Sort.by("productDate").descending());
+    	
+		
+   		/* 키워드, 카테고리 검색 */
    		Page<Product> result;
    		String keyWord = productPageRequestDTO.getKeyword();
    		String categoryCode = productPageRequestDTO.getCategory();
@@ -118,10 +163,20 @@ public class ProductServiceImpl implements ProductService {
    	            result = productRepository.findAll(pageable);
    	        }
    	    }
-   		
-   		List<Product> productList = result.getContent();
-   		long totalCount = result.getTotalElements();
 
+   		List<Product> productList = new ArrayList<>(result.getContent());
+   		long totalCount = result.getTotalElements();
+   		
+   		
+   		// 순위 3개만 앞으로 정렬
+   		// 카테고리 진입 시 top 제품 사라지도록. ALL 로 돌아오면 다시 노출
+   		if(categoryCode == null || categoryCode.isEmpty() || "ALL".equals(categoryCode) ) {
+   			if(!topProductList.isEmpty()) {
+   	   			productList.addAll(0, topProductList);
+   	   		}
+   		}
+
+   		
    		ProductPageResponseDTO<Product> responseDTO = ProductPageResponseDTO.<Product>withAll()
    				.dtoList(productList)
    				.productPageRequestDTO(productPageRequestDTO)

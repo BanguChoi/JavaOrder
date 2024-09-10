@@ -34,4 +34,6 @@ public interface OrdersRepository extends JpaRepository<Orders, Long>{
 	Orders findByOrderNumber(Long partnerOrderId);
 	// tid로 주문 찾기
 	Orders findByTid(String tid);
+	// 회원번호로 가장 많이 주문한 제품 찾기
+	Orders findFirstByMemberCode(Member mCode);
 }

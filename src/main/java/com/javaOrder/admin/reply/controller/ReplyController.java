@@ -48,16 +48,6 @@ public class ReplyController {
 		return result;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@DeleteMapping(value="/{replyId}", produces=MediaType.TEXT_PLAIN_VALUE)
 	public void replyDelete(@PathVariable Long replyId) {
 		replyService.replyDelete(replyId);

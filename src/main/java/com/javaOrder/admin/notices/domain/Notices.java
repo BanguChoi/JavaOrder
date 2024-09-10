@@ -2,7 +2,6 @@ package com.javaOrder.admin.notices.domain;
 
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
@@ -10,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -20,10 +20,10 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity
-@Table(name = "notices")//커밋시 이름 2 제거 필요 0910 여기도 커밋 필용ㅇ벗음 변경필요시 문즤
-@SequenceGenerator(name="notices_code_seq", initialValue = 100001,  allocationSize = 50)
-public class Notices {
 
+@Table(name = "notices")
+@SequenceGenerator(name="notices_code_seq", initialValue = 1,  allocationSize = 1)
+public class Notices {//위에 시퀀스 네임 바꿔주기
 		@Id
 		@Column(name="notices_no")
 		@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "notices_code_seq") 
@@ -32,8 +32,7 @@ public class Notices {
 		@Column(name="notices_title", nullable = false)
 		private String noticesTitle;
 
-//최종 커밋시 lob 추가 
-//		@Lob
+		@Lob
 		@Column(name="notices_content", nullable = false)
 		private String noticesContent;
 
@@ -41,10 +40,7 @@ public class Notices {
 		private String noticesName;				
 		
 		@CreationTimestamp
-		@ColumnDefault(value="sysDate")
-		private LocalDateTime regDate;	//이름변경 0910
-		
-		
+		private LocalDateTime regDate;	//작성일
 
 //		private String adminCode; //작성자코드 추후 연결
 

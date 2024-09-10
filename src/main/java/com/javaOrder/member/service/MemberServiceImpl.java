@@ -1,5 +1,6 @@
 package com.javaOrder.member.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.javaOrder.common.util.service.IdGenerationService;
+import com.javaOrder.common.util.service.MaskingUtils;
 import com.javaOrder.common.util.vo.PageRequestDTO;
 import com.javaOrder.common.util.vo.PageResponseDTO;
 import com.javaOrder.member.cart.domain.Cart;
@@ -39,6 +41,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		/* 회원가입시 카트 자동생성 */
         Cart cart = new Cart();
+        cart.setCartId("C" + memberCode);
         cart.setMember(member);   
         cartRepository.save(cart);
 	}
@@ -94,18 +97,27 @@ public class MemberServiceImpl implements MemberService {
 			result = memberRepository.findAll(pageable);
 		}
 		
-		List<Member> memberList = result.getContent().stream().collect(Collectors.toList());		
+		List<Member> memberList = result.getContent().stream()
+				.map(member -> {
+			        // 마스킹 처리
+			        member.setMemberName(MaskingUtils.maskName(member.getMemberName()));
+			        member.setMemberId(MaskingUtils.maskId(member.getMemberId()));
+			        member.setMemberEmail(MaskingUtils.maskEmail(member.getMemberEmail()));
+			        member.setMemberPhone(MaskingUtils.maskPhone(member.getMemberPhone()));
+			        return member;
+			    })
+				.collect(Collectors.toList());		
 		Long totalCount = result.getTotalElements();
 		
 		PageResponseDTO<Member> responseDTO = PageResponseDTO.<Member>withAll()
-											.dtoList(memberList)
-											.pageRequestDTO(pageRequestDTO)
-											.totalCount(totalCount)
-											.build();
-		
+			.dtoList(memberList)
+			.pageRequestDTO(pageRequestDTO)
+			.totalCount(totalCount)
+			.build();
 		return responseDTO;
 	}
 
+	
 	// 회원 로그인
 	@Override
 	public Member Login(String memberId, String memberPassword) {
@@ -173,11 +185,37 @@ public class MemberServiceImpl implements MemberService {
 	        // 비밀번호 변경
 	    	member.setMemberPasswd(newPassword);
 	        //수정일 갱신
-	        member.setMemberLast(LocalDateTime.now());
+	        member.setMemberLast(LocalDate.now());
 	        memberRepository.save(member);
 	        return true;
 	    }
 	    return false;
 	}
+	
+	// 회원 탈퇴
+	@Override
+	public boolean deleteMember(String memberCode) {
+		try {
+            Member member = memberRepository.findByMemberCode(memberCode);
+
+            if (member != null) {
+                member.setMemberName(memberCode);
+                member.setMemberId(memberCode);
+                member.setMemberPasswd(memberCode);
+                member.setMemberEmail(null);
+                member.setMemberPhone(memberCode);
+                member.setMemberAddress(null);
+                member.setMemberBirth(LocalDate.of(0001, 1, 1));
+                member.setMemberStatus("N");
+
+                memberRepository.save(member);
+                return true; // 성공적으로 null로 설정됨
+            } else {
+                return false; // 회원이 존재하지 않음
+            }
+        } catch (Exception e) {
+            return false; // 오류 발생
+        }
+    }
 	
 }

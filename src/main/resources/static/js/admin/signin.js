@@ -1,7 +1,7 @@
 $(document).ready(function() {
     const $form = $('#loginForm');
-    const $id = $form.find('input[name="memberId"]');
-    const $password = $form.find('input[name="memberPassword"]');
+    const $id = $form.find('input[name="adminId"]');
+    const $password = $form.find('input[name="adminPassword"]');
 	
 	// 아이디와 비밀번호가 일치하지 않을 경우
 	const $error = $('#error');

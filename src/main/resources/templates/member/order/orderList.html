@@ -52,6 +52,7 @@
 				<th>상품명</th>
 				<th>총금액</th>
 				<th>주문일자</th>
+				<th>수령방식</th>
 				<th>주문상태</th>
 			</tr>
 		</thead>
@@ -68,11 +69,31 @@
 					</td>
 					<td th:text="*{orderPrice}"></td>
 					<td th:text="*{orderDate}"></td>
+					<td th:text="*{orderTakeout==0?'매장':orderTakeout==1?'픽업':'N/A'}"></td>
 					<td th:text="*{orderStatus=='E'?'픽업완료':orderStatus=='P'?'준비완료':orderStatus=='S'?'주문접수':orderStatus=='W'?'주문대기':'N/A'}"></td>
 				</tr>
 			</th:block>
 		</tbody>
 	</table>
+	
+	<nav aria-label="Page navigation example">
+	  <ul class="pagination justify-content-center">
+	  	<!-- 이전 바로가기 10개 존재여부를 prev필드의 값으로 확인 -->
+	    <li class="page-item" th:if="${orderList.prev}">
+	      <a th:data-number="${orderList.prevPage}" class="page-link">Previous</a>
+	    </li>
+	    
+	    <!-- 바로가기 번호 출력 -->
+	    <li th:each="number:${orderList.pageNumList}" th:classappend="'page-item '+ ${(orderList.current == number) ? 'active':''}">
+	    	<a class="page-link" th:text="${number}" th:data-number="${number}"></a>
+	    </li>
+	    
+		<!-- 다음 바로가기 10개 존재 여부를 next 필드의 값으로 확인 -->	    
+	    <li class="page-item" th:if="${orderList.next}">
+	      <a th:data-number="${orderList.nextPage}" class="page-link">Next</a>
+	    </li>
+	  </ul>
+	</nav>
 </div>
 </th:block>
 		
