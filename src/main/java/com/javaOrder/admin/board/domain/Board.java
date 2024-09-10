@@ -32,17 +32,17 @@ public class Board {
 	@Column(name="board_title", nullable = false)
 	private String boardTitle;
 	
-	@Lob 
+//	@Lob 주의 커밋시 항상 적용
 	@Column(name="board_content", nullable = false)
 	private String boardContent;
 
-	
-	@Column(name="board_passwd", nullable = false)
+	//커밋시에는 컬럼 wd 로 변경 ws
+	@Column(name="board_passws", nullable = false)
 	private String boardPasswd;
 		
 	@CreationTimestamp
 	@ColumnDefault(value = "sysDate")
-	private LocalDateTime regDate;
+	private LocalDateTime boardDate;// board date변경 regDate >> boardDate 0910
 
 
 	

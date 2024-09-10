@@ -22,7 +22,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity
-@Table(name = "promotion2")
+@Table(name = "promotion2") //최종커밋시 2지우기 0910
 @SequenceGenerator(name="prom_code_seq", initialValue = 100001,  allocationSize = 10)
 public class Promotion {
 	
@@ -34,6 +34,8 @@ public class Promotion {
 	@Column(name="prom_title", nullable = false)
 	private String promTitle;
 	
+	//@Lob 푸쉬에 항상 조심
+//	@Lob
 	@Column(name="prom_content", nullable = false)
 	private String promContent;
 
@@ -49,7 +51,7 @@ public class Promotion {
 	
 	@CreationTimestamp
 	@ColumnDefault(value="sysDate")
-	private LocalDateTime regDate;	//작성일
+	private LocalDateTime promotionDate;	//이름변경 0910
 
 	
 

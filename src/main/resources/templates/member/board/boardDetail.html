@@ -18,7 +18,7 @@
 						<td class="col-md-3">제목</td>
 						<td class="col-md-3 text-start" th:text="*{boardTitle}"></td>
 						<td class="col-md-3">작성일</td>
-						<td class="col-md-3 text-start" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+						<td class="col-md-3 text-start" th:text="*{#temporals.format(boardDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
 					</tr>					
 					<tr class="board-table-tr-height">
 						<td class="col-md-3 aligh-middle">글내용</td>
@@ -38,17 +38,17 @@
 	<!--삭제는표시숨김으로<button type="button" id="insertFormBtn" class="btn btn-primary btn-sm">글쓰기</button> 삭제는 표시 숨김 처리 -->
 					<button type="button" id="boardListBtn" class="btn btn-primary btn-sm">글목록</button>
 				</div>
-			
+				
 			
 			<!--댓글화면 구현(comment) 나중에 / 이거** 주석처리 주의/-->
 		
 
-	<!-- 아래 보이면 안되는 구역 수정필요 입력된 내용이 중앙에 정렬됨 제목의 표현이 regDate까지 적용됨 -->		
+	<!-- 아래 보이면 안되는 구역 수정필요 입력된 내용이 중앙에 정렬됨 제목의 표현이 boardDate까지 적용됨 -->		
 			<div id="replyList" >
 				<div class="card mb-2" id="item-template" style="display: none">
 					<h5 class="card-header">
 						<span class="replyName"></span>
-						<span class="regDate"></span>		
+						<span class="boardDate"></span>		
 					</h5>
 					<div class="card-replyContent">
 						<p class="card-text"></p>

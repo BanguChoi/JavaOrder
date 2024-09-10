@@ -42,7 +42,7 @@
 							<td th:text="*{promCode}"></td>
 							<td><a th:href="@{/member/promotion/} + *{promCode}" th:text="*{promTitle}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a></td>
 							<td class="content" th:text="*{promContent}"></td>
-							<td class="date" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+							<td class="date" th:text="*{#temporals.format(promotionDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
 						</tr>
 					</th:block>
 				</tbody>

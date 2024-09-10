@@ -20,7 +20,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity
-@Table(name = "notices2")
+@Table(name = "notices2")//커밋시 이름 2 제거 필요 0910
 @SequenceGenerator(name="notices_code_seq", initialValue = 100001,  allocationSize = 50)
 public class Notices {//위에 시퀀스 네임 바꿔주기
 
@@ -31,7 +31,9 @@ public class Notices {//위에 시퀀스 네임 바꿔주기
 		
 		@Column(name="notices_title", nullable = false)
 		private String noticesTitle;
-		
+
+		// 커밋시 lob 추가 
+//		@Lob
 		@Column(name="notices_content", nullable = false)
 		private String noticesContent;
 
@@ -40,7 +42,7 @@ public class Notices {//위에 시퀀스 네임 바꿔주기
 		
 		@CreationTimestamp
 		@ColumnDefault(value="sysDate")
-		private LocalDateTime regDate;	//작성일
+		private LocalDateTime noticesDate;	//이름변경 0910
 		
 		
 
