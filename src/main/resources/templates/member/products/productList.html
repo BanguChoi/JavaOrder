@@ -94,6 +94,9 @@
 	            <div class="card-body">
 		            <div>
 		            	 <h5 class="card-title" th:text="*{productName}" ></h5>
+		            	 <span th:if="${productList.topProductList.contains(product)}" class="badge bg-primary">
+		            	 	추천메뉴
+		            	 </span>
 		            </div>
 	                <p class="card-text" th:text="*{productPrice} +'원'"></p>
 	                <a th:href="@{'/products/' + *{productId} +'/detail'}" class="btn btn-primary productDetailBtn">제품담기</a>

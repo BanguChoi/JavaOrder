@@ -170,19 +170,23 @@ public class ProductServiceImpl implements ProductService {
    		
    		// 순위 3개만 앞으로 정렬
    		// 카테고리 진입 시 top 제품 사라지도록. ALL 로 돌아오면 다시 노출
-   		if(categoryCode == null || categoryCode.isEmpty() || "ALL".equals(categoryCode) ) {
+   		int pageNumber = pageable.getPageNumber();
+   		
+   		if(pageNumber == 0 && (categoryCode == null || categoryCode.isEmpty() || "ALL".equals(categoryCode))) {
    			if(!topProductList.isEmpty()) {
    	   			productList.addAll(0, topProductList);
    	   		}
    		}
 
-   		
    		ProductPageResponseDTO<Product> responseDTO = ProductPageResponseDTO.<Product>withAll()
    				.dtoList(productList)
    				.productPageRequestDTO(productPageRequestDTO)
    				.totalCount(totalCount)
    				.build();
+
    		
    		return responseDTO;
    	}
+    
+    
 }
