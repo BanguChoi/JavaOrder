@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -37,16 +38,18 @@ public class Board {
 	@Column(name="board_content", nullable = false)
 	private String boardContent;
 
-	//커밋시에는 컬럼 wd 로 변경 ws
+
 	@Column(name="board_passwd", nullable = false)
 	private String boardPasswd;
 		
 	@CreationTimestamp
 	@ColumnDefault(value = "sysDate")
-	private LocalDateTime regDate;// board date변경 regDate >> regDate 0910
+	private LocalDateTime regDate;
 	
 	
 	//회원번호 받아오기
+	@JoinColumn(name = "member")
+    @Column(name="m_code")
 	private String memberNUmber;
 	
 	
