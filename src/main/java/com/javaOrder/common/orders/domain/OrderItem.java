@@ -63,6 +63,7 @@ public class OrderItem {
 	@Column(name="oi_syrup", nullable=true)
 	private Integer orderitemSyrup;	// 시럽
 	
+	
 //	@Column(name="oi_takeout", nullable=false)
 //	@ColumnDefault("0")
 //	private Integer orderitemTakeout;	// 수령방식

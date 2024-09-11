@@ -20,7 +20,6 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity
-
 @Table(name = "notices")
 @SequenceGenerator(name="notices_code_seq", initialValue = 1,  allocationSize = 1)
 public class Notices {//위에 시퀀스 네임 바꿔주기

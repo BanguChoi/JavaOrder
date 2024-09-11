@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -21,7 +22,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name="board")
-@SequenceGenerator(name = "board_no_seq", initialValue = 100001, allocationSize = 50 )
+@SequenceGenerator(name = "board_no_seq", initialValue = 1, allocationSize = 50 )
 public class Board {	
 	
 	@Id
@@ -32,12 +33,12 @@ public class Board {
 	@Column(name="board_title", nullable = false)
 	private String boardTitle;
 	
-//	@Lob
+	@Lob
 	@Column(name="board_content", nullable = false)
 	private String boardContent;
 
 	//최종 커밋시에는 컬럼 wd 로  ws 오타 수정
-	@Column(name="board_passws", nullable = false)
+	@Column(name="board_passwd", nullable = false)
 	private String boardPasswd;
 		
 	@CreationTimestamp
