@@ -19,30 +19,49 @@ $(document).ready(function() {
             !checkForm(address, "주소") || !checkForm(birth, "생년월일")) {
             return;
         }
-
+		
+		// 아이디 중복 체크
         // AJAX 요청을 통해 서버로 데이터 전송
         $.ajax({
-            type: 'POST',
-            url: '/member/signup',
-            data: {
-                memberName: name.val().trim(),
-                memberId: id.val().trim(),
-                memberPasswd: password.val(),
-                memberEmail: email.val().trim(),
-                memberPhone: phone.val().trim(), // 포맷 후 저장
-                memberAddress: address.val().trim(),
-                memberBirth: birth.val(),
-                memberDate: getDateFormat(new Date()), // 가입일 자동 처리
-				memberLast: getDateFormat(new Date()),
-                memberStatus: 'M' // 상태값 자동 설정
-            }
-        }).done(function() {
-            // 성공 시 로그인 화면으로 리다이렉트
-            location.href = '/member/signin';
-        }).fail(function() {
-            $('#error').text('회원가입에 실패했습니다: ');
-        });
-    });
+			type:'POST',
+			url:'/member/checkMemberId',
+			data:{ memberId: id.val().trim()},
+			success: function(response){
+				if(response.exists){
+					$('#idError').text('이 ID는 이미 사용 중입니다.');
+					$('#idError').css('color','red');
+				} else {
+					$.ajax({
+					    type: 'POST',
+					    url: '/member/signup',
+					    data: {
+					        memberName: name.val().trim(),
+					        memberId: id.val().trim(),
+					        memberPasswd: password.val(),
+					        memberEmail: email.val().trim(),
+					        memberPhone: phone.val().trim(), // 포맷 후 저장
+					        memberAddress: address.val().trim(),
+					        memberBirth: birth.val(),
+					        memberDate: getDateFormat(new Date()), // 가입일 자동 처리
+							memberLast: getDateFormat(new Date()),
+					        memberStatus: 'M' // 상태값 자동 설정
+					    },
+					success:function() {
+					    // 성공 시 로그인 화면으로 리다이렉트
+					    location.href = '/member/signin';
+						},
+					error: function() {
+					    $('#error').text('회원가입에 실패했습니다: ');
+						}
+					});
+				}
+		    },
+			error: function(){
+				$('#idError').text('ID 중복 확인 중 오류가 발생했습니다.');
+				$('#idError').css('color','red');
+			}
+		});
+	});
 
     // 주소 검색 버튼 클릭 시 처리
     $('#addressSearchBtn').on('click', function() {

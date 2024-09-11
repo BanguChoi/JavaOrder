@@ -40,12 +40,9 @@ public class MemberTests {
 	public void createMemberTest() {
 
 		String memberCode = idGenerationService.generateId("M", "member_seq",4);
-
 		
 		Member member = new Member();
-		
 	    member.setMemberCode(memberCode);
-		
 		member.setMemberName("테스트3");
 		member.setMemberId("test3");
 		member.setMemberPasswd("1234");
@@ -67,19 +64,5 @@ public class MemberTests {
 	    entityManager.flush();
 
 	}
-	
-	
-	
-	/*
-	@Test
-	public void memberCountTest() {
-		long memberCount = memberRepository.count();
-		log.info(String.valueOf(memberCount));
-	}
-	*/
-	
-	
-	
-	
 	
 }

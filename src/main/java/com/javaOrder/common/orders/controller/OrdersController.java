@@ -34,10 +34,13 @@ public class OrdersController {
 		Member member = (Member) session.getAttribute("member");
 		
 		if(member!=null) {
-//			List<Orders> orderList = orderService.orderClientList(mCode);
-//			List<Orders> orderList = orderService.orderClientList(member.getMemberCode());
 			PageResponseDTO<Orders> orderList = orderService.orderClientList(member, pageRequestDTO);
 			model.addAttribute("orderList", orderList);
+			model.addAttribute("searchType", pageRequestDTO.getSearchType());
+		    model.addAttribute("keyword", pageRequestDTO.getKeyword());
+		    model.addAttribute("status", pageRequestDTO.getStatus());
+		    model.addAttribute("startDate", pageRequestDTO.getStartDate());
+		    model.addAttribute("endDate", pageRequestDTO.getEndDate());
 			return "member/order/orderList";
 		}else {
 			return "redirect:/member/signin";

@@ -12,17 +12,21 @@
 		<th:block layout:fragment="content">  
 		<div class="product-container container-fluid">
 			<div class="row">
-				<div class="col-md-8">
-					<h5 class="text-start" th:text="${productDetail.productName}"></h5>
-					<p class="text-start" th:text="${productDetail.productExplain}"></p>
+				<div class="col-md-6 mt-4 mx-4">
 					<img class="img-fluid rounded" th:src="@{/images/} + ${productDetail.productId} + '.jpg'" onerror="this.src='/images/noimg.png'">
+					<h3 class="text-start mt-4" th:text="${productDetail.productName}"></h3>
+					<hr/>
+					<p class="text-start mb-4" th:text="${productDetail.productExplain}"></p>
+					<br/>
+					<br/>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-2"></div>
+				<div class="col-md-3">
 					<form th:action="@{/cart/insertCartItem}" method="post" class="text-start">
 						<input type="hidden" name="productId" th:value="${productDetail.productId}" />
 						<input type="hidden" name="cartId" th:value="${cart != null ? cart.cartId : ''}" />
 						
-						<div class="option-scroll">
+						<div class="option-scroll mt-4">
 							<th:block th:if="${#strings.startsWith(productDetail.category.code, 'A')}">
 								<div class="mb-3">
 									<label class="form-label">Size</label>

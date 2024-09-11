@@ -13,6 +13,9 @@ public interface MemberRepository extends JpaRepository<Member, String>{
 	public Member findCartByMemberCode(String memberCode);
 	public Member findByMemberCode(String memberCode);
 	
+	// 아이디 중복 확인
+	public boolean existsByMemberId(String memberId);
+	
 	// 회원 번호 검색
 	public Page<Member> findByMemberCode(String memberCode, Pageable pageable);
 	// 검색어를 포함하는 이름 검색

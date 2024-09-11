@@ -21,7 +21,7 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	@Override
 	public void createAdmin(Admin admin) {
-		String adminCode = idGenerationService.generateId("A", "admin_seq", 3);
+		String adminCode = idGenerationService.generateId("A", "admin_seq", 4);
 		admin.setAdminCode(adminCode);
 		adminRepository.save(admin);
 	}

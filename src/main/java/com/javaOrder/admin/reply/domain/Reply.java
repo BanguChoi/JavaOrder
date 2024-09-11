@@ -27,7 +27,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name="reply")
-@SequenceGenerator(name = "reply_id_seq", initialValue = 1, allocationSize = 50 )
+@SequenceGenerator(name = "reply_id_seq", initialValue = 1, allocationSize = 1 )
 public class Reply {
 	
 	@Id

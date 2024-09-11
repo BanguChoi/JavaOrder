@@ -20,17 +20,19 @@
 			        <label for="memberName" class="form-label col-1">이름</label>
 			        <input type="text" id="memberName" name="memberName" class="form-control col-9" th:value="*{memberName}" autocomplete="username" readonly>
 			        <button type="button" class="btn btn-primary ms-2 updateBtn" data-field="memberName">수정</button>
+			        <button type="button" class="btn btn-primary cancelBtn" style="display: none;">취소</button>
 			        <button type="button" class="btn btn-success ms-2" style="display:none;">변경</button>
 			        <div id="memberNameError" class="text-danger"></div>
 			    </div>
 			    
 			    <!-- 아이디 -->
+			    <div id="memberIdError" class="text-danger"></div>
 			    <div class="input-group mb-3">
 			        <label for="memberId" class="form-label col-1">아이디</label>
 			        <input type="text" id="memberId" name="memberId" class="form-control col-9" th:value="*{memberId}" autocomplete="userId" readonly>
 			        <button type="button" class="btn btn-primary ms-2 updateBtn" data-field="memberId">수정</button>
+			        <button type="button" class="btn btn-primary cancelBtn" style="display: none;">취소</button>
 			        <button type="button" class="btn btn-success ms-2" style="display:none;">변경</button>
-			        <div id="memberIdError" class="text-danger"></div>
 			    </div>
 			    
 			    <!-- 비밀번호 -->
@@ -47,6 +49,7 @@
 			        <label for="memberEmail" class="form-label col-1">이메일</label>
 			        <input type="email" id="memberEmail" name="memberEmail" class="form-control col-9" th:value="*{memberEmail}" readonly>
 			        <button type="button" class="btn btn-primary ms-2 updateBtn" data-field="memberEmail">수정</button>
+			        <button type="button" class="btn btn-primary cancelBtn" style="display: none;">취소</button>
 			        <button type="button" class="btn btn-success ms-2" style="display:none;">변경</button>
 			        <div id="memberEmailError" class="text-danger"></div>
 			    </div>
@@ -56,6 +59,7 @@
 			        <label for="memberPhone" class="form-label col-1">전화번호</label>
 			        <input type="text" id="memberPhone" name="memberPhone" class="form-control col-9" th:value="*{memberPhone}" readonly>
 			        <button type="button" class="btn btn-primary ms-2 updateBtn" data-field="memberPhone">수정</button>
+			        <button type="button" class="btn btn-primary cancelBtn" style="display: none;">취소</button>
 			        <button type="button" class="btn btn-success ms-2" style="display:none;">변경</button>
 			        <div id="memberPhoneError" class="text-danger"></div>
 			    </div>
@@ -65,6 +69,7 @@
 			        <label for="memberAddress" class="form-label col-1">주소</label>
 			        <input type="text" id="memberAddress" name="memberAddress" class="form-control col-9" th:value="*{memberAddress}" readonly>
 			        <button type="button" class="btn btn-primary ms-2 updateBtn" data-field="memberAddress">수정</button>
+			        <button type="button" class="btn btn-primary cancelBtn" style="display: none;">취소</button>
 			        <button type="button" class="btn btn-success ms-2" style="display:none;">변경</button>
 			        <button type="button" class="btn btn-secondary ms-2" id="searchAddressBtn" style="display:none;">주소 검색</button>
 			        <div id="memberAddressError" class="text-danger"></div>

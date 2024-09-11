@@ -14,7 +14,9 @@ import com.javaOrder.admin.board.domain.Board;
 import com.javaOrder.common.util.vo.PageRequestDTO;
 import com.javaOrder.common.util.vo.PageResponseDTO;
 import com.javaOrder.member.board.service.BoardMemberService;
+import com.javaOrder.member.domain.Member;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.Setter;
 
 @Controller
@@ -34,8 +36,15 @@ public class BoardMemberController {
 	}
 	
 	@GetMapping("/insertForm")
-	public String insertForm(Board board) {
-		return "member/board/insertForm";
+	public String insertForm(Board board, HttpSession session, Model model) {
+		Member member = (Member) session.getAttribute("member");
+		if(member == null) {
+			model.addAttribute("member", "로그인하지 않았습니다.");
+			return "redirect:/";
+		}else {
+			model.addAttribute("member", member);
+			return "member/board/insertForm";
+		}
 	}
 	@PostMapping("/boardInsert")
 	public String boardInsert(Board board) {

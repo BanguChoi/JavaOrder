@@ -26,18 +26,23 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name="board")
-@SequenceGenerator(name = "board_no_seq", initialValue = 1, allocationSize = 50 )
+@SequenceGenerator(name = "board_no_seq", initialValue = 1, allocationSize = 1 )
 public class Board {	
 	
 	@Id
 	@Column(name = "board_no")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_no_seq")
 	private Long boardNo;
+
+	//회원번호 받아오기
+	@ManyToOne
+	@JoinColumn(name="m_code")
+	private Member member;
 	
 	@Column(name="board_title", nullable = false)
 	private String boardTitle;
 	
-	@Lob
+	@Lob 
 	@Column(name="board_content", nullable = false)
 	private String boardContent;
 
@@ -49,9 +54,10 @@ public class Board {
 	@ColumnDefault(value = "sysDate")
 	private LocalDateTime regDate;// board date변경 regDate >> regDate 0910
 	
+
 	@ManyToOne
 	@JoinColumn(name = "m_code")
 	private Member memberCode;
-	
+
 	
 }

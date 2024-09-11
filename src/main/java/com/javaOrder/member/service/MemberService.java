@@ -14,6 +14,9 @@ public interface MemberService {
 	// 로그인 메서드
 	public Member Login(String memberId, String memberPassword);
 	
+	// 중복 아이디 확인
+	public boolean checkMemberId(String memberId);
+	
 	// 회원 수정 메서드
 	boolean updateMemberField(String memberCode, String fieldId, String newValue);
 	

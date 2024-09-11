@@ -42,5 +42,4 @@ public class Admin {
 	
 	@Column(name = "a_date")
 	private LocalDateTime adminDate;
-	
 }
