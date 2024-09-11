@@ -57,52 +57,40 @@
 	                <th>진행여부</th>
 	            </tr>
 	        </thead>
-		      	<tbody class="list">
-					<!-- #lists , #sets , #maps : 컬렉션 관련 기능 제공 -->
-					<tr th:if="${#lists.size(promotionList.dtoList)==0}">
-						<td colspan="6" class="text-center">등록된 게시물이 존재하지 않습니다.</td>
-					</tr>
-					<!--/* Strings 객체의 유틸리티 메서드는  #strings다.  ex) ${#strings.method(string)} */-->
-					<th:block th:if="${not #strings.isEmpty(promotionList.dtoList)}">		
-						<tr class="text-center" th:each="promotion : ${promotionList.dtoList}" th:object="${promotion}"  th:data-no="*{promotionCode}">
-							<td th:text="*{promotionCode}"></td>
-							<td>
-								<img th:src="@{/images/promotion/{promotion.productCode}.jpg(promotion.productCode=${promotion.promotionCode})}" onerror="this.src='/images/noimg.png'" 
-									class="img-fluid img-thumbnail" style="width:100px; height:100px; ">
-							</td>
-							<td><a th:href="@{/admin/promotion/} + *{promotionCode}" th:text="*{promotionTitle}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a></td>
-							<td>
-								<span class="date" th:text="*{#temporals.format(promotionStartDate, 'yyyy-MM-dd')}"></span>
-								-
-								<span class="date" th:text="*{#temporals.format(promotionEndDate, 'yyyy-MM-dd')}"></span>
-							</td>
-							<td class="date" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-							<td>
-								<div class="btn-group">
-									<button th:text="*{promotionStatus=='N'?'진행예정':promotionStatus=='P'?'진행중':promotionStatus=='E'?'종료':'N/A'}" 
-							  			class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
-									<ul class="dropdown-menu">
-								    	<li><button class="dropdown-item statusBtn" th:value="N">진행예정</button></li>
-									    <li><button class="dropdown-item statusBtn" th:value="P">진행중</button></li>
-									    <li><button class="dropdown-item statusBtn" th:value="E">종료</button></li>
-									</ul>
-								</div>
-							</td>
-						</tr>
-						<!--/* Strings 객체의 유틸리티 메서드는  #strings다.  ex) ${#strings.method(string)} */-->
-						<th:block th:if="${not #strings.isEmpty(promotionList.dtoList)}">		
-							<tr class="text-center" th:each="promotion : ${promotionList.dtoList}" th:object="${promotion}"  th:data-no="*{promCode}">
-								<td th:text="*{promCode}"></td>
-								<td><a th:href="@{/admin/promotion/} + *{promCode}" th:text="*{promTitle}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a></td>
-								<td class="content" th:text="*{promContent}"></td>
-								<td class="content" th:text="*{promName}"></td>
-								<!-- 이미지 파일 보류 -->
-								<td class="date" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-							</tr>
-						</th:block>
-					</tbody>
-	   	 	</table>
-   	 	</div>
+		    <tbody class="list">
+				<!-- #lists , #sets , #maps : 컬렉션 관련 기능 제공 -->
+				<tr th:if="${#lists.size(promotionList.dtoList)==0}">
+					<td colspan="6" class="text-center">등록된 게시물이 존재하지 않습니다.</td>
+				</tr>
+				<!--/* Strings 객체의 유틸리티 메서드는  #strings다.  ex) ${#strings.method(string)} */-->
+				<th:block th:if="${not #strings.isEmpty(promotionList.dtoList)}">		
+					<tr class="text-center" th:each="promotion : ${promotionList.dtoList}" th:object="${promotion}"  th:data-no="*{promotionCode}">
+						<td th:text="*{promotionCode}"></td>
+						<td>
+							<img th:src="@{/images/promotion/{promotion.promotionCode}.jpg(promotion.promotionCode=${promotion.promotionCode})}" onerror="this.src='/images/noimg.png'" 
+								class="img-fluid img-thumbnail" style="width:100px; height:100px; ">
+						</td>
+						<td><a th:href="@{/admin/promotion/} + *{promotionCode}" th:text="*{promotionTitle}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a></td>
+						<td>
+							<span class="date" th:text="*{#temporals.format(promotionStartDate, 'yyyy-MM-dd')}"></span>
+							-
+							<span class="date" th:text="*{#temporals.format(promotionEndDate, 'yyyy-MM-dd')}"></span>
+						</td>
+						<td class="date" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+						<td>
+						<div class="btn-group">
+							<button th:text="*{promotionStatus=='N'?'진행예정':promotionStatus=='P'?'진행중':promotionStatus=='E'?'종료':'N/A'}" 
+							  	class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+							<ul class="dropdown-menu">
+								<li><button class="dropdown-item statusBtn" th:value="N">진행예정</button></li>
+								<li><button class="dropdown-item statusBtn" th:value="P">진행중</button></li>
+								<li><button class="dropdown-item statusBtn" th:value="E">종료</button></li>
+							</ul>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+	   	</table>
 	    <div class="text-end">
 			<button type="button" id="insertFormBtn" class="btn btn-primary btn-sm mb-2">추가</button>					
 	    </div>
