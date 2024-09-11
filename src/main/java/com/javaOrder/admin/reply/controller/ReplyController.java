@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.javaOrder.admin.domain.Admin;
 import com.javaOrder.admin.reply.domain.Reply;
 import com.javaOrder.admin.reply.service.ReplyService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,10 +37,20 @@ public class ReplyController {
 	}
 	
 	@PostMapping(value="/replyInsert", consumes="application/json", produces=MediaType.APPLICATION_JSON_VALUE)
-	public Reply replyInsert(@RequestBody Reply reply) {
+	public Reply replyInsert(@RequestBody Reply reply, HttpSession session) {
 		log.info(reply.toString());
-		Reply result = replyService.replyInsert(reply);
-		return result;
+		Admin admin = (Admin) session.getAttribute("admin");
+		if(admin == null) {
+			return null;
+		}else {
+			reply.setAdmin(admin);
+			Reply result = replyService.replyInsert(reply);
+			if(result!=null)
+				return result;
+			else {
+				return null;
+			}
+		}
 	}
 	
 	@PutMapping(value="/{replyId}", consumes="application/json", produces=MediaType.APPLICATION_JSON_VALUE)

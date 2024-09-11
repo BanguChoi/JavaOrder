@@ -7,6 +7,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.javaOrder.admin.board.domain.Board;
+import com.javaOrder.admin.domain.Admin;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -50,8 +51,8 @@ public class Reply {
 	@JoinColumn(name = "boardNo")
 	private Board board;
 
-	
-
-//관리자코드 	
-//	private String adminCode;
+	//관리자코드
+	@ManyToOne
+	@JoinColumn(name="a_code")
+	private Admin admin;
 }

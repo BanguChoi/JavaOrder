@@ -56,14 +56,14 @@ public class BoardAdminController {
 		
 		Admin admin = (Admin) session.getAttribute("admin");
 		if(admin == null) {
-			model.addAttribute("adminName", "관리자가 로그인하지 않았습니다.");
+			model.addAttribute("admin", "관리자가 로그인하지 않았습니다.");
 			return "redirect:/admin/";
 		}else {
-			model.addAttribute("adminName", admin.getAdminName());
+			model.addAttribute("admin", admin);
+			model.addAttribute("newLine", newLine);
+			return "admin/board/boardDetail";
 		}
 		
-		model.addAttribute("newLine", newLine);
-		return "admin/board/boardDetail";
 	}
 		
 	@PostMapping("/updateForm")

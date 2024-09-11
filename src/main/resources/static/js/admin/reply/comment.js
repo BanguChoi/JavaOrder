@@ -66,11 +66,14 @@ $(document).on("click", "#replyInsertBtn", function() { // 버튼명 바꾸기
             }),
             dataType: "json"
         }).done(function(data) {
-            if (data != "") {
+            if (data != null) {
                 alert("댓글 등록이 완료되었습니다.");
                 dataReset();
                 template(data);
-            }
+            }else {
+				alert("로그인이 필요합니다.");
+				locationProcess("/admin/");
+			}
         }).fail(function() {
             alert("시스템에 문제가 있어 잠시 후에 다시 진행해 주세요.");
         });
