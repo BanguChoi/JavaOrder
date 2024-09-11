@@ -1,13 +1,30 @@
 $(document).ready(function() {
-    // 각 필드를 수정 모드로 변경
+    // 필드의 원래 값으로 초기화
+	function resetField(fieldId){
+		const inputField = $(`#${fieldId}`);
+		const originalValue = inputField.data('original-value');
+		if(originalValue !== undefined) {
+			inputField.val(originalValue)
+		}
+		$(`#${fieldId}Error`).text('');
+		disableEditing(fieldId);
+	}
+	
+	// 각 필드를 수정 모드로 변경
     function editField(fieldId) {
         const inputField = $(`#${fieldId}`);
         const changeButton = inputField.siblings('button.btn-success');
         const editButton = inputField.siblings('button.updateBtn');
         const searchButton = inputField.siblings('button.btn-secondary');
-
+		const cancelButton = inputField.siblings('button.cancelBtn');
+		
+		if(!inputField.data('original-value')){
+			inputField.data('original-value',inputField.val());
+		}
+		
         inputField.prop('readonly', false);
         changeButton.show();
+		cancelButton.show();
         editButton.hide();
         if (fieldId === 'memberAddress') {
             searchButton.show();
@@ -20,9 +37,11 @@ $(document).ready(function() {
         const changeButton = inputField.siblings('button.btn-success');
         const editButton = inputField.siblings('button.updateBtn');
         const searchButton = inputField.siblings('button.btn-secondary');
-
+		const cancelButton = inputField.siblings('button.cancelBtn');
+				
         inputField.prop('readonly', true);
         changeButton.hide();
+		cancelButton.hide();
         editButton.show();
         if (fieldId === 'memberAddress') {
             searchButton.hide();
@@ -79,28 +98,52 @@ $(document).ready(function() {
     function updateField(fieldId) {
         if (!validateField(fieldId)) return; // 유효성 검사 실패 시 처리 중지
         
-        const inputField = $(`#${fieldId}`);
-        const newValue = inputField.val().trim();
-        const memberCode = $('#memberCode').val();
-        
-        $.ajax({
-            url: '/member/updateField',
-            method: 'POST',
-            data: {
-                memberCode: memberCode,
-                fieldId: fieldId,
-                newValue: newValue
-            },
-            success: function() {
-                // 성공 시 읽기 전용 모드로 전환
-                disableEditing(fieldId);
-                alert('변경이 완료되었습니다.');
-            },
-            error: function() {
-                alert('변경 중 오류가 발생했습니다.');
-            }
-        });
-    }
+		if(fieldId === 'memberId'){
+		//아이디 중복 검사
+		const idValue = $(`#${fieldId}`).val().trim();
+		$.ajax({
+			url: '/member/checkMemberId',
+			method: 'POST',
+			data: {memberId: idValue },
+			success: function(response){
+				if (response.exists) {
+                    $('#memberIdError').text('이 ID는 이미 사용 중입니다.');
+                } else {
+						sendUpdateRequest(fieldId);
+                	}
+				},
+			error: function() {
+				$('#memberIdError').text('아이디 중복 확인 중 오류가 발생하였습니다.');
+			}		
+		});
+	}else{
+		sendUpdateRequest(fieldId);
+		}
+	}
+
+	function sendUpdateRequest(fieldId){
+	    const inputField = $(`#${fieldId}`);
+	    const newValue = inputField.val().trim();
+	    const memberCode = $('#memberCode').val();
+	    
+	    $.ajax({
+	        url: '/member/updateField',
+	        method: 'POST',
+	        data: {
+	            memberCode: memberCode,
+	            fieldId: fieldId,
+	            newValue: newValue
+	        },
+	        success: function() {
+	            // 성공 시 읽기 전용 모드로 전환
+	            disableEditing(fieldId);
+	            alert('변경이 완료되었습니다.');
+	        },
+	        error: function() {
+	            alert('변경 중 오류가 발생했습니다.');
+	        }
+	    });
+	}
 
     // 주소 검색
     function searchAddress() {
@@ -112,7 +155,13 @@ $(document).ready(function() {
             }
         }).open();
     }
-
+	
+	// 수정 취소 버튼
+	$('button.cancelBtn').on('click', function() {
+       const fieldId = $(this).siblings('input').attr('id');
+       resetField(fieldId);
+   });
+	   
     // 입력 필드 수정
     $('button.updateBtn').on('click', function() {
         const fieldId = $(this).siblings('input').attr('id');
