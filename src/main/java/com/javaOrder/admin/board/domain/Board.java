@@ -5,12 +5,16 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.javaOrder.member.domain.Member;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -29,6 +33,11 @@ public class Board {
 	@Column(name = "board_no")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_no_seq")
 	private Long boardNo;
+
+	//회원번호 받아오기
+	@ManyToOne
+	@JoinColumn(name="m_code")
+	private Member member;
 	
 	@Column(name="board_title", nullable = false)
 	private String boardTitle;
@@ -51,9 +60,6 @@ public class Board {
 //	@Column(name="board_status", nullable = false)
 //	private String boardStatus;	
 	
-//회원번호 받아오기
-//	private String memberNUmber;
-	
-	
 
+	
 }
