@@ -58,6 +58,5 @@ public class Board {
 	@ManyToOne
 	@JoinColumn(name = "m_code")
 	private Member memberCode;
-
 	
 }
