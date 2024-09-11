@@ -78,17 +78,18 @@
 						</td>
 						<td class="date" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
 						<td>
-						<div class="btn-group">
-							<button th:text="*{promotionStatus=='N'?'진행예정':promotionStatus=='P'?'진행중':promotionStatus=='E'?'종료':'N/A'}" 
-							  	class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
-							<ul class="dropdown-menu">
-								<li><button class="dropdown-item statusBtn" th:value="N">진행예정</button></li>
-								<li><button class="dropdown-item statusBtn" th:value="P">진행중</button></li>
-								<li><button class="dropdown-item statusBtn" th:value="E">종료</button></li>
-							</ul>
-						</div>
-					</td>
-				</tr>
+							<div class="btn-group">
+								<button th:text="*{promotionStatus=='N'?'진행예정':promotionStatus=='P'?'진행중':promotionStatus=='E'?'종료':'N/A'}" 
+								  	class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+								<ul class="dropdown-menu">
+									<li><button class="dropdown-item statusBtn" th:value="N">진행예정</button></li>
+									<li><button class="dropdown-item statusBtn" th:value="P">진행중</button></li>
+									<li><button class="dropdown-item statusBtn" th:value="E">종료</button></li>
+								</ul>
+							</div>
+						</td>
+					</tr>
+				</th:block>
 			</tbody>
 	   	</table>
 	    <div class="text-end">

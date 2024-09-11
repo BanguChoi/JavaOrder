@@ -1,6 +1,5 @@
 // 글쓰기 버튼
 $("#insertFormBtn").on("click", function(){
-    console.log("클릭");  // 확인용
     locationProcess("/admin/promotion/insertForm");
 });
 
