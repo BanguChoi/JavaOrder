@@ -1,8 +1,11 @@
 package com.javaOrder.common.util.vo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import com.javaOrder.admin.product.domain.Product;
 
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +14,7 @@ import lombok.Data;
 public class ProductPageResponseDTO<E> {
 	private List<E> dtoList;
 	private List<Integer> pageNumList;
+	private List<Product> topProductList;
 	private ProductPageRequestDTO productPageRequestDTO;
 	private boolean prev;
 	private boolean next;
@@ -27,6 +31,7 @@ public class ProductPageResponseDTO<E> {
 		this.dtoList = dtoList;
 		this.productPageRequestDTO = productPageRequestDTO;
 		this.totalCount = (int) totalCount;
+		this.topProductList = new ArrayList<>();
 		
 		int end = (int) (Math.ceil(productPageRequestDTO.getPage() / 10.0)) * 10;
 		int start = end - 9;

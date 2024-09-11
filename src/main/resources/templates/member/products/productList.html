@@ -87,6 +87,7 @@
 	    <div class="text-center">등록된 제품이 없습니다.</div>
 	</div>
 
+
 	<div th:if="${not #lists.isEmpty(productList.dtoList)}" class="container d-flex flex-wrap justify-content-center ">
 	    <div th:each="product : ${productList.dtoList}" th:object="${product}" th:data-no="*{productId}">
 	        <div th:if="*{#strings.equals(productSell, 'Y')}" class="card mx-4 mb-4" style="width: 14rem;">
@@ -94,6 +95,9 @@
 	            <div class="card-body">
 		            <div>
 		            	 <h5 class="card-title" th:text="*{productName}" ></h5>
+		            	 <span th:if="${productList.topProductList != null and productList.topProductList.contains(product)}" class="badge bg-primary">
+		            	 	추천메뉴
+		            	 </span>
 		            </div>
 	                <p class="card-text" th:text="*{productPrice} +'원'"></p>
 	                <a th:href="@{'/products/' + *{productId} +'/detail'}" class="btn btn-primary productDetailBtn">제품담기</a>
