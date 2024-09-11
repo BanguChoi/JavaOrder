@@ -46,7 +46,7 @@ public interface DashboardRepository extends JpaRepository<Orders, Long> {
     List<Object[]> findTop5YearlyProductSales();
     
     /* 카테고리별 */
-    /* 주별 */
+    /* 주별 
     @Query(value = "SELECT period, categoryName, totalSales, totalCount " +
             "FROM ( " +
             "    SELECT " +
@@ -64,63 +64,77 @@ public interface DashboardRepository extends JpaRepository<Orders, Long> {
             ") " +
             "WHERE rn <= 5 " +
             "ORDER BY period, totalSales DESC", nativeQuery = true)
+    List<Object[]> findTop5WeeklyCategorySales();*/
+    @Query(value = "SELECT period, categoryName, totalSales, quantitySold " +
+            "FROM (" +
+            "    SELECT TO_CHAR(o.ord_date, 'YYYY-IW') AS period, " +
+            "           c.cate_name AS categoryName, " +
+            "           SUM(oi.oi_num * oi.oi_price) AS totalSales, " +
+            "           SUM(oi.oi_num) AS quantitySold " +
+            "    FROM orders o " +
+            "    JOIN order_item oi ON o.ord_num = oi.ord_num " +
+            "    JOIN product p ON oi.p_id = p.p_id " +
+            "    JOIN category c ON p.cate_code = c.cate_code " +
+            "    WHERE TO_CHAR(o.ord_date, 'YYYY-IW') = TO_CHAR(SYSDATE, 'YYYY-IW') " +
+            "    GROUP BY TO_CHAR(o.ord_date, 'YYYY-IW'), c.cate_name " +
+            ") sub " +
+            "ORDER BY totalSales DESC " +
+            "FETCH FIRST 5 ROWS ONLY",
+    nativeQuery = true)
     List<Object[]> findTop5WeeklyCategorySales();
     /* 월별 */
-    @Query(value = "SELECT period, categoryName, totalSales, totalCount " +
-            "FROM ( " +
-            "    SELECT " +
-            "        TO_CHAR(o.ord_date, 'YYYY-MM') AS period, " +
-            "        c.cate_name AS categoryName, " +
-            "        SUM(oi.oi_num * oi.oi_price) AS totalSales, " +
-            "        SUM(oi.oi_num) AS totalCount, " +
-            "        ROW_NUMBER() OVER (PARTITION BY TO_CHAR(o.ord_date, 'YYYY-MM') " +
-            "                           ORDER BY SUM(oi.oi_num * oi.oi_price) DESC) AS rn " +
+    @Query(value = "SELECT period, categoryName, totalSales, quantitySold " +
+            "FROM (" +
+            "    SELECT TO_CHAR(o.ord_date, 'YYYY-MM') AS period, " +
+            "           c.cate_name AS categoryName, " +
+            "           SUM(oi.oi_num * oi.oi_price) AS totalSales, " +
+            "           SUM(oi.oi_num) AS quantitySold " +
             "    FROM orders o " +
             "    JOIN order_item oi ON o.ord_num = oi.ord_num " +
             "    JOIN product p ON oi.p_id = p.p_id " +
             "    JOIN category c ON p.cate_code = c.cate_code " +
+            "    WHERE TO_CHAR(o.ord_date, 'YYYY-MM') = TO_CHAR(SYSDATE, 'YYYY-MM') " +
             "    GROUP BY TO_CHAR(o.ord_date, 'YYYY-MM'), c.cate_name " +
-            ") " +
-            "WHERE rn <= 5 " +
-            "ORDER BY period, totalSales DESC", nativeQuery = true)
+            ") sub " +
+            "ORDER BY totalSales DESC " +
+            "FETCH FIRST 5 ROWS ONLY",
+    nativeQuery = true)
     List<Object[]> findTop5MonthlyCategorySales();
     /* 분기별 */
-    @Query(value = "SELECT period, categoryName, totalSales, totalCount " +
-            "FROM ( " +
-            "    SELECT " +
-            "        TO_CHAR(o.ord_date, 'YYYY-Q') AS period, " +
-            "        c.cate_name AS categoryName, " +
-            "        SUM(oi.oi_num * oi.oi_price) AS totalSales, " +
-            "        SUM(oi.oi_num) AS totalCount, " +
-            "        ROW_NUMBER() OVER (PARTITION BY TO_CHAR(o.ord_date, 'YYYY-Q') " +
-            "                           ORDER BY SUM(oi.oi_num * oi.oi_price) DESC) AS rn " +
+    @Query(value = "SELECT period, categoryName, totalSales, quantitySold " +
+            "FROM (" +
+            "    SELECT TO_CHAR(o.ord_date, 'YYYY-Q') AS period, " +
+            "           c.cate_name AS categoryName, " +
+            "           SUM(oi.oi_num * oi.oi_price) AS totalSales, " +
+            "           SUM(oi.oi_num) AS quantitySold " +
             "    FROM orders o " +
             "    JOIN order_item oi ON o.ord_num = oi.ord_num " +
             "    JOIN product p ON oi.p_id = p.p_id " +
             "    JOIN category c ON p.cate_code = c.cate_code " +
+            "    WHERE TO_CHAR(o.ord_date, 'YYYY-Q') = TO_CHAR(SYSDATE, 'YYYY-Q') " +
             "    GROUP BY TO_CHAR(o.ord_date, 'YYYY-Q'), c.cate_name " +
-            ") " +
-            "WHERE rn <= 5 " +
-            "ORDER BY period, totalSales DESC", nativeQuery = true)
+            ") sub " +
+            "ORDER BY totalSales DESC " +
+            "FETCH FIRST 5 ROWS ONLY",
+    nativeQuery = true)
     List<Object[]> findTop5QuarterlyCategorySales();
     /* 연별 */
-    @Query(value = "SELECT period, categoryName, totalSales, totalCount " +
-            "FROM ( " +
-            "    SELECT " +
-            "        TO_CHAR(o.ord_date, 'YYYY') AS period, " +
-            "        c.cate_name AS categoryName, " +
-            "        SUM(oi.oi_num * oi.oi_price) AS totalSales, " +
-            "        SUM(oi.oi_num) AS totalCount, " +
-            "        ROW_NUMBER() OVER (PARTITION BY TO_CHAR(o.ord_date, 'YYYY') " +
-            "                           ORDER BY SUM(oi.oi_num * oi.oi_price) DESC) AS rn " +
+    @Query(value = "SELECT period, categoryName, totalSales, quantitySold " +
+            "FROM (" +
+            "    SELECT TO_CHAR(o.ord_date, 'YYYY') AS period, " +
+            "           c.cate_name AS categoryName, " +
+            "           SUM(oi.oi_num * oi.oi_price) AS totalSales, " +
+            "           SUM(oi.oi_num) AS quantitySold " +
             "    FROM orders o " +
             "    JOIN order_item oi ON o.ord_num = oi.ord_num " +
             "    JOIN product p ON oi.p_id = p.p_id " +
             "    JOIN category c ON p.cate_code = c.cate_code " +
+            "    WHERE TO_CHAR(o.ord_date, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY') " +
             "    GROUP BY TO_CHAR(o.ord_date, 'YYYY'), c.cate_name " +
-            ") " +
-            "WHERE rn <= 5 " +
-            "ORDER BY period, totalSales DESC", nativeQuery = true)
+            ") sub " +
+            "ORDER BY totalSales DESC " +
+            "FETCH FIRST 5 ROWS ONLY",
+    nativeQuery = true)
     List<Object[]> findTop5YearlyCategorySales();
 	
 	/****************** 기간별 총 매출 ******************/
@@ -226,6 +240,7 @@ public interface DashboardRepository extends JpaRepository<Orders, Long> {
                    "GROUP BY TO_CHAR(o.ord_date, 'YYYY-IW'), c.cate_name " +
                    "ORDER BY period, totalSales DESC", nativeQuery = true)
     List<Object[]> findWeeklyCategorySales();
+
     /* 월별 카테고리별 매출 */
     @Query(value = "SELECT TO_CHAR(o.ord_date, 'YYYY-MM') AS period, c.cate_name AS categoryName, " +
                    "SUM(oi.oi_num * oi.oi_price) AS totalSales, SUM(oi.oi_num) AS totalCount " +
@@ -235,6 +250,8 @@ public interface DashboardRepository extends JpaRepository<Orders, Long> {
                    "GROUP BY TO_CHAR(o.ord_date, 'YYYY-MM'), c.cate_name " +
                    "ORDER BY period, totalSales DESC", nativeQuery = true)
     List<Object[]> findMonthlyCategorySales();
+
+    
     /* 분기별 카테고리별 매출 */
     @Query(value = "SELECT TO_CHAR(o.ord_date, 'YYYY-Q') AS period, c.cate_name AS categoryName, " +
                    "SUM(oi.oi_num * oi.oi_price) AS totalSales, SUM(oi.oi_num) AS totalCount " +
@@ -244,6 +261,8 @@ public interface DashboardRepository extends JpaRepository<Orders, Long> {
                    "GROUP BY TO_CHAR(o.ord_date, 'YYYY-Q'), c.cate_name " +
                    "ORDER BY period, totalSales DESC", nativeQuery = true)
     List<Object[]> findQuarterlyCategorySales();
+
+    
     /* 연별 카테고리별 매출 */
     @Query(value = "SELECT TO_CHAR(o.ord_date, 'YYYY') AS period, c.cate_name AS categoryName, " +
                    "SUM(oi.oi_num * oi.oi_price) AS totalSales, SUM(oi.oi_num) AS totalCount " +
@@ -253,4 +272,5 @@ public interface DashboardRepository extends JpaRepository<Orders, Long> {
                    "GROUP BY TO_CHAR(o.ord_date, 'YYYY'), c.cate_name " +
                    "ORDER BY period, totalSales DESC", nativeQuery = true)
     List<Object[]> findYearlyCategorySales();
+
 }
