@@ -7,7 +7,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -36,7 +35,7 @@ public class Product {
     @Column(name = "p_order", nullable = false)
     private int productOrder;
 
-    @Lob
+//    @Lob 서버에 이미 VARCHR2(500)이 선언되어있음 해결책으로는 컬럼복사 유형변경 변경전 컬럼 삭제가 있는데 일단 LOB 지우는거로 해결
     @Column(name = "p_ex")
     private String productExplain;
 
