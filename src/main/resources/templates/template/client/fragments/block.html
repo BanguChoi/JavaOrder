@@ -36,7 +36,7 @@
 	<!-- 왼쪽 사이드 메뉴바 -->
 	<th:block th:fragment="sidebar">
 		<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"  style="width: 200px;">
-	    	<span class="fs-4">JavaOrder로고</span>
+	    	<span class="fs-4">JavaOrder</span>
 	    </a>
 	  <hr>
 	  <ul class="nav nav-pills flex-column mb-auto">
@@ -46,12 +46,6 @@
 	        Orders
 	      </a>
 	    </li>
-<!-- 	    <li> -->
-<!-- 	      <a href="#" class="nav-link link-body-emphasis"> -->
-<!-- 	        <svg class="bi pe-none" width="16" height="16"><use xlink:href="#grid"></use></svg> -->
-<!-- 	        Products -->
-<!-- 	      </a> -->
-<!-- 	    </li> -->
 	    <li>
 	      <a href="/member/promotion/promotionList" class="nav-link link-body-emphasis">
 	        Promotion
@@ -87,10 +81,11 @@
 		    <button type="button" id= "signUpBtn" class="btn btn-primary">회원가입</button>
 		</div>
 		 
-		<div class="mb-5 pb-5" id="userInfoSection" th:if="${session.member != null}">
+		<div class="pb-5" id="userInfoSection" th:if="${session.member != null}">
 		    <div id="userInfo" class="clickable">
-		        <p>안녕하세요, <span th:text="${session.member.memberName}"></span> 회원님!</p>
-		        <p>이메일: <span th:text="${session.member.memberEmail}">이메일</span></p>
+		        <p>안녕하세요,</p>
+		        <p><span th:text="${session.member.memberName}"></span> 회원님!</p>
+		        <hr />
 			    <form class="text-center" action="/member/signout" method="get">
 			        	<button type="submit" class="btn btn-danger btn-sm">로그아웃</button>
 			    </form>    

@@ -29,6 +29,7 @@ public class PageResponseDTO<E> {
 		this.pageRequestDTO = pageRequestDTO;
 		this.totalCount = (int)totalCount;
 
+
 		int end = (int)(Math.ceil(pageRequestDTO.getPage() / 10.0)) * 10;	// Math.ceil(): 주어진 숫자보다 크거나 같은 가장 작은 정수를 반환
 		int start = end - 9;
 		int last = (int)(Math.ceil((totalCount / (double)pageRequestDTO.getSize())));
@@ -51,5 +52,6 @@ public class PageResponseDTO<E> {
 		this.totalPage = this.pageNumList.size();
 		this.current = this.pageRequestDTO.getPage();
 	}
+
 
 }

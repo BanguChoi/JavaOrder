@@ -203,6 +203,8 @@ public class ProductController {
 	public String productList(ProductPageRequestDTO productPageRequestDTO, Model model, HttpSession session) {
 		ProductPageResponseDTO<Product> productList = productService.productList(productPageRequestDTO, session);
 		model.addAttribute("productList", productList);
+		
+		
 		return "member/products/productList :: productList";
 	}
 	

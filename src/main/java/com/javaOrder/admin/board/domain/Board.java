@@ -23,8 +23,8 @@ import lombok.ToString;
 @Entity
 @Table(name="board")
 @SequenceGenerator(name = "board_no_seq", initialValue = 1, allocationSize = 50 )
-public class Board {	
-	
+public class Board {
+		
 	@Id
 	@Column(name = "board_no")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_no_seq")
@@ -37,13 +37,13 @@ public class Board {
 	@Column(name="board_content", nullable = false)
 	private String boardContent;
 
-	//최종 커밋시에는 컬럼 wd 로  ws 오타 수정
+
 	@Column(name="board_passwd", nullable = false)
 	private String boardPasswd;
 		
 	@CreationTimestamp
 	@ColumnDefault(value = "sysDate")
-	private LocalDateTime regDate;// board date변경 regDate >> regDate 0910
+	private LocalDateTime regDate;
 
 
 	
