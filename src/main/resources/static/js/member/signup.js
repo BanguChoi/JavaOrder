@@ -24,7 +24,7 @@ $(document).ready(function() {
         // AJAX 요청을 통해 서버로 데이터 전송
         $.ajax({
 			type:'POST',
-			url:'/member/checkId',
+			url:'/member/checkMemberId',
 			data:{ memberId: id.val().trim()},
 			success: function(response){
 				if(response.exists){
@@ -45,12 +45,14 @@ $(document).ready(function() {
 					        memberDate: getDateFormat(new Date()), // 가입일 자동 처리
 							memberLast: getDateFormat(new Date()),
 					        memberStatus: 'M' // 상태값 자동 설정
-					    }
-					}).done(function() {
+					    },
+					success:function() {
 					    // 성공 시 로그인 화면으로 리다이렉트
 					    location.href = '/member/signin';
-					}).fail(function() {
+						},
+					error: function() {
 					    $('#error').text('회원가입에 실패했습니다: ');
+						}
 					});
 				}
 		    },

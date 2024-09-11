@@ -72,11 +72,12 @@ public class MemberController {
 		}
 	}
 	
+	// 중복 아이디 체크
 	@PostMapping("/checkMemberId")
 	public ResponseEntity<Map<String, Boolean>> checkMemberId(@RequestParam String memberId){
-		boolean checkMemberId = memberService.checkMemberId(memberId);
+		boolean isIdExist = memberService.checkMemberId(memberId);
 		Map<String, Boolean> response = new HashMap<>();
-		response.put("checkMemberId", checkMemberId);
+		response.put("exists", isIdExist);
 		return ResponseEntity.ok(response);
 	}
 	
