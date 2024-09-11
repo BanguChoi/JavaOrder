@@ -1,3 +1,5 @@
+<!-- board 쪽 template js는 건드릴거면 팀장님에게 문의 -->
+
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
  layout:decorate="~{template/admin/layout/layout}">
@@ -28,6 +30,7 @@
 			</table>
 			
 			<div class="text-end mb-3">
+<!-- 				<button type="button" id="boardDeleteBtn" class="btn btn-primary btn-sm">글삭제</button> 글 삭제 안함 숨김 처림-->
 				<button type="button" id="boardListBtn" class="btn btn-primary btn-sm">글목록</button>
 			</div>
 			
@@ -39,7 +42,7 @@
 				<div class="row mb-3">
 					<label for="replyName" class="col-sm-1 col-form-label">작성자</label>
 					<div class="col-sm-3">
-						<input type="text" name="replyName" id="replyName" th:value="${adminName}" class="form-control" readonly/>
+						<input type="text" name="replyName" id="replyName"  class="form-control"/>
 					</div>
 					<button type="button" id="replyInsertBtn" class="btn btn-secondary col-sm-1 sendBtn mx-2">저장</button>
 				</div>

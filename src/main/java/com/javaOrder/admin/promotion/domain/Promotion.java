@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+//프로모션은ㅇ 건드리면 안됨 뭔가 잘못 됬으면 문의
 @Setter
 @Getter
 @ToString
@@ -34,7 +35,7 @@ public class Promotion {
 
 	@Column(name="prom_img", nullable = true)
 	private String promotionImage; // 이미지  null 추후 추가
-	
+
 	@CreationTimestamp
 	@Column(name="prom_regdate")
 	private LocalDateTime regDate;	//작성일

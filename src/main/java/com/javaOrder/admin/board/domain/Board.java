@@ -22,7 +22,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name="board")
-@SequenceGenerator(name = "board_no_seq", initialValue = 100001, allocationSize = 1 )
+@SequenceGenerator(name = "board_no_seq", initialValue = 1, allocationSize = 1 )
 public class Board {	
 	
 	@Id
@@ -37,8 +37,8 @@ public class Board {
 	@Column(name="board_content", nullable = false)
 	private String boardContent;
 
-	//커밋시에는 컬럼 wd 로 변경 ws
-	@Column(name="board_passws", nullable = false)
+	
+	@Column(name="board_passwd", nullable = false)
 	private String boardPasswd;
 		
 	@CreationTimestamp

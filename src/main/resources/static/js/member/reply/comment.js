@@ -23,7 +23,8 @@
 	    $element.removeAttr('style');	    
 	    $element.find('.replyName').text(data.replyName); // 텍스트를 추가
 	    $element.find('.regDate').text(getDateFormat(new Date(data.replyDate))); // 날짜 형식 추가
-	    $element.find('.card-text').html(data.replyContent); // 댓글 내용 추가
+		$element.find('.card-text').addClass("text-start").html(data.replyContent); // 댓글 내용 추가
+
 
 	    // #replyList에 복사한 요소를 추가합니다.
 	    $div.append($element);

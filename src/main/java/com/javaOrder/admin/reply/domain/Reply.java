@@ -27,22 +27,20 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name="reply")
-@SequenceGenerator(name = "reply_id_seq", initialValue = 100001, allocationSize = 1 )
+@SequenceGenerator(name = "reply_id_seq", initialValue = 1, allocationSize = 50 )
 public class Reply {
-	
-	//댓글용 수정
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reply_id_seq")
 	@Column(name = "reply_id", nullable = false)
-	private Long replyId;//boardNo 랑 구분이 힘들어 id로 변경
+	private Long replyId;
 	
 	@Column(name = "reply_name", nullable = false)
-	private String replyName;//nickname
+	private String replyName;
 	
 	@Lob
 	@Column(name="reply_content")
-	private String replyContent;//body?
+	private String replyContent;
 	
 	@CreationTimestamp
 	@ColumnDefault(value = "sysDate")

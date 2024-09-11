@@ -23,7 +23,6 @@ import lombok.ToString;
 @Table(name = "notices")
 @SequenceGenerator(name="notices_code_seq", initialValue = 1,  allocationSize = 1)
 public class Notices {//위에 시퀀스 네임 바꿔주기
-
 		@Id
 		@Column(name="notices_no")
 		@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "notices_code_seq") 
@@ -31,7 +30,7 @@ public class Notices {//위에 시퀀스 네임 바꿔주기
 		
 		@Column(name="notices_title", nullable = false)
 		private String noticesTitle;
-		
+
 		@Lob
 		@Column(name="notices_content", nullable = false)
 		private String noticesContent;

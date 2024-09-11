@@ -13,12 +13,11 @@
 			</form>
 		</div>
 		<div class="board-table-height">	
-			<table class="table table-bordered table-hover">
+			<table class="table table-hover table-striped">
 				<thead>
 					<tr class="text-center">
-						<th class="col-md-1">글번호</th>
-						<th class="col-md-auto">글제목</th>
-						<th class="col-md-auto">글내용</th>
+						<th class="col-md-2">문의번호</th>
+						<th class="col-md-auto">문의제목</th>
 						<th class="col-md-2">등록일</th>						
 					</tr>
 				</thead>
@@ -32,7 +31,6 @@
 						<tr class="text-center" th:each="board : ${boardList.dtoList}" th:object="${board}"  th:data-no="*{boardNo}">
 							<td th:text="*{boardNo}"></td>
 							<td><a th:href="@{/admin/board/} + *{boardNo}" th:text="*{boardTitle}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a></td>
-							<td class="content" th:text="*{boardContent}"></td>
 							<td class="date" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
 						</tr>
 					</th:block>
