@@ -7,6 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -35,7 +36,8 @@ public class Product {
     @Column(name = "p_order", nullable = false)
     private int productOrder;
 
-    @Column(name = "p_ex", length = 500)
+    @Lob
+    @Column(name = "p_ex")
     private String productExplain;
 
     @Temporal(TemporalType.DATE)

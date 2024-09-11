@@ -14,7 +14,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -27,7 +26,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name="reply")
-@SequenceGenerator(name = "reply_id_seq", initialValue = 100001, allocationSize = 50 )
+@SequenceGenerator(name = "reply_id_seq", initialValue = 100001, allocationSize = 1 )
 public class Reply {
 	
 	//댓글용 수정
