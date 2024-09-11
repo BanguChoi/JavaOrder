@@ -17,17 +17,17 @@
 					<label for="search">검색조건</label>
 				</div>
 				<div class="col-auto">
-					<select class="form-select form-select-sm" id="searchType" name="searchType">
+					<select class="form-select form-select-sm" id="searchType" th:value="${orderList.pageRequestDTO.searchType}" name="searchType">
 						<option value="memberCode">회원(번호)</option>
 						<option value="orderStatus">주문상태</option>
 						<option value="orderDate">작성일자</option>
 					</select>
 				</div>
 				<div class="col-auto textArea">
-					<input type="text" id="keyword" name="keyword" placeholder="검색어를 입력하세요" class="form-control form-control-sm" />
+					<input type="text" id="keyword" name="keyword" th:value="${orderList.pageRequestDTO.keyword}"placeholder="검색어를 입력하세요" class="form-control form-control-sm" />
 				</div>
 				<div class="col-auto selectArea">
-					<select class="form-select form-select-sm" id="status" name="status">
+					<select class="form-select form-select-sm" id="status" name="status" th:value="${orderList.pageRequestDTO.status}">
 						<option value="W">주문대기</option>
 						<option value="S">주문접수</option>
 						<option value="P">준비완료</option>
@@ -35,10 +35,10 @@
 					</select>
 				</div>
 				<div class="col-auto dateArea">
-					<input type="date" id="startDate" name="startDate" placeholder="시작일자" class="form-control form-control-sm" />
+					<input type="date" id="startDate" name="startDate" th:value="${orderList.pageRequestDTO.startDate}" placeholder="시작일자" class="form-control form-control-sm" />
 				</div>
 				<div class="col-auto dateArea">
-					<input type="date" id="endDate" name="endDate" placeholder="종료일자" class="form-control form-control-sm" />
+					<input type="date" id="endDate" name="endDate" th:value="${orderList.pageRequestDTO.endDate}" placeholder="종료일자" class="form-control form-control-sm" />
 				</div>
 				<div class="col-auto">
 					<button type="button" id="searchBtn" class="btn btn-primary btn-sm">Search</button>
