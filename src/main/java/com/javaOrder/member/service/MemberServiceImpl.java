@@ -128,7 +128,13 @@ public class MemberServiceImpl implements MemberService {
 		return null;
 	}
 
-
+	// 중복 아이디 확인
+	@Override
+	public boolean checkMemberId(String memberId) {
+		return memberRepository.existsByMemberId(memberId);
+	}
+	
+	
 	// 회원 수정 처리
 	@Transactional
     @Override

@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -32,7 +33,7 @@ public class Board {
 	@Column(name="board_title", nullable = false)
 	private String boardTitle;
 	
-//	@Lob 주의 커밋시 항상 적용
+	@Lob 
 	@Column(name="board_content", nullable = false)
 	private String boardContent;
 

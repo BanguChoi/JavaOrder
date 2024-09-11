@@ -3,6 +3,7 @@ package com.javaOrder.member.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,6 +70,14 @@ public class MemberController {
 			model.addAttribute("error", "회원가입에 실패했습니다. 다시 시도해 주세요.");
 			return new RedirectView("/member/signup");
 		}
+	}
+	
+	@PostMapping("/checkMemberId")
+	public ResponseEntity<Map<String, Boolean>> checkMemberId(@RequestParam String memberId){
+		boolean checkMemberId = memberService.checkMemberId(memberId);
+		Map<String, Boolean> response = new HashMap<>();
+		response.put("checkMemberId", checkMemberId);
+		return ResponseEntity.ok(response);
 	}
 	
 	// 회원 mypage
