@@ -3,7 +3,7 @@
 	layout:decorate="~{template/client/layout/layout}">
 	
 	<th:block layout:fragment="content">
-		<div class="text-center"><h3>member 공지 게시판 상세</h3></div>
+		<div class="text-center m-5"><h1>공지 게시판 상세</h1></div>
 		
 		<div class="container" th:object="${detail}"> 
 			<div>
@@ -11,7 +11,7 @@
 					<input type="hidden" name="noticesNo" th:value="*{noticesNo}"/>
 				</form>
 				
-				<table class="table table-bordered">
+				<table class="table table-bordered ">
 					<tbody>
 <!-- 						제목, 작성자, 작성일의 헤더와 데이터가 같은 줄에 표시됨 -->
 						<tr>
@@ -22,7 +22,7 @@
 						<tr>
 <!-- 							내용	Content -->
 							<td colspan="3" class="text-start">
-								<div th:utext="${#strings.replace(detail.noticesContent, newLine, '&lt;br /&gt;')}"></div>
+								<div class="m-3" th:utext="${#strings.replace(detail.noticesContent, newLine, '&lt;br /&gt;')}"></div>
 							</td>
 						</tr>
 					</tbody>

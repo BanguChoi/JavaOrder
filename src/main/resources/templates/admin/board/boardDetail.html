@@ -5,7 +5,7 @@
  layout:decorate="~{template/admin/layout/layout}">
  
  <th:block layout:fragment="content">
- 	<div class="text-center"><h3>admin board 문의 게시판 상세</h3></div>
+ 	<div class="text-center m-3"><h1>문의 게시판 상세</h1></div>
  	
  	<div class="container">
 		<div th:object="${detail}" >
@@ -20,7 +20,7 @@
 						<td class="col-md-3">제목</td>
 						<td class="col-md-3 text-start" th:text="*{boardTitle}"></td>
 						<td class="col-md-3">작성일</td>
-						<td class="col-md-3 text-start" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+						<td class="col-md-3 text-center" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
 					</tr>					
 					<tr class="board-table-tr-height">
 						<td class="col-md-3 aligh-middle">글내용</td>
@@ -64,7 +64,7 @@
 						<a href="#" class="btn btn-secondary btn-sm replyDeleteBtn">삭제</a>
 					</h5>
 					<div class="card-replyContent">
-						<p class="card-text"></p>
+						<p class="card-text mx-4 m-3"></p>
 					</div>
 				</div>
 			</div>

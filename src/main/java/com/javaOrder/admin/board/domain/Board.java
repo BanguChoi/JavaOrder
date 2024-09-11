@@ -5,12 +5,16 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.javaOrder.member.domain.Member;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -44,16 +48,10 @@ public class Board {
 	@CreationTimestamp
 	@ColumnDefault(value = "sysDate")
 	private LocalDateTime regDate;// board date변경 regDate >> regDate 0910
-
-
 	
-//	게시글상태 받아오기
-//	@Column(name="board_status", nullable = false)
-//	private String boardStatus;	
-	
-//회원번호 받아오기
-//	private String memberNUmber;
+	@ManyToOne
+	@JoinColumn(name = "m_code")
+	private Member memberCode;
 	
 	
-
 }

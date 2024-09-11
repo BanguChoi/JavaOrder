@@ -161,7 +161,7 @@ public class PromotionAdminController {
 	@PostMapping("/promotionDelete")
 	public String promotionDelete(Promotion promotion) {
 		service.promotionDelete(promotion);
-		return "redirect:/admin/promotion/promotionList"; //이동이 안될시 확인 성공
+		return "redirect:/admin/promotion/promotionList";
 	}
 	
 	

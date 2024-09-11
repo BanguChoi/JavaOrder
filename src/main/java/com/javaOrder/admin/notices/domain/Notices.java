@@ -4,12 +4,16 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.javaOrder.admin.domain.Admin;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -40,7 +44,9 @@ public class Notices {//위에 시퀀스 네임 바꿔주기
 		
 		@CreationTimestamp
 		private LocalDateTime regDate;	//작성일
-
-//		private String adminCode; //작성자코드 추후 연결
+		
+		@ManyToOne
+		@JoinColumn(name="a_code")
+		private Admin adminCode; //작성자코드 추후 연결
 
 }
