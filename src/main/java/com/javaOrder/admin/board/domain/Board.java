@@ -38,21 +38,16 @@ public class Board {
 	private String boardContent;
 
 	//커밋시에는 컬럼 wd 로 변경 ws
-	@Column(name="board_passws", nullable = false)
+	@Column(name="board_passwd", nullable = false)
 	private String boardPasswd;
 		
 	@CreationTimestamp
 	@ColumnDefault(value = "sysDate")
 	private LocalDateTime regDate;// board date변경 regDate >> regDate 0910
-
-
 	
-//	게시글상태 받아오기
-//	@Column(name="board_status", nullable = false)
-//	private String boardStatus;	
 	
-//회원번호 받아오기
-//	private String memberNUmber;
+	//회원번호 받아오기
+	private String memberNUmber;
 	
 	
 
