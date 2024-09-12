@@ -46,20 +46,28 @@ public class Board {
 	@Column(name="board_content", nullable = false)
 	private String boardContent;
 
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> c51dd2f97f4640d7cde0519b5f3d90a32a8cef79
 	@Column(name="board_passwd", nullable = false)
 	private String boardPasswd;
 		
 	@CreationTimestamp
 	@ColumnDefault(value = "sysDate")
-	private LocalDateTime regDate;// board date변경 regDate >> regDate 0910
-
-
+	private LocalDateTime regDate;
 	
-//	게시글상태 받아오기
-//	@Column(name="board_status", nullable = false)
-//	private String boardStatus;	
 	
+<<<<<<< HEAD
+=======
+	//회원번호 받아오기
+	@JoinColumn(name = "member")
+    @Column(name="m_code")
+	private String memberNUmber;
+	
+	
+>>>>>>> c51dd2f97f4640d7cde0519b5f3d90a32a8cef79
 
 	
 }
