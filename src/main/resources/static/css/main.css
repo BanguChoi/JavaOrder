@@ -1,0 +1,22 @@
+/* main.css */
+
+/* 페이지 전체 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+
+/* 클릭 가능한 영역 스타일 */
+.clickable {
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    text-align:center;
+    height:60px;
+    line-height:10px;
+    padding: 10px 10px; /* 공간을 위한 패딩 */
+    display: inline-block; /* 가로로 붙어있는 박스 */
+    margin-bottom: 5px;
+    transition: background-color 0.3s, border-color 0.3s; /* 호버 효과를 위한 트랜지션 */
+}

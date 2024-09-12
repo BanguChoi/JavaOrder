@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+ layout:decorate="~{template/client/layout/layout}">
+
+<th:block layout:fragment="content">
+	<div class="text-center"><h3>문의 게시판 수정</h3></div>
+	
+	<div class="container">
+		<div th:object="${updateData}">
+			<form id="updateForm" name="updateForm" th:action="@{/member/board/boardUpdate}" method="get"> 
+									<!--이걸 왜적었지? th:action="@{/member/board/boardUpdate}" -->
+				<input type="hidden" id="boardNo" name="boardNo" th:value="*{boardNo}"/>			
+				<div class="mb-3 row">
+					<label class="col-sm-2 col-form-label">글제목</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" th:field="*{boardTitle}" />
+					</div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-sm-2 col-form-label">글내용</label>
+					<div class="col-sm-10">
+						<textarea class="form-control board-textarea" rows="8" th:field="*{boardContent}"></textarea>
+					</div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-sm-2 col-form-label">비밀번호</label>
+					<input class="col-sm-4"  id="boardPasswd" name="boardPasswd" autocomplete=off />					
+				</div>
+				<div class="text-end">
+					<button type="button" id="boardUpdateBtn" class="btn btn-primary btn-sm">글저장</button>
+					<button type="button" id="boardCancelBtn" class="btn btn-primary btn-sm">글취소</button>
+					<button type="button" id="boardListBtn" class="btn btn-primary btn-sm">글목록</button>
+				</div>			
+			</form>
+		</div>
+	</div>
+</th:block>
+
+
+<th:block layout:fragment="script">
+	<script src="/js/member/board/updateForm.js"></script>
+</th:block>
+
+</html>

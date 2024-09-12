@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+    layout:decorate="~{template/admin/layout/layout}">
+
+    <th:block layout:fragment="content">
+        
+       <h1 class="m-3">공지 사항</h1>
+       
+       <div id="noticesSearch" class="my-2">
+			<form id="searchForm">
+				<!--/* 페이징 처리를 위한 파라미터  */--> 
+				<input type="hidden" name="page" id="page" th:value="${noticesList.pageRequestDTO.page}">
+				<input type="hidden" name="size" id="size" th:value="${noticesList.pageRequestDTO.size}">
+			</form>
+		</div>
+		<div class="board-table-height">	
+			<table class="table table-hover table-striped">
+	        <thead>
+	            <tr>
+	                <th>공지번호</th>
+	                <th>제목</th>
+	                <th>작성자</th>
+	                <th>작성일</th>
+	            </tr>
+	        </thead>
+		      	<tbody class="list">
+					<!-- #lists , #sets , #maps : 컬렉션 관련 기능 제공 -->
+					<tr th:if="${#lists.size(noticesList.dtoList)==0}">
+						<td colspan="5" class="text-center">등록된 게시물이 존재하지 않습니다.</td>
+					</tr>
+					<!--/* Strings 객체의 유틸리티 메서드는  #strings다.  ex) ${#strings.method(string)} */-->
+					<th:block th:if="${not #strings.isEmpty(noticesList.dtoList)}">		
+						<tr class="text-center" th:each="notices : ${noticesList.dtoList}" th:object="${notices}"  th:data-no="*{noticesNo}">
+							<td th:text="*{noticesNo}"></td>
+							<td><a th:href="@{/admin/notices/} + *{noticesNo}" th:text="${#strings.length(notices.noticesTitle) >10 ? #strings.substring(notices.noticesTitle, 0, 10) + '...' : notices.noticesTitle}" 
+							class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a></td>
+							
+							<td class="name" th:text="*{noticesName}"></td>
+							<td class="date" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+						</tr>
+					</th:block>
+				</tbody>
+   	 		</table>
+   	 	</div>
+	    
+		<div class="text-end">
+            <button type="button" id="insertFormBtn" class="btn btn-primary btn-sm mb-2">글쓰기</button>                    
+        </div>
+	    
+	    <nav aria-label="Page navigation example">
+  			<ul class="pagination justify-content-center">
+				<!--/* 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인. */-->
+           		<li class="page-item" th:if="${noticesList.prev}">
+           				<a th:data-number="${noticesList.prevPage}" class="page-link">Previous</a>
+           		</li>
+				
+				<!--/* 바로가기 번호 출력 */--> 
+				<li th:each="number : ${noticesList.pageNumList}" th:classappend="'page-item ' + ${(noticesList.current == number) ? 'active':''}">
+					<a class="page-link" th:text="${number}" th:data-number="${number}"></a>
+				</li>
+
+				<!--/* 다음 바로가기 10개 존재 여부를 next 필드의 값으로 확인. */-->
+				<li class="page-item" th:if="${noticesList.next}">
+					<a th:data-number="${noticesList.nextPage}" class="page-link">Next</a>
+				</li> 
+			</ul>
+		</nav>
+    </th:block>
+    <th:block layout:fragment="script">
+        <script src="/js/admin/notices/noticesList.js"></script>        
+    </th:block>
+</html>
+

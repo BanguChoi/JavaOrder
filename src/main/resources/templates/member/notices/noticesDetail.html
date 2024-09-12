@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{template/client/layout/layout}">
+	
+	<th:block layout:fragment="content">
+		<div class="text-center"><h3>member 공지 게시판 상세</h3></div>
+		
+		<div class="container" th:object="${detail}"> 
+			<div>
+				<form id="dataForm">
+					<input type="hidden" name="noticesNo" th:value="*{noticesNo}"/>
+				</form>
+				
+				<table class="table table-bordered">
+					<tbody>
+<!-- 						제목, 작성자, 작성일의 헤더와 데이터가 같은 줄에 표시됨 -->
+						<tr>
+							<td class="col-md-4 text-center"><strong>제목</strong>: <span th:text="*{noticesTitle}"></span></td>
+							<td class="col-md-4 text-center"><strong>작성자</strong>: <span th:text="*{noticesName}"></span></td>
+							<td class="col-md-4 text-center"><strong>작성일</strong>: <span th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></span></td>
+						</tr>
+						<tr>
+<!-- 							내용	Content -->
+							<td colspan="3" class="text-start">
+								<div th:utext="${#strings.replace(detail.noticesContent, newLine, '&lt;br /&gt;')}"></div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="text-end mt-3">					
+					<input type="button" value="목록" id="noticesListBtn" class="btn btn-primary btn-sm" />
+				</div>	
+			</div>
+		</div>
+		
+	</th:block>		
+		
+	<th:block layout:fragment="script">
+		<script src="/js/member/notices/noticesDetail.js"></script>
+	</th:block>	
+</html>

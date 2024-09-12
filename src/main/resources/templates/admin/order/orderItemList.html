@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/admin/layout/layout}" >
+
+<th:block layout:fragment="content">
+	<h3>주문내역 조회</h3>
+	
+	<th:block th:if="${#lists.size(orderItemList) == 0}">
+		<div class="row border-bottom py-3">
+			주문 항목 내역이 없습니다. 잠시 후 다시 시도해 주세요.
+		</div>	
+	</th:block>
+	<th:block th:if="${not #lists.isEmpty(orderItemList)}">
+		<div class="row border-bottom py-3 text-start" th:each="orderItem : ${orderItemList}" th:object="${orderItem}"> 
+			<div class="col-2">
+				<img th:src="@{/images/{orderItem.productId.productCode}.jpg(orderItem.productId.productCode=*{productId.productId})}" onerror="this.src='/images/noimg.png'" class="img-fluid">
+			</div>
+			<div class="col-6">
+			    <h5 th:text="*{productId.productName}"></h5>
+			    <p>
+			    <span th:text="*{orderitemNumber}">1</span>개 <span th:text="*{orderitemPrice}">원</span></p>
+			    <p>옵션 : 
+			    	<span th:text="*{orderitemShot==0}?'':${orderItem.orderitemShot}+'샷'"></span>&nbsp;
+			    	<span th:text="*{orderitemSize==0?'Small':orderitemSize==1?'Medium':'Large'}"></span>&nbsp;
+			    	<span th:text="*{orderitemTemp==0?'Ice':'Hot'}"></span>&nbsp;
+			    	<span th:text="*{orderitemSyrup == 0 ? '':orderitemSyrup==1?'카라멜시럽':'바닐라시럽'}"></span>
+			    </p>
+			</div>
+		</div>
+	</th:block>
+	
+	<div class="text-end">
+		<button type="button" class="btn btn-primary mt-5" id="orderListBtn">목록</button>
+	</div>
+</th:block>
+		
+<th:block layout:fragment="script">
+	<script src="/js/admin/order/orderItemList.js"></script>
+</th:block>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{template/admin/layout/layout}">
+
+	<th:block layout:fragment="content">
+		<div class="text-center"><h3>공지 게시판 수정</h3></div>	
+		
+		<div class="container" > 
+			<div th:object="${updateData}" th:value="*{noticesNo}">
+				<form id="updateForm" name="updateForm">
+					<input type="hidden" name="noticesNo" th:value="*{noticesNo}" />
+				
+					<div class="mb-3 row">
+				    	<label class="col-sm-2 col-form-label">제목</label>
+				    	<div class="col-sm-10">
+				      		<input type="text" class="form-control" th:field="*{noticesTitle}" />
+				    	</div>
+				  	</div>
+				  	<div class="mb-3 row">
+				    	<label class="col-sm-2 col-form-label">작성자</label>
+				    	<div class="col-sm-10">
+				      		<input type="text" class="form-control" th:field="*{noticesName}" readonly="readonly" />
+				    	</div>
+				  	</div>				  	
+				    <div class="mb-3 row">
+				    	<label class="col-sm-2 col-form-label">글내용</label>
+				    	<div class="col-sm-10">
+				    		<textarea class="form-control board-textarea" rows="8" th:field="*{noticesContent}"></textarea>
+				    	</div>
+				    </div>
+				</form>	    
+				
+			</div>
+		
+			<div class="text-end">
+				<input type="button" value="수정" id="noticesUpdateBtn" class="btn btn-primary btn-sm" />
+				<input type="button" value="취소" id="noticesCancelBtn" class="btn btn-primary btn-sm" />
+				<input type="button" value="목록" id="noticesListBtn" class="btn btn-primary btn-sm" />
+			</div>
+		</div>
+	</th:block>
+	
+	<th:block layout:fragment="script">
+		<script src="/js/admin/notices/updateForm.js"></script>
+	</th:block>	
+	
+</html>

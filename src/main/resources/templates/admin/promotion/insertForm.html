@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{template/admin/layout/layout}">
+
+	<th:block layout:fragment="content">
+		<div class="text-center"><h3>프로모션 입력</h3></div>	
+		
+		<div class="container"> 
+			<form id="insertForm" th:object="${promotion}" th:data-code="*{promotionCode}">
+<!-- 				<input type="hidden" id="admin" name="admin" th:value="admin.adminCode" /> -->
+				<!-- <div class="mb-3 row">
+			    	<label class="col-sm-2 col-form-label">작성자</label>
+			    	<div class="col-sm-10">
+			      		<input type="text" class="form-control" th:field="*{promotionName}" />
+			    	</div>
+			  	</div> -->
+			  	
+			  	<div class="mb-3 row">
+			    	<label class="col-sm-2 col-form-label">글제목</label>
+			    	<div class="col-sm-10">
+			    		<input type="text" class="form-control" th:field="*{promotionTitle}" />
+			    	</div>
+			    </div>
+			    <div class="mb-3 row">
+			    	<label class="col-sm-2 col-form-label">프로모션 기간</label>
+			    	<div class="col-sm-2">
+			    		<input type="date" class="form-control" th:field="*{promotionStartDate}" />
+			    	</div>
+			    	-
+			    	<div class="col-sm-2">
+			    		<input type="date" class="form-control" th:field="*{promotionEndDate}" />
+			    	</div>
+			    </div>
+			    
+			    <!-- <div class="mb-3 row">
+			    	<label class="col-sm-2 col-form-label">프로모션 이미지</label>
+			    	<div class="col-sm-10">
+			    		<img id="promotionImage" th:src="@{/images/promotion/{promotion.productCode}.jpg(promotion.productCode=${promotion.promotionCode})}" onerror="this.src='/images/noimg.png'"  alt="프로모션 이미지" class="img-fluid promotion-image">
+			    	</div>
+			    	<input type="file" id="imageUpload" style="display:none;"/>
+			    	<button type="button" class="btn" id="manageImageButton">이미지 관리</button>
+            		<button type="button" class="btn btn-danger" id="deleteImageButton">이미지 삭제</button>
+			    </div>			     -->
+			</form>
+			
+			<div class="text-end">
+				<input type="button" value="저장" id="promotionInsertBtn" class="btn btn-primary btn-sm" />
+				<input type="button" value="취소" id="promotionCancelBtn" class="btn btn-primary btn-sm" />
+				<input type="button" value="목록" id="promotionListBtn" class="btn btn-primary btn-sm"  />
+			</div>
+		</div>
+	</th:block>	
+
+	<th:block layout:fragment="script">
+		<script src="/js/admin/promotion/insertForm.js"></script>
+	</th:block>	
+	
+</html>

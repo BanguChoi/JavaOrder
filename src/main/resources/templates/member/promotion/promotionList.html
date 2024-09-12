@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+    layout:decorate="~{template/client/layout/layout}">
+
+    <!-- 본문 코드가 위치하는 파일로서 상단에 layout:decorate="경로/공통레이아웃파일명"을 선언하여 기본 레이아웃 파일을 사용하겠다는 의미 -->
+    <!-- 나머지 페이지에서 layout:fragment="content" 아래의 코드는 기본 레이아웃의 content라는 부분에 위치한다. -->
+
+    <th:block layout:fragment="content" style="width:75%; height:100%; overflow-y:auto; height: calc(100vh - 56px);">
+		<div class="text-center m-3"><h1>Promotion</h1></div>
+		<div class="container">   
+		<div id="promotionSearch" class="my-2 d-flex justify-content-center">
+			<form id="searchForm">
+				<!--/* 페이징 처리를 위한 파라미터  */--> 
+				<input type="hidden" name="page" id="page" th:value="${promotionList.pageRequestDTO.page}">
+				<input type="hidden" name="size" id="size" th:value="${promotionList.pageRequestDTO.size}">
+				
+				<div class="row g-2 align-items-center">
+					<div class="col-auto">
+						<label for="search">검색조건</label>
+					</div>
+					<div class="col-auto">
+						<select class="form-select form-select-sm" id="searchType" name="searchType">
+							<option value="memberCode">검색어</option>
+							<option value="orderStatus">진행상태</option>
+							<option value="orderDate">진행기간</option>
+						</select>
+					</div>
+					<div class="col-auto textArea">
+						<input type="text" id="keyword" name="keyword" placeholder="검색어를 입력하세요" class="form-control form-control-sm" />
+					</div>
+					<div class="col-auto selectArea">
+						<select class="form-select form-select-sm" id="status" name="status">
+							<option value="N">진행예정</option>
+							<option value="P">진행중</option>
+							<option value="E">종료</option>
+						</select>
+					</div>
+					<div class="col-auto dateArea">
+						<input type="date" id="startDate" name="startDate" placeholder="시작일자" class="form-control form-control-sm" />
+					</div>
+					<div class="col-auto dateArea">
+						<input type="date" id="endDate" name="endDate" placeholder="종료일자" class="form-control form-control-sm" />
+					</div>
+					<div class="col-auto">
+						<button type="button" id="searchBtn" class="btn btn-primary btn-sm">Search</button>
+						<button type="button" id="allSearchBtn" class="btn btn-primary btn-sm">All Search</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="mb-4 d-flex flex-wrap justify-content-center">
+			<th:block th:if="${#lists.size(promotionList.dtoList)==0}">
+				<div class="text-center">등록된 프로모션이 존재하지 않습니다.</div>
+			</th:block>
+			<th:block th:if="${not #strings.isEmpty(promotionList.dtoList)}">
+				<div class="text-center m-2" th:each="promotion : ${promotionList.dtoList}" th:object="${promotion}"  th:data-no="*{promotionCode}">
+					<div class="card" style="width: 18rem;">
+					  <img th:src="@{/images/promotion/{promotion.promotionCode}.jpg(promotion.promotionCode=${promotion.promotionCode})}" onerror="this.src='/images/noimg.png'"
+					   class="goDetail card-img-top img-fluid img-thumbnail" style="height:400px; overflow:hidden;"  alt="프로모션 이미지">
+					  <div class="card-body">
+					    <h5 class="card-title"><a th:href="@{/member/promotion/} + *{promotionCode}"
+					     	th:text="${#strings.length(promotion.promotionTitle)>10 ? #strings.substring(promotion.promotionTitle, 0, 10) + '...' : promotion.promotionTitle}" 
+					     	class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a></h5>
+					    <p class="card-text date" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></p>
+					  </div>
+					</div>
+				</div>
+			</th:block>
+	    </div>
+	    
+	    <nav aria-label="Page navigation example" class="mb-5">
+		  	<ul class="pagination justify-content-center">
+				<!--/* 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인. */-->
+		       		<li class="page-item" th:if="${promotionList.prev}">
+		       				<a th:data-number="${promotionList.prevPage}" class="page-link">Previous</a>
+		       		</li>
+				
+				<!--/* 바로가기 번호 출력 */--> 
+				<li th:each="number : ${promotionList.pageNumList}" th:classappend="'page-item ' + ${(promotionList.current == number) ? 'active':''}">
+					<a class="page-link" th:text="${number}" th:data-number="${number}"></a>
+				</li>
+		
+				<!--/* 다음 바로가기 10개 존재 여부를 next 필드의 값으로 확인. */-->
+				<li class="page-item" th:if="${promotionList.next}">
+					<a th:data-number="${promotionList.nextPage}" class="page-link">Next</a>
+				</li> 
+			</ul>
+		</nav>
+		</div>
+    </th:block>
+    <th:block layout:fragment="script">
+        <script src="/js/member/promotion/promotionList.js"></script>        
+    </th:block>
+</html>
+

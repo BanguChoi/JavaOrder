@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{template/admin/layout/layout}">
+	
+	<th:block layout:fragment="content">
+		<div class="text-center"><h3>Admin promotion 상세</h3></div>
+		
+		<div class="container" th:object="${detail}"> 
+				<form id="dataForm">
+					<input type="hidden" id="promotionCode" name="promotionCode" th:value="*{promotionCode}"/>
+					
+					<!-- 제목, 작성자, 작성일의 헤더와 데이터가 같은 줄에 표시됨 -->
+					<div class="mb-3 row">
+				    	<label class="col-sm-2 col-form-label">제목</label>
+				    	<div class="col-sm-5">
+					    	<input type="text" class="form-control" th:field="*{promotionTitle}"/>
+				    	</div>
+				    </div>
+				    <div class="mb-3 row">
+				    	<label class="col-sm-2 col-form-label">작성일</label>
+				    	<div class="col-sm-10 text-start" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></div>
+				    </div>
+				    <div class="mb-3 row">
+				    	<label class="col-sm-2 col-form-label">현재 프로모션 기간</label>
+				    	<div class="col-sm-3">
+				    		<div class="col-sm-10 text-center" th:text="*{#temporals.format(promotionStartDate, 'yyyy-MM-dd')}"></div>	
+				    	</div>
+				    	-
+				    	<div class="col-sm-3">
+				    		<div class="col-sm-10 text-center" th:text="*{#temporals.format(promotionEndDate, 'yyyy-MM-dd')}"></div>
+				    	</div>
+				    </div>
+				    <div class="mb-3 row">
+				    	<label class="col-sm-2 col-form-label">수정할 프로모션 기간</label>
+				    	<div class="col-sm-3">
+				    		<input type="date" class="form-control" id="promotionStartDate" name="promotionStartDate" th:value="*{#temporals.format(promotionStartDate, 'yyyy-MM-dd HH:mm:ss')}"/>
+				    	</div>
+				    	-
+				    	<div class="col-sm-3">
+				    		<input type="date" class="form-control" id="promotionEndDate" name="promotionEndDate" th:value="*{#temporals.format(promotionEndDate, 'yyyy-MM-dd HH:mm:ss')}"/>
+				    	</div>
+				    </div>
+				    <div class="mb-3 row">
+				    	<label class="col-sm-2 col-form-label">진행 상태</label>
+				    	<div class="col-sm-2">
+				    		<select class="form-select form-select-sm" th:field="*{promotionStatus}">
+								<option th:value="N">진행예정</option>
+								<option th:value="P">진행중</option>
+								<option th:value="E">종료</option>
+							</select>
+						</div>
+				    </div>
+			    </form>
+				
+				<div class="mb-3 row text-center">
+					<input type="file" id="imageUpload" style="display:none;"/>
+					<button type="button" class="btn btn-primary m-2 col" id="manageImageButton">이미지 관리</button>
+					<button type="button" class="btn btn-danger m-2 col" id="deleteImageButton">이미지 삭제</button>
+				</div>
+				<div class="mb-3 row text-center">
+					<img id="promotionImage" th:src="@{/images/promotion/{promotion.promotionCode}.jpg(promotion.promotionCode=${promotion.promotionCode})}" onerror="this.src='/images/noimg.png'"  alt="프로모션 이미지" class="img-fluid promotion-image">
+				</div>
+				
+				<div class="text-end mt-3">
+					<input type="button" value="수정" id="updateFormBtn" class="btn btn-primary btn-sm" />
+					<input type="button" value="삭제" id="promotionDeleteBtn" class="btn btn-primary btn-sm" />
+					<input type="button" value="추가" id="insertFormBtn" class="btn btn-primary btn-sm" />
+					<input type="button" value="목록" id="promotionListBtn" class="btn btn-primary btn-sm" />
+				</div>	
+			</div>
+	</th:block>		
+		
+	<th:block layout:fragment="script">
+		<script src="/js/admin/promotion/promotionDetail.js"></script>
+	</th:block>	
+</html>

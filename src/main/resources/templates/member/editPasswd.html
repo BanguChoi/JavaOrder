@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link href="/css/editPasswd.css" rel="stylesheet">
+    <title>JavaOrder</title>
+</head>
+
+<body class="text-center">
+	<main class="form">
+		<h1 class="h3 mb-3 fw-normal">비밀번호 변경</h1>
+		<form id="passwordForm">
+			<!-- 현재 비밀번호 -->
+			<div class="form-floating password-container">
+				<input type="password" id="currentPassword" name="currentPassword" class="form-control" placeholder="currentPassword" autocomplete="current-Password">
+				<label for="currentPassword" >현재 비밀번호</label>
+				<input type="checkbox" id="showCurrentPassword" class="form-check-input">
+			</div>
+			<div class="text-danger error-message" id="currentPasswordError"></div> 
+			<div class="text-success" id="successMessage"></div>
+				
+			<!-- 새 비밀번호 -->
+			<div class="form-floating password-container">
+			    <input type="password" id="newPassword" name="newPassword" class="form-control" placeholder="newPassword" autocomplete="new-Password" readonly>
+			    <label for="newPassword">새 비밀번호</label>
+			    <input type="checkbox" id="showNewPassword" class="form-check-input">
+			</div>
+			<div class="text-danger error-message" id="passwordError"></div>
+			
+			<!-- 수정 버튼 -->
+			<button type="button" id="verifyPasswordBtn" class="btn btn-primary">비밀번호 확인</button>
+			<!-- 변경 버튼 -->
+			<button type="button" id="changePasswordBtn" class="btn btn-primary" style="display:none;">비밀번호 변경</button>
+			<!-- 마이페이지로 -->
+		    <button type="button" id="cancelBtn" class="btn btn-primary">취소</button>
+		</form>
+	</main>
+	
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/member/editPasswd.js"></script>
+</body>
+</html>

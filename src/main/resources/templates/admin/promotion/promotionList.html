@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+    layout:decorate="~{template/admin/layout/layout}">    
+
+    <th:block layout:fragment="content">
+        <div class="text-center m-3"><h3>프로모션 목록</h3></div>        
+       
+		<div id="promotionSearch" class="my-2">
+			<form id="searchForm">
+				<!--/* 페이징 처리를 위한 파라미터  */--> 
+				<input type="hidden" name="page" id="page" th:value="${promotionList.pageRequestDTO.page}">
+				<input type="hidden" name="size" id="size" th:value="${promotionList.pageRequestDTO.size}">
+				
+				<div class="row g-2 align-items-center">
+					<div class="col-auto">
+						<label for="search">검색조건</label>
+					</div>
+					<div class="col-auto">
+						<select class="form-select form-select-sm" id="searchType" name="searchType">
+							<option value="memberCode">검색어</option>
+							<option value="orderStatus">진행상태</option>
+							<option value="orderDate">진행기간</option>
+						</select>
+					</div>
+					<div class="col-auto textArea">
+						<input type="text" id="keyword" name="keyword" placeholder="검색어를 입력하세요" class="form-control form-control-sm" />
+					</div>
+					<div class="col-auto selectArea">
+						<select class="form-select form-select-sm" id="status" name="status">
+							<option value="N">진행예정</option>
+							<option value="P">진행중</option>
+							<option value="E">종료</option>
+						</select>
+					</div>
+					<div class="col-auto dateArea">
+						<input type="date" id="startDate" name="startDate" placeholder="시작일자" class="form-control form-control-sm" />
+					</div>
+					<div class="col-auto dateArea">
+						<input type="date" id="endDate" name="endDate" placeholder="종료일자" class="form-control form-control-sm" />
+					</div>
+					<div class="col-auto">
+						<button type="button" id="searchBtn" class="btn btn-primary btn-sm">Search</button>
+						<button type="button" id="allSearchBtn" class="btn btn-primary btn-sm">All Search</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+	    <table class="table table-hover table-striped">
+	        <thead>
+	            <tr>
+	                <th>Code</th>
+	                <th>Image</th>
+	                <th>Title</th>
+					<th>프로모션 기간</th>
+	                <th>작성일</th>
+	                <th>진행여부</th>
+	            </tr>
+	        </thead>
+		    <tbody class="list">
+				<!-- #lists , #sets , #maps : 컬렉션 관련 기능 제공 -->
+				<tr th:if="${#lists.size(promotionList.dtoList)==0}">
+					<td colspan="6" class="text-center">등록된 게시물이 존재하지 않습니다.</td>
+				</tr>
+				<!--/* Strings 객체의 유틸리티 메서드는  #strings다.  ex) ${#strings.method(string)} */-->
+				<th:block th:if="${not #strings.isEmpty(promotionList.dtoList)}">		
+					<tr class="text-center" th:each="promotion : ${promotionList.dtoList}" th:object="${promotion}"  th:data-no="*{promotionCode}">
+						<td th:text="*{promotionCode}"></td>
+						<td>
+							<img th:src="@{/images/promotion/{promotion.promotionCode}.jpg(promotion.promotionCode=${promotion.promotionCode})}" onerror="this.src='/images/noimg.png'" 
+								class="img-fluid img-thumbnail" style="width:100px; height:100px; ">
+						</td>
+						<td><a th:href="@{/admin/promotion/} + *{promotionCode}" th:text="*{promotionTitle}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"></a></td>
+						<td>
+							<span class="date" th:text="*{#temporals.format(promotionStartDate, 'yyyy-MM-dd')}"></span>
+							-
+							<span class="date" th:text="*{#temporals.format(promotionEndDate, 'yyyy-MM-dd')}"></span>
+						</td>
+						<td class="date" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+						<td>
+							<div class="btn-group">
+								<button th:text="*{promotionStatus=='N'?'진행예정':promotionStatus=='P'?'진행중':promotionStatus=='E'?'종료':'N/A'}" 
+								  	class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+								<ul class="dropdown-menu">
+									<li><button class="dropdown-item statusBtn" th:value="N">진행예정</button></li>
+									<li><button class="dropdown-item statusBtn" th:value="P">진행중</button></li>
+									<li><button class="dropdown-item statusBtn" th:value="E">종료</button></li>
+								</ul>
+							</div>
+						</td>
+					</tr>
+				</th:block>
+			</tbody>
+	   	</table>
+	    <div class="text-end">
+			<button type="button" id="insertFormBtn" class="btn btn-primary btn-sm mb-2">추가</button>					
+	    </div>
+	    
+   		<nav aria-label="Page navigation example">
+  			<ul class="pagination justify-content-center">
+				<!--/* 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인. */-->
+           		<li class="page-item" th:if="${promotionList.prev}">
+           				<a th:data-number="${promotionList.prevPage}" class="page-link">Previous</a>
+           		</li>
+				
+				<!--/* 바로가기 번호 출력 */--> 
+				<li th:each="number : ${promotionList.pageNumList}" th:classappend="'page-item ' + ${(promotionList.current == number) ? 'active':''}">
+					<a class="page-link" th:text="${number}" th:data-number="${number}"></a>
+				</li>
+
+				<!--/* 다음 바로가기 10개 존재 여부를 next 필드의 값으로 확인. */-->
+				<li class="page-item" th:if="${promotionList.next}">
+					<a th:data-number="${promotionList.nextPage}" class="page-link">Next</a>
+				</li> 
+			</ul>
+		</nav>
+    </th:block>
+    <th:block layout:fragment="script">
+        <script src="/js/admin/promotion/promotionList.js"></script>        
+    </th:block>
+</html>
+

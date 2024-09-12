@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" class="h-100" data-bs-theme="auto" >
+	<head>
+		<th:block th:insert="~{template/client/fragments/block :: config}"></th:block>
+		<link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
+		<link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
+		<link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sticky-footer-navbar/">
+	</head>
+	<body class="d-flex flex-column h-100 text-center">
+	
+		<!-- header -->
+		<!-- <th:block th:insert="~{template/admin/fragments/block :: header}"></th:block> -->
+		
+		<div class="d-flex flex-grow-1">
+			<!-- sidebar -->
+			<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary position-fixed" style="top: 0; left: 0; width: 250px; height: 100vh; padding-top: 56px;">
+	  			<th:block th:insert="~{template/client/fragments/block :: sidebar}"></th:block>
+			</div>
+			
+			<!-- main -->
+			<main class="d-flex flex-grow-1 flex-column w-100 pb-5" style="margin-left:250px; width:250px;">
+			   	<th:block layout:fragment="content"></th:block>
+			</main>
+		</div>		
+		
+		<!-- footer -->
+		<footer class="footer fixed-bottom bg-body-tertiary pt-3">
+			<th:block th:insert="~{template/client/fragments/block :: footer}"></th:block>
+		</footer>
+		
+		<script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="/js/jquery-3.7.1.min.js"></script>
+		<script src="/js/common.js"></script>
+
+		<script src="/js/member/main.js"></script>
+		<th:block layout:fragment="script"></th:block>
+	</body>
+</html>

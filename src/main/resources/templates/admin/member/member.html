@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/admin/layout/layout}">
+	
+<head>
+	<th:block th:insert="~{template/admin/fragments/block :: config}">
+	<link href="css/member.css"/>
+</head>
+	
+<th:block layout:fragment="content">
+	<h1 class="my-4">회원 목록</h1>
+        
+    <div id="memberSearch" class="my-2">
+		<form id="searchForm">
+			<!--/*페이징 처리를 위한 파라미터*/-->
+			<input type="hidden" name="page" id="page" th:value="${memberList.pageRequestDTO.page}">
+			<input type="hidden" name="size" id="size" th:value="${memberList.pageRequestDTO.size}">
+			
+			<div class="row g-2 align-items-center">
+				<div class="col-auto">
+					<label for="search">검색조건</label>
+				</div>
+				<div class="col-auto">
+					<select class="form-select form-select-sm" id="searchType" name="searchType">
+						<option value="memberCode">회원(번호)</option>
+						<option value="name">이름</option>
+						<option value="address">주소</option>
+						<option value="birth">생일</option>
+						<option value="lastLoginDate">마지막 로그인</option>
+						<option value="regDate">가입일</option>
+						<option value="status">상태</option>
+					</select>
+				</div>
+				<div class="col-auto textArea">
+					<input type="text" id="keyword" name="keyword" placeholder="검색어를 입력하세요" class="form-control form-control-sm" />
+				</div>
+				<div class="col-auto selectArea">
+					<select class="form-select form-select-sm" id="status" name="status">
+						<option value="M">회원</option>
+						<option value="N">탈퇴회원</option>
+					</select>
+				</div>
+				<div class="col-auto dateArea">
+					<input type="date" id="startDate" name="startDate" placeholder="시작일자" class="form-control form-control-sm" />
+				</div>
+				<div class="col-auto dateArea">
+					<input type="date" id="endDate" name="endDate" placeholder="종료일자" class="form-control form-control-sm" />
+				</div>
+				<div class="col-auto">
+					<button type="button" id="searchBtn" class="btn btn-primary btn-sm">Search</button>
+					<button type="button" id="allSearchBtn" class="btn btn-primary btn-sm">All Search</button>
+				</div>
+			</div>		
+		</form>
+	</div>
+    
+	<div class="table-container">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>회원 코드</th>
+			        <th>이름</th>
+		         	<th>아이디</th>
+		         	<th>이메일</th>
+		         	<th>전화번호</th>
+		         	<th>주소</th>
+		         	<th>생일</th>
+			        <th>마지막 로그인</th>
+			        <th>가입일</th>
+			        <th>상태</th>
+		     	</tr>
+		 	</thead>
+		 	<tbody>
+		 		<tr th:if="${#lists.size(memberList.dtoList) == 0}">
+		 			<td colspan="10">등록된 회원이 없습니다.</td>
+		 		</tr>
+		     	<th:block th:if="${not #strings.isEmpty(memberList.dtoList)}">
+	         		<tr th:each="member : ${memberList.dtoList}" th:object="${member}">
+			             <td th:text="*{memberCode}"></td>
+			             <td th:text="*{memberName}"></td>
+			             <td th:text="*{memberId}"></td>
+			             <td th:text="*{memberEmail}"></td>
+			             <td th:text="*{memberPhone}"></td>
+			             <td th:text="*{memberAddress}"></td>
+			             <td th:text="*{memberBirth}"></td>
+			             <td th:text="*{memberLast}"></td>
+			             <td th:text="*{memberDate}"></td>
+			             <td th:text="*{memberStatus}"></td>
+			        </tr>
+		     	</th:block>
+		 	</tbody>
+		</table>
+	</div>
+    
+    <nav aria-label="Page navigation example">
+	  <ul class="pagination justify-content-center">
+	  	<!-- 이전 바로가기 10개 존재여부를 prev필드의 값으로 확인 -->
+	    <li class="page-item" th:if="${memberList.prev}">
+	      <a th:data-number="${memberList.prevPage}" class="page-link">Previous</a>
+	    </li>
+	    
+	    <!-- 바로가기 번호 출력 -->
+	    <li th:each="number:${memberList.pageNumList}" th:classappend="'page-item '+ ${(memberList.current == number) ? 'active':''}">
+	    	<a class="page-link" th:text="${number}" th:data-number="${number}"></a>
+	    </li>
+	    
+		<!-- 다음 바로가기 10개 존재 여부를 next 필드의 값으로 확인 -->	    
+	    <li class="page-item" th:if="${memberList.next}">
+	      <a th:data-number="${memberList.nextPage}" class="page-link">Next</a>
+	    </li>
+	  </ul>
+	</nav>
+</th:block>
+    
+<th:block layout:fragment="script">
+	<script src="/js/admin/member/member.js"></script>
+</th:block>
+</html>

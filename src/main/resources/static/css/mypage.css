@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+/* 기본 바디 스타일 */
+body {
+    font-family: Arial, sans-serif; /* 기본 폰트 설정 */
+    color: #212529; /* 기본 텍스트 색상 */
+}
+
+
+h1 {
+    margin-bottom: 30px;
+    color: #343a40;
+}
+
+/* 카드 스타일 */
+.card {
+    border: 1px solid #e9ecef; /* 카드 경계선 색상 */
+    border-radius: 10px; /* 카드 모서리 둥글게 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 카드 그림자 */
+    max-width: 700px; /* 카드 최대 너비 설정 */
+    margin: auto; /* 카드 중앙 정렬 */
+    background-color: #ffffff; /* 카드 배경 색상 */
+    padding: 20px; /* 카드 내 여백 */
+}
+
+/* 카드 헤더 */
+.card-header {
+    background-color: #007bff; /* 카드 헤더 배경 색상 */
+    color: white; /* 카드 헤더 글자 색상 */
+    font-size: 1.5rem; /* 카드 헤더 폰트 크기 */
+    border-bottom: 1px solid #0069d9; /* 카드 헤더 하단 경계선 색상 */
+    border-top-left-radius: 10px; /* 카드 헤더 좌측 상단 모서리 둥글게 */
+    border-top-right-radius: 10px; /* 카드 헤더 우측 상단 모서리 둥글게 */
+}
+
+/* 입력 그룹 스타일 */
+.input-group {
+    display: flex; /* 입력 필드와 버튼을 수평으로 배치 */
+    align-items: center; /* 입력 필드와 버튼을 중앙 정렬 */
+    margin-bottom: 20px; /* 입력 그룹 하단 여백 */
+}
+
+/* 라벨 스타일 */
+.input-group label {
+    width: 25%; /* 라벨 너비 설정 */
+    font-weight: bold; /* 라벨 글자 두껍게 */
+    margin-right: 15px; /* 라벨과 입력 필드 사이의 여백 */
+    text-align: right; /* 라벨 텍스트 우측 정렬 */
+    color: #495057; /* 라벨 텍스트 색상 */
+}
+
+/* 입력 필드 스타일 */
+.input-group input {
+    flex: 1; /* 입력 필드의 너비를 가능한 최대화 */
+    border: 1px solid #ced4da; /* 입력 필드 경계선 색상 */
+    border-radius: 0.25rem; /* 입력 필드 모서리 둥글게 */
+    padding: 0.5rem 0.75rem; /* 입력 필드 내 여백 */
+    font-size: 1rem; /* 입력 필드 폰트 크기 */
+    margin-right: 10px; /* 입력 필드와 버튼 사이의 여백 */
+    max-width: calc(100% - 140px); /* 입력 필드 최대 너비 설정 */
+    transition: border-color 0.3s ease-in-out; /* 입력 필드 경계선 색상 전환 효과 */
+}
+
+/* 입력 필드 포커스 시 스타일 */
+.input-group input:focus {
+    border-color: #007bff; /* 포커스 시 경계선 색상 */
+    outline: none; /* 포커스 시 기본 아웃라인 제거 */
+}
+
+/* 버튼 스타일 */
+.input-group .btn-primary {
+    background-color: #007bff; /* 기본 버튼 배경 색상 */
+    border-color: #007bff; /* 기본 버튼 경계선 색상 */
+    color: white; /* 버튼 텍스트 색상 */
+    border-radius: 0.25rem; /* 버튼 모서리 둥글게 */
+}
+
+.input-group .btn-primary:hover {
+    background-color: #0056b3; /* 기본 버튼 호버 색상 */
+    border-color: #004a9d; /* 기본 버튼 호버 경계선 색상 */
+}
+
+/* 변경 버튼 스타일 */
+.input-group .btn-success {
+    background-color: #28a745; /* 변경 버튼 배경 색상 */
+    border-color: #28a745; /* 변경 버튼 경계선 색상 */
+    color: white; /* 버튼 텍스트 색상 */
+    border-radius: 0.25rem; /* 버튼 모서리 둥글게 */
+}
+
+.input-group .btn-success:hover {
+    background-color: #218838; /* 변경 버튼 호버 색상 */
+    border-color: #1e7e34; /* 변경 버튼 호버 경계선 색상 */
+}
+
+/* 주소 검색 버튼 스타일 */
+.input-group .btn-secondary {
+    background-color: #6c757d; /* 주소 검색 버튼 배경 색상 */
+    border-color: #6c757d; /* 주소 검색 버튼 경계선 색상 */
+    color: white; /* 버튼 텍스트 색상 */
+    border-radius: 0.25rem; /* 버튼 모서리 둥글게 */
+}
+
+.input-group .btn-secondary:hover {
+    background-color: #5a6268; /* 주소 검색 버튼 호버 색상 */
+    border-color: #545b62; /* 주소 검색 버튼 호버 경계선 색상 */
+}

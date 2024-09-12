@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/client/layout/layout}" >
+
+<th:block th:fragment="productList">
+	
+	<form id="searchForm">
+		<input type="hidden" name="page" id="size" th:value="${productList.productPageRequestDTO.page}" />
+		<input type="hidden" name="size" id="size" th:value="${productList.productPageRequestDTO.size}" />
+		<input type="hidden" name="category" id="category" th:value="${productList.productPageRequestDTO.category}"/>
+		<div class="d-flex mx-auto">
+			<input class="form-control me-2" name="keyword"  id="keyword" type="search" placeholder="Search" aria-label="Search">
+     		<button class="btn btn-primary searchBtn" type="submit">Search</button>
+     	</div>
+	</form>
+	 
+	<div class="mt-4 mb-4">
+<!-- 		<img style="width:100%; height:350px; background-color:gray;"/> -->
+		<div id="promotionList" class="carousel slide" data-bs-ride="carousel">
+		    <div class="carousel-inner" id="carouselItems">
+		        <!-- JavaScript로 동적 생성 -->
+		    </div>
+		    <button class="carousel-control-prev" type="button" data-bs-target="#promotionList" data-bs-slide="prev">
+		        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		        <span class="visually-hidden">Previous</span>
+		    </button>
+		    <button class="carousel-control-next" type="button" data-bs-target="#promotionList" data-bs-slide="next">
+		        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		        <span class="visually-hidden">Next</span>
+		    </button>
+		</div>
+	</div>
+	
+	<div class="mb-4 d-flex justify-content-center">
+		<button type="button" class="allBtn btn btn-outline-secondary me-4" data-category="ALL">ALL</button>
+		<div class="btn-group me-4">
+		  <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+		    Coffee
+		  </button>
+		  <ul class="dropdown-menu cateBtn">
+		    <li><a class="dropdown-item" data-category="A01">콜드 브루 커피</a></li>
+		    <li><a class="dropdown-item" data-category="A02">브루드 커피</a></li>
+		    <li><a class="dropdown-item" data-category="A03">에스프레소</a></li>
+		    <li><a class="dropdown-item" data-category="A04">프라푸치노</a></li>
+		  </ul>
+		</div>
+		
+		<div class="btn-group me-4">
+		  <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+		    Non-Coffee
+		  </button>
+		  <ul class="dropdown-menu cateBtn">
+		  	<li><a class="dropdown-item" data-category="A05">블렌디드</a></li>
+		    <li><a class="dropdown-item" data-category="A06">리프레셔</a></li>
+		    <li><a class="dropdown-item" data-category="A07">피지오</a></li>
+		    <li><a class="dropdown-item" data-category="A08">티</a></li>
+		    <li><a class="dropdown-item" data-category="A09">기타 제조 음료</a></li>
+		    <li><a class="dropdown-item" data-category="A10">주스</a></li>
+		  </ul>
+		</div>
+		
+		<div class="btn-group me-4">
+		  <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+		    Bakery
+		  </button>
+		  <ul class="dropdown-menu cateBtn">
+		    <li><a class="dropdown-item" data-category="B01">브레드</a></li>
+		    <li><a class="dropdown-item" data-category="B02">케이크</a></li>
+		    <li><a class="dropdown-item" data-category="B03">샌드위치</a></li>
+		  </ul>
+		</div>
+		
+		<div class="btn-group">
+		  <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+		    Etc
+		  </button>
+		  <ul class="dropdown-menu cateBtn">
+		    <li><a class="dropdown-item" data-category="B04">수프</a></li>
+		    <li><a class="dropdown-item" data-category="B05">과일, 요거트</a></li>
+		    <li><a class="dropdown-item" data-category="B06">스낵, 미니 디저트</a></li>
+		    <li><a class="dropdown-item" data-category="B07">아이스크림</a></li>
+		  </ul>
+		</div>
+	</div>
+		
+	<div th:if="${#lists.size(productList.dtoList) == 0}">
+	    <div class="text-center">등록된 제품이 없습니다.</div>
+	</div>
+
+
+	<div th:if="${not #lists.isEmpty(productList.dtoList)}" class="container d-flex flex-wrap justify-content-center ">
+	    <div th:each="product : ${productList.dtoList}" th:object="${product}" th:data-no="*{productId}">
+	        <div th:if="*{#strings.equals(productSell, 'Y')}" class="card mx-4 mb-4" style="width: 14rem;">
+	        	<img class="card-img-top " th:src="@{/images/{productCode}.jpg(productCode=${product.productId})}" onerror="this.src='/images/noimg.png'">
+	            <div class="card-body">
+		            <div>
+		            	 <h5 class="card-title" th:text="*{productName}" ></h5>
+		            	 <span th:if="${productList.topProductList != null and productList.topProductList.contains(product)}" class="badge bg-primary">
+		            	 	추천메뉴
+		            	 </span>
+		            </div>
+	                <p class="card-text" th:text="*{productPrice} +'원'"></p>
+	                <a th:href="@{'/products/' + *{productId} +'/detail'}" class="btn btn-primary productDetailBtn">제품담기</a>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+ 
+	<nav aria-label="Page navigation example" class="pb-4 mb-4">
+		<ul class="pagination justify-content-center">
+
+			<li class="page-item" th:if="${productList.prev}">
+				<a th:data-number="${productList.prevPage}" class="page-link">Previous</a>
+			</li>
+			
+			<li th:each="number : ${productList.pageNumList}"
+				th:classappend="'page-item ' + ${(productList.current == number) ? 'active' : ''}">
+				<a class="page-link" th:text="${number}" th:data-number="${number}"></a>
+			</li>
+			
+			<li class="page-item" th:if="${productList.next}">
+				<a th:data-number="${productList.nextPage}" class="page-link">Next</a>
+			</li>
+		</ul>
+	</nav>
+</th:block>
+</html>
+
+
+

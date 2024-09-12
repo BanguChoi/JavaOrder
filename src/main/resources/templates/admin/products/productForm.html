@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/admin/layout/layout}" >
+<head>
+	<title>상품 등록</title>
+    <link rel="stylesheet" th:href="@{/css/product.css}">
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="form-container">
+        <h1>상품 등록</h1>
+        <form id="productForm">
+            <div>
+                <label for="productName">상품명</label>
+                <input type="text" id="productName" name="productName" required>
+            </div>
+            <div>
+                <label for="categoryCode">카테고리 코드</label>
+                <div style="display: flex; align-items: center;">
+                    <select id="categoryCode" name="categoryCode" required>
+                        <option value="" disabled selected>카테고리 선택</option>
+                        <option th:each="category : ${categories}" th:value="${category.code}" th:text="${category.name}"></option>
+                    </select>
+                    <button type="button" id="showAddCategoryForm" style="margin-left: 10px;">카테고리 추가</button>
+                </div>
+            </div>
+            <div class="new-category-form" id="newCategoryForm">
+                <label for="newCategoryPrefix">새 카테고리 코드</label>
+                <input type="text" id="newCategoryPrefix" name="newCategoryPrefix" placeholder="Prefix (예: A01)">
+                <label for="newCategoryName">새 카테고리 이름</label>
+                <input type="text" id="newCategoryName" name="newCategoryName" placeholder="카테고리 이름">
+                <button type="button" id="addNewCategoryBtn">추가</button>
+            </div>
+            <div>
+                <label for="productPrice">가격</label>
+                <input type="number" id="productPrice" name="productPrice" required>
+            </div>
+            <div>
+                <label for="productSell">상품 게시 여부</label>
+                <select id="productSell" name="productSell">
+                    <option value="Y">게시</option>
+                    <option value="N">미게시</option>
+                </select>
+            </div>
+            <div>
+                <label for="productExplain">상품 상세 설명</label>
+                <textarea id="productExplain" name="productExplain" required></textarea>
+            </div>
+            <div class="actions">
+                <button type="button" id="submitBtn">등록</button>
+                <a href="/admin/products" class="button">목록</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="/js/jquery-3.7.1.min.js"></script>
+    <script src="/js/admin/products/productForm.js"></script>
+</th:block>
+</body>
+</html>

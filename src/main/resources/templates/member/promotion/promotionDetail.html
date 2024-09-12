@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{template/client/layout/layout}">
+	
+	<th:block layout:fragment="content">
+		<div class="text-center"><h3>Promotion 상세</h3></div>
+		
+		<div class="container" th:object="${detail}"> 
+			<form id="dataForm">
+				<input type="hidden" id="promotionCode" name="promotionCode" th:value="*{promotionCode}"/>
+			</form>
+			<!-- 제목, 작성자, 작성일의 헤더와 데이터가 같은 줄에 표시됨 -->
+			<div class="mb-3 row">
+				<label class="col-sm-2 col-form-label">제목</label>
+				<div class="col-sm-3 text-start" th:text="*{promotionTitle}"></div>
+			</div>
+			<div class="mb-3 row">
+				<label class="col-sm-2 col-form-label">작성일</label>
+				<div class="col-sm-3 text-start" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></div>
+			</div>
+			<div class="mb-3 row">
+				<label class="col-sm-2 col-form-label">프로모션 기간</label>
+				<div class="col-sm-3 text-start">
+					<span class="col-sm-4" th:text="*{#temporals.format(promotionStartDate, 'yyyy-MM-dd')}"></span>
+					-
+					<span class="col-sm-4" th:text="*{#temporals.format(promotionEndDate, 'yyyy-MM-dd')}"></span>	
+				</div>
+			</div>
+			<div class="mb-3 row">
+				<label class="col-sm-2 col-form-label">진행 상태</label>
+				<div class="col-sm-1 text-start" th:text="*{promotionStatus=='N'?'진행예정':promotionStatus=='P'?'진행중':promotionStatus=='E'?'종료':'N/A'}"></div>
+			</div>
+			<div class="mb-3 row text-center">
+				<img id="promotionImage" th:src="@{/images/promotion/{promotion.productCode}.jpg(promotion.productCode=${promotion.promotionCode})}" onerror="this.src='/images/noimg.png'"  alt="프로모션 이미지" class="img-fluid promotion-image">
+			</div>
+			
+			<div class="text-end mt-3">
+				<input type="button" value="목록" id="promotionListBtn" class="btn btn-primary" />
+			</div>
+		</div>	
+	</th:block>		
+		
+	<th:block layout:fragment="script">
+		<script src="/js/member/promotion/promotionDetail.js"></script>
+	</th:block>	
+</html>

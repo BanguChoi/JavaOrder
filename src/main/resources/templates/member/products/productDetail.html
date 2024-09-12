@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/client/layout/layout}" >	
+	
+	<head>
+		<th:block th:insert="~{template/client/fragments/block :: config}"></th:block>
+		<meta name="theme-color" content="#712cf9"/>
+	</head>
+
+	<body class="d-flex h-100 text-center">
+
+		<th:block layout:fragment="content">  
+		<div class="product-container container-fluid">
+			<div class="row">
+				<div class="col-md-6 mt-4 mx-4">
+					<img class="img-fluid rounded" th:src="@{/images/} + ${productDetail.productId} + '.jpg'" onerror="this.src='/images/noimg.png'">
+					<h3 class="text-start mt-4" th:text="${productDetail.productName}"></h3>
+					<hr/>
+					<p class="text-start mb-4" th:text="${productDetail.productExplain}"></p>
+					<br/>
+					<br/>
+				</div>
+				<div class="col-md-2"></div>
+				<div class="col-md-3">
+					<form th:action="@{/cart/insertCartItem}" method="post" class="text-start">
+						<input type="hidden" name="productId" th:value="${productDetail.productId}" />
+						<input type="hidden" name="cartId" th:value="${cart != null ? cart.cartId : ''}" />
+						
+						<div class="option-scroll mt-4">
+							<th:block th:if="${#strings.startsWith(productDetail.category.code, 'A')}">
+								<div class="mb-3">
+									<label class="form-label">Size</label>
+									<div class="btn-group w-100" role="group">
+										<input type="radio" class="btn-check" name="optionSize" id="sizeS" value="1"/>
+										<label class="btn btn-outline-primary" for="sizeS">S</label>
+										<input type="radio" class="btn-check" name="optionSize" id="sizeM" value="2"/>
+										<label class="btn btn-outline-primary" for="sizeM">M (+700)</label>
+										<input type="radio" class="btn-check" name="optionSize" id="sizeL" value="3"/>
+										<label class="btn btn-outline-primary" for="sizeL">L (+1400)</label>
+									</div>
+								</div>
+								
+								<div class="mb-3">
+									<label class="form-label">ICE/HOT</label>
+									<div class="btn-group w-100" role="group">
+										<input type="radio" class="btn-check" name="optionTemperature" id="ice" value="1"/>
+										<label class="btn btn-outline-primary" for="ice">ICE</label>
+										<input type="radio" class="btn-check" name="optionTemperature" id="hot" value="2"/>
+										<label class="btn btn-outline-primary" for="hot">HOT</label>
+									</div>
+								</div>
+								
+								<div class="mb-3">
+									<label class="form-label">샷추가</label>
+									<select class="form-select" name="optionShot" id="optionShot">
+										<option value="0">추가안함</option>
+										<option value="1">1샷 (+500)</option>
+										<option value="2">2샷 (+1000)</option>
+										<option value="3">3샷 (+1500)</option>
+										<option value="4">4샷 (+2000)</option>
+										<option value="5">5샷 (+2500)</option>
+										<option value="6">6샷 (+3000)</option>
+										<option value="7">7샷 (+3500)</option>
+										<option value="8">8샷 (+4000)</option>
+										<option value="9">9샷 (+4500)</option>
+									</select>
+								</div>
+								
+								<div class="mb-3">
+									<label class="form-label">시럽</label>
+									<div class="d-flex flex-wrap">
+										<div class="form-check me-3">
+											<input type="checkbox" name="optionSyrup" class="form-check-input" id="caramel" value="1"/>
+											<label class="form-check-label" for="caramel">카라멜(+500)</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" name="optionSyrup" class="form-check-input" id="vanila" value="2"/>	
+											<label class="form-check-label" for="vanila">바닐라(+500)</label>
+										</div>
+									</div>
+								</div>
+							</th:block>
+						</div>
+						
+						<div class="mt-3">
+							<label class="form-label">수량</label>
+							<div class="input-group">
+								<button type="button" class="btn btn-outline-secondary" id="minusBtn">-</button>
+								<input type="text" value="1" id="count" class="form-control text-center" readonly />
+								<button type="button" class="btn btn-outline-secondary" id="plusBtn">+</button>
+							</div>
+						</div>
+						
+						<div class="mt-3 text-center">
+							<strong>총 가격: <span id="total-price"></span>원</strong>
+						</div>
+						
+						<div class="mt-3">
+							<button type="submit" class="btn btn-primary w-100 addCartBtn">장바구니담기</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		</th:block>
+
+		<th:block layout:fragment="script">
+		  	<script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+			<script src="/js/jquery-3.7.1.min.js"></script>
+			<script src="/js/common.js"></script>
+			<script src="/js/member/products/productDetail.js"></script>
+		</th:block>
+	</body>
+</html>

@@ -1,0 +1,145 @@
+table {
+width: 100%;
+border-collapse: collapse;
+}
+th, td {
+padding: 8px 12px;
+border: 1px solid #ddd;
+text-align: left;
+}
+th {
+background-color: #f2f2f2;
+}
+.actions a {
+	margin-right: 10px;
+}
+.product-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+.product-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    float: left;
+    margin-right: 20px;
+}
+.image-actions {
+    display: flex;
+    align-items: center;
+}
+.product-info {
+    clear: both;
+    margin-top: 20px;
+}
+.product-info div {
+    margin-bottom: 10px;
+}
+.btn {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.btn:hover {
+    background-color: #0056b3;
+}
+.btn-danger {
+    background-color: #dc3545;
+}
+.btn-danger:hover {
+    background-color: #c82333;
+}
+.form-container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+.form-container div {
+    margin-bottom: 10px;
+}
+.form-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+.form-container input, .form-container select, .form-container textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+.form-container .actions {
+    margin-top: 20px;
+    text-align: right;
+}
+.form-container .actions button, .form-container .actions a {
+    padding: 10px 15px;
+    margin-left: 10px;
+    text-decoration: none;
+}
+/* 추가된 카테고리 입력 폼 숨기기 */
+.new-category-form {
+    margin-top: 10px;
+    display: none;
+}
+#productExplain {
+    width: 100%;
+    height: 200px;
+}
+div[style*="display: flex"] {
+    justify-content: center; /* 페이지 번호를 가운데 정렬 */
+    align-items: center;
+    margin-top: 20px;
+}
+
+button {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #e0e0e0;
+}
+
+button.current {
+    background-color: #4CAF50;
+    color: white;
+}
+form.search-form {
+    margin-bottom: 5px;
+    text-align: left;
+}
+.table-products {
+    width: 100%;
+    border-collapse: collapse;
+}
+.table-products td, .table-products th {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: middle;
+}
+.table-products img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.table-products td:first-child {
+    width: 100px;
+}
+.table-products td {
+    width: auto;
+}
+.table-products td:first-child {
+    width: 100px;
+}

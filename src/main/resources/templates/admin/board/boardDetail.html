@@ -1,0 +1,82 @@
+<!-- board 쪽 template js는 건드릴거면 팀장님에게 문의 -->
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+ layout:decorate="~{template/admin/layout/layout}">
+ 
+ <th:block layout:fragment="content">
+ 	<div class="text-center"><h3>admin board 문의 게시판 상세</h3></div>
+ 	
+ 	<div class="container">
+		<div th:object="${detail}" >
+		
+			<form id="dataForm">
+				<input type="hidden" th:field="*{boardNo}"/>
+				<input type="hidden" id="admin" name="admin" th:value="${admin}" />
+			</form>
+			
+			<table class="table table-bordered">
+				<tbody class="text-center">
+					<tr>
+						<td class="col-md-3">제목</td>
+						<td class="col-md-3 text-start" th:text="*{boardTitle}"></td>
+						<td class="col-md-3">작성일</td>
+						<td class="col-md-3 text-start" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+					</tr>					
+					<tr class="board-table-tr-height">
+						<td class="col-md-3 aligh-middle">글내용</td>
+						<td colspan="3" class="col-md-9 text-start" th:utext="${#strings.replace(detail.boardContent, newLine, '&lt;br /&gt;')}"></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div class="text-end mb-3">
+<!-- 				<button type="button" id="boardDeleteBtn" class="btn btn-primary btn-sm">글삭제</button> 글 삭제 안함 숨김 처림-->
+				<button type="button" id="boardListBtn" class="btn btn-primary btn-sm">글목록</button>
+			</div>
+			
+			<!--댓글화면 구현(comment) 나중에 / 이거** 주석처리 주의/-->
+			
+			<form id="replyForm">
+				<div class="text-start mb-3"><h4>답변</h4></div>
+				<input type="hidden" name="replyId" id="replyId" value="0" />					
+				<div class="row mb-3">
+					<label for="replyName" class="col-sm-1 col-form-label">작성자</label>
+					<div class="col-sm-3">
+						<input type="text" name="replyName" id="replyName" th:value="${admin.adminName}" class="form-control"/>
+					</div>
+					<button type="button" id="replyInsertBtn" class="btn btn-secondary col-sm-1 sendBtn mx-2">저장</button>
+				</div>
+				<div class="row mb-3">
+					<label for="replyContent" class="col-sm-1 col-form-label">댓글내용</label>
+					<div class="col-sm-11">
+						<textarea name="replyContent" id="replyContent" class="form-control" rows="3"></textarea>
+					</div>
+				</div>
+			</form>
+
+	<!-- 아래 보이면 안되는 구역 수정필요 입력된 내용이 중앙에 정렬됨 제목의 표현이 regDate까지 적용됨 -->		
+			<div id="replyList" >
+				<div class="card mb-2" id="item-template" style="display: none">
+					<h5 class="card-header">
+						<span class="replyName"></span>
+						<span class="regDate"></span>
+						<a href="#" class="btn btn-secondary btn-sm replyUpdateFormBtn">수정</a>
+						<a href="#" class="btn btn-secondary btn-sm replyDeleteBtn">삭제</a>
+					</h5>
+					<div class="card-replyContent">
+						<p class="card-text"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	 	
+ 	<!-- <th:block th:insert="~{client/board/reply :: reply}"></th:block> -->
+ </th:block>
+ 
+ <th:block layout:fragment="script">
+ 	<script src="/js/admin/board/boardDetail.js"></script>
+ 	<script src="/js/admin/reply/comment.js"></script>
+ </th:block>
+</html>

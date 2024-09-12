@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+ layout:decorate="~{template/client/layout/layout}">
+ 
+ <th:block layout:fragment="content">
+ 	<div class="text-center"><h3>member board 문의 게시판 상세</h3></div>
+ 	
+ 	<div class="container">
+		<div th:object="${detail}" >
+		
+			<form id="dataForm">
+				<input type="hidden" th:field="*{boardNo}"/>
+			</form>
+			
+			<table class="table table-bordered">
+				<tbody class="text-center">
+					<tr>
+						<td class="col-md-3">제목</td>
+						<td class="col-md-3 text-start" th:text="*{boardTitle}"></td>
+						<td class="col-md-3">작성일</td>
+						<td class="col-md-3 text-start" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+					</tr>					
+					<tr class="board-table-tr-height">
+						<td class="col-md-3 aligh-middle">글내용</td>
+						<td colspan="3" class="col-md-9 text-start" th:utext="${#strings.replace(detail.boardContent, newLine, '&lt;br /&gt;')}"></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div class="text-end mb-3">
+				<button type="button" id="updateFormBtn" class="btn btn-primary btn-sm">글수정</button>
+				<!--삭제는표시숨김으로<button type="button" id="insertFormBtn" class="btn btn-primary btn-sm">글쓰기</button> 삭제는 표시 숨김 처리 -->
+				<button type="button" id="boardListBtn" class="btn btn-primary btn-sm">글목록</button>
+			</div>
+
+				
+			
+			<!--댓글화면 구현(comment) 나중에 / 이거** 주석처리 주의/-->
+		
+
+		<!-- 아래 보이면 안되는 구역 수정필요 입력된 내용이 중앙에 정렬됨 제목의 표현이 regDate까지 적용됨 -->		
+		<div id="replyList" >
+			<div class="card mb-2" id="item-template" style="display: none">
+				<h5 class="card-header">
+					<span class="replyName"></span>
+					<span class="regDate"></span>		
+				</h5>
+				<div class="card-replyContent">
+					<p class="card-text"></p>
+				</div>
+			</div>
+		</div>
+		
+		</div>
+	</div>
+	 	
+ 	<!-- <th:block th:insert="~{client/board/reply :: reply}"></th:block> -->
+ </th:block>
+ 
+ <th:block layout:fragment="script">
+ 	<script src="/js/member/board/boardDetail.js"></script>
+ 	<script src="/js/member/reply/comment.js"></script>
+ </th:block>
+</html>

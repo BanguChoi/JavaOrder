@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{template/client/layout/layout}">
+
+<th:block th:fragment="cartItemList">
+  <th:block th:if="${cartItemList != null and cartItemList.size() > 0}">
+    <div class="container">
+      <div th:each="cartItem : ${cartItemList}" th:object="${cartItem}" th:data-no="*{itemId}" class="cartItem card mb-3">
+        
+         <!-- <div class="col-md-2">
+		<img class="img-fluid rounded float-start" style="width:70%;" src="@{/images/} + {product.productId} + '.jpg'" onerror="this.src='/images/noimg.png'">
+         </div> -->
+         <div class="col-md-10">
+           <div class="card-body">
+             <div class="d-flex justify-content-between align-items-center mb-2">
+               <h6 class="card-title mb-0" th:text="*{product.productName}"></h6>
+               <button type="button" class="btn btn-sm btn-outline-danger deleteItemBtn" th:data-item-id="*{itemId}">삭제</button>
+             </div>
+			<p class="card-text small text-muted text-start">
+			  사이즈: 
+			  <span th:switch="*{optionSize}">
+			    <span th:case="1">S</span>
+			    <span th:case="2">M</span>
+			    <span th:case="3">L</span>
+			    <span th:case="*" th:text="*{optionSize}"></span>
+			  </span>,
+			  온도: 
+			  <span th:switch="*{optionTemperature}">
+			    <span th:case="1">ICE</span>
+			    <span th:case="2">HOT</span>
+			    <span th:case="*" th:text="*{optionTemperature}"></span>
+			  </span>,<br/>
+			  샷 추가: 
+			  <span th:switch="*{optionShot}">
+			    <span th:case="0">추가안함</span>
+			    <span th:case="*" th:text="*{optionShot} + '샷'"></span>
+			  </span>,
+			  시럽: 
+			  <span th:switch="*{optionSyrup}">
+				<span th:case="0">추가안함</span>
+			    <span th:case="1">카라멜시럽</span>
+			    <span th:case="2">바닐라시럽</span>
+			    <span th:case="*" th:text="*{optionSyrup}"></span>
+			  </span>
+			</p>
+             <div class="d-flex justify-content-between align-items-center">
+               <span class="fw-bold itemPrice" th:text="*{itemPrice}" th:data-price="*{itemPrice}"></span>원
+               <div class="d-flex align-items-center">
+                 <button type="button" th:data-item-id="*{itemId}" class="btn btn-sm btn-outline-secondary minusItemBtn">-</button>
+                 <input type="number" th:id="'itemCount' + *{itemId}" class="form-control form-control-sm mx-2 itemCount" style="width: 60px;" th:value="*{itemNum}" min="1" readonly>
+                 <button type="button" th:data-item-id="*{itemId}" class="btn btn-sm btn-outline-secondary plusItemBtn">+</button>
+               </div>
+             </div>
+           </div>
+         </div>
+      </div>
+    </div>
+
+    <div class="container mt-3" th:if="${cart.cartItems != null and cart.cartItems.size() > 0}">
+      <div class="d-flex justify-content-end align-items-center">
+        <span class="me-2">총 금액:</span>
+        <span id="cartPrice" class="fw-bold"></span><span>원</span>
+      </div>
+    </div>
+  </th:block>
+</th:block>
+
+</html>

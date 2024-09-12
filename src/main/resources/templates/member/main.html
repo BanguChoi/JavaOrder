@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template/client/layout/layout}" >
+
+<!-- 메인 콘텐츠 영역 -->
+<th:block layout:fragment="content">
+	<header class="my-2">
+		<nav class="navbar navbar-expand-md navbar-dark sticky-top">
+			<div class="text-start col-9 ms-3 p-1 border">
+				<a id="latestNoticeLink" class="ps-3 link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"></a>
+			</div>
+		</nav>	
+	</header>   
+    <div class="d-flex flex-grow-1" style="margin: 20px; overflow-y: auto; height: calc(100vh - 56px);">
+
+		<!-- 상품 리스트 -->           
+		<div id="productListContainer" style="width: 75%; height: 100%; overflow-y: auto;">
+			<th:block  th:insert="~{member/products/productList :: productList}"></th:block>
+		</div>
+		<!-- 장바구니 -->
+		<div class="" style="width: 25%; height: 100%; overflow-y: auto;">
+			<th:block th:insert="~{member/cart/cart :: cart}"></th:block>
+		</div>		
+	</div>
+
+</th:block>
+
+<th:block layout:fragment="script">
+	<script src="/js/member/products/productList.js"></script>
+	<script src="/js/member/cart/cart.js"></script>
+	<script src="/js/member/cart/cartItemList.js"></script>
+	<script src="/js/member/promotion/promotionBanner.js"></script>
+</th:block>
+	</body>
+</html>
