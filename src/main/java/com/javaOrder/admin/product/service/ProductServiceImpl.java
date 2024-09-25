@@ -120,15 +120,11 @@ public class ProductServiceImpl implements ProductService {
    		Member member = (Member) session.getAttribute("member");
    		Pageable pageable;
    		
-   		/* 해당 회원의 구매율 탑 제품 */
    		List<Product> topProductList = new ArrayList<>();
 
    		if(member != null) {
    			String memberCode = member.getMemberCode();
-   			
-   			logger.info("memberCode: " + memberCode);		
-   			
-   			
+
    			List<Object[]> topOrderItems = orderItemRepository.findTop3ProductsByMemberCode(memberCode);
    			
    			List<String> topProductId = topOrderItems.stream()
@@ -190,8 +186,7 @@ public class ProductServiceImpl implements ProductService {
    				.productPageRequestDTO(productPageRequestDTO)
    				.totalCount(totalCount)
    				.build();
-   		
-   		// 순위 3개에 뱃지를 달아주기 위해
+
    		responseDTO.setTopProductList(topProductList);
    		
    		return responseDTO;

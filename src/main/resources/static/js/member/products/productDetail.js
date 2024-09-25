@@ -93,7 +93,6 @@ $(document).ready(function(){
 $('.addCartBtn').on("click", function(e) {
 	e.preventDefault();
 	
-
 	const cartId = $('input[name="cartId"]').val();
  
 	let optionSyrup = $("input[name='optionSyrup']:checked").map(function() {
@@ -102,7 +101,6 @@ $('.addCartBtn').on("click", function(e) {
 	if (optionSyrup.length === 0) {
 		optionSyrup = [];
 	}
-	
 	
 	if (!cartId) {
         alert('로그인이 필요한 서비스입니다.');

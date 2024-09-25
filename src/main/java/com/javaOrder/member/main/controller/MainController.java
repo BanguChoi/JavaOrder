@@ -45,6 +45,7 @@ public class MainController {
 		if(session.getAttribute("member") != null) {
 			Member loggedInMember = (Member) session.getAttribute("member");
 			
+			/*
 			try {
 	        	Cart cart = cartService.getCartByMemberCode(loggedInMember.getMemberCode());
 	            model.addAttribute("cart", cart);
@@ -52,6 +53,7 @@ public class MainController {
 	        	logger.error("Error retrieving cart: {}", e.getMessage());
 	            model.addAttribute("cartError", "장바구니를 찾을 수 없습니다.");
 	        }
+	        */
 		   
 			model.addAttribute("member", loggedInMember);
 
